@@ -386,8 +386,8 @@ def convergence_table(errors_2x, n0, k, t0, tf):
   tf is the last one. (float)
   '''
   n = n0
-  print("| n | h = $\\frac{1}{h}$ | $\\tau(0,h)$ | q = $\\frac{tau(0,h)}{tau(0, 2h)}$ | $log_4 ^q$|")
-  print("|---|-----------------|-----------|---------------------------------|-------|")
+  print("| n | h = $\\frac{1}{h}$ | $\\tau(0,h)$ | q = $\\frac{tau(0,h)}{tau(0, 2h)}$ |")
+  print("|---|-----------------|-----------|---------------------------------|")
   print("", n, (tf-t0)/n, errors_2x[0], "-", sep=" | ", end=" | \n")
   for i in range(1, k):
       n = n0 * 2 ** i
