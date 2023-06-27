@@ -18,13 +18,17 @@
 # $$
 
 # This is well defined because it has been proven that the sequence ${p_k}$ with, $\forall k \in \mathbb{N}$:
+# 
 # $$
-#     p_k = \sum_{i=0}^{k} \frac{A^i}{i!}, \text{ $\forall A$ as decribed above,}
+#     p_k = \sum_{i=0}^{k} \frac{A^i}{i!}, \forall A \text{ as decribed above,}
 # $$
+# 
 # is a Cauchy sequence, and therefore converge to a limit matrix which was denoted $e^A$, since the set of the square complex matrix with fixed lenght with the norm 
+# 
 # $$
 # ||A|| = \max_{||x||=1} ||Ax||
 # $$
+# 
 # is a Banach space.
 
 # ### Exponential of a zeros matrix

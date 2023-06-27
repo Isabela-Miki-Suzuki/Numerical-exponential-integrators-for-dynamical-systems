@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2023.6.26)  27 JUN 2023 01:17
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2023.6.26)  27 JUN 2023 01:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1650,7 +1650,19 @@ File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 ] [2
 
 
-] (./book.toc)
+] (./book.toc
+LaTeX Info: Redefining \rmfamily on input line 1.
+LaTeX Info: Redefining \sffamily on input line 1.
+LaTeX Info: Redefining \ttfamily on input line 1.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 7.00075pt on input line 5.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 5.00053pt on input line 5.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 6.99925pt on input line 5.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 4.99947pt on input line 5.
+)
 \tf@toc=\write7
 \openout7 = `book.toc'.
 
@@ -1658,17 +1670,7 @@ File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 
 ] [2
 
-]
-
-LaTeX Warning: Hyper reference `Description_and_evaluation_of_institutional_sup
-port_received_in_the_period::doc' on page 1 undefined on input line 192.
-
-
-LaTeX Warning: Hyper reference `Participation_in_scientific_event,_list_of_publ
-ications_and_list_of_papers_prepared_or_submitted::doc' on page 1 undefined on 
-input line 196.
-
-[1] [2
+] [1] [2
 
 ]
 Chapter 1.
@@ -1680,46 +1682,138 @@ Chapter 2.
 
 ]
 Chapter 3.
+[7] [8] [9] [10] [11] [12] [13] [14] [15]
+Underfull \hbox (badness 7704) in paragraph at lines 1132--1154
+$[][][] [] [][][][][][] [][] [] [][][][][]$ \TU/FreeSerif(0)/m/n/10 invertible,
+ such that $[] [] [][][][]$, with
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1132--1154
+\TU/FreeSerif(0)/m/n/10 $$[] [] []$$[][][][][][][]$J_i$[]$i = 1, 2, 3, \dotsc, 
+N$[][][][][][][][][][][][][][][][][][] [][][][][]$$[][] []
+ []
+
+[16] [17]
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 7.00075pt on input line 236.
+(Font)              scaled to size 8.00085pt on input line 1283.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 5.00053pt on input line 236.
+(Font)              scaled to size 6.00064pt on input line 1283.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 6.99925pt on input line 236.
+(Font)              scaled to size 7.99915pt on input line 1283.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 4.99947pt on input line 236.
-[7] [8] [9] [10] [11]
+(Font)              scaled to size 5.99936pt on input line 1283.
 
-! LaTeX Error: Bad math environment delimiter.
 
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.737 ...backslash{}forall A\( as decribed above,}
-                                                  
-? I
-insert>H
-! Extra }, or forgotten $.
-\textdef@ ...th {#1}\let \f@size #2\selectfont #3}
-                                                  }
-l.737 ...backslash{}forall A\( as decribed above,}
-                                                  
-? 
-! Emergency stop.
-\textdef@ ...th {#1}\let \f@size #2\selectfont #3}
-                                                  }
-l.737 ...backslash{}forall A\( as decribed above,}
-                                                  
-End of file on the terminal!
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1283.
 
- 
+[18]
+Underfull \vbox (badness 10000) detected at line 1707
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1707
+ []
+
+[19]
+Underfull \vbox (badness 10000) detected at line 1707
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1707
+ []
+
+[20]
+Underfull \vbox (badness 10000) detected at line 1707
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1707
+ []
+
+[21]
+Underfull \vbox (badness 10000) detected at line 1707
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1707
+ []
+
+[22]
+Underfull \vbox (badness 10000) detected at line 1707
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1707
+ []
+
+[23]
+Underfull \vbox (badness 10000) detected at line 1707
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1707
+ []
+
+[24] [25] [26]
+Chapter 4.
+[27
+
+] [28
+
+]
+Chapter 5.
+(./book.ind)
+The property list \polyglossia@langsetup contains the pairs (without outer
+braces):
+>  {latex/script}  =>  {latin}
+>  {latex/lcscript}  =>  {latin}
+>  {latex/scripttag}  =>  {}
+>  {latex/language}  =>  {Latex}
+>  {latex/langtag}  =>  {ENG}
+>  {latex/bcp47}  =>  {}
+>  {latex/hyphennames}  =>  {english}
+>  {latex/direction}  =>  {LR}
+>  {latex/hyphenmins}  =>  {2,3}
+>  {latex/frenchspacing}  =>  {false}
+>  {latex/indentfirst}  =>  {false}
+>  {latex/fontsetup}  =>  {true}
+>  {latex/envname}  =>  {latex}
+>  {latex/babelname}  =>  {latex}
+>  {latex/localnumeral}  =>  {polyglossia@C@localnumeral}
+>  {latex/Localnumeral}  =>  {polyglossia@C@localnumeral}
+>  {english/script}  =>  {latin}
+>  {english/lcscript}  =>  {latin}
+>  {english/scripttag}  =>  {}
+>  {english/language}  =>  {English}
+>  {english/langtag}  =>  {ENG}
+>  {english/bcp47}  =>  {en-US}
+>  {english/hyphennames}  =>  {english,american,usenglish,USenglish}
+>  {english/direction}  =>  {LR}
+>  {english/hyphenmins}  =>  {2,3}
+>  {english/frenchspacing}  =>  {false}
+>  {english/indentfirst}  =>  {false}
+>  {english/fontsetup}  =>  {true}
+>  {english/envname}  =>  {english}
+>  {english/babelname}  =>  {american}
+>  {english/localnumeral}  =>  {polyglossia@C@localnumeral}
+>  {english/Localnumeral}  =>  {polyglossia@C@localnumeral}.
+ [29] (./book.aux
+LaTeX Info: Redefining \rmfamily on input line 19.
+LaTeX Info: Redefining \sffamily on input line 19.
+LaTeX Info: Redefining \ttfamily on input line 19.
+)
+Package rerunfilecheck Info: File `book.out' has not changed.
+(rerunfilecheck)             Checksum: 14E8B582CA7CC3B5B959479FDAB82723;2447.
+ ) 
 Here is how much of TeX's memory you used:
- 42901 strings out of 478190
- 986984 string characters out of 5854827
- 1571172 words of memory out of 5000000
- 62715 multiletter control sequences out of 15000+600000
- 474719 words of font info for 105 fonts, out of 8000000 for 9000
+ 42962 strings out of 478190
+ 988936 string characters out of 5854827
+ 1840172 words of memory out of 5000000
+ 62758 multiletter control sequences out of 15000+600000
+ 477017 words of font info for 124 fonts, out of 8000000 for 9000
  15 hyphenation exceptions out of 8191
- 99i,23n,115p,742b,2041s stack positions out of 5000i,500n,10000p,200000b,80000s
-Output written on book.pdf (15 pages).
+ 99i,23n,115p,742b,2273s stack positions out of 5000i,500n,10000p,200000b,80000s
+
+Output written on book.pdf (33 pages).
