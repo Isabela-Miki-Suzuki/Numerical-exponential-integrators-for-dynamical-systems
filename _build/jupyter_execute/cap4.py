@@ -373,70 +373,72 @@ def convergence_table(errors_2x, n0, k, t0, tf):
 # ## Exponential Euler method
 
 # For
-# \begin{cases}
+# 
+# $\begin{cases}
 #     y'(t) + \lambda y(t) = g(y(t), t), t \in (t_0, T) \\
 #     y(0) = y_0
-# \end{cases}
+# \end{cases}$
 # 
 # the domain is evenly discretized:
 # 
-# \begin{equation*}
+# $$
 #     N \in \mathbb{N}; h = \frac{T-t_0}{N}; \text{Domain: }\{t_k = t_0 + k h : k = 0, 1, ...\}.
-# \end{equation*}
+# $$
 # 
 # The discretization of the ODE takes the exact solution of the Cauchy problem, given by the variation of constants formula
-# \begin{equation*}
+# 
+# $$
 #     y(t) = e^{-(t-t_0) \lambda}y_0 + \int_{t_0}^t [e^{-\lambda(t-\tau)} g(y(\tau), \tau)] d\tau
-# \end{equation*}
+# $$
 # 
 # and, by Taylor expansion on $g$:
 # 
 # $\tau \in (t_k, t_{k+1})$
-# \begin{equation*}
+# $$
 #     g(y(\tau), \tau) = g(y(t_k), t_k) + (\tau - t_k) \frac{dg}{dt} (y(\theta_k), \theta_k)
-# \end{equation*}
+# $$
 # for a $\theta_k \in (t_k, t_{k+1}),$
 # 
-# \begin{equation*}
+# $$
 #     y(t_{k+1}) = e^{-(t_{k+1}-t_k) \lambda}y(t_k) + \int_{t_k}^{t_{k+1}} [e^{-\lambda(t_{k+1}-\tau)} g(y(\tau), \tau)] d\tau
-# \end{equation*}
+# $$
 # 
-# \begin{equation*}
+# $$
 #     = e^{-h \lambda}y(t_k) + \int_{t_k}^{t_{k+1}} \left[e^{-\lambda(t_{k+1}-\tau)} \left( g(y(t_k), t_k) + (\tau - t_k) \frac{dg}{dt} (y(\theta_k), \theta_k)\right)\right] d\tau
-# \end{equation*}
+# $$
 # 
-# \begin{equation*}
+# $$
 #     = e^{-h \lambda}y(t_k) + g(y(t_k), t_k) \int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)} d\tau + \frac{dg}{dt} (y(\theta_k), \theta_k) \int_{t_k}^{t_{k+1}} (\tau - t_k) e^{-\lambda(t_{k+1}-\tau)} d\tau.
-# \end{equation*}
+# $$
 # 
 # Since
 # 
-# \begin{equation*}
+# $$
 #     \int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)} d\tau = h\phi_1(-\lambda h)= \frac{1-e^{-h \lambda}}{\lambda}
-# \end{equation*}
+# $$
 # 
 # and, by the Taylor expansion of $e^{-\lambda h}$ in the point zero
 # 
-# \begin{equation*}
+# $$
 #     e^{-\lambda h} = 1 - \lambda h + \frac{1}{2}\lambda^2h^2 - \frac{1}{3!}\lambda^3h^3 + \dotsi + \frac{1}{n!} (-\lambda h)^n + \dotsi, n \in \mathbb{N}
-# \end{equation*}
+# $$
 # 
-# \begin{gather*}
+# $$
 #      \int_{t_k}^{t_{k+1}} (\tau - t_k) e^{-\lambda(t_{k+1}-\tau)} d\tau =
 #      h^2 \phi_2 (-\lambda h) =
 #      h \frac{\phi_1(0) - \phi_1(-\lambda h)}{\lambda} =
 #      \frac{h}{\lambda} - \frac{1-e^{-h \lambda}}{\lambda^2} = \\
 #      \frac{h}{\lambda} - \frac{1-(1 - \lambda h + \frac{1}{2}\lambda^2h^2 - \frac{1}{3!}\lambda^3h^3 + \dotsi + \frac{1}{n!} (-\lambda h)^n + \dotsi)}{\lambda^2} = \\
 #      \frac{h^2}{2} - \frac{h^3}{3!} \lambda + \dotsi + \frac{h^n}{n!} (-\lambda)^{n-2} + \dotsi  =  O(h^2),
-# \end{gather*}
+# $$
 # 
-# \begin{equation*}
+# $$
 #     y(t_{k+1}) = e^{-h \lambda}y(t_k) + g(y(t_k), t_k) \frac{1-e^{-h \lambda}}{\lambda} + \frac{dg}{dt} (y(\theta_k), \theta_k) O(h^2),
-# \end{equation*}
+# $$
 # 
-# \begin{equation*}
+# $$
 #   y(t_{k+1}) = e^{-h \lambda}y(t_k) + g(y(t_k), t_k) \frac{1-e^{-h \lambda}}{\lambda} + O(h^2).
-# \end{equation*}
+# $$
 # 
 # That inspires the $\textbf{Exponential Euler method}$ :
 # $$
@@ -446,9 +448,3 @@ def convergence_table(errors_2x, n0, k, t0, tf):
 #     t_{k+1} = t_k + h
 # $$
 # with $y_k \thickapprox y(t_k)$.
-
-# In[ ]:
-
-
-
-

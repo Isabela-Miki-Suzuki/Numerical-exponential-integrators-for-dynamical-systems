@@ -340,10 +340,10 @@ In order to show that the exponential methods improve in dealing with Stiff prob
 \label{\detokenize{cap2:one-step-methods-for-ode}}
 \sphinxAtStartPar
 In order to find a approximation for the solution of the problem
-\textbackslash{}begin\{cases\}
-y’(t) = f(t, y(t)), t \textbackslash{}in {[}t\_0,T{]} \textbackslash{}
-y(t\_0)=y\_0 \textbackslash{}text\{,\}
-\textbackslash{}end\{cases\}
+\(\begin{cases}
+y'(t) = f(t, y(t)), t \in [t_0,T] \\
+y(t_0)=y_0 \text{,}
+\end{cases}\)
 
 \sphinxAtStartPar
 they are of the form:
@@ -361,10 +361,10 @@ y_n \thickapprox y(t_n) .
 
 \sphinxAtStartPar
 To analyse the method, there is a model problem
-\textbackslash{}begin\{cases\}
-y’(t) = \sphinxhyphen{} \textbackslash{}lambda y(t) \textbackslash{}text\{ ; \} t \textbackslash{}in{[}t\_0,T{]}\textbackslash{}
-y(t\_0)=y\_0,\textbackslash{}
-\textbackslash{}end\{cases\}
+\(\begin{cases}
+    y'(t) = - \lambda y(t) \text{ ; } t \in[t_0,T]\\ 
+    y(t_0)=y_0,\\
+\end{cases}\)
 
 \sphinxAtStartPar
 whose solution is \(y(t) = y_0 e^{-\lambda (t-t_0)}\)
@@ -404,27 +404,25 @@ The reason for taking this specific problem is that it models the behaviour of t
 
 \sphinxAtStartPar
 Taking
-\textbackslash{}begin\{cases\}
-y’(t) = f(y(t), t), t \textbackslash{}in (t\_0, T) \textbackslash{}
-y(t\_0) = y\_0 \textbackslash{}in \textbackslash{}mathbb\{K\}
-\textbackslash{}end\{cases\}
+\(\begin{cases}
+    y'(t) = f(y(t), t), t \in (t_0, T) \\
+    y(t_0) = y_0 \in \mathbb{K}
+\end{cases}\)
 
 \sphinxAtStartPar
 and a approximation \(z\) of the solution \(y\), doing
-\textbackslash{}begin\{align*\}
-\textbackslash{}sigma(t) = z(t) \sphinxhyphen{} y(t) \textbackslash{}Rightarrow
-\textbackslash{}end\{align*\}
-
-\sphinxAtStartPar
-\textbackslash{}begin\{align*\}
-\textbackslash{}dot\{\textbackslash{}sigma\}(t) = \textbackslash{}dot\{z\}(t) \sphinxhyphen{} \textbackslash{}dot\{y\}(t) = f(z(t), t) \sphinxhyphen{} f(y(t), t) \textbackslash{}Rightarrow
-\textbackslash{}end\{align*\}
-
-\sphinxAtStartPar
-\textbackslash{}begin\{align*\}
-\textbackslash{}dot\{\textbackslash{}sigma\}(t) + \textbackslash{}dot\{y\}(t) = \textbackslash{}dot\{z\}(t) = f(z(t), t) = f(y(t)+\textbackslash{}sigma(t), t) = f(y(t), t) + \textbackslash{}sigma(t)\textbackslash{}frac\{\textbackslash{}partial f\}\{\textbackslash{}partial y\} + O(\textbackslash{}sigma\textasciicircum{}2(t)),
-\textbackslash{}end\{align*\}
-
+\$\(
+\sigma(t) = z(t) - y(t) \Rightarrow
+\)\$
+\begin{equation*}
+\begin{split}
+\dot{\sigma}(t) = \dot{z}(t) - \dot{y}(t) = f(z(t), t) - f(y(t), t) \Rightarrow
+\end{split}
+\end{equation*}\begin{equation*}
+\begin{split}
+\dot{\sigma}(t) + \dot{y}(t) = \dot{z}(t) = f(z(t), t) = f(y(t)+\sigma(t), t) = f(y(t), t) + \sigma(t)\frac{\partial f}{\partial y} + O(\sigma^2(t)),
+\end{split}
+\end{equation*}
 \sphinxAtStartPar
 so
 \textbackslash{}begin\{cases\}
@@ -474,51 +472,46 @@ such that \)\textbackslash{}phi\$ is Lipschitzian in y, continuous in their argu
 \label{\detokenize{cap2:examples}}
 \sphinxAtStartPar
 Euler method:
-
-\sphinxAtStartPar
-\textbackslash{}begin\{equation*\}
-\textbackslash{}phi (t\_\{k\},y\_\{k\},h) = f(t\_\{k\},y\_\{k\})
-\textbackslash{}end\{equation*\}
-
+\begin{equation*}
+\begin{split}
+    \phi (t_{k},y_{k},h) = f(t_{k},y_{k})
+\end{split}
+\end{equation*}
 \sphinxAtStartPar
 Modified Euler method:
-
-\sphinxAtStartPar
-\textbackslash{}begin\{equation*\}
-\textbackslash{}phi (t\_\{k\},y\_\{k\},h) = \textbackslash{}frac\{1\}\{2\} \textbackslash{}left{[} f(t\_\{k\},y\_\{k\}) + f(t\_\{k+1\},y\_\{k\} + h f(t\_\{k\},y\_\{k\})) \textbackslash{}right{]}
-\textbackslash{}end\{equation*\}
-
+\begin{equation*}
+\begin{split}
+    \phi (t_{k},y_{k},h) = \frac{1}{2} \left[ f(t_{k},y_{k}) + f(t_{k+1},y_{k} + h f(t_{k},y_{k})) \right]
+\end{split}
+\end{equation*}
 \sphinxAtStartPar
 Midpoint method:
-
-\sphinxAtStartPar
-\textbackslash{}begin\{equation*\}
-\textbackslash{}phi (t\_\{k\},y\_\{k\},h) = f(t\_\{k\} + \textbackslash{}frac\{h\}\{2\},y\_\{k\} + \textbackslash{}frac\{h\}\{2\} f(t\_\{k\},y\_\{k\}))
-\textbackslash{}end\{equation*\}
-
+\begin{equation*}
+\begin{split}
+    \phi (t_{k},y_{k},h) = f(t_{k} + \frac{h}{2},y_{k} + \frac{h}{2} f(t_{k},y_{k}))
+\end{split}
+\end{equation*}
 \sphinxAtStartPar
 Classic Runge\sphinxhyphen{}Kutta (RK 4\sphinxhyphen{}4):
-
-\sphinxAtStartPar
-\textbackslash{}begin\{gather*\}
-\textbackslash{}phi (t\_\{k\},y\_\{k\},h) = \textbackslash{}frac\{1\}\{6\} \textbackslash{}left( \textbackslash{}kappa\_1 + 2 \textbackslash{}kappa\_2 + 2 \textbackslash{}kappa\_3 + \textbackslash{}kappa\_4 \textbackslash{}right), \textbackslash{}text\{with \}\textbackslash{}
-\textbackslash{}kappa\_1 = f(t\_\{k\},y\_\{k\})\textbackslash{}
-\textbackslash{}kappa\_2 = f(t\_\{k\} + \textbackslash{}frac\{h\}\{2\},y\_\{k\} + \textbackslash{}frac\{h\}\{2\} \textbackslash{}kappa\_1)\textbackslash{}
-\textbackslash{}kappa\_3 = f(t\_\{k\} + \textbackslash{}frac\{h\}\{2\},y\_\{k\} + \textbackslash{}frac\{h\}\{2\} \textbackslash{}kappa\_2)\textbackslash{}
-\textbackslash{}kappa\_4 = f(t\_\{k\} + h, y\_\{k\} + h \textbackslash{}kappa\_3)
-\textbackslash{}end\{gather*\}
-
+\begin{equation*}
+\begin{split}
+    \phi (t_{k},y_{k},h) = \frac{1}{6} \left( \kappa_1 + 2 \kappa_2 + 2 \kappa_3 + \kappa_4 \right), \text{with }\\
+    \kappa_1 = f(t_{k},y_{k})\\
+    \kappa_2 = f(t_{k} + \frac{h}{2},y_{k} + \frac{h}{2} \kappa_1)\\
+    \kappa_3 = f(t_{k} + \frac{h}{2},y_{k} + \frac{h}{2} \kappa_2)\\
+    \kappa_4 = f(t_{k} + h, y_{k} + h \kappa_3)
+\end{split}
+\end{equation*}
 
 \subsection{Euler method}
 \label{\detokenize{cap2:euler-method}}
 \sphinxAtStartPar
 Further detailing this explicit one\sphinxhyphen{}step method of
-
-\sphinxAtStartPar
-\textbackslash{}begin\{equation*\}
-\textbackslash{}phi (t\_\{k\},y\_\{k\},h) = f(t\_\{k\},y\_\{k\}),
-\textbackslash{}end\{equation*\}
-
+\begin{equation*}
+\begin{split}
+    \phi (t_{k},y_{k},h) = f(t_{k},y_{k}),
+\end{split}
+\end{equation*}
 \sphinxAtStartPar
 an analysis on stability, convergence and order of convergence is done.
 
@@ -527,10 +520,10 @@ an analysis on stability, convergence and order of convergence is done.
 \label{\detokenize{cap2:stability}}
 \sphinxAtStartPar
 For the problem
-\textbackslash{}begin\{cases\}
-y’(t) = \sphinxhyphen{} \textbackslash{}lambda y(t) \textbackslash{}text\{ ; \} t \textbackslash{}in {[}t\_0 , T{]} \textbackslash{}
-y(t\_0)=y\_0,
-\textbackslash{}end\{cases\}
+\(\begin{cases}
+    y'(t) = - \lambda y(t) \text{ ; } t \in [t_0 , T] \\
+    y(t_0)=y_0,
+\end{cases}\)
 
 \sphinxAtStartPar
 with known solution
@@ -591,21 +584,21 @@ Being \(\tau(h, t_k)\) the local truncation error.
 
 \sphinxAtStartPar
 From
-\textbackslash{}begin\{equation*\}
-y(t\_\{k+1\}) = y(t\_k) + h f(y(t\_k),t\_k) + O(h\textasciicircum{}2),
-\textbackslash{}end\{equation*\}
+\$\(
+    y(t_{k+1}) = y(t_k) + h f(y(t_k),t_k) + O(h^2),
+\)\$
 
 \sphinxAtStartPar
 we have
-\textbackslash{}begin\{equation*\}
-h \textbackslash{}tau(h, t\_k) \textbackslash{}doteq \textbackslash{}frac\{y(t\_\{k+1\}) \sphinxhyphen{} y(t\_k)\}\{h\} \sphinxhyphen{} f(t\_k, y(t\_k)) = O(h\textasciicircum{}2),
-\textbackslash{}end\{equation*\}
+\$\(
+    h \tau(h, t_k) \doteq \frac{y(t_{k+1}) - y(t_k)}{h} - f(t_k, y(t_k)) = O(h^2),
+\)\$
 
 \sphinxAtStartPar
 so
-\textbackslash{}begin\{equation*\}
-\textbackslash{}tau(h, t\_k) = O(h).
-\textbackslash{}end\{equation*\}
+\$\(
+    \tau(h, t_k) = O(h).
+\)\$
 
 \sphinxAtStartPar
 Since for one step methods the order of convergence is the order of the local truncation error, the order is of \(O(h)\), order 1.
@@ -623,23 +616,23 @@ In this chapter, a review on the theory of matrix exponential and in \(\phi\) fu
 \label{\detokenize{cap3:matrix-exponential}}
 \sphinxAtStartPar
 Based on the Maclaurin series of the exponential function
-\textbackslash{}begin\{align*\}
-e\textasciicircum{}x = \textbackslash{}sum\_\{i=0\}\textasciicircum{}\{\textbackslash{}infty\} \textbackslash{}frac\{x\textasciicircum{}i\}\{i!\},
-\textbackslash{}end\{align*\}
+\$\(
+    e^x = \sum_{i=0}^{\infty} \frac{x^i}{i!},
+\)\$
 
 \sphinxAtStartPar
 the \(\textbf{exponential of a square complex matrix }A\) is defined as
-\textbackslash{}begin\{align*\}
-e\textasciicircum{}A \textbackslash{}doteq \textbackslash{}sum\_\{i=0\}\textasciicircum{}\{\textbackslash{}infty\} \textbackslash{}frac\{A\textasciicircum{}i\}\{i!\}.
-\textbackslash{}end\{align*\}
+\$\(
+    e^A \doteq \sum_{i=0}^{\infty} \frac{A^i}{i!}.
+\)\$
 
 \sphinxAtStartPar
 This is well defined because it has been proven that the sequence \({p_k}\) with, \(\forall k \in \mathbb{N}\):
-\textbackslash{}begin\{align*\}
-p\_k = \textbackslash{}sum\_\{i=0\}\textasciicircum{}\{k\} \textbackslash{}frac\{A\textasciicircum{}i\}\{i!\}, \textbackslash{}text\{ \(\forall A\) as decribed above,\}
-\textbackslash{}end\{align*\}
-is a Cauchy sequence, and therefore converge to a limit matrix which was denoted \(e^A\), since the set of the square complex matrix with fixed lenght with the norm
 \$\(
+    p_k = \sum_{i=0}^{k} \frac{A^i}{i!}, \text{ \)\textbackslash{}forall A\( as decribed above,}
+\)\(
+is a Cauchy sequence, and therefore converge to a limit matrix which was denoted \)e\textasciicircum{}A\(, since the set of the square complex matrix with fixed lenght with the norm 
+\)\(
 ||A|| = \max_{||x||=1} ||Ax||
 \)\$
 is a Banach space.
@@ -656,12 +649,11 @@ If \(A =
     \vdots & \vdots & \vdots & \ddots & \vdots\\
     0 & 0 & 0 & \dotsm & 0\\
 \end{array} } \right] \),
-
-\sphinxAtStartPar
-\textbackslash{}begin\{align*\}
-e\textasciicircum{}A \textbackslash{}doteq \textbackslash{}sum\_\{i=0\}\textasciicircum{}\{\textbackslash{}infty\} \textbackslash{}frac\{A\textasciicircum{}i\}\{i!\} = I + A + \textbackslash{}frac\{A\textasciicircum{}2\}\{2\} + \textbackslash{}dotsm = I + 0 + 0 + \textbackslash{}dotsm = I.
-\textbackslash{}end\{align*\}
-
+\begin{equation*}
+\begin{split}
+    e^A \doteq \sum_{i=0}^{\infty} \frac{A^i}{i!} = I + A + \frac{A^2}{2} + \dotsm = I + 0 + 0 + \dotsm = I.
+\end{split}
+\end{equation*}
 
 \subsubsection{Exponential of a diagonal matrix}
 \label{\detokenize{cap3:exponential-of-a-diagonal-matrix}}
@@ -678,35 +670,32 @@ If \(A =
 
 \sphinxAtStartPar
 it is easy to note that
-
-\sphinxAtStartPar
-\textbackslash{}begin\{align*\}
-A\textasciicircum{}2 = diag \textbackslash{}left(\textbackslash{}lambda\_1\textasciicircum{}2, \textbackslash{}lambda\_2\textasciicircum{}2, \textbackslash{}lambda\_3\textasciicircum{}2, \textbackslash{}dotsc, \textbackslash{}lambda\_N\textasciicircum{}2 \textbackslash{}right)
-\textbackslash{}end\{align*\}
-
-\sphinxAtStartPar
-\textbackslash{}begin\{align*\}
-A\textasciicircum{}3 = diag \textbackslash{}left(\textbackslash{}lambda\_1\textasciicircum{}3, \textbackslash{}lambda\_2\textasciicircum{}3, \textbackslash{}lambda\_3\textasciicircum{}3, \textbackslash{}dotsc, \textbackslash{}lambda\_N\textasciicircum{}3 \textbackslash{}right)
-\textbackslash{}end\{align*\}
 \begin{equation*}
+\begin{split}
+    A^2 = diag \left(\lambda_1^2, \lambda_2^2, \lambda_3^2, \dotsc, \lambda_N^2 \right)
+\end{split}
+\end{equation*}\begin{equation*}
+\begin{split}
+    A^3 = diag \left(\lambda_1^3, \lambda_2^3, \lambda_3^3, \dotsc, \lambda_N^3 \right)
+\end{split}
+\end{equation*}\begin{equation*}
 \begin{split}
 \vdots
 \end{split}
-\end{equation*}
-\sphinxAtStartPar
-\textbackslash{}begin\{align*\}
-A\textasciicircum{}j = diag \textbackslash{}left(\textbackslash{}lambda\_1\textasciicircum{}j, \textbackslash{}lambda\_2\textasciicircum{}j, \textbackslash{}lambda\_3\textasciicircum{}j, \textbackslash{}dotsc, \textbackslash{}lambda\_N\textasciicircum{}j \textbackslash{}right) , \textbackslash{}forall j \textbackslash{}in \textbackslash{}mathbb\{N\}
-\textbackslash{}end\{align*\}
-\begin{equation*}
+\end{equation*}\begin{equation*}
+\begin{split}
+    A^j = diag \left(\lambda_1^j, \lambda_2^j, \lambda_3^j, \dotsc, \lambda_N^j \right) , \forall j \in \mathbb{N}
+\end{split}
+\end{equation*}\begin{equation*}
 \begin{split}
 \vdots
 \end{split}
 \end{equation*}
 \sphinxAtStartPar
 so
-\textbackslash{}begin\{align*\}
-e\textasciicircum{}A \textbackslash{}doteq \textbackslash{}sum\_\{i=0\}\textasciicircum{}\{\textbackslash{}infty\} \textbackslash{}frac\{A\textasciicircum{}i\}\{i!\} = diag\textbackslash{}left(\textbackslash{}sum\_\{i=0\}\textasciicircum{}\{\textbackslash{}infty\} \textbackslash{}frac\{\textbackslash{}lambda\_1\textasciicircum{}i\}\{i!\}, \textbackslash{}sum\_\{i=0\}\textasciicircum{}\{\textbackslash{}infty\} \textbackslash{}frac\{\textbackslash{}lambda\_2\textasciicircum{}i\}\{i!\}, \textbackslash{}sum\_\{i=0\}\textasciicircum{}\{\textbackslash{}infty\} \textbackslash{}frac\{\textbackslash{}lambda\_3\textasciicircum{}i\}\{i!\}, \textbackslash{}dotsc, \textbackslash{}sum\_\{i=0\}\textasciicircum{}\{\textbackslash{}infty\} \textbackslash{}frac\{\textbackslash{}lambda\_N\textasciicircum{}i\}\{i!\}\textbackslash{}right) = diag \textbackslash{}left( e\textasciicircum{}\{\textbackslash{}lambda\_1\}, e\textasciicircum{}\{\textbackslash{}lambda\_2\}, e\textasciicircum{}\{\textbackslash{}lambda\_3\}, \textbackslash{}dotsc, e\textasciicircum{}\{\textbackslash{}lambda\_N\} \textbackslash{}right).
-\textbackslash{}end\{align*\}
+\$\(
+    e^A \doteq \sum_{i=0}^{\infty} \frac{A^i}{i!} = diag\left(\sum_{i=0}^{\infty} \frac{\lambda_1^i}{i!}, \sum_{i=0}^{\infty} \frac{\lambda_2^i}{i!}, \sum_{i=0}^{\infty} \frac{\lambda_3^i}{i!}, \dotsc, \sum_{i=0}^{\infty} \frac{\lambda_N^i}{i!}\right) = diag \left( e^{\lambda_1}, e^{\lambda_2}, e^{\lambda_3}, \dotsc, e^{\lambda_N} \right).
+\)\$
 
 \sphinxAtStartPar
 In the same way, if B is a diagonal by blocks matrix:
@@ -838,9 +827,9 @@ one can calculate
 \end{equation*}
 \sphinxAtStartPar
 And then, with \(t \in \mathbb{R}\)
-\textbackslash{}begin\{align*\}
-e\textasciicircum{}\{tA\} \textbackslash{}doteq \textbackslash{}sum\_\{i=0\}\textasciicircum{}\{\textbackslash{}infty\} \textbackslash{}frac\{tA\textasciicircum{}i\}\{i!\} = Id + tA + \textbackslash{}frac\{t\textasciicircum{}2 A\textasciicircum{}2\}\{2\} + \textbackslash{}frac\{t\textasciicircum{}3 A\textasciicircum{}3\}\{6\} + \textbackslash{}dotsc + \textbackslash{}frac\{t\textasciicircum{}\{N\sphinxhyphen{}2\} A\textasciicircum{}\{N\sphinxhyphen{}2\}\}\{(N\sphinxhyphen{}2)!\} + \textbackslash{}frac\{t\textasciicircum{}\{N\sphinxhyphen{}1\} A\textasciicircum{}\{N\sphinxhyphen{}1\}\}\{(N\sphinxhyphen{}1)!\} + 0 + 0 + \textbackslash{}dotsc + 0
-\textbackslash{}end\{align*\}
+\$\(
+    e^{tA} \doteq \sum_{i=0}^{\infty} \frac{tA^i}{i!} = Id + tA + \frac{t^2 A^2}{2} + \frac{t^3 A^3}{6} + \dotsc + \frac{t^{N-2} A^{N-2}}{(N-2)!} + \frac{t^{N-1} A^{N-1}}{(N-1)!} + 0 + 0 + \dotsc + 0
+\)\$
 \begin{equation*}
 \begin{split}
     = \left[ {\begin{array}{ccccccc}
@@ -1000,24 +989,24 @@ so
 
 \sphinxAtStartPar
 Note that
-\textbackslash{}begin\{align\}
-(MJM\textasciicircum{}\{\sphinxhyphen{}1\})\textasciicircum{}k = MJM\textasciicircum{}\{\sphinxhyphen{}1\}MJM\textasciicircum{}\{\sphinxhyphen{}1\}MJM\textasciicircum{}\{\sphinxhyphen{}1\} \textbackslash{}dotsc MJM\textasciicircum{}\{\sphinxhyphen{}1\} = MJIJIJM\textasciicircum{}\{\sphinxhyphen{}1\} \textbackslash{}dotsc MJM\textasciicircum{}\{\sphinxhyphen{}1\} = MJJJ \textbackslash{}dotsc JM\textasciicircum{}\{\sphinxhyphen{}1\} = MJ\textasciicircum{}kM\textasciicircum{}\{\sphinxhyphen{}1\}.
-\textbackslash{}end\{align\}
+\$\(
+    (MJM^{-1})^k = MJM^{-1}MJM^{-1}MJM^{-1} \dotsc MJM^{-1} = MJIJIJM^{-1} \dotsc MJM^{-1} = MJJJ \dotsc JM^{-1} = MJ^kM^{-1}.
+\)\$
 
 \sphinxAtStartPar
 Because of the formula of the series that defines the expansion, it implicates in \(e^{MJM^{-1}} = M e^J M^{-1}\).
 
 \sphinxAtStartPar
 And then, using the same notation from the last proposition,
-\textbackslash{}begin\{align*\}
-e\textasciicircum{}\{tA\} = e\textasciicircum{}\{tMJM\textasciicircum{}\{\sphinxhyphen{}1\}\} = e\textasciicircum{}\{MtJM\textasciicircum{}\{\sphinxhyphen{}1\}\} = Me\textasciicircum{}\{tJ\}M\textasciicircum{}\{\sphinxhyphen{}1\} = M \textbackslash{}left{[} \{ \textbackslash{}begin\{array\}\{ccccc\}
-e\textasciicircum{}\{tJ\_1\} \& 0 \& 0 \& \textbackslash{}dotsm \& 0\textbackslash{}
-0 \& e\textasciicircum{}\{tJ\_2\} \& 0 \& \textbackslash{}dotsm \& 0\textbackslash{}
-0 \& 0 \& e\textasciicircum{}\{tJ\_3\} \& \textbackslash{}dotsm \& 0\textbackslash{}
-\textbackslash{}vdots \& \textbackslash{}vdots \& \textbackslash{}vdots \& \textbackslash{}ddots \& \textbackslash{}vdots\textbackslash{}
-0 \& 0 \& 0 \& \textbackslash{}dotsm \& e\textasciicircum{}\{tJ\_\{N\}\}\textbackslash{}
-\textbackslash{}end\{array\} \} \textbackslash{}right{]} M\textasciicircum{}\{\sphinxhyphen{}1\}, t \textbackslash{}in \textbackslash{}mathbb\{R\},
-\textbackslash{}end\{align*\}
+\$\(
+e^{tA} = e^{tMJM^{-1}} = e^{MtJM^{-1}} = Me^{tJ}M^{-1} = M \left[ { \begin{array}{ccccc}
+        e^{tJ_1} & 0 & 0 & \dotsm & 0\\
+        0 & e^{tJ_2} & 0 & \dotsm & 0\\
+        0 & 0 & e^{tJ_3} & \dotsm & 0\\
+        \vdots & \vdots & \vdots & \ddots & \vdots\\
+        0 & 0 & 0 & \dotsm & e^{tJ_{N}}\\
+    \end{array} } \right] M^{-1}, t \in \mathbb{R},
+\)\$
 with each block as the section above indicates.
 
 
@@ -1025,20 +1014,20 @@ with each block as the section above indicates.
 \label{\detokenize{cap3:linear-problem}}
 \sphinxAtStartPar
 The linear problem is, following with the used notation:
-\textbackslash{}begin\{cases\}
-y’(t) + \textbackslash{}lambda y(t) = g(y(t), t), t \textbackslash{}in (t\_0, T) \textbackslash{}
-y(t\_0) = y\_0
-\textbackslash{}text\{,\}
-\textbackslash{}end\{cases\}
+\(\begin{cases}
+    y'(t) + \lambda y(t) = g(y(t), t), t \in (t_0, T) \\
+    y(t_0) = y_0 
+    \text{,}
+\end{cases}\)
 the one with \(g \equiv 0.\)
 
 \sphinxAtStartPar
 So, generaly, it is of the form:
-\textbackslash{}begin\{cases\}
-y’(t) = A y(t), t \textbackslash{}in (t\_0, T) \textbackslash{}
-y(t\_0) = y\_0
-\textbackslash{}text\{,\}
-\textbackslash{}end\{cases\}
+\(\begin{cases}
+    y'(t) = A y(t), t \in (t_0, T) \\
+    y(t_0) = y_0 
+    \text{,}
+\end{cases}\)
 with \(A \in \mathscr{M}_{N \times N}(\mathbb{C}), N \in \mathbb{N}\)  (remembering that a matrix \(1 \times 1\) is simply a number).
 
 \sphinxAtStartPar
@@ -1046,24 +1035,23 @@ Because \(A y(t)\) is a \(C^1\) function in \(y\), continuous in \(t\) and \(t \
 
 \sphinxAtStartPar
 Since
-\textbackslash{}begin\{equation*\}
-\textbackslash{}frac\{d\}\{dt\}y\_0e\textasciicircum{}\{A(t\sphinxhyphen{}t\_0)\} \textbackslash{}doteq \textbackslash{}lim\_\{h\textbackslash{}to0\} \textbackslash{}frac\{y\_0e\textasciicircum{}\{A(t\sphinxhyphen{}t\_0+h)\}\sphinxhyphen{}y\_0e\textasciicircum{}\{A(t\sphinxhyphen{}t\_0)\}\}\{h\} = y\_0e\textasciicircum{}\{(t\sphinxhyphen{}t\_0)A\}\textbackslash{}lim\_\{h\textbackslash{}to0\} \textbackslash{}frac\{e\textasciicircum{}\{Ah\}\sphinxhyphen{}I\}\{h\} = y\_0e\textasciicircum{}\{(t\sphinxhyphen{}t\_0)A\}\textbackslash{}lim\_\{h\textbackslash{}to0\} \textbackslash{}frac\{Ae\textasciicircum{}\{Ah\}\}\{1\} = y\_0e\textasciicircum{}\{(t\sphinxhyphen{}t\_0)A\} \textbackslash{}frac\{Ae\textasciicircum{}\{A0\}\}\{1\} = y\_0e\textasciicircum{}\{(t\sphinxhyphen{}t\_0)A\} A I = A y\_0e\textasciicircum{}\{(t\sphinxhyphen{}t\_0)A\}
-\textbackslash{}end\{equation*\}
+\$\(
+    \frac{d}{dt}y_0e^{A(t-t_0)} \doteq \lim_{h\to0} \frac{y_0e^{A(t-t_0+h)}-y_0e^{A(t-t_0)}}{h} = y_0e^{(t-t_0)A}\lim_{h\to0} \frac{e^{Ah}-I}{h} = y_0e^{(t-t_0)A}\lim_{h\to0} \frac{Ae^{Ah}}{1} = y_0e^{(t-t_0)A} \frac{Ae^{A0}}{1} = y_0e^{(t-t_0)A} A I = A y_0e^{(t-t_0)A} 
+\)\$
 
 \sphinxAtStartPar
 using L’Hôpital’s rule on the second equality and noting that \(A(t-t_0+h) = A(t-t_0)+Ah\) and \(A(t-t_0) \cdot Ah = (t-t_0)hAA = Ah \cdot A(t-t_0)\), so it was possible to apply the last proposition and make \(e^{A(t-t_0+h)} = e^{A(t-t_0)} \cdot e^{Ah}\),
 
 \sphinxAtStartPar
 taking
-\textbackslash{}begin\{equation*\}
-y(t) = y\_0e\textasciicircum{}\{A(t\sphinxhyphen{}t\_0)\},
-\textbackslash{}end\{equation*\}
-
-\sphinxAtStartPar
-\textbackslash{}begin\{equation*\}
-y’(t) = A y\_0 e\textasciicircum{}\{(t\sphinxhyphen{}t\_0)A\} = A y(t) \textbackslash{}text\{ and \} y(t\_0) = y\_0 e\textasciicircum{}\{(t\_0\sphinxhyphen{}t\_0)A\} = y\_0 I = y\_0.
-\textbackslash{}end\{equation*\}
-
+\$\(
+    y(t) = y_0e^{A(t-t_0)},
+\)\$
+\begin{equation*}
+\begin{split}
+    y'(t) = A y_0 e^{(t-t_0)A} = A y(t) \text{ and } y(t_0) = y_0 e^{(t_0-t_0)A} = y_0 I = y_0.
+\end{split}
+\end{equation*}
 \sphinxAtStartPar
 So, the solution for the general linear problem is \(y(t)=y_0 e^{A(t-t_0)}\).
 
@@ -1077,17 +1065,17 @@ All information about matrix exponential is from {[}4{]}.
 Returning to the general case
 
 \sphinxAtStartPar
-\textbackslash{}begin\{cases\}
-y’(t) + \textbackslash{}lambda y(t) = g(y(t), t), t \textbackslash{}in (t\_0, T) \textbackslash{}
-y(t\_0) = y\_0
-\textbackslash{}text\{,\}
-\textbackslash{}end\{cases\}
+\(\begin{cases}
+    y'(t) + \lambda y(t) = g(y(t), t), t \in (t_0, T) \\
+    y(t_0) = y_0 
+    \text{,}
+\end{cases}\)
 
 \sphinxAtStartPar
 there is the variation of constants formula:
-\textbackslash{}begin\{equation*\}
-y(t) = e\textasciicircum{}\{\sphinxhyphen{}t \textbackslash{}lambda\}y\_0 + \textbackslash{}int\_\{t\_0\}\textasciicircum{}t e\textasciicircum{}\{\sphinxhyphen{}\textbackslash{}lambda(t\sphinxhyphen{}\textbackslash{}tau)\} g(y(\textbackslash{}tau), \textbackslash{}tau) d\textbackslash{}tau.
-\textbackslash{}end\{equation*\}
+\$\(
+    y(t) = e^{-t \lambda}y_0 + \int_{t_0}^t e^{-\lambda(t-\tau)} g(y(\tau), \tau) d\tau.
+\)\$
 This well known implicit function, gives a solution of the problem.
 
 \sphinxAtStartPar
@@ -1104,17 +1092,15 @@ Before introducing exponential methods, it is useful to present the \(\phi\) fun
 
 \sphinxAtStartPar
 They are \(\mathbb{C} \rightarrow \mathbb{C}\) functions defined as:
-
-\sphinxAtStartPar
-\textbackslash{}begin\{equation*\}
-\textbackslash{}phi\_0 (z) = e\textasciicircum{}z;
-\textbackslash{}end\{equation*\}
-
-\sphinxAtStartPar
-\textbackslash{}begin\{equation*\}
-\textbackslash{}phi\_n (z) = \textbackslash{}int\_\{0\}\textasciicircum{}\{1\} e\textasciicircum{}\{(1\sphinxhyphen{}\textbackslash{}tau)z\} \textbackslash{}frac\{\textbackslash{}tau\textasciicircum{}\{n\sphinxhyphen{}1\}\}\{(n\sphinxhyphen{}1)!\} ,d\textbackslash{}tau, n \textbackslash{}geq 1.
-\textbackslash{}end\{equation*\}
-
+\begin{equation*}
+\begin{split}
+  \phi_0 (z) = e^z;
+\end{split}
+\end{equation*}\begin{equation*}
+\begin{split}
+  \phi_n (z) = \int_{0}^{1} e^{(1-\tau)z} \frac{\tau^{n-1}}{(n-1)!} \,d\tau, n \geq 1.
+\end{split}
+\end{equation*}
 \sphinxAtStartPar
 By integration by parts,
 
@@ -1127,30 +1113,27 @@ By integration by parts,
 
 \sphinxAtStartPar
 Since
-\textbackslash{}begin\{align*\}
-\textbackslash{}phi\_n(0) = \textbackslash{}int\_\{0\}\textasciicircum{}\{1\} e\textasciicircum{}0 \textbackslash{}frac\{\textbackslash{}tau\textasciicircum{}\{n\sphinxhyphen{}1\}\}\{(n\sphinxhyphen{}1)!\} ,d\textbackslash{}tau = \textbackslash{}int\_\{0\}\textasciicircum{}\{1\} \textbackslash{}frac\{\textbackslash{}tau\textasciicircum{}\{n\sphinxhyphen{}1\}\}\{(n\sphinxhyphen{}1)!\} ,d\textbackslash{}tau = \textbackslash{}frac\{1\textasciicircum{}n\}\{n!\} \sphinxhyphen{} 0 = \textbackslash{}frac\{1\}\{n!\},
-\textbackslash{}end\{align*\}
-
-\sphinxAtStartPar
-\textbackslash{}begin\{equation*\}
-\textbackslash{}phi\_\{n+1\}(z) = \textbackslash{}frac\{\textbackslash{}phi\_n(z) \sphinxhyphen{} \textbackslash{}phi\_n(0)\}\{z\}, \textbackslash{}textbf\{the recursive characterization\}.
-\textbackslash{}end\{equation*\}
-
+\$\(
+  \phi_n(0) = \int_{0}^{1} e^0 \frac{\tau^{n-1}}{(n-1)!} \,d\tau = \int_{0}^{1} \frac{\tau^{n-1}}{(n-1)!} \,d\tau = \frac{1^n}{n!} - 0 = \frac{1}{n!},
+\)\$
+\begin{equation*}
+\begin{split}
+  \phi_{n+1}(z) = \frac{\phi_n(z) - \phi_n(0)}{z}, \textbf{the recursive characterization}.
+\end{split}
+\end{equation*}
 \sphinxAtStartPar
 By the properties of integral {[}5{]}, if \(h \in \mathbb{R}^*, t_k \in \mathbb{R}, t_k+h = t_{k+1},\)
-
-\sphinxAtStartPar
-\textbackslash{}begin\{align*\}
-\textbackslash{}phi\_n (z) = \textbackslash{}int\_\{0\}\textasciicircum{}\{1\} e\textasciicircum{}\{(1\sphinxhyphen{}\textbackslash{}tau)z\} \textbackslash{}frac\{\textbackslash{}tau\textasciicircum{}\{n\sphinxhyphen{}1\}\}\{(n\sphinxhyphen{}1)!\} ,d\textbackslash{}tau \textbackslash{}
-= \textbackslash{}frac\{1\}\{h\}\textbackslash{}int\_\{0\}\textasciicircum{}\{h\} e\textasciicircum{}\{\textbackslash{}frac\{(h\sphinxhyphen{}\textbackslash{}tau)z\}\{h\}\} \textbackslash{}frac\{\textbackslash{}tau\textasciicircum{}\{n\sphinxhyphen{}1\}\}\{h\textasciicircum{}\{n\sphinxhyphen{}1\}(n\sphinxhyphen{}1)!\} ,d\textbackslash{}tau \textbackslash{}
-= \textbackslash{}frac\{1\}\{h\}\textbackslash{}int\_\{t\_k\}\textasciicircum{}\{t\_k + h\} e\textasciicircum{}\{\textbackslash{}frac\{(h\sphinxhyphen{}\textbackslash{}tau+t\_k)z\}\{h\}\} \textbackslash{}frac\{(\textbackslash{}tau \sphinxhyphen{} t\_k)\textasciicircum{}\{n\sphinxhyphen{}1\}\}\{h\textasciicircum{}\{n\sphinxhyphen{}1\}(n\sphinxhyphen{}1)!\} ,d\textbackslash{}tau,
-\textbackslash{}end\{align*\}
-
-\sphinxAtStartPar
-\textbackslash{}begin\{equation*\}
-\textbackslash{}phi\_n (z) = \textbackslash{}frac\{1\}\{h\textasciicircum{}l\}\textbackslash{}int\_\{t\_k\}\textasciicircum{}\{t\_\{k+1\}\} e\textasciicircum{}\{\textbackslash{}frac\{1\}\{h\}(t\_\{k+1\}\sphinxhyphen{}\textbackslash{}tau)z\} \textbackslash{}frac\{(\textbackslash{}tau \sphinxhyphen{} t\_k)\textasciicircum{}\{n\sphinxhyphen{}1\}\}\{(n\sphinxhyphen{}1)!\} ,d\textbackslash{}tau.
-\textbackslash{}end\{equation*\}
-
+\begin{equation*}
+\begin{split}
+  \phi_n (z) = \int_{0}^{1} e^{(1-\tau)z} \frac{\tau^{n-1}}{(n-1)!} \,d\tau \\
+  = \frac{1}{h}\int_{0}^{h} e^{\frac{(h-\tau)z}{h}} \frac{\tau^{n-1}}{h^{n-1}(n-1)!} \,d\tau \\
+  = \frac{1}{h}\int_{t_k}^{t_k + h} e^{\frac{(h-\tau+t_k)z}{h}} \frac{(\tau - t_k)^{n-1}}{h^{n-1}(n-1)!} \,d\tau,
+\end{split}
+\end{equation*}\begin{equation*}
+\begin{split}
+  \phi_n (z) = \frac{1}{h^l}\int_{t_k}^{t_{k+1}} e^{\frac{1}{h}(t_{k+1}-\tau)z} \frac{(\tau - t_k)^{n-1}}{(n-1)!} \,d\tau.
+\end{split}
+\end{equation*}
 \sphinxAtStartPar
 Information from {[}1{]}.
 
@@ -1537,86 +1520,80 @@ def convergence\PYGZus{}table(errors\PYGZus{}2x, n0, k, t0, tf):
 \label{\detokenize{cap4:exponential-euler-method}}
 \sphinxAtStartPar
 For
-\textbackslash{}begin\{cases\}
-y’(t) + \textbackslash{}lambda y(t) = g(y(t), t), t \textbackslash{}in (t\_0, T) \textbackslash{}
-y(0) = y\_0
-\textbackslash{}end\{cases\}
+
+\sphinxAtStartPar
+\(\begin{cases}
+    y'(t) + \lambda y(t) = g(y(t), t), t \in (t_0, T) \\
+    y(0) = y_0
+\end{cases}\)
 
 \sphinxAtStartPar
 the domain is evenly discretized:
-
-\sphinxAtStartPar
-\textbackslash{}begin\{equation*\}
-N \textbackslash{}in \textbackslash{}mathbb\{N\}; h = \textbackslash{}frac\{T\sphinxhyphen{}t\_0\}\{N\}; \textbackslash{}text\{Domain: \}\{t\_k = t\_0 + k h : k = 0, 1, …\}.
-\textbackslash{}end\{equation*\}
-
+\begin{equation*}
+\begin{split}
+    N \in \mathbb{N}; h = \frac{T-t_0}{N}; \text{Domain: }\{t_k = t_0 + k h : k = 0, 1, ...\}.
+\end{split}
+\end{equation*}
 \sphinxAtStartPar
 The discretization of the ODE takes the exact solution of the Cauchy problem, given by the variation of constants formula
-\textbackslash{}begin\{equation*\}
-y(t) = e\textasciicircum{}\{\sphinxhyphen{}(t\sphinxhyphen{}t\_0) \textbackslash{}lambda\}y\_0 + \textbackslash{}int\_\{t\_0\}\textasciicircum{}t {[}e\textasciicircum{}\{\sphinxhyphen{}\textbackslash{}lambda(t\sphinxhyphen{}\textbackslash{}tau)\} g(y(\textbackslash{}tau), \textbackslash{}tau){]} d\textbackslash{}tau
-\textbackslash{}end\{equation*\}
-
+\begin{equation*}
+\begin{split}
+    y(t) = e^{-(t-t_0) \lambda}y_0 + \int_{t_0}^t [e^{-\lambda(t-\tau)} g(y(\tau), \tau)] d\tau
+\end{split}
+\end{equation*}
 \sphinxAtStartPar
 and, by Taylor expansion on \(g\):
 
 \sphinxAtStartPar
 \(\tau \in (t_k, t_{k+1})\)
-\textbackslash{}begin\{equation*\}
-g(y(\textbackslash{}tau), \textbackslash{}tau) = g(y(t\_k), t\_k) + (\textbackslash{}tau \sphinxhyphen{} t\_k) \textbackslash{}frac\{dg\}\{dt\} (y(\textbackslash{}theta\_k), \textbackslash{}theta\_k)
-\textbackslash{}end\{equation*\}
-for a \(\theta_k \in (t_k, t_{k+1}),\)
-
-\sphinxAtStartPar
-\textbackslash{}begin\{equation*\}
-y(t\_\{k+1\}) = e\textasciicircum{}\{\sphinxhyphen{}(t\_\{k+1\}\sphinxhyphen{}t\_k) \textbackslash{}lambda\}y(t\_k) + \textbackslash{}int\_\{t\_k\}\textasciicircum{}\{t\_\{k+1\}\} {[}e\textasciicircum{}\{\sphinxhyphen{}\textbackslash{}lambda(t\_\{k+1\}\sphinxhyphen{}\textbackslash{}tau)\} g(y(\textbackslash{}tau), \textbackslash{}tau){]} d\textbackslash{}tau
-\textbackslash{}end\{equation*\}
-
-\sphinxAtStartPar
-\textbackslash{}begin\{equation*\}
-= e\textasciicircum{}\{\sphinxhyphen{}h \textbackslash{}lambda\}y(t\_k) + \textbackslash{}int\_\{t\_k\}\textasciicircum{}\{t\_\{k+1\}\} \textbackslash{}left{[}e\textasciicircum{}\{\sphinxhyphen{}\textbackslash{}lambda(t\_\{k+1\}\sphinxhyphen{}\textbackslash{}tau)\} \textbackslash{}left( g(y(t\_k), t\_k) + (\textbackslash{}tau \sphinxhyphen{} t\_k) \textbackslash{}frac\{dg\}\{dt\} (y(\textbackslash{}theta\_k), \textbackslash{}theta\_k)\textbackslash{}right)\textbackslash{}right{]} d\textbackslash{}tau
-\textbackslash{}end\{equation*\}
-
-\sphinxAtStartPar
-\textbackslash{}begin\{equation*\}
-= e\textasciicircum{}\{\sphinxhyphen{}h \textbackslash{}lambda\}y(t\_k) + g(y(t\_k), t\_k) \textbackslash{}int\_\{t\_k\}\textasciicircum{}\{t\_\{k+1\}\} e\textasciicircum{}\{\sphinxhyphen{}\textbackslash{}lambda(t\_\{k+1\}\sphinxhyphen{}\textbackslash{}tau)\} d\textbackslash{}tau + \textbackslash{}frac\{dg\}\{dt\} (y(\textbackslash{}theta\_k), \textbackslash{}theta\_k) \textbackslash{}int\_\{t\_k\}\textasciicircum{}\{t\_\{k+1\}\} (\textbackslash{}tau \sphinxhyphen{} t\_k) e\textasciicircum{}\{\sphinxhyphen{}\textbackslash{}lambda(t\_\{k+1\}\sphinxhyphen{}\textbackslash{}tau)\} d\textbackslash{}tau.
-\textbackslash{}end\{equation*\}
-
+\$\(
+    g(y(\tau), \tau) = g(y(t_k), t_k) + (\tau - t_k) \frac{dg}{dt} (y(\theta_k), \theta_k)
+\)\(
+for a \)\textbackslash{}theta\_k \textbackslash{}in (t\_k, t\_\{k+1\}),\$
+\begin{equation*}
+\begin{split}
+    y(t_{k+1}) = e^{-(t_{k+1}-t_k) \lambda}y(t_k) + \int_{t_k}^{t_{k+1}} [e^{-\lambda(t_{k+1}-\tau)} g(y(\tau), \tau)] d\tau
+\end{split}
+\end{equation*}\begin{equation*}
+\begin{split}
+    = e^{-h \lambda}y(t_k) + \int_{t_k}^{t_{k+1}} \left[e^{-\lambda(t_{k+1}-\tau)} \left( g(y(t_k), t_k) + (\tau - t_k) \frac{dg}{dt} (y(\theta_k), \theta_k)\right)\right] d\tau
+\end{split}
+\end{equation*}\begin{equation*}
+\begin{split}
+    = e^{-h \lambda}y(t_k) + g(y(t_k), t_k) \int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)} d\tau + \frac{dg}{dt} (y(\theta_k), \theta_k) \int_{t_k}^{t_{k+1}} (\tau - t_k) e^{-\lambda(t_{k+1}-\tau)} d\tau.
+\end{split}
+\end{equation*}
 \sphinxAtStartPar
 Since
-
-\sphinxAtStartPar
-\textbackslash{}begin\{equation*\}
-\textbackslash{}int\_\{t\_k\}\textasciicircum{}\{t\_\{k+1\}\} e\textasciicircum{}\{\sphinxhyphen{}\textbackslash{}lambda(t\_\{k+1\}\sphinxhyphen{}\textbackslash{}tau)\} d\textbackslash{}tau = h\textbackslash{}phi\_1(\sphinxhyphen{}\textbackslash{}lambda h)= \textbackslash{}frac\{1\sphinxhyphen{}e\textasciicircum{}\{\sphinxhyphen{}h \textbackslash{}lambda\}\}\{\textbackslash{}lambda\}
-\textbackslash{}end\{equation*\}
-
+\begin{equation*}
+\begin{split}
+    \int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)} d\tau = h\phi_1(-\lambda h)= \frac{1-e^{-h \lambda}}{\lambda}
+\end{split}
+\end{equation*}
 \sphinxAtStartPar
 and, by the Taylor expansion of \(e^{-\lambda h}\) in the point zero
-
-\sphinxAtStartPar
-\textbackslash{}begin\{equation*\}
-e\textasciicircum{}\{\sphinxhyphen{}\textbackslash{}lambda h\} = 1 \sphinxhyphen{} \textbackslash{}lambda h + \textbackslash{}frac\{1\}\{2\}\textbackslash{}lambda\textasciicircum{}2h\textasciicircum{}2 \sphinxhyphen{} \textbackslash{}frac\{1\}\{3!\}\textbackslash{}lambda\textasciicircum{}3h\textasciicircum{}3 + \textbackslash{}dotsi + \textbackslash{}frac\{1\}\{n!\} (\sphinxhyphen{}\textbackslash{}lambda h)\textasciicircum{}n + \textbackslash{}dotsi, n \textbackslash{}in \textbackslash{}mathbb\{N\}
-\textbackslash{}end\{equation*\}
-
-\sphinxAtStartPar
-\textbackslash{}begin\{gather*\}
-\textbackslash{}int\_\{t\_k\}\textasciicircum{}\{t\_\{k+1\}\} (\textbackslash{}tau \sphinxhyphen{} t\_k) e\textasciicircum{}\{\sphinxhyphen{}\textbackslash{}lambda(t\_\{k+1\}\sphinxhyphen{}\textbackslash{}tau)\} d\textbackslash{}tau =
-h\textasciicircum{}2 \textbackslash{}phi\_2 (\sphinxhyphen{}\textbackslash{}lambda h) =
-h \textbackslash{}frac\{\textbackslash{}phi\_1(0) \sphinxhyphen{} \textbackslash{}phi\_1(\sphinxhyphen{}\textbackslash{}lambda h)\}\{\textbackslash{}lambda\} =
-\textbackslash{}frac\{h\}\{\textbackslash{}lambda\} \sphinxhyphen{} \textbackslash{}frac\{1\sphinxhyphen{}e\textasciicircum{}\{\sphinxhyphen{}h \textbackslash{}lambda\}\}\{\textbackslash{}lambda\textasciicircum{}2\} = \textbackslash{}
-\textbackslash{}frac\{h\}\{\textbackslash{}lambda\} \sphinxhyphen{} \textbackslash{}frac\{1\sphinxhyphen{}(1 \sphinxhyphen{} \textbackslash{}lambda h + \textbackslash{}frac\{1\}\{2\}\textbackslash{}lambda\textasciicircum{}2h\textasciicircum{}2 \sphinxhyphen{} \textbackslash{}frac\{1\}\{3!\}\textbackslash{}lambda\textasciicircum{}3h\textasciicircum{}3 + \textbackslash{}dotsi + \textbackslash{}frac\{1\}\{n!\} (\sphinxhyphen{}\textbackslash{}lambda h)\textasciicircum{}n + \textbackslash{}dotsi)\}\{\textbackslash{}lambda\textasciicircum{}2\} = \textbackslash{}
-\textbackslash{}frac\{h\textasciicircum{}2\}\{2\} \sphinxhyphen{} \textbackslash{}frac\{h\textasciicircum{}3\}\{3!\} \textbackslash{}lambda + \textbackslash{}dotsi + \textbackslash{}frac\{h\textasciicircum{}n\}\{n!\} (\sphinxhyphen{}\textbackslash{}lambda)\textasciicircum{}\{n\sphinxhyphen{}2\} + \textbackslash{}dotsi  =  O(h\textasciicircum{}2),
-\textbackslash{}end\{gather*\}
-
-\sphinxAtStartPar
-\textbackslash{}begin\{equation*\}
-y(t\_\{k+1\}) = e\textasciicircum{}\{\sphinxhyphen{}h \textbackslash{}lambda\}y(t\_k) + g(y(t\_k), t\_k) \textbackslash{}frac\{1\sphinxhyphen{}e\textasciicircum{}\{\sphinxhyphen{}h \textbackslash{}lambda\}\}\{\textbackslash{}lambda\} + \textbackslash{}frac\{dg\}\{dt\} (y(\textbackslash{}theta\_k), \textbackslash{}theta\_k) O(h\textasciicircum{}2),
-\textbackslash{}end\{equation*\}
-
-\sphinxAtStartPar
-\textbackslash{}begin\{equation*\}
-y(t\_\{k+1\}) = e\textasciicircum{}\{\sphinxhyphen{}h \textbackslash{}lambda\}y(t\_k) + g(y(t\_k), t\_k) \textbackslash{}frac\{1\sphinxhyphen{}e\textasciicircum{}\{\sphinxhyphen{}h \textbackslash{}lambda\}\}\{\textbackslash{}lambda\} + O(h\textasciicircum{}2).
-\textbackslash{}end\{equation*\}
-
+\begin{equation*}
+\begin{split}
+    e^{-\lambda h} = 1 - \lambda h + \frac{1}{2}\lambda^2h^2 - \frac{1}{3!}\lambda^3h^3 + \dotsi + \frac{1}{n!} (-\lambda h)^n + \dotsi, n \in \mathbb{N}
+\end{split}
+\end{equation*}\begin{equation*}
+\begin{split}
+     \int_{t_k}^{t_{k+1}} (\tau - t_k) e^{-\lambda(t_{k+1}-\tau)} d\tau =
+     h^2 \phi_2 (-\lambda h) =
+     h \frac{\phi_1(0) - \phi_1(-\lambda h)}{\lambda} =
+     \frac{h}{\lambda} - \frac{1-e^{-h \lambda}}{\lambda^2} = \\
+     \frac{h}{\lambda} - \frac{1-(1 - \lambda h + \frac{1}{2}\lambda^2h^2 - \frac{1}{3!}\lambda^3h^3 + \dotsi + \frac{1}{n!} (-\lambda h)^n + \dotsi)}{\lambda^2} = \\
+     \frac{h^2}{2} - \frac{h^3}{3!} \lambda + \dotsi + \frac{h^n}{n!} (-\lambda)^{n-2} + \dotsi  =  O(h^2),
+\end{split}
+\end{equation*}\begin{equation*}
+\begin{split}
+    y(t_{k+1}) = e^{-h \lambda}y(t_k) + g(y(t_k), t_k) \frac{1-e^{-h \lambda}}{\lambda} + \frac{dg}{dt} (y(\theta_k), \theta_k) O(h^2),
+\end{split}
+\end{equation*}\begin{equation*}
+\begin{split}
+  y(t_{k+1}) = e^{-h \lambda}y(t_k) + g(y(t_k), t_k) \frac{1-e^{-h \lambda}}{\lambda} + O(h^2).
+\end{split}
+\end{equation*}
 \sphinxAtStartPar
 That inspires the \(\textbf{Exponential Euler method}\) :
 \$\(

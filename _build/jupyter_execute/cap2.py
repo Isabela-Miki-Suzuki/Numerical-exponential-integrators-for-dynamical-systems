@@ -8,10 +8,10 @@
 # ## One step methods for ODE 
 
 # In order to find a approximation for the solution of the problem
-# \begin{cases}
+# $\begin{cases}
 # y'(t) = f(t, y(t)), t \in [t_0,T] \\
 # y(t_0)=y_0 \text{,}
-# \end{cases}
+# \end{cases}$
 
 # they are of the form:
 # $$
@@ -26,10 +26,10 @@
 # $$
 
 # To analyse the method, there is a model problem
-# \begin{cases}
+# $\begin{cases}
 #     y'(t) = - \lambda y(t) \text{ ; } t \in[t_0,T]\\ 
 #     y(t_0)=y_0,\\
-# \end{cases}
+# \end{cases}$
 # 
 # whose solution is $y(t) = y_0 e^{-\lambda (t-t_0)}$
 # with $\lambda > 0.$
@@ -60,23 +60,23 @@
 # The reason for taking this specific problem is that it models the behaviour of the difference between the approximation and the solution on a small neighbourhood of any Cauchy problem:
 
 # Taking
-# \begin{cases}
+# $\begin{cases}
 #     y'(t) = f(y(t), t), t \in (t_0, T) \\
 #     y(t_0) = y_0 \in \mathbb{K}
-# \end{cases}
+# \end{cases}$
 
 # and a approximation $z$ of the solution $y$, doing
-# \begin{align*}
+# $$
 # \sigma(t) = z(t) - y(t) \Rightarrow
-# \end{align*}
+# $$
 
-# \begin{align*}
+# $$
 # \dot{\sigma}(t) = \dot{z}(t) - \dot{y}(t) = f(z(t), t) - f(y(t), t) \Rightarrow
-# \end{align*}
+# $$
 
-# \begin{align*}
+# $$
 # \dot{\sigma}(t) + \dot{y}(t) = \dot{z}(t) = f(z(t), t) = f(y(t)+\sigma(t), t) = f(y(t), t) + \sigma(t)\frac{\partial f}{\partial y} + O(\sigma^2(t)),
-# \end{align*}
+# $$
 
 # so
 # \begin{cases}
@@ -115,49 +115,49 @@
 
 # Euler method: 
 # 
-# \begin{equation*}
+# $$
 #     \phi (t_{k},y_{k},h) = f(t_{k},y_{k})
-# \end{equation*}
+# $$
 # 
 # Modified Euler method: 
 # 
-# \begin{equation*}
+# $$
 #     \phi (t_{k},y_{k},h) = \frac{1}{2} \left[ f(t_{k},y_{k}) + f(t_{k+1},y_{k} + h f(t_{k},y_{k})) \right]
-# \end{equation*}
+# $$
 # 
 # Midpoint method: 
 # 
-# \begin{equation*}
+# $$
 #     \phi (t_{k},y_{k},h) = f(t_{k} + \frac{h}{2},y_{k} + \frac{h}{2} f(t_{k},y_{k}))
-# \end{equation*}
+# $$
 # 
 # Classic Runge-Kutta (RK 4-4): 
 # 
-# \begin{gather*}
+# $$
 #     \phi (t_{k},y_{k},h) = \frac{1}{6} \left( \kappa_1 + 2 \kappa_2 + 2 \kappa_3 + \kappa_4 \right), \text{with }\\
 #     \kappa_1 = f(t_{k},y_{k})\\
 #     \kappa_2 = f(t_{k} + \frac{h}{2},y_{k} + \frac{h}{2} \kappa_1)\\
 #     \kappa_3 = f(t_{k} + \frac{h}{2},y_{k} + \frac{h}{2} \kappa_2)\\
 #     \kappa_4 = f(t_{k} + h, y_{k} + h \kappa_3)
-# \end{gather*}
+# $$
 
 # ## Euler method
 
 # Further detailing this explicit one-step method of
 # 
-# \begin{equation*}
+# $$
 #     \phi (t_{k},y_{k},h) = f(t_{k},y_{k}),
-# \end{equation*}
+# $$
 # 
 # an analysis on stability, convergence and order of convergence is done.
 
 # ### Stability
 # 
 # For the problem
-# \begin{cases}
+# $\begin{cases}
 #     y'(t) = - \lambda y(t) \text{ ; } t \in [t_0 , T] \\
 #     y(t_0)=y_0,
-# \end{cases}
+# \end{cases}$
 # 
 # with known solution
 # 
@@ -207,18 +207,18 @@
 # Being $\tau(h, t_k)$ the local truncation error.
 # 
 # From
-# \begin{equation*}
+# $$
 #     y(t_{k+1}) = y(t_k) + h f(y(t_k),t_k) + O(h^2),
-# \end{equation*}
+# $$
 # 
 # we have
-# \begin{equation*}
+# $$
 #     h \tau(h, t_k) \doteq \frac{y(t_{k+1}) - y(t_k)}{h} - f(t_k, y(t_k)) = O(h^2),
-# \end{equation*}
+# $$
 # 
 # so
-# \begin{equation*}
+# $$
 #     \tau(h, t_k) = O(h).
-# \end{equation*}
+# $$
 # 
 # Since for one step methods the order of convergence is the order of the local truncation error, the order is of $O(h)$, order 1.
