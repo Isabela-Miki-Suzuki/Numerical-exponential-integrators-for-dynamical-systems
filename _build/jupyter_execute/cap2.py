@@ -271,17 +271,23 @@
 
 # ### Convergence
 # Since
+# 
 # $$
 # \lim_{m \to +\infty} \left(1 + \frac{p}{m} \right)^m = e^p,
 # $$
+# 
 # and h = $\frac{T-t_0}{N}$, for $y_N$ we have
+# 
 # $$
 # \lim_{N \to +\infty} y_N = \lim_{N \to +\infty} \left(1 - h \lambda \right)^N y_0 = \lim_{N \to +\infty} \left(1 - \frac{(T-t_0) \lambda}{N} \right)^N y_0.
 # $$
+# 
 # It is reasonable to take $p = -(T-t_0) \lambda$ and conclude that the last point estimated by the method will converge to
+# 
 # $$
 # y_0e^{-\lambda (T-t_0)}.
 # $$
+# 
 # Which is precisely $y(T)$ and proves the convergence.
 
 # ### Order of convergence

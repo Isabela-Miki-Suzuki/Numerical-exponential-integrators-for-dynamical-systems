@@ -659,18 +659,27 @@ the error will converge oscillating since it takes positive values with even exp
 \label{\detokenize{cap2:convergence}}
 \sphinxAtStartPar
 Since
-\$\(
+\begin{equation*}
+\begin{split}
 \lim_{m \to +\infty} \left(1 + \frac{p}{m} \right)^m = e^p,
-\)\(
-and h = \)\textbackslash{}frac\{T\sphinxhyphen{}t\_0\}\{N\}\(, for \)y\_N\( we have
-\)\(
+\end{split}
+\end{equation*}
+\sphinxAtStartPar
+and h = \(\frac{T-t_0}{N}\), for \(y_N\) we have
+\begin{equation*}
+\begin{split}
 \lim_{N \to +\infty} y_N = \lim_{N \to +\infty} \left(1 - h \lambda \right)^N y_0 = \lim_{N \to +\infty} \left(1 - \frac{(T-t_0) \lambda}{N} \right)^N y_0.
-\)\(
-It is reasonable to take \)p = \sphinxhyphen{}(T\sphinxhyphen{}t\_0) \textbackslash{}lambda\( and conclude that the last point estimated by the method will converge to
-\)\(
+\end{split}
+\end{equation*}
+\sphinxAtStartPar
+It is reasonable to take \(p = -(T-t_0) \lambda\) and conclude that the last point estimated by the method will converge to
+\begin{equation*}
+\begin{split}
 y_0e^{-\lambda (T-t_0)}.
-\)\(
-Which is precisely \)y(T)\$ and proves the convergence.
+\end{split}
+\end{equation*}
+\sphinxAtStartPar
+Which is precisely \(y(T)\) and proves the convergence.
 
 
 \subsubsection{Order of convergence}
