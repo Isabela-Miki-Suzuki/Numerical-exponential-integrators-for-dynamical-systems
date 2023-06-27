@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2023.6.26)  27 JUN 2023 00:10
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2023.6.26)  27 JUN 2023 00:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1719,9 +1719,25 @@ l.260 \end{split}
 l.260 \end{split}
                  
 ? 
+
+! LaTeX Error: \begin{split} on input line 260 ended by \end{equation*}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.260 \end{split}
+                 
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.260 \end{split}
+                 
+? 
 ! Emergency stop.
 <inserted text> 
-                }
+                $
 l.260 \end{split}
                  
 End of file on the terminal!

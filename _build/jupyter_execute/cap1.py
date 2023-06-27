@@ -50,7 +50,7 @@
 
 # $$
 # \begin{align*}
-# e^{-ct} \text{, with c >>1, }
+#     e^{-ct} \text{, with c >>1, }
 # \end{align*}
 # $$
 
@@ -58,7 +58,7 @@
 
 # $$
 # \begin{align*}
-# \mp c^{n}e^{-ct}
+#     \mp c^{n}e^{-ct}
 # \end{align*}
 # $$
 
@@ -70,7 +70,7 @@
 
 # $$
 # \begin{align*}
-# e^{A}
+#     e^{A}
 # \end{align*}
 # $$
 
