@@ -78,7 +78,11 @@
 
 # so
 # $$
-#     e^A \doteq \sum_{i=0}^{\infty} \frac{A^i}{i!} = diag\left(\sum_{i=0}^{\infty} \frac{\lambda_1^i}{i!}, \sum_{i=0}^{\infty} \frac{\lambda_2^i}{i!}, \sum_{i=0}^{\infty} \frac{\lambda_3^i}{i!}, \dotsc, \sum_{i=0}^{\infty} \frac{\lambda_N^i}{i!}\right) = diag \left( e^{\lambda_1}, e^{\lambda_2}, e^{\lambda_3}, \dotsc, e^{\lambda_N} \right).
+#     e^A \doteq \sum_{i=0}^{\infty} \frac{A^i}{i!} = diag\left(\sum_{i=0}^{\infty} \frac{\lambda_1^i}{i!}, \sum_{i=0}^{\infty} \frac{\lambda_2^i}{i!}, \sum_{i=0}^{\infty} \frac{\lambda_3^i}{i!}, \dotsc, \sum_{i=0}^{\infty} \frac{\lambda_N^i}{i!}\right)
+# $$
+# 
+# $$
+#     = diag \left( e^{\lambda_1}, e^{\lambda_2}, e^{\lambda_3}, \dotsc, e^{\lambda_N} \right).
 # $$
 
 # In the same way, if B is a diagonal by blocks matrix:
@@ -115,7 +119,9 @@
 # \end{array} } \right] $,
 
 # one can calculate
-# $A^2 = A \cdot A =  
+# 
+# $$
+# A^2 = A \cdot A =  
 # \left[ {\begin{array}{ccccccc}
 #     0 & 1 &  &  &  &  & \\
 #      & 0 & 1 &  &  &  &\\
@@ -133,8 +139,11 @@
 #      &  &  &  & 0 & \ddots &  \\
 #      &  &  &  &  & \ddots & 1 \\
 #      &  &  &  &  &  & 0 \\
-# \end{array} } \right]  =   
-# \left[ {\begin{array}{ccccccc}
+# \end{array} } \right] 
+# $$
+# 
+# $$
+#   =   \left[ {\begin{array}{ccccccc}
 #     0 & 0 & 1 &  &  &  & \\
 #      & 0 & 0 & 1 &  &  &\\
 #      &  & 0 & 0 & 1 &  &\\
@@ -142,7 +151,8 @@
 #      &  &  &  & 0 & \ddots & 1 \\
 #      &  &  &  &  & \ddots & 0 \\
 #      &  &  &  &  &  & 0 \\
-# \end{array} } \right] $,
+# \end{array} } \right], 
+# $$
 
 # $$
 #     A^3 = A \cdot A^2 = \left[ {\begin{array}{ccccccc}
@@ -161,7 +171,11 @@
 #      &  &  &  & 0 & \ddots & 1 \\
 #      &  &  &  &  & \ddots & 0 \\
 #      &  &  &  &  &  & 0 \\
-# \end{array} } \right] = \left[ {\begin{array}{ccccccc}
+# \end{array} } \right] 
+# $$
+# 
+# $$
+# = \left[ {\begin{array}{ccccccc}
 #     0 & 0 & 0 & 1 &  &  & \\
 #      & 0 & 0 & 0 & 1 &  &\\
 #      &  & 0 & 0 & 0 & \ddots &\\
@@ -206,7 +220,11 @@
 
 # And then, with $t \in \mathbb{R}$
 # $$
-#     e^{tA} \doteq \sum_{i=0}^{\infty} \frac{tA^i}{i!} = Id + tA + \frac{t^2 A^2}{2} + \frac{t^3 A^3}{6} + \dotsc + \frac{t^{N-2} A^{N-2}}{(N-2)!} + \frac{t^{N-1} A^{N-1}}{(N-1)!} + 0 + 0 + \dotsc + 0
+#     e^{tA} \doteq \sum_{i=0}^{\infty} \frac{tA^i}{i!}
+# $$
+# 
+# $$
+#     = Id + tA + \frac{t^2 A^2}{2} + \frac{t^3 A^3}{6} + \dotsc + \frac{t^{N-2} A^{N-2}}{(N-2)!} + \frac{t^{N-1} A^{N-1}}{(N-1)!} + 0 + 0 + \dotsc + 0
 # $$
 
 # $$
@@ -226,7 +244,11 @@
 #      &  &  &  & 0 & \ddots &  \\
 #      &  &  &  &  & \ddots & t \\
 #      &  &  &  &  &  & 0 \\
-# \end{array} } \right] + \left[ {\begin{array}{ccccccc}
+# \end{array} } \right] + 
+# $$
+# 
+# $$
+# + \left[ {\begin{array}{ccccccc}
 #     0 & 0 & \frac{t^2}{2} &  &  &  & \\
 #      & 0 & 0 & \frac{t^2}{2} &  &  &\\
 #      &  & 0 & 0 & \frac{t^2}{2} &  &\\
@@ -269,7 +291,11 @@
 #     0 & 0 & \lambda_i & \ddots & 0\\
 #     \vdots & \vdots & \vdots & \ddots & 1\\
 #     0 & 0 & 0 & \dotsm & \lambda_i\\
-# \end{array} } \right] = \left[ {\begin{array}{ccccc}
+# \end{array} } \right] 
+# $$
+# 
+# $$
+# = \left[ {\begin{array}{ccccc}
 #     \lambda_i & 0 & 0 & \dotsm & 0\\
 #     0 & \lambda_i & 0 & \dotsm & 0\\
 #     0 & 0 & \lambda_i & \dotsm & 0\\
@@ -281,7 +307,11 @@
 #      &  & 0 & \ddots &\\
 #      &  &  & \ddots & 1\\
 #      &  &  &  & 0\\
-# \end{array} } \right] = D + N,
+# \end{array} } \right] 
+# $$
+# 
+# $$
+#     = D + N,
 # $$
 
 # and
@@ -298,13 +328,21 @@
 #      &  & 0 & \ddots &\\
 #      &  &  & \ddots & 1\\
 #      &  &  &  & 0\\
-# \end{array} } \right] = \left[ {\begin{array}{ccccc}
+# \end{array} } \right] 
+# $$
+# 
+# $$
+# = \left[ {\begin{array}{ccccc}
 #     0 & \lambda_i &  &  & \\
 #      & 0 & \lambda_i &  &\\
 #      &  & 0 & \ddots &\\
 #      &  &  & \ddots & \lambda_i\\
 #      &  &  &  & 0\\
-# \end{array} } \right] = \left[ {\begin{array}{ccccc}
+# \end{array} } \right] 
+# $$
+# 
+# $$
+# = \left[ {\begin{array}{ccccc}
 #     0 & 1 &  &  & \\
 #      & 0 & 1 &  &\\
 #      &  & 0 & \ddots &\\
@@ -321,7 +359,11 @@
 
 # so
 # $$
-#     e^{tJ} = e^{tD+tN} = e^{tD} \cdot e^{tN} = \left[ {\begin{array}{ccccc}
+#     e^{tJ} = e^{tD+tN} = e^{tD} \cdot e^{tN}
+# $$
+# 
+# $$
+# = \left[ {\begin{array}{ccccc}
 #     e^{t \lambda_i} & 0 & 0 & \dotsm & 0\\
 #     0 & e^{t \lambda_i} & 0 & \dotsm & 0\\
 #     0 & 0 & e^{t \lambda_i} & \dotsm & 0\\
@@ -333,7 +375,11 @@
 #      &  & 1 & \ddots & \frac{t^2}{2} \\
 #      &  &  & \ddots & t \\
 #      &  &  &  & 1 \\
-# \end{array} } \right] = \left[ {\begin{array}{ccccc}
+# \end{array} } \right]
+# $$
+# 
+# $$
+# = \left[ {\begin{array}{ccccc}
 #     e^{t \lambda_i} & e^{t \lambda_i}t & \frac{e^{t \lambda_i} t^2}{2} & \dotsc & \frac{e^{t \lambda_i} t^{N-1}}{(N-1)!}\\
 #      & e^{t \lambda_i} & e^{t \lambda_i} t & \ddots & \vdots\\
 #      &  & e^{t \lambda_i} & \ddots & \frac{e^{t \lambda_i} t^2}{2} \\
@@ -360,14 +406,22 @@
 
 # Note that
 # $$
-#     (MJM^{-1})^k = MJM^{-1}MJM^{-1}MJM^{-1} \dotsc MJM^{-1} = MJIJIJM^{-1} \dotsc MJM^{-1} = MJJJ \dotsc JM^{-1} = MJ^kM^{-1}.
+#     (MJM^{-1})^k = MJM^{-1}MJM^{-1}MJM^{-1} \dotsc MJM^{-1} 
+# $$
+# 
+# $$
+#     = MJIJIJM^{-1} \dotsc MJM^{-1} = MJJJ \dotsc JM^{-1} = MJ^kM^{-1}.
 # $$
 
 # Because of the formula of the series that defines the expansion, it implicates in $e^{MJM^{-1}} = M e^J M^{-1}$.
 
 # And then, using the same notation from the last proposition,
 # $$
-# e^{tA} = e^{tMJM^{-1}} = e^{MtJM^{-1}} = Me^{tJ}M^{-1} = M \left[ { \begin{array}{ccccc}
+# e^{tA} = e^{tMJM^{-1}} = e^{MtJM^{-1}} = Me^{tJ}M^{-1} 
+# $$
+# 
+# $$
+#     = M \left[ { \begin{array}{ccccc}
 #         e^{tJ_1} & 0 & 0 & \dotsm & 0\\
 #         0 & e^{tJ_2} & 0 & \dotsm & 0\\
 #         0 & 0 & e^{tJ_3} & \dotsm & 0\\

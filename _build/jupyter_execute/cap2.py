@@ -75,7 +75,11 @@
 # $$
 
 # $$
-# \dot{\sigma}(t) + \dot{y}(t) = \dot{z}(t) = f(z(t), t) = f(y(t)+\sigma(t), t) = f(y(t), t) + \sigma(t)\frac{\partial f}{\partial y} + O(\sigma^2(t)),
+# \dot{\sigma}(t) + \dot{y}(t) = \dot{z}(t) = f(z(t), t) = f(y(t)+\sigma(t), t)
+# $$
+# 
+# $$
+#  = f(y(t), t) + \sigma(t)\frac{\partial f}{\partial y} + O(\sigma^2(t)),
 # $$
 
 # so

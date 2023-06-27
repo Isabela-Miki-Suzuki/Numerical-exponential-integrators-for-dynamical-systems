@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2023.6.26)  27 JUN 2023 00:33
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2023.6.26)  27 JUN 2023 00:45
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1650,19 +1650,7 @@ File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 ] [2
 
 
-] (./book.toc
-LaTeX Info: Redefining \rmfamily on input line 1.
-LaTeX Info: Redefining \sffamily on input line 1.
-LaTeX Info: Redefining \ttfamily on input line 1.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 7.00075pt on input line 5.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 5.00053pt on input line 5.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 6.99925pt on input line 5.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 4.99947pt on input line 5.
-)
+] (./book.toc)
 \tf@toc=\write7
 \openout7 = `book.toc'.
 
@@ -1670,7 +1658,17 @@ LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
 
 ] [2
 
-] [1] [2
+]
+
+LaTeX Warning: Hyper reference `Description_and_evaluation_of_institutional_sup
+port_received_in_the_period::doc' on page 1 undefined on input line 192.
+
+
+LaTeX Warning: Hyper reference `Participation_in_scientific_event,_list_of_publ
+ications_and_list_of_papers_prepared_or_submitted::doc' on page 1 undefined on 
+input line 196.
+
+[1] [2
 
 ]
 Chapter 1.
@@ -1682,6 +1680,14 @@ Chapter 2.
 
 ]
 Chapter 3.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 7.00075pt on input line 236.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 5.00053pt on input line 236.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 6.99925pt on input line 236.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 4.99947pt on input line 236.
 [7]
 Underfull \hbox (badness 5637) in paragraph at lines 373--379
 []\TU/FreeSerif(0)/m/n/10 If that is possible to manipulate the method so that,
@@ -1689,7 +1695,7 @@ Underfull \hbox (badness 5637) in paragraph at lines 373--379
  []
 
 [8] [9]
-Overfull \hbox (131.37868pt too wide) in paragraph at lines 542--549
+Overfull \hbox (131.37868pt too wide) in paragraph at lines 546--553
 \TU/FreeSerif(0)/m/n/10 \infty \Rightarrow y_k \rightarrow \infty $[][] [][][] 
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][][][][][][][][][][] [][][][][][][][][][][][][][][][][][][][][][][][][][][][
@@ -1697,19 +1703,19 @@ Overfull \hbox (131.37868pt too wide) in paragraph at lines 542--549
  []
 
 [10]
-Underfull \hbox (badness 10000) in paragraph at lines 564--578
+Underfull \hbox (badness 10000) in paragraph at lines 568--582
 \TU/FreeSerif(0)/m/n/10 Since $$[][] [][] [] [][][]$$[][][][] []$\frac{T-t_0}{N
 }$[] [][][]$y_N$[][][][][][]$$[][] [][] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 564--578
+Underfull \hbox (badness 10000) in paragraph at lines 568--582
 [][] [][] [][] [] [][] [][] [][][]$$[][][][][][][][][][][][][][][][][][][][]$\T
 U/FreeSerif(0)/m/n/10 p = -(T-t_0)
  []
 
 
-Overfull \hbox (7.48698pt too wide) in paragraph at lines 564--578
+Overfull \hbox (7.48698pt too wide) in paragraph at lines 568--582
 \TU/FreeSerif(0)/m/n/10 \lambda$[][][][][][][][][][][][][][][][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]$$[]
 [][][][]$$[][][][][][][][][][][][][][][][]$y(T)$
@@ -1722,13 +1728,13 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.632 ...backslash{}forall A\( as decribed above,}
+l.636 ...backslash{}forall A\( as decribed above,}
                                                   
 ? 
 ! Emergency stop.
  ...                                              
                                                   
-l.632 ...backslash{}forall A\( as decribed above,}
+l.636 ...backslash{}forall A\( as decribed above,}
                                                   
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -1736,10 +1742,10 @@ or  <return>  to continue without it.
 
  
 Here is how much of TeX's memory you used:
- 42923 strings out of 478190
- 988006 string characters out of 5854827
+ 42902 strings out of 478190
+ 987123 string characters out of 5854827
  1573171 words of memory out of 5000000
- 62736 multiletter control sequences out of 15000+600000
+ 62715 multiletter control sequences out of 15000+600000
  474719 words of font info for 105 fonts, out of 8000000 for 9000
  15 hyphenation exceptions out of 8191
  99i,17n,115p,742b,2041s stack positions out of 5000i,500n,10000p,200000b,80000s
