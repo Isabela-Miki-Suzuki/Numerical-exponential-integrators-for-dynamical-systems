@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2023.6.26)  26 JUN 2023 23:49
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2023.6.26)  26 JUN 2023 23:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1859,7 +1859,7 @@ LaTeX Info: Redefining \sffamily on input line 19.
 LaTeX Info: Redefining \ttfamily on input line 19.
 )
 Package rerunfilecheck Info: File `book.out' has not changed.
-(rerunfilecheck)             Checksum: 2FEA292C2334D2479BF3396799296171;2456.
+(rerunfilecheck)             Checksum: B599B27FAA17108698960D72C364F8DB;2431.
  ) 
 Here is how much of TeX's memory you used:
  42962 strings out of 478190

@@ -1,18 +1,18 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # 3.1 Chapter 1
+# # Chapter 1
 # 
 # The reason for studying exponential methods is that those are good with $\textbf{stiff differential equations}$ in terms of precision and how small the time step is required to be to achieve good accuracy. 
 
-# ## 3.1.1 Cauchy problem
+# ## Cauchy problem
 # 
 # A $\textbf{Cauchy problem}$ is a ordinary differential equation (ODE) with initial conditions. Being its standard scalar form:
 # 
-# \begin{cases}
+# $\begin{cases}
 #     y'(t) = f(y(t), t), t \in (t_0, T) \\
 #     y(t_0) = y_0 \in \mathbb{K} \text{,}
-# \end{cases}
+# \end{cases}$
 # 
 # with $\mathbb{K}$ a field, $f$ function with image in $\mathbb{K}$ and $t_0, T \in \mathbb{R}$.
 # 
@@ -36,7 +36,7 @@
 # 
 # Notation as in [1].
 
-# ## 3.1.2 Stiffness
+# ## Stiffness
 # 
 # The error of the approximation given by a method trying to estimate the solution of a Cauchy problem is always given by a term multiplied by a higher derivative of the exact solution, because of the Taylor expansion with Lagrange form of the remainder. In that way, if that is enough information about this derivative, the error can be estimated. 
 # 

@@ -230,22 +230,22 @@ To be done.
 \sphinxstepscope
 
 
-\section{3.1 Chapter 1}
+\section{Chapter 1}
 \label{\detokenize{cap1:chapter-1}}\label{\detokenize{cap1::doc}}
 \sphinxAtStartPar
 The reason for studying exponential methods is that those are good with \(\textbf{stiff differential equations}\) in terms of precision and how small the time step is required to be to achieve good accuracy.
 
 
-\subsection{3.1.1 Cauchy problem}
+\subsection{Cauchy problem}
 \label{\detokenize{cap1:cauchy-problem}}
 \sphinxAtStartPar
 A \(\textbf{Cauchy problem}\) is a ordinary differential equation (ODE) with initial conditions. Being its standard scalar form:
 
 \sphinxAtStartPar
-\textbackslash{}begin\{cases\}
-y’(t) = f(y(t), t), t \textbackslash{}in (t\_0, T) \textbackslash{}
-y(t\_0) = y\_0 \textbackslash{}in \textbackslash{}mathbb\{K\} \textbackslash{}text\{,\}
-\textbackslash{}end\{cases\}
+\(\begin{cases}
+    y'(t) = f(y(t), t), t \in (t_0, T) \\
+    y(t_0) = y_0 \in \mathbb{K} \text{,}
+\end{cases}\)
 
 \sphinxAtStartPar
 with \(\mathbb{K}\) a field, \(f\) function with image in \(\mathbb{K}\) and \(t_0, T \in \mathbb{R}\).
@@ -278,7 +278,7 @@ In this project, the stiff ones were those addressed.
 Notation as in {[}1{]}.
 
 
-\subsection{3.1.2 Stiffness}
+\subsection{Stiffness}
 \label{\detokenize{cap1:stiffness}}
 \sphinxAtStartPar
 The error of the approximation given by a method trying to estimate the solution of a Cauchy problem is always given by a term multiplied by a higher derivative of the exact solution, because of the Taylor expansion with Lagrange form of the remainder. In that way, if that is enough information about this derivative, the error can be estimated.
