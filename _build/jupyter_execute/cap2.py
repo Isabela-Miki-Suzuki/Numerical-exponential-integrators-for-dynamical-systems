@@ -38,10 +38,16 @@
 # with $\lambda > 0.$
 
 # If that is possible to manipulate the method so that, for this problem, can be written as
+# 
 # $$
 # y_{k+1} = \zeta(\lambda,h) y_k,
 # $$
-# then $$\zeta(\lambda,h)$$ is called $\textbf{amplification factor}$ of the method.
+# 
+# then 
+# 
+# $$\zeta(\lambda,h)$$ 
+# 
+# is called $\textbf{amplification factor}$ of the method.
 
 # By induction, it gives
 # $$
@@ -68,16 +74,20 @@
 # 
 # it is said that there is $\textbf{stability}$.
 
-# The interval with the values of $\lambda h$ such as 
+# The interval with the values of $\lambda h$ such as
+# 
 # $$
 # |\zeta(\lambda, h)|<1,
 # $$ 
+# 
 # is called $\textbf{interval of stability}$.
 
 # And if the interval of stability contains all the points $z$ such that 
+# 
 # $$
 #     Re(z) < 0,
 # $$
+# 
 # the method is said $\textbf{A-stable}$.
 
 # The reason for taking this specific problem is that it models the behaviour of the difference between the approximation and the solution on a small neighbourhood of any Cauchy problem:

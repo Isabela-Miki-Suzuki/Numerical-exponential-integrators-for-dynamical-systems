@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2023.6.26)  27 JUN 2023 01:11
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2023.6.26)  27 JUN 2023 01:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1688,64 +1688,19 @@ LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
 (Font)              scaled to size 6.99925pt on input line 236.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
 (Font)              scaled to size 4.99947pt on input line 236.
-[7]
-Underfull \hbox (badness 5637) in paragraph at lines 376--382
-[]\TU/FreeSerif(0)/m/n/10 If that is possible to manipulate the method so that,
- for this problem, can be written as $$[][] []
- []
-
-[8] [9] [10]
-Underfull \hbox (badness 10000) in paragraph at lines 646--660
+[7] [8] [9] [10] [11]
+Underfull \hbox (badness 10000) in paragraph at lines 660--674
 \TU/FreeSerif(0)/m/n/10 Since $$[][] [][] [] [][][]$$[][][][] []$\frac{T-t_0}{N
 }$[] [][][]$y_N$[][][][][][]$$[][] [][] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 646--660
+Underfull \hbox (badness 10000) in paragraph at lines 660--674
 [][] [][] [][] [] [][] [][] [][][]$$[][][][][][][][][][][][][][][][][][][][]$\T
 U/FreeSerif(0)/m/n/10 p = -(T-t_0)
  []
 
 
-Overfull \hbox (7.48698pt too wide) in paragraph at lines 646--660
+Overfull \hbox (7.48698pt too wide) in paragraph at lines 660--674
 \TU/FreeSerif(0)/m/n/10 \lambda$[][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]$$[]
-[][][][]$$[][][][][][][][][][][][][][][][]$y(T)$
- []
-
-[11]
-
-! LaTeX Error: Bad math environment delimiter.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.714 ...backslash{}forall A\( as decribed above,}
-                                                  
-? ^^[[A^^[[A
-Type <return> to proceed, S to scroll future error messages,
-R to run without stopping, Q to run quietly,
-I to insert something, E to edit your file,
-1 or ... or 9 to ignore the next 1 to 9 tokens of input,
-H for help, X to quit.
-? 
-! Emergency stop.
- ...                                              
-                                                  
-l.714 ...backslash{}forall A\( as decribed above,}
-                                                  
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
- 
-Here is how much of TeX's memory you used:
- 42904 strings out of 478190
- 987168 string characters out of 5854827
- 1574172 words of memory out of 5000000
- 62717 multiletter control sequences out of 15000+600000
- 474719 words of font info for 105 fonts, out of 8000000 for 9000
- 15 hyphenation exceptions out of 8191
- 99i,23n,115p,742b,2041s stack positions out of 5000i,500n,10000p,200000b,80000s
-Output written on book.pdf (15 pages).
+][][][][][][][][][][][][][][][][][][
