@@ -12,31 +12,31 @@
 \contentsline {subsubsection}{Convergence}{10}{subsubsection*.4}%
 \contentsline {subsubsection}{Order of convergence}{10}{subsubsection*.5}%
 \contentsline {section}{\numberline {2.3}Important concepts for the study of exponential methods}{11}{section.2.3}%
-\contentsline {subsection}{\numberline {2.3.1}Matrix exponential}{11}{subsection.2.3.1}%
-\contentsline {subsubsection}{Exponential of a zeros matrix}{11}{subsubsection*.6}%
-\contentsline {subsubsection}{Exponential of a diagonal matrix}{11}{subsubsection*.7}%
-\contentsline {subsubsection}{Exponential of a matrix of ones above the diagonal}{12}{subsubsection*.8}%
-\contentsline {subsubsection}{Exponential of a Jordan block}{14}{subsubsection*.9}%
-\contentsline {subsubsection}{Exponential of any matrix}{15}{subsubsection*.10}%
-\contentsline {subsection}{\numberline {2.3.2}Linear problem}{15}{subsection.2.3.2}%
-\contentsline {subsection}{\numberline {2.3.3}General problem}{16}{subsection.2.3.3}%
-\contentsline {subsection}{\numberline {2.3.4}\(\mitphi \) functions}{17}{subsection.2.3.4}%
-\contentsline {section}{\numberline {2.4}Exponential methods}{17}{section.2.4}%
-\contentsline {subsection}{\numberline {2.4.1}Exponential Euler method}{18}{subsection.2.4.1}%
-\contentsline {subsection}{\numberline {2.4.2}Exponential time differencing methods (ETD)}{18}{subsection.2.4.2}%
-\contentsline {subsection}{\numberline {2.4.3}Exponential time differencing methods with Runge\sphinxhyphen {}Kutta time stepping}{19}{subsection.2.4.3}%
-\contentsline {subsubsection}{Exponential \sphinxhyphen {} Trapezoidal rule}{19}{subsubsection*.11}%
-\contentsline {subsubsection}{Exponential \sphinxhyphen {} Midpoint rule}{19}{subsubsection*.12}%
-\contentsline {subsubsection}{New deduction \sphinxhyphen {} Trapezoidal rule}{20}{subsubsection*.13}%
-\contentsline {subsubsection}{New deduction \sphinxhyphen {} Midpoint rule}{20}{subsubsection*.14}%
-\contentsline {section}{\numberline {2.5}References}{21}{section.2.5}%
-\contentsline {chapter}{\numberline {3}Description of how the data management plan is being followed and any changes}{23}{chapter.3}%
-\contentsline {chapter}{\numberline {4}Appendix}{25}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Code}{25}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Some deductions}{34}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Exponential Euler method}{34}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}Exponential time differencing methods (ETD)}{35}{subsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.2.3}Exponential time differencing methods with Runge\sphinxhyphen {}Kutta time stepping \sphinxhyphen {} order 2 \sphinxhyphen {} Cox and Matthews \sphinxhyphen {} Trapezoidal rule}{37}{subsection.4.2.3}%
-\contentsline {subsection}{\numberline {4.2.4}Exponential time differencing methods with Runge\sphinxhyphen {}Kutta time stepping \sphinxhyphen {} order 2 \sphinxhyphen {} Cox and Matthews \sphinxhyphen {} Midpoint rule}{38}{subsection.4.2.4}%
-\contentsline {subsection}{\numberline {4.2.5}Exponential time differencing methods with Runge\sphinxhyphen {}Kutta time stepping \sphinxhyphen {} order 2 \sphinxhyphen {} Classical approach \sphinxhyphen {} Trapezoidal rule}{39}{subsection.4.2.5}%
-\contentsline {subsection}{\numberline {4.2.6}Exponential time differencing methods with Runge\sphinxhyphen {}Kutta time stepping \sphinxhyphen {} order 2 \sphinxhyphen {} Classical approach \sphinxhyphen {} Midpoint rule}{40}{subsection.4.2.6}%
+\contentsline {subsection}{\numberline {2.3.1}Linear problem}{11}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}General problem}{12}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3.3}\(\mitphi \) functions}{12}{subsection.2.3.3}%
+\contentsline {section}{\numberline {2.4}Exponential methods}{13}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}Exponential Euler method}{13}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.2}Exponential time differencing methods (ETD)}{14}{subsection.2.4.2}%
+\contentsline {subsection}{\numberline {2.4.3}Exponential time differencing methods with Runge\sphinxhyphen {}Kutta time stepping}{14}{subsection.2.4.3}%
+\contentsline {subsubsection}{Exponential \sphinxhyphen {} Trapezoidal rule}{14}{subsubsection*.6}%
+\contentsline {subsubsection}{Exponential \sphinxhyphen {} Midpoint rule}{15}{subsubsection*.7}%
+\contentsline {subsubsection}{New deduction \sphinxhyphen {} Trapezoidal rule}{15}{subsubsection*.8}%
+\contentsline {subsubsection}{New deduction \sphinxhyphen {} Midpoint rule}{16}{subsubsection*.9}%
+\contentsline {section}{\numberline {2.5}References}{16}{section.2.5}%
+\contentsline {chapter}{\numberline {3}Description of how the data management plan is being followed and any changes}{17}{chapter.3}%
+\contentsline {chapter}{\numberline {4}Appendix}{19}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Code}{19}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Some deductions}{28}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Exponential Euler method}{28}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Exponential time differencing methods (ETD)}{29}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Exponential time differencing methods with Runge\sphinxhyphen {}Kutta time stepping \sphinxhyphen {} order 2 \sphinxhyphen {} Cox and Matthews \sphinxhyphen {} Trapezoidal rule}{31}{subsection.4.2.3}%
+\contentsline {subsection}{\numberline {4.2.4}Exponential time differencing methods with Runge\sphinxhyphen {}Kutta time stepping \sphinxhyphen {} order 2 \sphinxhyphen {} Cox and Matthews \sphinxhyphen {} Midpoint rule}{32}{subsection.4.2.4}%
+\contentsline {subsection}{\numberline {4.2.5}Exponential time differencing methods with Runge\sphinxhyphen {}Kutta time stepping \sphinxhyphen {} order 2 \sphinxhyphen {} Classical approach \sphinxhyphen {} Trapezoidal rule}{33}{subsection.4.2.5}%
+\contentsline {subsection}{\numberline {4.2.6}Exponential time differencing methods with Runge\sphinxhyphen {}Kutta time stepping \sphinxhyphen {} order 2 \sphinxhyphen {} Classical approach \sphinxhyphen {} Midpoint rule}{34}{subsection.4.2.6}%
+\contentsline {section}{\numberline {4.3}Matrix exponential}{35}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Exponential of a zeros matrix}{35}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Exponential of a diagonal matrix}{35}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}Exponential of a matrix of ones above the diagonal}{36}{subsection.4.3.3}%
+\contentsline {subsection}{\numberline {4.3.4}Exponential of a Jordan block}{38}{subsection.4.3.4}%
+\contentsline {subsection}{\numberline {4.3.5}Exponential of any matrix}{39}{subsection.4.3.5}%
