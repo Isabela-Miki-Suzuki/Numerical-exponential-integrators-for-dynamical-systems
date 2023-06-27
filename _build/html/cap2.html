@@ -1,0 +1,714 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>3.2 Chapter 2: Classical methods &#8212; Numerical exponential integrators for dynamical systems</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Chapter 3: important concepts for the study of exponential methods" href="cap3.html" />
+    <link rel="prev" title="3.1 Chapter 1" href="cap1.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Numerical exponential integrators for dynamical systems</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    General Information about the Project
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Summary_of_the_proposed_project.html">
+   1. Summary of the proposed project
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Summary_of_the_activities.html">
+   2. Summary of the activities
+  </a>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="Project_execution.html">
+   3. Project execution
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="cap1.html">
+     3.1 Chapter 1
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     3.2 Chapter 2: Classical methods
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="cap3.html">
+     Chapter 3: important concepts for the study of exponential methods
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="cap4.html">
+     Chapter 2: Exponential methods
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Description_and_evaluation_of_institutional_support_received_in_the_period.html">
+   Description and evaluation of institutional support received in the period
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Participation_in_scientific_event%2C_list_of_publications_and_list_of_papers_prepared_or_submitted.html">
+   Participation in scientific event, list of publications and list of papers prepared or submitted
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/Isabela-Miki-Suzuki/Numerical-exponential-integrators-for-dynamical-systems/master?urlpath=tree/docs/cap2.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/Isabela-Miki-Suzuki/Numerical-exponential-integrators-for-dynamical-systems"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/Isabela-Miki-Suzuki/Numerical-exponential-integrators-for-dynamical-systems/issues/new?title=Issue%20on%20page%20%2Fcap2.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/cap2.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#one-step-methods-for-ode">
+   One step methods for ODE
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#examples">
+   Examples
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#euler-method">
+   Euler method
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#stability">
+     Stability
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#convergence">
+     Convergence
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#order-of-convergence">
+     Order of convergence
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>3.2 Chapter 2: Classical methods</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#one-step-methods-for-ode">
+   One step methods for ODE
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#examples">
+   Examples
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#euler-method">
+   Euler method
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#stability">
+     Stability
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#convergence">
+     Convergence
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#order-of-convergence">
+     Order of convergence
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="chapter-2-classical-methods">
+<h1>3.2 Chapter 2: Classical methods<a class="headerlink" href="#chapter-2-classical-methods" title="Permalink to this headline">#</a></h1>
+<p>In order to show that the exponential methods improve in dealing with Stiff problems, that is necessary to know how the previows methods deal with them, so a review on the theory of the classical methods is made in this chapter. In particular there will be focus on the one step methods. All the information is from [3].</p>
+<section id="one-step-methods-for-ode">
+<h2>One step methods for ODE<a class="headerlink" href="#one-step-methods-for-ode" title="Permalink to this headline">#</a></h2>
+<p>In order to find a approximation for the solution of the problem
+\begin{cases}
+y’(t) = f(t, y(t)), t \in [t_0,T] \
+y(t_0)=y_0 \text{,}
+\end{cases}</p>
+<p>they are of the form:
+$<span class="math notranslate nohighlight">\(
+y_{k+1} = y_{k} + h \phi (t_{k},y_{k},t_{k+1},y_{k+1},h) \text{,}
+\)</span>$</p>
+<p>with $<span class="math notranslate nohighlight">\(k = 0, 1, ..., n-1;\)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\(
+N \in \mathbb{N}; h = \frac{T-t_0}{N}; \\
+\{t_i = t_0 + ih : i = 0, 1, ..., N\}; \\ 
+y_n \thickapprox y(t_n) .
+\)</span>$</p>
+<p>To analyse the method, there is a model problem
+\begin{cases}
+y’(t) = - \lambda y(t) \text{ ; } t \in[t_0,T]\
+y(t_0)=y_0,\
+\end{cases}</p>
+<p>whose solution is <span class="math notranslate nohighlight">\(y(t) = y_0 e^{-\lambda (t-t_0)}\)</span>
+with <span class="math notranslate nohighlight">\(\lambda &gt; 0.\)</span></p>
+<p>If that is possible to manipulate the method so that, for this problem, can be written as
+$<span class="math notranslate nohighlight">\(
+y_{k+1} = \zeta(\lambda,h) y_k,
+\)</span><span class="math notranslate nohighlight">\(
+then \)</span><span class="math notranslate nohighlight">\(\zeta(\lambda,h)\)</span><span class="math notranslate nohighlight">\( is called \)</span>\textbf{amplification factor}$ of the method.</p>
+<p>By induction, it gives
+$<span class="math notranslate nohighlight">\(
+y_{k+1} = \zeta(\lambda, h)^{k+1} y_0.
+\)</span>$</p>
+<p>It is well known that this expression only converges as k goes to infinity if
+$<span class="math notranslate nohighlight">\(
+|\zeta(\lambda, h)| &lt; 1
+\)</span>$
+and then converges to zero.</p>
+<p>When it occurs, i.e., <span class="math notranslate nohighlight">\(k \rightarrow \infty \Rightarrow y_k \rightarrow 0\)</span> such as the exact solution <span class="math notranslate nohighlight">\(y(t) = y_0 e^{-\lambda (t-t_0)}\)</span>, it is said that there is <span class="math notranslate nohighlight">\(\textbf{stability}\)</span>.</p>
+<p>The inequation gives a interval for which values of <span class="math notranslate nohighlight">\(\lambda h\)</span>, <span class="math notranslate nohighlight">\(|\zeta(\lambda, h)|&lt;1\)</span>, called <span class="math notranslate nohighlight">\(\textbf{interval of stability}\)</span>.</p>
+<p>And if the interval of stability contains all the points <span class="math notranslate nohighlight">\(z\)</span> such that <span class="math notranslate nohighlight">\(Re(z) &lt; 0\)</span>, the method is said <span class="math notranslate nohighlight">\(\textbf{A-stable}\)</span>.</p>
+<p>The reason for taking this specific problem is that it models the behaviour of the difference between the approximation and the solution on a small neighbourhood of any Cauchy problem:</p>
+<p>Taking
+\begin{cases}
+y’(t) = f(y(t), t), t \in (t_0, T) \
+y(t_0) = y_0 \in \mathbb{K}
+\end{cases}</p>
+<p>and a approximation <span class="math notranslate nohighlight">\(z\)</span> of the solution <span class="math notranslate nohighlight">\(y\)</span>, doing
+\begin{align*}
+\sigma(t) = z(t) - y(t) \Rightarrow
+\end{align*}</p>
+<p>\begin{align*}
+\dot{\sigma}(t) = \dot{z}(t) - \dot{y}(t) = f(z(t), t) - f(y(t), t) \Rightarrow
+\end{align*}</p>
+<p>\begin{align*}
+\dot{\sigma}(t) + \dot{y}(t) = \dot{z}(t) = f(z(t), t) = f(y(t)+\sigma(t), t) = f(y(t), t) + \sigma(t)\frac{\partial f}{\partial y} + O(\sigma^2(t)),
+\end{align*}</p>
+<p>so
+\begin{cases}
+\dot{\sigma}(t) \approx \sigma(t) \frac{\partial f}{\partial y} (y(t), t) \
+\sigma(t_k) = \sigma_k.
+\end{cases}</p>
+<p>Other important definitions are:</p>
+<p><span class="math notranslate nohighlight">\(\textbf{Local truncation error:}\)</span> Is the difference between the exact expression and its numerical approximation in a certain point and with a certain domain discretization. If the domain is equally spaced by <span class="math notranslate nohighlight">\(h\)</span> is often denoted by <span class="math notranslate nohighlight">\(\tau(h,t_0)\)</span> being <span class="math notranslate nohighlight">\(t_0\)</span> the point.</p>
+<p><span class="math notranslate nohighlight">\(\textbf{Order of the local truncation error:}\)</span> the local truncation error (which depends on the <span class="math notranslate nohighlight">\(h\)</span> spacing of the discretized domain) <span class="math notranslate nohighlight">\(\tau(h)\)</span> has order <span class="math notranslate nohighlight">\(n \in \mathbb{N}\)</span> if <span class="math notranslate nohighlight">\(\tau(h) = O(h^n) \)</span>, i.e., if there is constant <span class="math notranslate nohighlight">\(M \in \mathbb{R}\)</span> and <span class="math notranslate nohighlight">\(h_0 \in \mathbb{R}\)</span> such that <span class="math notranslate nohighlight">\(\tau(h) \leq M h^n\)</span>, <span class="math notranslate nohighlight">\(\forall h \leq h_0\)</span>.</p>
+<p><span class="math notranslate nohighlight">\(\textbf{Global error:}\)</span> Is the difference between the approximation given by the method for the solution of the problem on a certain point and the exact one (unlike the local truncation error, here we take the solution we got, not the expression used to find the approximation).</p>
+<p><span class="math notranslate nohighlight">\(\textbf{Consistency:}\)</span> The method is said consistent if <span class="math notranslate nohighlight">\(\lim _{h \to 0} \frac{1}{h}\tau(h,x_0) = 0\)</span>.</p>
+<p><span class="math notranslate nohighlight">\(\textbf{Obs.:}\)</span> For consistency, we usually only analyse for the linear part of the Cauchy problem, since this is the part that most influences in the consistency.</p>
+<p><span class="math notranslate nohighlight">\(\textbf{Order of consistency:}\)</span> is the smallest order (varying the points at which the local error is calculated) of the local truncation error.</p>
+<p><span class="math notranslate nohighlight">\(\textbf{Convergence:}\)</span> A numerical method is convergent if, and only if, for any well-posed Cauchy problem and for every <span class="math notranslate nohighlight">\(t \in (t_0, T)\)</span>,
+$<span class="math notranslate nohighlight">\(\lim_{h \to 0} e_k = 0\)</span><span class="math notranslate nohighlight">\(
+with \)</span>t - t_0 = kh<span class="math notranslate nohighlight">\( fixed and \)</span>e_k<span class="math notranslate nohighlight">\( denoting the global error on \)</span>t_k$ (following the past notation).</p>
+<p><span class="math notranslate nohighlight">\(\textbf{Theorem:}\)</span> A one-step explicit method given by
+$<span class="math notranslate nohighlight">\(
+y_0 = y(t_0) \\
+y_{k+1} = y_{k} + h \phi (t_{k},y_{k},h)
+\)</span><span class="math notranslate nohighlight">\(
+such that \)</span>\phi$ is Lipschitzian in y, continuous in their arguments, and consistent for any well-posed Cauchy problem is convergent. Besides that, the convergence order is greater or equal to the consistency order.</p>
+<p><span class="math notranslate nohighlight">\(\textit{Prove:}\)</span> [3] pág 29-31.</p>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">#</a></h2>
+<p>Euler method:</p>
+<p>\begin{equation*}
+\phi (t_{k},y_{k},h) = f(t_{k},y_{k})
+\end{equation*}</p>
+<p>Modified Euler method:</p>
+<p>\begin{equation*}
+\phi (t_{k},y_{k},h) = \frac{1}{2} \left[ f(t_{k},y_{k}) + f(t_{k+1},y_{k} + h f(t_{k},y_{k})) \right]
+\end{equation*}</p>
+<p>Midpoint method:</p>
+<p>\begin{equation*}
+\phi (t_{k},y_{k},h) = f(t_{k} + \frac{h}{2},y_{k} + \frac{h}{2} f(t_{k},y_{k}))
+\end{equation*}</p>
+<p>Classic Runge-Kutta (RK 4-4):</p>
+<p>\begin{gather*}
+\phi (t_{k},y_{k},h) = \frac{1}{6} \left( \kappa_1 + 2 \kappa_2 + 2 \kappa_3 + \kappa_4 \right), \text{with }\
+\kappa_1 = f(t_{k},y_{k})\
+\kappa_2 = f(t_{k} + \frac{h}{2},y_{k} + \frac{h}{2} \kappa_1)\
+\kappa_3 = f(t_{k} + \frac{h}{2},y_{k} + \frac{h}{2} \kappa_2)\
+\kappa_4 = f(t_{k} + h, y_{k} + h \kappa_3)
+\end{gather*}</p>
+</section>
+<section id="euler-method">
+<h2>Euler method<a class="headerlink" href="#euler-method" title="Permalink to this headline">#</a></h2>
+<p>Further detailing this explicit one-step method of</p>
+<p>\begin{equation*}
+\phi (t_{k},y_{k},h) = f(t_{k},y_{k}),
+\end{equation*}</p>
+<p>an analysis on stability, convergence and order of convergence is done.</p>
+<section id="stability">
+<h3>Stability<a class="headerlink" href="#stability" title="Permalink to this headline">#</a></h3>
+<p>For the problem
+\begin{cases}
+y’(t) = - \lambda y(t) \text{ ; } t \in [t_0 , T] \
+y(t_0)=y_0,
+\end{cases}</p>
+<p>with known solution</p>
+<div class="math notranslate nohighlight">
+\[ y(t) = y_0e^{-\lambda (t-t_0)},\]</div>
+<p>the method turn into:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+y_0 = y(t_0)\\
+\textbf{for } k = 0, 1, 2, ..., N-1 :\\
+    y_{k+1} = y_k + h \lambda y_k \\
+    t_{k+1} = t_k + h.
+\end{split}\]</div>
+<p>Then the amplification factor is:
+$<span class="math notranslate nohighlight">\(
+(1 - h \lambda).
+\)</span><span class="math notranslate nohighlight">\(
+If \)</span>|1 - h \lambda| &gt; 1<span class="math notranslate nohighlight">\(, for fixed \)</span>N<span class="math notranslate nohighlight">\(, it will be a divergent series (\)</span>k \rightarrow \infty \Rightarrow y_k \rightarrow \infty <span class="math notranslate nohighlight">\(), so, since the computer has a limitant number that can represent, even if the number of steps is such that \)</span>h$ is not small enought, it might have sufficient steps to reach the maximum number represented by the machine.</p>
+<p>However, if <span class="math notranslate nohighlight">\(|1 - h \lambda| &lt; 1\)</span> and <span class="math notranslate nohighlight">\(N\)</span> is fixed, it converges to zero (<span class="math notranslate nohighlight">\(k \rightarrow \infty \Rightarrow y_k \rightarrow 0 )\)</span>.</p>
+<p>Besides that, <span class="math notranslate nohighlight">\(|1 - h \lambda| &lt; 1\)</span> is the same as <span class="math notranslate nohighlight">\(0 &lt; h \lambda &lt; 2\)</span>.
+So the interval of stability is (0,2).
+That’s why the method suddenly converged, it was when <span class="math notranslate nohighlight">\(h\)</span> got small enought to <span class="math notranslate nohighlight">\(h \lambda\)</span> be in the interval of stability, i.e., <span class="math notranslate nohighlight">\(h &lt; 2/\lambda\)</span>.</p>
+<p>It is worth mentioning here that if <span class="math notranslate nohighlight">\(-1 &lt; 1 - h \lambda &lt; 0\)</span>, the error will converge oscillating since it takes positive values with even exponents and negative with odd ones.</p>
+</section>
+<section id="convergence">
+<h3>Convergence<a class="headerlink" href="#convergence" title="Permalink to this headline">#</a></h3>
+<p>Since
+$<span class="math notranslate nohighlight">\(
+\lim_{m \to +\infty} \left(1 + \frac{p}{m} \right)^m = e^p,
+\)</span><span class="math notranslate nohighlight">\(
+and h = \)</span>\frac{T-t_0}{N}<span class="math notranslate nohighlight">\(, for \)</span>y_N<span class="math notranslate nohighlight">\( we have
+\)</span><span class="math notranslate nohighlight">\(
+\lim_{N \to +\infty} y_N = \lim_{N \to +\infty} \left(1 - h \lambda \right)^N y_0 = \lim_{N \to +\infty} \left(1 - \frac{(T-t_0) \lambda}{N} \right)^N y_0.
+\)</span><span class="math notranslate nohighlight">\(
+It is reasonable to take \)</span>p = -(T-t_0) \lambda<span class="math notranslate nohighlight">\( and conclude that the last point estimated by the method will converge to
+\)</span><span class="math notranslate nohighlight">\(
+y_0e^{-\lambda (T-t_0)}.
+\)</span><span class="math notranslate nohighlight">\(
+Which is precisely \)</span>y(T)$ and proves the convergence.</p>
+</section>
+<section id="order-of-convergence">
+<h3>Order of convergence<a class="headerlink" href="#order-of-convergence" title="Permalink to this headline">#</a></h3>
+<p>Being <span class="math notranslate nohighlight">\(\tau(h, t_k)\)</span> the local truncation error.</p>
+<p>From
+\begin{equation*}
+y(t_{k+1}) = y(t_k) + h f(y(t_k),t_k) + O(h^2),
+\end{equation*}</p>
+<p>we have
+\begin{equation*}
+h \tau(h, t_k) \doteq \frac{y(t_{k+1}) - y(t_k)}{h} - f(t_k, y(t_k)) = O(h^2),
+\end{equation*}</p>
+<p>so
+\begin{equation*}
+\tau(h, t_k) = O(h).
+\end{equation*}</p>
+<p>Since for one step methods the order of convergence is the order of the local truncation error, the order is of <span class="math notranslate nohighlight">\(O(h)\)</span>, order 1.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="cap1.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">3.1 Chapter 1</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="cap3.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Chapter 3: important concepts for the study of exponential methods</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Isabela Miki Suzuki<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
