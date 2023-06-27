@@ -361,11 +361,14 @@ y_n \thickapprox y(t_n) .
 
 \sphinxAtStartPar
 To analyse the method, there is a model problem
-\(\begin{cases}
+\begin{equation*}
+\begin{split}
+\begin{cases}
     y'(t) = - \lambda y(t) \text{ ; } t \in[t_0,T]\\ 
     y(t_0)=y_0,\\
-\end{cases}\)
-
+\end{cases}
+\end{split}
+\end{equation*}
 \sphinxAtStartPar
 whose solution is \(y(t) = y_0 e^{-\lambda (t-t_0)}\)
 with \(\lambda > 0.\)
@@ -391,24 +394,49 @@ It is well known that this expression only converges as k goes to infinity if
 and then converges to zero.
 
 \sphinxAtStartPar
-When it occurs, i.e., \(k \rightarrow \infty \Rightarrow y_k \rightarrow 0\) such as the exact solution \(y(t) = y_0 e^{-\lambda (t-t_0)}\), it is said that there is \(\textbf{stability}\).
+When it occurs, i.e.,
+\begin{equation*}
+\begin{split}
+    k \rightarrow \infty \Rightarrow y_k \rightarrow 0
+\end{split}
+\end{equation*}
+\sphinxAtStartPar
+such as the exact solution
+\begin{equation*}
+\begin{split}
+    y(t) = y_0 e^{-\lambda (t-t_0)},
+\end{split}
+\end{equation*}
+\sphinxAtStartPar
+it is said that there is \(\textbf{stability}\).
 
 \sphinxAtStartPar
-The inequation gives a interval for which values of \(\lambda h\), \(|\zeta(\lambda, h)|<1\), called \(\textbf{interval of stability}\).
+The interval with the values of \(\lambda h\) such as
+\$\(
+|\zeta(\lambda, h)|<1,
+\)\( 
+is called \)\textbackslash{}textbf\{interval of stability\}\$.
 
 \sphinxAtStartPar
-And if the interval of stability contains all the points \(z\) such that \(Re(z) < 0\), the method is said \(\textbf{A-stable}\).
+And if the interval of stability contains all the points \(z\) such that
+\$\(
+    Re(z) < 0,
+\)\(
+the method is said \)\textbackslash{}textbf\{A\sphinxhyphen{}stable\}\$.
 
 \sphinxAtStartPar
 The reason for taking this specific problem is that it models the behaviour of the difference between the approximation and the solution on a small neighbourhood of any Cauchy problem:
 
 \sphinxAtStartPar
 Taking
-\(\begin{cases}
+\begin{equation*}
+\begin{split}
+\begin{cases}
     y'(t) = f(y(t), t), t \in (t_0, T) \\
     y(t_0) = y_0 \in \mathbb{K}
-\end{cases}\)
-
+\end{cases}
+\end{split}
+\end{equation*}
 \sphinxAtStartPar
 and a approximation \(z\) of the solution \(y\), doing
 \$\(

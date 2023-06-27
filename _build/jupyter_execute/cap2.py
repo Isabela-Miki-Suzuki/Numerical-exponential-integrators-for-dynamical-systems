@@ -26,10 +26,13 @@
 # $$
 
 # To analyse the method, there is a model problem
-# $\begin{cases}
+# 
+# $$
+# \begin{cases}
 #     y'(t) = - \lambda y(t) \text{ ; } t \in[t_0,T]\\ 
 #     y(t_0)=y_0,\\
-# \end{cases}$
+# \end{cases}
+# $$
 # 
 # whose solution is $y(t) = y_0 e^{-\lambda (t-t_0)}$
 # with $\lambda > 0.$
@@ -51,19 +54,42 @@
 # $$
 # and then converges to zero.
 
-# When it occurs, i.e., $k \rightarrow \infty \Rightarrow y_k \rightarrow 0$ such as the exact solution $y(t) = y_0 e^{-\lambda (t-t_0)}$, it is said that there is $\textbf{stability}$.
+# When it occurs, i.e., 
+# 
+# $$
+#     k \rightarrow \infty \Rightarrow y_k \rightarrow 0
+# $$
+# 
+# such as the exact solution 
+# 
+# $$
+#     y(t) = y_0 e^{-\lambda (t-t_0)},
+# $$
+# 
+# it is said that there is $\textbf{stability}$.
 
-# The inequation gives a interval for which values of $\lambda h$, $|\zeta(\lambda, h)|<1$, called $\textbf{interval of stability}$.
+# The interval with the values of $\lambda h$ such as 
+# $$
+# |\zeta(\lambda, h)|<1,
+# $$ 
+# is called $\textbf{interval of stability}$.
 
-# And if the interval of stability contains all the points $z$ such that $Re(z) < 0$, the method is said $\textbf{A-stable}$.
+# And if the interval of stability contains all the points $z$ such that 
+# $$
+#     Re(z) < 0,
+# $$
+# the method is said $\textbf{A-stable}$.
 
 # The reason for taking this specific problem is that it models the behaviour of the difference between the approximation and the solution on a small neighbourhood of any Cauchy problem:
 
 # Taking
-# $\begin{cases}
+# 
+# $$
+# \begin{cases}
 #     y'(t) = f(y(t), t), t \in (t_0, T) \\
 #     y(t_0) = y_0 \in \mathbb{K}
-# \end{cases}$
+# \end{cases}
+# $$
 
 # and a approximation $z$ of the solution $y$, doing
 # $$
