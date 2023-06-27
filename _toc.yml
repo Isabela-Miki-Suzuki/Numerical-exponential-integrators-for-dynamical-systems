@@ -1,0 +1,19 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+chapters:
+- file: Summary_of_the_proposed_project
+- file: Summary_of_the_activities
+- file: Project_execution
+  sections: 
+  - file: Introduction
+  - file: cap1
+  - file: cap2
+  - file: cap3
+  - file: cap4
+  - file: conclusion
+  - file: References
+- file: Description_and_evaluation_of_institutional_support_received_in_the_period
+- file: Participation_in_scientific_event,_list_of_publications_and_list_of_papers_prepared_or_submitted
