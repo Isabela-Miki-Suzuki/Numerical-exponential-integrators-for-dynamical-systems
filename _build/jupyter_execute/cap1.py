@@ -19,9 +19,7 @@
 # Sometimes, it is convenient to separate the linear part of $f$ as indicated below:
 # 
 # $$
-# \begin{equation*}
 #     f(y(t), t) = g(y(t), t) - \lambda y(t) \text{,}
-# \end{equation*}
 # $$
 # 
 # with $\lambda \in \mathbb{K}$ or $\mathscr{M}_{N \times N}(\mathbb{K})$.
@@ -49,17 +47,13 @@
 # The $\textbf{transient solution}$ is of the form:
 
 # $$
-# \begin{align*}
 #     e^{-ct} \text{, with c >>1, }
-# \end{align*}
 # $$
 
 # which is known to go to zero really fast as t increases. But its $n$th derivative
 
 # $$
-# \begin{align*}
 #     \mp c^{n}e^{-ct}
-# \end{align*}
 # $$
 
 # doesn't go as quickly and may increase in magnitude.
@@ -69,9 +63,7 @@
 # In a system of ODE's, these characteristics are most common in problems in which the solution of the initial value problem is of the form
 
 # $$
-# \begin{align*}
 #     e^{A}
-# \end{align*}
 # $$
 
 # being $A$ a matrix such that $\lambda_{min}$ and $\lambda_{max}$ are the eigenvalue with minimum and maximum value in modulus and $\lambda_{min} << \lambda_{max}$. On the bigger magnitude eigenvalue direction, the behaviour is very similar to the transient solution, having drastic changes over time and on the smaller one, comparing to that, changes almost nothing as times passes, like the steady state solution.
