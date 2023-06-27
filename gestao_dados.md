@@ -4,4 +4,4 @@ The project is following what was initially proposed, with the student doing an 
 
 Small changes were the most emphasized paper [1], which shared a lot of attention with other papers like [6] and [7].
 
-Until the end of the period of validity, it is expected that the analyzes in methods of the Runge-Kutta type will be completed and that the methods studied will be applied to problems of dynamical systems.
+Until the end of the period of validity, it is expected that the analyzes in methods of the Runge-Kutta type will be completed and that the methods studied will be applied to problems of dynamical systems. Besides that, it is desired to select and add made graphics to the report.

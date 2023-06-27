@@ -22,6 +22,9 @@
 \contentsline {subsection}{\numberline {2.3.3}General problem}{16}{subsection.2.3.3}%
 \contentsline {subsection}{\numberline {2.3.4}\(\mitphi \) functions}{17}{subsection.2.3.4}%
 \contentsline {section}{\numberline {2.4}Exponential methods}{17}{section.2.4}%
-\contentsline {subsection}{\numberline {2.4.1}Exponential Euler method}{24}{subsection.2.4.1}%
-\contentsline {section}{\numberline {2.5}References}{25}{section.2.5}%
-\contentsline {chapter}{\numberline {3}Description of how the data management plan is being followed and any changes}{27}{chapter.3}%
+\contentsline {subsection}{\numberline {2.4.1}Exponential Euler method}{18}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.2}Exponential time differencing methods (ETD)}{19}{subsection.2.4.2}%
+\contentsline {subsection}{\numberline {2.4.3}Exponential time differencing methods with Runge\sphinxhyphen {}Kutta time stepping}{20}{subsection.2.4.3}%
+\contentsline {section}{\numberline {2.5}References}{20}{section.2.5}%
+\contentsline {chapter}{\numberline {3}Description of how the data management plan is being followed and any changes}{23}{chapter.3}%
+\contentsline {chapter}{\numberline {4}Appendix}{25}{chapter.4}%

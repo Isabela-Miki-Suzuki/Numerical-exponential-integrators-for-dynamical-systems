@@ -187,6 +187,10 @@ Period covered by this research report:
 \sphinxAtStartPar
 {\hyperref[\detokenize{gestao_dados::doc}]{\sphinxcrossref{Description of how the data management plan is being followed and any changes}}}
 
+\item {} 
+\sphinxAtStartPar
+{\hyperref[\detokenize{appendix::doc}]{\sphinxcrossref{Appendix}}}
+
 \end{itemize}
 
 \sphinxstepscope
@@ -1354,6 +1358,291 @@ Information from {[}1{]}.
 \sphinxAtStartPar
 In this chapter, exponential methods are introduced, with further analysis of some of them, being tested and compared to more classical equivalents.
 
+
+\subsection{Exponential Euler method}
+\label{\detokenize{cap4:exponential-euler-method}}
+\sphinxAtStartPar
+For
+
+\sphinxAtStartPar
+\(\begin{cases}
+    y'(t) + \lambda y(t) = g(y(t), t), t \in (t_0, T) \\
+    y(0) = y_0
+\end{cases}\)
+
+\sphinxAtStartPar
+the domain is evenly discretized:
+\begin{equation*}
+\begin{split}
+    N \in \mathbb{N}; h = \frac{T-t_0}{N}; \text{Domain: }\{t_k = t_0 + k h : k = 0, 1, ...\}.
+\end{split}
+\end{equation*}
+\sphinxAtStartPar
+The discretization of the ODE takes the exact solution of the Cauchy problem, given by the variation of constants formula
+\begin{equation*}
+\begin{split}
+    y(t) = e^{-(t-t_0) \lambda}y_0 + \int_{t_0}^t [e^{-\lambda(t-\tau)} g(y(\tau), \tau)] d\tau
+\end{split}
+\end{equation*}
+\sphinxAtStartPar
+and, by Taylor expansion on \(g\):
+
+\sphinxAtStartPar
+\(\tau \in (t_k, t_{k+1})\)
+\begin{equation*}
+\begin{split}
+    g(y(\tau), \tau) = g(y(t_k), t_k) + (\tau - t_k) \frac{dg}{dt} (y(\theta_k), \theta_k)
+\end{split}
+\end{equation*}
+\sphinxAtStartPar
+for a \(\theta_k \in (t_k, t_{k+1}),\)
+\begin{equation*}
+\begin{split}
+    y(t_{k+1}) = e^{-(t_{k+1}-t_k) \lambda}y(t_k) + \int_{t_k}^{t_{k+1}} [e^{-\lambda(t_{k+1}-\tau)} g(y(\tau), \tau)] d\tau
+\end{split}
+\end{equation*}\begin{equation*}
+\begin{split}
+    = e^{-h \lambda}y(t_k) + \int_{t_k}^{t_{k+1}} \left[e^{-\lambda(t_{k+1}-\tau)} \left( g(y(t_k), t_k) + (\tau - t_k) \frac{dg}{dt} (y(\theta_k), \theta_k)\right)\right] d\tau
+\end{split}
+\end{equation*}\begin{equation*}
+\begin{split}
+    = e^{-h \lambda}y(t_k) + g(y(t_k), t_k) \int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)} d\tau + \frac{dg}{dt} (y(\theta_k), \theta_k) \int_{t_k}^{t_{k+1}} (\tau - t_k) e^{-\lambda(t_{k+1}-\tau)} d\tau.
+\end{split}
+\end{equation*}
+\sphinxAtStartPar
+Since
+\begin{equation*}
+\begin{split}
+    \int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)} d\tau = h\phi_1(-\lambda h)= \frac{1-e^{-h \lambda}}{\lambda}
+\end{split}
+\end{equation*}
+\sphinxAtStartPar
+and, by the Taylor expansion of \(e^{-\lambda h}\) in the point zero
+\begin{equation*}
+\begin{split}
+    e^{-\lambda h} = 1 - \lambda h + \frac{1}{2}\lambda^2h^2 - \frac{1}{3!}\lambda^3h^3 + \dotsi + \frac{1}{n!} (-\lambda h)^n + \dotsi, n \in \mathbb{N}
+\end{split}
+\end{equation*}\begin{equation*}
+\begin{split}
+     \int_{t_k}^{t_{k+1}} (\tau - t_k) e^{-\lambda(t_{k+1}-\tau)} d\tau =
+     h^2 \phi_2 (-\lambda h) =
+     h \frac{\phi_1(0) - \phi_1(-\lambda h)}{\lambda} =
+     \frac{h}{\lambda} - \frac{1-e^{-h \lambda}}{\lambda^2} = \\
+     \frac{h}{\lambda} - \frac{1-(1 - \lambda h + \frac{1}{2}\lambda^2h^2 - \frac{1}{3!}\lambda^3h^3 + \dotsi + \frac{1}{n!} (-\lambda h)^n + \dotsi)}{\lambda^2} = \\
+     \frac{h^2}{2} - \frac{h^3}{3!} \lambda + \dotsi + \frac{h^n}{n!} (-\lambda)^{n-2} + \dotsi  =  O(h^2),
+\end{split}
+\end{equation*}\begin{equation*}
+\begin{split}
+    y(t_{k+1}) = e^{-h \lambda}y(t_k) + g(y(t_k), t_k) \frac{1-e^{-h \lambda}}{\lambda} + \frac{dg}{dt} (y(\theta_k), \theta_k) O(h^2),
+\end{split}
+\end{equation*}\begin{equation*}
+\begin{split}
+  y(t_{k+1}) = e^{-h \lambda}y(t_k) + g(y(t_k), t_k) \frac{1-e^{-h \lambda}}{\lambda} + O(h^2).
+\end{split}
+\end{equation*}
+\sphinxAtStartPar
+That inspires the \(\textbf{Exponential Euler method}\) :
+\begin{equation*}
+\begin{split}
+y_0 = y(t_0)\\
+\textbf{for } k = 0, 1, 2, ..., N-1 :\\
+    y_{k+1} = e^{-h \lambda}y_k + g(y_k, t_k) \frac{1-e^{-h \lambda}}{\lambda}\\
+    t_{k+1} = t_k + h
+\end{split}
+\end{equation*}
+\sphinxAtStartPar
+with \(y_k \thickapprox y(t_k)\).
+
+
+\subsection{Exponential time differencing methods (ETD)}
+\label{\detokenize{cap4:exponential-time-differencing-methods-etd}}
+\sphinxAtStartPar
+In the same conditions as above, it is taken a general Taylor expansion of \(g\):
+
+\sphinxAtStartPar
+\(\tau \in (t_k, t_{k+1}), n \in \mathbb{N}\)
+\begin{equation*}
+\begin{split}
+    g(y(\tau), \tau) = g(y(t_k), t_k) + (\tau - t_k) \frac{dg}{dt} (y(t_k), t_k) + \frac{(\tau - t_k)^2}{2!} \frac{d^2g}{dt^2} (y(t_k), t_k) + \\
+    \dotsi + \frac{(\tau - t_k)^{n-1}}{(n-1)!} \frac{d^{n-1}g}{dt^{n-1}} (y(t_k), t_k) + \frac{(\tau - t_k)^n}{n!} \frac{d^ng}{dt^n} (y(\theta_k), \theta_k)
+\end{split}
+\end{equation*}
+\sphinxAtStartPar
+for a \(\theta_k \in (t_k, t_{k+1})\)
+
+\sphinxAtStartPar
+In
+\begin{equation*}
+\begin{split}
+    y(t_{k+1}) = e^{-h \lambda}y(t_k) + \int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)} g(y(\tau), \tau) d\tau
+\end{split}
+\end{equation*}
+\sphinxAtStartPar
+It will now become
+\begin{equation*}
+\begin{split}
+y(t_{k+1}) = e^{-h \lambda}y(t_k) + \int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)}  g(y(t_k), t_k) +
+(\tau - t_k) \frac{dg}{dt} (y(t_k), t_k) +
+\end{split}
+\end{equation*}\begin{equation*}
+\begin{split}
+ \frac{(\tau - t_k)^2}{2!} \frac{d^2g}{dt^2} (y(t_k), t_k) + \dotsi + 
+\end{split}
+\end{equation*}\begin{equation*}
+\begin{split}
+ + \frac{(\tau - t_k)^{n-1}}{(n-1)!} \frac{d^{n-1}g}{dt^{n-1}} (y(t_k), t_k) + \frac{(\tau - t_k)^n}{n!} \frac{d^ng}{dt^n} (y(\theta_k), \theta_k)  d\tau,
+\end{split}
+\end{equation*}\begin{equation*}
+\begin{split}
+y(t_{k+1}) = e^{-h \lambda}y(t_k) +
+g(y(t_k), t_k)\int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)} d \tau +
+\end{split}
+\end{equation*}\begin{equation*}
+\begin{split}
++ \frac{dg}{dt}(y(t_k), t_k)\int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)} (\tau - t_k)d\tau + \frac{d^2g}{dt^2} (y(t_k), t_k)\int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)} \frac{(\tau - t_k)^2}{2!}d\tau +
+\end{split}
+\end{equation*}\begin{equation*}
+\begin{split}
++ \dotsi +
+\end{split}
+\end{equation*}\begin{equation*}
+\begin{split}
++ \frac{d^{n-1}g}{dt^{n-1}} (y(t_k), t_k)\int_{t_k}^{t_{k+1}}  e^{-\lambda(t_{k+1}-\tau)} \frac{(\tau - t_k)^{n-1}}{(n-1)!} d\tau + \frac{d^ng}{dt^n} (y(\theta_k), \theta_k) \int_{t_k}^{t_{k+1}}  e^{-\lambda(t_{k+1}-\tau)} \frac{(\tau - t_k)^n}{n!} d\tau,
+\end{split}
+\end{equation*}\begin{equation*}
+\begin{split}
+y(t_{k+1}) = e^{-h \lambda}y(t_k) +
+h\phi_1(-\lambda h) g(y(t_k), t_k) +
+h^2\phi_2(-\lambda h) \frac{dg}{dt}(y(t_k), t_k) +
+h^3\phi_3(-\lambda h)\frac{d^2g}{dt^2} (y(t_k), t_k)
+\end{split}
+\end{equation*}\begin{equation*}
+\begin{split}
++ \dotsi +
+\end{split}
+\end{equation*}\begin{equation*}
+\begin{split}
++ h^n\phi_n(-\lambda h) \frac{d^{n-1}g}{dt^{n-1}} (y(t_k), t_k)+
+h^{n+1}\phi_{n+1}(-\lambda h) \frac{d^ng}{dt^n} (y(\theta_k), \theta_k).
+\end{split}
+\end{equation*}
+\sphinxAtStartPar
+From the discussion about the exponential Euler, that is known that
+\begin{equation*}
+\begin{split}
+h^2\phi_2(-\lambda h) = \frac{h^2}{2} - \frac{h^3}{3!} \lambda + \dotsi + \frac{h^l}{l!} (-\lambda)^{l-2} + \dotsi = \frac{1}{(-\lambda)^2} \sum\limits_{i=2}^{\infty} \frac{(-\lambda h)^i}{i!}.
+\end{split}
+\end{equation*}
+\sphinxAtStartPar
+Since
+\begin{equation*}
+\begin{split}
+  \phi_{n+1}(-\lambda h) = \frac{\phi_n(-\lambda h) - \phi_n(0)}{-\lambda h} \text{ and}\\
+  \phi_n(0) = \frac{1}{n!},
+\end{split}
+\end{equation*}\begin{equation*}
+\begin{split}
+  h^3 \phi_3(-\lambda h) = h^2 \frac{\phi_2(0) - \phi_2(-\lambda h)}{\lambda} = \frac{\frac{h^2}{2} - (\frac{h^2}{2} - \frac{h^3}{3!} \lambda + \dotsi + \frac{h^l}{l!} (-\lambda)^{l-2} + O(h^{l+1}))}{\lambda} = \frac{1}{(-\lambda)^3} \sum\limits_{i=3}^{\infty} \frac{(-\lambda h)^i}{i!}.
+\end{split}
+\end{equation*}
+\sphinxAtStartPar
+And if
+\begin{equation*}
+\begin{split}
+h^l \phi_l(-\lambda h) = \frac{1}{(-\lambda)^l} \sum\limits_{i=l}^{\infty} \frac{(-\lambda h)^i}{i!}, \text{for a } l \in \mathbb{N},
+\end{split}
+\end{equation*}\begin{equation*}
+\begin{split}
+  h^{l+1}\phi_{l+1}(-\lambda h) = h^{l+1} \frac{\phi_l(-\lambda h) - \phi_l(0)}{-\lambda h} = \frac{h^l \phi_l(0) - h^l \phi_l(-\lambda h)}{\lambda} = \frac{h^l}{l! \lambda} - \frac{1}{\lambda} \frac{1}{(-\lambda)^l} \sum\limits_{i=l}^{\infty} \frac{(-\lambda h)^i}{i!} = \frac{1}{(-\lambda)^{l+1}} \sum\limits_{i=l+1}^{\infty} \frac{(-\lambda h)^i}{i!}.
+\end{split}
+\end{equation*}
+\sphinxAtStartPar
+So, by induction,
+\begin{equation*}
+\begin{split}
+h^n \phi_n(-\lambda h) = \frac{1}{(-\lambda)^n} \sum\limits_{i=n}^{\infty} \frac{(-\lambda h)^i}{i!} = O(h^n), \forall n \geq 2.
+\end{split}
+\end{equation*}
+\sphinxAtStartPar
+Then,
+\begin{equation*}
+\begin{split}
+y(t_{k+1}) = e^{-h \lambda}y(t_k) +
+h\phi_1(-\lambda h) g(y(t_k), t_k) +
+h^2\phi_2(-\lambda h) \frac{dg}{dt}(y(t_k), t_k) +
+h^3\phi_3(-\lambda h)\frac{d^2g}{dt^2} (y(t_k), t_k) +
+\dotsi + \\
+h^n\phi_n(-\lambda h) \frac{d^{n-1}g}{dt^{n-1}} (y(t_k), t_k)+
+O(h^{n+1}).
+\end{split}
+\end{equation*}
+\sphinxAtStartPar
+It is possible to note that the exponential euler is essentially the exponential time differencing method of order 1.
+
+\sphinxAtStartPar
+In the same way as Taylor methods, the problem here is that at the expense of a higher order of convergence, ends up requiring the evaluation and implementation of multiple derivatives that may not even be easy to calculate. It can be avoided using Runge\sphinxhyphen{}Kutta methods.
+
+
+\subsection{Exponential time differencing methods with Runge\sphinxhyphen{}Kutta time stepping}
+\label{\detokenize{cap4:exponential-time-differencing-methods-with-runge-kutta-time-stepping}}
+\sphinxAtStartPar
+For the Runge\sphinxhyphen{}Kutte methods, that is used approximations of the derivatives that converges together with the whole expression as the time step decreases.
+
+\sphinxstepscope
+
+
+\section{References}
+\label{\detokenize{References:references}}\label{\detokenize{References::doc}}\begin{enumerate}
+\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
+\item {} 
+\sphinxAtStartPar
+HOCHBRUCK, M.; OSTERMANN, A. Exponential integrators. Acta Numer, Cambridge Univ Press, v. 19, p. 209–286, 2010.
+
+\item {} 
+\sphinxAtStartPar
+BURDEN, Richard L.; FAIRES, J. Douglas. Numerical Analysis. 9.ed. Boston:Brooks/Cole, 2010. p.348\sphinxhyphen{}353.
+
+\item {} 
+\sphinxAtStartPar
+ROMA, Alexandre. Lecture notes. Introdução à Resolução Numérica do Problema de Cauchy (Introduction to numerical resolution of Cauchy problem), MAP5002. Jan. and Feb. 2023. IME\sphinxhyphen{}USP University of São Paulo.
+
+\item {} 
+\sphinxAtStartPar
+TAL, Fábio A. Lecture notes. Técnicas em Teoria do Controle (techniques in control theory), MAP2321. Aug. to Dez. 2022. IME\sphinxhyphen{}USP University from São Paulo.
+
+\item {} 
+\sphinxAtStartPar
+Apostol, T.M. Calculus v. 1. Blaisdell book in pure and applied mathematics. \sphinxurl{https://books.google.com.br/books?id=sR\_vAAAAMAAJ}. 1961. Blaisdell Publishing Company.
+
+\item {} 
+\sphinxAtStartPar
+S.M. Cox, P.C. Matthews, Exponential Time Differencing for Stiff Systems, Journal of Computational Physics, Volume 176, Issue 2, 2002, Pages 430\sphinxhyphen{}455, ISSN 0021\sphinxhyphen{}9991, \sphinxurl{https://doi.org/10.1006/jcph.2002.6995}.
+
+\item {} 
+\sphinxAtStartPar
+Hochbruck, Marlis, and Alexander Ostermann. “Explicit Exponential Runge\sphinxhyphen{}Kutta Methods for Semilinear Parabolic Problems.” SIAM Journal on Numerical Analysis, vol. 43, no. 3, 2006, pp. 1069–90. JSTOR, \sphinxurl{http://www.jstor.org/stable/4101280}. Accessed 27 June 2023.
+
+\end{enumerate}
+
+\sphinxstepscope
+
+
+\chapter{Description of how the data management plan is being followed and any changes}
+\label{\detokenize{gestao_dados:description-of-how-the-data-management-plan-is-being-followed-and-any-changes}}\label{\detokenize{gestao_dados::doc}}
+\sphinxAtStartPar
+The project is following what was initially proposed, with the student doing an in\sphinxhyphen{}depth study of the main exponential methods, such as exponential Euler, exponential time differencing methods and exponential time differencing methods with Runge\sphinxhyphen{}Kutta time stepping.
+
+\sphinxAtStartPar
+Small changes were the most emphasized paper {[}1{]}, which shared a lot of attention with other papers like {[}6{]} and {[}7{]}.
+
+\sphinxAtStartPar
+Until the end of the period of validity, it is expected that the analyzes in methods of the Runge\sphinxhyphen{}Kutta type will be completed and that the methods studied will be applied to problems of dynamical systems.
+
+\sphinxstepscope
+
+
+\chapter{Appendix}
+\label{\detokenize{appendix:appendix}}\label{\detokenize{appendix::doc}}
 \sphinxAtStartPar
 All the functions coded are in the following environment.
 
@@ -1369,6 +1658,31 @@ from scipy.linalg import expm
 from scipy import linalg
 
 stab\PYGZus{}lim = 1000.0
+
+def classic\PYGZus{}euler\PYGZus{}deprec(t0, tf, n, x0, lamb, g):
+    \PYGZsq{}\PYGZsq{}\PYGZsq{}(float, float, int, float, float, function) \PYGZhy{}\PYGZgt{} np.vector\PYGZsq{}\PYGZsq{}\PYGZsq{}
+    h = (tf\PYGZhy{}t0)/n
+    x = np.zeros(n)
+    x[0]=x0
+    t = t0
+    for i in range(1, n):
+        x[i] = x[i\PYGZhy{}1] + h*(\PYGZhy{}lamb*x[i\PYGZhy{}1] + g(x[i\PYGZhy{}1],t))
+        t = t0 + i*h
+        if np.abs(x[i]) \PYGZgt{} stab\PYGZus{}lim:
+            x[i] = 0.0
+    return x
+
+def exponential\PYGZus{}euler\PYGZus{}deprec(t0, tf, n, x0, lamb, g):
+    \PYGZsq{}\PYGZsq{}\PYGZsq{}(float, float, int, float, function) \PYGZhy{}\PYGZgt{} np.vector\PYGZsq{}\PYGZsq{}\PYGZsq{}
+    h = (tf\PYGZhy{}t0)/n
+    x = np.zeros(n)
+    x[0]=x0
+    t = t0
+    phi1 = (1\PYGZhy{}np.exp(\PYGZhy{}h*lamb))/lamb
+    for i in range(1, n):
+        x[i] = np.exp(\PYGZhy{}h*lamb)*x[i\PYGZhy{}1] + phi1*g(x[i\PYGZhy{}1],t)
+        t = t0 + i*h
+    return x
 
 def classic\PYGZus{}euler(t0, tf, n, x0, A, g):
     \PYGZsq{}\PYGZsq{}\PYGZsq{}(float, float, int, np.array, np.matrix, function) \PYGZhy{}\PYGZgt{} np.matrix\PYGZsq{}\PYGZsq{}\PYGZsq{}
@@ -1713,154 +2027,192 @@ def convergence\PYGZus{}table(errors\PYGZus{}2x, n0, k, t0, tf):
   \PYGZsq{}\PYGZsq{}\PYGZsq{}
   n = n0
   print(n, (tf\PYGZhy{}t0)/n, errors\PYGZus{}2x[0], \PYGZdq{}\PYGZhy{}\PYGZdq{}, sep=\PYGZdq{} \PYGZam{} \PYGZdq{}, end=\PYGZdq{} \PYGZbs{}\PYGZbs{}\PYGZbs{}\PYGZbs{} \PYGZbs{}n\PYGZdq{})
-  for k in range(1, 4):
-      n = n0 * 2 ** k
+  for i in range(1, k):
+      n = n0 * 2 ** i
       h = (tf\PYGZhy{}t0)/n
-      q = errors\PYGZus{}2x[k\PYGZhy{}1]/errors\PYGZus{}2x[k] \PYGZsh{}q=erro(h)/erro(h)
+      q = errors\PYGZus{}2x[i\PYGZhy{}1]/errors\PYGZus{}2x[i] \PYGZsh{}q=erro(h)/erro(h)
       r = ((tf\PYGZhy{}t0)/(n/2))/((tf\PYGZhy{}t0)/n)
-      print(n, h, errors\PYGZus{}2x[k], log(q,2)/log(r,2), sep=\PYGZdq{} \PYGZam{} \PYGZdq{}, end=\PYGZdq{} \PYGZbs{}\PYGZbs{}\PYGZbs{}\PYGZbs{} \PYGZbs{}n\PYGZdq{})
+      print(n, h, errors\PYGZus{}2x[i], log(q,2)/log(r,2), sep=\PYGZdq{} \PYGZam{} \PYGZdq{}, end=\PYGZdq{} \PYGZbs{}\PYGZbs{}\PYGZbs{}\PYGZbs{} \PYGZbs{}n\PYGZdq{})
 \end{sphinxVerbatim}
 
 \end{sphinxuseclass}\end{sphinxVerbatimInput}
 
 \end{sphinxuseclass}
+\sphinxAtStartPar
+The execution done are the following.
 
-\subsection{Exponential Euler method}
-\label{\detokenize{cap4:exponential-euler-method}}
-\sphinxAtStartPar
-For
+\begin{sphinxuseclass}{cell}\begin{sphinxVerbatimInput}
 
-\sphinxAtStartPar
-\(\begin{cases}
-    y'(t) + \lambda y(t) = g(y(t), t), t \in (t_0, T) \\
-    y(0) = y_0
-\end{cases}\)
+\begin{sphinxuseclass}{cell_input}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+n0 = 128
+k = 4
+t0 = 0
+tf = 1
+x0 = np.array([1])
+A = np.array([[100]])
+errors\PYGZus{}2x\PYGZus{}vector = errors\PYGZus{}2x(n0, k, classic\PYGZus{}euler, t0, tf, x0, A, g, sol, vectorize\PYGZus{}sol, error\PYGZus{}sup)
+convergence\PYGZus{}table(errors\PYGZus{}2x\PYGZus{}vector, n0, k, t0, tf)
+\end{sphinxVerbatim}
 
-\sphinxAtStartPar
-the domain is evenly discretized:
-\begin{equation*}
-\begin{split}
-    N \in \mathbb{N}; h = \frac{T-t_0}{N}; \text{Domain: }\{t_k = t_0 + k h : k = 0, 1, ...\}.
-\end{split}
-\end{equation*}
-\sphinxAtStartPar
-The discretization of the ODE takes the exact solution of the Cauchy problem, given by the variation of constants formula
-\begin{equation*}
-\begin{split}
-    y(t) = e^{-(t-t_0) \lambda}y_0 + \int_{t_0}^t [e^{-\lambda(t-\tau)} g(y(\tau), \tau)] d\tau
-\end{split}
-\end{equation*}
-\sphinxAtStartPar
-and, by Taylor expansion on \(g\):
+\end{sphinxuseclass}\end{sphinxVerbatimInput}
+\begin{sphinxVerbatimOutput}
 
-\sphinxAtStartPar
-\(\tau \in (t_k, t_{k+1})\)
-\begin{equation*}
-\begin{split}
-    g(y(\tau), \tau) = g(y(t_k), t_k) + (\tau - t_k) \frac{dg}{dt} (y(\theta_k), \theta_k)
-\end{split}
-\end{equation*}
-\sphinxAtStartPar
-for a \(\theta_k \in (t_k, t_{k+1}),\)
-\begin{equation*}
-\begin{split}
-    y(t_{k+1}) = e^{-(t_{k+1}-t_k) \lambda}y(t_k) + \int_{t_k}^{t_{k+1}} [e^{-\lambda(t_{k+1}-\tau)} g(y(\tau), \tau)] d\tau
-\end{split}
-\end{equation*}\begin{equation*}
-\begin{split}
-    = e^{-h \lambda}y(t_k) + \int_{t_k}^{t_{k+1}} \left[e^{-\lambda(t_{k+1}-\tau)} \left( g(y(t_k), t_k) + (\tau - t_k) \frac{dg}{dt} (y(\theta_k), \theta_k)\right)\right] d\tau
-\end{split}
-\end{equation*}\begin{equation*}
-\begin{split}
-    = e^{-h \lambda}y(t_k) + g(y(t_k), t_k) \int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)} d\tau + \frac{dg}{dt} (y(\theta_k), \theta_k) \int_{t_k}^{t_{k+1}} (\tau - t_k) e^{-\lambda(t_{k+1}-\tau)} d\tau.
-\end{split}
-\end{equation*}
-\sphinxAtStartPar
-Since
-\begin{equation*}
-\begin{split}
-    \int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)} d\tau = h\phi_1(-\lambda h)= \frac{1-e^{-h \lambda}}{\lambda}
-\end{split}
-\end{equation*}
-\sphinxAtStartPar
-and, by the Taylor expansion of \(e^{-\lambda h}\) in the point zero
-\begin{equation*}
-\begin{split}
-    e^{-\lambda h} = 1 - \lambda h + \frac{1}{2}\lambda^2h^2 - \frac{1}{3!}\lambda^3h^3 + \dotsi + \frac{1}{n!} (-\lambda h)^n + \dotsi, n \in \mathbb{N}
-\end{split}
-\end{equation*}\begin{equation*}
-\begin{split}
-     \int_{t_k}^{t_{k+1}} (\tau - t_k) e^{-\lambda(t_{k+1}-\tau)} d\tau =
-     h^2 \phi_2 (-\lambda h) =
-     h \frac{\phi_1(0) - \phi_1(-\lambda h)}{\lambda} =
-     \frac{h}{\lambda} - \frac{1-e^{-h \lambda}}{\lambda^2} = \\
-     \frac{h}{\lambda} - \frac{1-(1 - \lambda h + \frac{1}{2}\lambda^2h^2 - \frac{1}{3!}\lambda^3h^3 + \dotsi + \frac{1}{n!} (-\lambda h)^n + \dotsi)}{\lambda^2} = \\
-     \frac{h^2}{2} - \frac{h^3}{3!} \lambda + \dotsi + \frac{h^n}{n!} (-\lambda)^{n-2} + \dotsi  =  O(h^2),
-\end{split}
-\end{equation*}\begin{equation*}
-\begin{split}
-    y(t_{k+1}) = e^{-h \lambda}y(t_k) + g(y(t_k), t_k) \frac{1-e^{-h \lambda}}{\lambda} + \frac{dg}{dt} (y(\theta_k), \theta_k) O(h^2),
-\end{split}
-\end{equation*}\begin{equation*}
-\begin{split}
-  y(t_{k+1}) = e^{-h \lambda}y(t_k) + g(y(t_k), t_k) \frac{1-e^{-h \lambda}}{\lambda} + O(h^2).
-\end{split}
-\end{equation*}
-\sphinxAtStartPar
-That inspires the \(\textbf{Exponential Euler method}\) :
-\begin{equation*}
-\begin{split}
-y_0 = y(t_0)\\
-\textbf{for } k = 0, 1, 2, ..., N-1 :\\
-    y_{k+1} = e^{-h \lambda}y_k + g(y_k, t_k) \frac{1-e^{-h \lambda}}{\lambda}\\
-    t_{k+1} = t_k + h
-\end{split}
-\end{equation*}
-\sphinxAtStartPar
-with \(y_k \thickapprox y(t_k)\).
+\begin{sphinxuseclass}{cell_output}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+128 \PYGZam{} 0.0078125 \PYGZam{} 0.2391072699739873 \PYGZam{} \PYGZhy{} \PYGZbs{}\PYGZbs{} 
+256 \PYGZam{} 0.00390625 \PYGZam{} 0.08650412059872986 \PYGZam{} 1.466817233501749 \PYGZbs{}\PYGZbs{} 
+512 \PYGZam{} 0.001953125 \PYGZam{} 0.039214210532948934 \PYGZam{} 1.1413923006132296 \PYGZbs{}\PYGZbs{} 
+1024 \PYGZam{} 0.0009765625 \PYGZam{} 0.018739566082401515 \PYGZam{} 1.0652890085799935 \PYGZbs{}\PYGZbs{} 
+\end{sphinxVerbatim}
 
-\sphinxstepscope
+\end{sphinxuseclass}\end{sphinxVerbatimOutput}
 
+\end{sphinxuseclass}
+\begin{sphinxuseclass}{cell}\begin{sphinxVerbatimInput}
 
-\section{References}
-\label{\detokenize{References:references}}\label{\detokenize{References::doc}}\begin{enumerate}
-\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
-\item {} 
-\sphinxAtStartPar
-HOCHBRUCK, M.; OSTERMANN, A. Exponential integrators. Acta Numer, Cambridge Univ Press, v. 19, p. 209–286, 2010.
+\begin{sphinxuseclass}{cell_input}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+n0 = 128
+k = 4
+t0 = 0
+tf = 1
+x0 = np.array([1])
+A = np.array([[100]])
+errors\PYGZus{}2x\PYGZus{}vector = errors\PYGZus{}2x(n0, k, exponential\PYGZus{}euler, t0, tf, x0, A, g, sol, vectorize\PYGZus{}sol, error\PYGZus{}sup)
+convergence\PYGZus{}table(errors\PYGZus{}2x\PYGZus{}vector, n0, k, t0, tf)
+\end{sphinxVerbatim}
 
-\item {} 
-\sphinxAtStartPar
-BURDEN, Richard L.; FAIRES, J. Douglas. Numerical Analysis. 9.ed. Boston:Brooks/Cole, 2010. p.348\sphinxhyphen{}353.
+\end{sphinxuseclass}\end{sphinxVerbatimInput}
+\begin{sphinxVerbatimOutput}
 
-\item {} 
-\sphinxAtStartPar
-ROMA, Alexandre. Lecture notes. Introdução à Resolução Numérica do Problema de Cauchy (Introduction to numerical resolution of Cauchy problem), MAP5002. Jan. and Feb. 2023. IME\sphinxhyphen{}USP University of São Paulo.
+\begin{sphinxuseclass}{cell_output}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+128 \PYGZam{} 0.0078125 \PYGZam{} 4.398075514689716e\PYGZhy{}05 \PYGZam{} \PYGZhy{} \PYGZbs{}\PYGZbs{} 
+256 \PYGZam{} 0.00390625 \PYGZam{} 2.074422525626487e\PYGZhy{}05 \PYGZam{} 1.0841625981445133 \PYGZbs{}\PYGZbs{} 
+512 \PYGZam{} 0.001953125 \PYGZam{} 1.0056221183126109e\PYGZhy{}05 \PYGZam{} 1.0446214904461004 \PYGZbs{}\PYGZbs{} 
+1024 \PYGZam{} 0.0009765625 \PYGZam{} 4.948885884282876e\PYGZhy{}06 \PYGZam{} 1.0229126060177947 \PYGZbs{}\PYGZbs{} 
+\end{sphinxVerbatim}
 
-\item {} 
-\sphinxAtStartPar
-TAL, Fábio A. Lecture notes. Técnicas em Teoria do Controle (techniques in control theory), MAP2321. Aug. to Dez. 2022. IME\sphinxhyphen{}USP University from São Paulo.
+\end{sphinxuseclass}\end{sphinxVerbatimOutput}
 
-\item {} 
-\sphinxAtStartPar
-Apostol, T.M. Calculus v. 1. Blaisdell book in pure and applied mathematics. \sphinxurl{https://books.google.com.br/books?id=sR\_vAAAAMAAJ}. 1961. Blaisdell Publishing Company.
+\end{sphinxuseclass}
+\begin{sphinxuseclass}{cell}\begin{sphinxVerbatimInput}
 
-\end{enumerate}
+\begin{sphinxuseclass}{cell_input}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+n0 = 128
+k = 4
+t0 = 0
+tf = 1
+x0 = np.array([1])
+A = np.array([[100]])
 
-\sphinxstepscope
+errors\PYGZus{}2x\PYGZus{}vector = errors\PYGZus{}2x(n0, k, etd2rk\PYGZus{}cox\PYGZus{}and\PYGZus{}matthews, t0, tf, x0, A, g, sol, vectorize\PYGZus{}sol, error\PYGZus{}sup)
+convergence\PYGZus{}table(errors\PYGZus{}2x\PYGZus{}vector, n0, k, t0, tf)
+\end{sphinxVerbatim}
 
+\end{sphinxuseclass}\end{sphinxVerbatimInput}
+\begin{sphinxVerbatimOutput}
 
-\chapter{Description of how the data management plan is being followed and any changes}
-\label{\detokenize{gestao_dados:description-of-how-the-data-management-plan-is-being-followed-and-any-changes}}\label{\detokenize{gestao_dados::doc}}
-\sphinxAtStartPar
-The project is following what was initially proposed, with the student doing an in\sphinxhyphen{}depth study of the main exponential methods, such as exponential Euler, exponential time differencing methods and exponential time differencing methods with Runge\sphinxhyphen{}Kutta time stepping.
+\begin{sphinxuseclass}{cell_output}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+128 \PYGZam{} 0.0078125 \PYGZam{} 4.186569175362864e\PYGZhy{}08 \PYGZam{} \PYGZhy{} \PYGZbs{}\PYGZbs{} 
+256 \PYGZam{} 0.00390625 \PYGZam{} 1.0575183428604418e\PYGZhy{}08 \PYGZam{} 1.985085775819591 \PYGZbs{}\PYGZbs{} 
+512 \PYGZam{} 0.001953125 \PYGZam{} 2.652380943352073e\PYGZhy{}09 \PYGZam{} 1.9953227875115886 \PYGZbs{}\PYGZbs{} 
+1024 \PYGZam{} 0.0009765625 \PYGZam{} 6.638462730912398e\PYGZhy{}10 \PYGZam{} 1.9983668943519293 \PYGZbs{}\PYGZbs{} 
+\end{sphinxVerbatim}
 
-\sphinxAtStartPar
-Small changes were the most emphasized paper {[}1{]}, which shared a lot of attention with other papers like {[}6{]} and {[}7{]}.
+\end{sphinxuseclass}\end{sphinxVerbatimOutput}
 
-\sphinxAtStartPar
-Until the end of the period of validity, it is expected that the analyzes in methods of the Runge\sphinxhyphen{}Kutta type will be completed and that the methods studied will be applied to problems of dynamical systems.
+\end{sphinxuseclass}
+\begin{sphinxuseclass}{cell}\begin{sphinxVerbatimInput}
 
+\begin{sphinxuseclass}{cell_input}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+n0 = 128
+k = 4
+t0 = 0
+tf = 1
+x0 = np.array([1])
+A = np.array([[100]])
+
+errors\PYGZus{}2x\PYGZus{}vector = errors\PYGZus{}2x(n0, k, etd2rk\PYGZus{}cox\PYGZus{}and\PYGZus{}matthews\PYGZus{}midpoint\PYGZus{}rule, t0, tf, x0, A, g, sol, vectorize\PYGZus{}sol, error\PYGZus{}sup)
+convergence\PYGZus{}table(errors\PYGZus{}2x\PYGZus{}vector, n0, k, t0, tf)
+\end{sphinxVerbatim}
+
+\end{sphinxuseclass}\end{sphinxVerbatimInput}
+\begin{sphinxVerbatimOutput}
+
+\begin{sphinxuseclass}{cell_output}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+128 \PYGZam{} 0.0078125 \PYGZam{} 2.9740964063024178e\PYGZhy{}08 \PYGZam{} \PYGZhy{} \PYGZbs{}\PYGZbs{} 
+256 \PYGZam{} 0.00390625 \PYGZam{} 6.3603379351490075e\PYGZhy{}09 \PYGZam{} 2.225276088173374 \PYGZbs{}\PYGZbs{} 
+512 \PYGZam{} 0.001953125 \PYGZam{} 1.4582129219398166e\PYGZhy{}09 \PYGZam{} 2.1249020291594443 \PYGZbs{}\PYGZbs{} 
+1024 \PYGZam{} 0.0009765625 \PYGZam{} 3.4828753076032726e\PYGZhy{}10 \PYGZam{} 2.065850662914468 \PYGZbs{}\PYGZbs{} 
+\end{sphinxVerbatim}
+
+\end{sphinxuseclass}\end{sphinxVerbatimOutput}
+
+\end{sphinxuseclass}
+\begin{sphinxuseclass}{cell}\begin{sphinxVerbatimInput}
+
+\begin{sphinxuseclass}{cell_input}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+n0 = 128
+k = 4
+t0 = 0
+tf = 1
+x0 = np.array([1])
+A = np.array([[100]])
+
+errors\PYGZus{}2x\PYGZus{}vector = errors\PYGZus{}2x(n0, k, etd2rk\PYGZus{}trapezoidal\PYGZus{}rule, t0, tf, x0, A, g, sol, vectorize\PYGZus{}sol, error\PYGZus{}sup)
+convergence\PYGZus{}table(errors\PYGZus{}2x\PYGZus{}vector, n0, k, t0, tf)
+\end{sphinxVerbatim}
+
+\end{sphinxuseclass}\end{sphinxVerbatimInput}
+\begin{sphinxVerbatimOutput}
+
+\begin{sphinxuseclass}{cell_output}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+128 \PYGZam{} 0.0078125 \PYGZam{} 0.0004242643044311458 \PYGZam{} \PYGZhy{} \PYGZbs{}\PYGZbs{} 
+256 \PYGZam{} 0.00390625 \PYGZam{} 0.00010714498082271644 \PYGZam{} 1.9853990333325726 \PYGZbs{}\PYGZbs{} 
+512 \PYGZam{} 0.001953125 \PYGZam{} 2.6871031228085582e\PYGZhy{}05 \PYGZam{} 1.9954406751889993 \PYGZbs{}\PYGZbs{} 
+1024 \PYGZam{} 0.0009765625 \PYGZam{} 6.725136514989377e\PYGZhy{}06 \PYGZam{} 1.9984162299862431 \PYGZbs{}\PYGZbs{} 
+\end{sphinxVerbatim}
+
+\end{sphinxuseclass}\end{sphinxVerbatimOutput}
+
+\end{sphinxuseclass}
+\begin{sphinxuseclass}{cell}\begin{sphinxVerbatimInput}
+
+\begin{sphinxuseclass}{cell_input}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+n0 = 128
+k = 4
+t0 = 0
+tf = 1
+x0 = np.array([1])
+A = np.array([[100]])
+
+errors\PYGZus{}2x\PYGZus{}vector = errors\PYGZus{}2x(n0, k, etd2rk\PYGZus{}midpoint\PYGZus{}rule, t0, tf, x0, A, g, sol, vectorize\PYGZus{}sol, error\PYGZus{}sup)
+convergence\PYGZus{}table(errors\PYGZus{}2x\PYGZus{}vector, n0, k, t0, tf)
+\end{sphinxVerbatim}
+
+\end{sphinxuseclass}\end{sphinxVerbatimInput}
+\begin{sphinxVerbatimOutput}
+
+\begin{sphinxuseclass}{cell_output}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+128 \PYGZam{} 0.0078125 \PYGZam{} 0.00021050633676356068 \PYGZam{} \PYGZhy{} \PYGZbs{}\PYGZbs{} 
+256 \PYGZam{} 0.00390625 \PYGZam{} 5.346923320679979e\PYGZhy{}05 \PYGZam{} 1.977082770096472 \PYGZbs{}\PYGZbs{} 
+512 \PYGZam{} 0.001953125 \PYGZam{} 1.34290321535252e\PYGZhy{}05 \PYGZam{} 1.9933536556922617 \PYGZbs{}\PYGZbs{} 
+1024 \PYGZam{} 0.0009765625 \PYGZam{} 3.362162453383888e\PYGZhy{}06 \PYGZam{} 1.9978939920584422 \PYGZbs{}\PYGZbs{} 
+\end{sphinxVerbatim}
+
+\end{sphinxuseclass}\end{sphinxVerbatimOutput}
+
+\end{sphinxuseclass}
 
 
 

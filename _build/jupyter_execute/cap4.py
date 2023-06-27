@@ -5,371 +5,6 @@
 
 # In this chapter, exponential methods are introduced, with further analysis of some of them, being tested and compared to more classical equivalents.
 
-# All the functions coded are in the following environment.
-
-# In[1]:
-
-
-from math import *
-import numpy as np
-from collections import deque
-import matplotlib.pyplot as plt
-from scipy.linalg import expm
-from scipy import linalg
-
-stab_lim = 1000.0
-
-def classic_euler(t0, tf, n, x0, A, g):
-    '''(float, float, int, np.array, np.matrix, function) -> np.matrix'''
-    h = (tf-t0)/n
-    x = np.zeros((x0.size,n), dtype=np.complex_)
-    x[:,0]=x0
-    t = t0
-    for i in range(1, n):
-        x[:,i] = x[:,i-1] + h*(np.matmul(-A,x[:,i-1]) + g(x[:,i-1],t))
-        t = t0 + i*h
-        if np.any(x[:,i].real > stab_lim):
-            x[:,i] = np.nan
-    return x
-
-def exponential_euler(t0, tf, n, x0, A, g):
-    '''(float, float, int, np.array, np.matrix, function) -> np.matrix'''
-    h = (tf-t0)/n
-    x = np.zeros((x0.size,n), dtype=np.complex_)
-    x[:,0] = x0
-    t = t0
-    exponential_matrix = expm(-h*A)
-    hphi1 = calculate_hphi1(h, A)
-    for i in range(1, n):
-        x[:,i] = np.matmul(exponential_matrix, x[:,i-1]) + np.matmul(hphi1,g(x[:,i-1],t))
-        t = t0 + i*h
-    return x
-
-def calculate_hphi1(h, A):
-    '''(float, np.matrix) -> np.matrix'''
-    hphi1 = np.matmul(1-expm(-h*A), linalg.inv(A))
-    return hphi1
-
-def calculate_hphi2(h, A, hphi1):
-    #IT IS NOT H2PHI2
-    '''(float, np.matrix, np.matrix) -> np.matrix'''
-    hphi2 = np.matmul(1-hphi1/h, linalg.inv(A))
-    return hphi2
-
-def etd2(t0, tf, n, x0, A, g, derivate_of_g):
-    '''(float, float, int, np.array, np.matrix, function, function) -> np.matrix'''
-    h = (tf-t0)/n
-    x = np.zeros((x0.size,n), dtype=np.complex_)
-    x[:,0] = x0
-    t = t0
-    exponential_matrix = expm(-h*A)
-    hphi1 = calculate_hphi1(h, A)
-    hphi2 = calculate_hphi2(h, A, hphi1)
-    for i in range(1, n):
-        x[:,i] = np.matmul(exponential_matrix, x[:,i-1]) + np.matmul(hphi1,g(x[:,i-1],t)) + h*np.matmul(hphi2,derivate_of_g(x[:,i-1],t))
-        t = t0 + i*h
-    return x
-
-def etd2rk_cox_and_matthews(t0, tf, n, x0, A, g):
-    '''(float, float, int, np.array, np.matrix, function) -> np.matrix'''
-    h = (tf-t0)/n
-    x = np.zeros((x0.size,n), dtype=np.complex_)
-    x[:,0]=x0
-    t = t0
-    exponential_matrix = expm(-h*A)
-    hphi1 = calculate_hphi1(h, A)
-    hphi2 = calculate_hphi2(h, A, hphi1)
-    for i in range(1, n):
-        a = np.matmul(exponential_matrix, x[:,i-1]) + np.matmul(hphi1,g(x[:,i-1],t))
-        x[:,i] = np.matmul(exponential_matrix, x[:,i-1]) + np.matmul(hphi1,g(x[:,i-1],t)) + np.matmul(hphi2,g(a, t0 + i*h)-g(x[:,i-1],t))
-        t = t0 + i*h
-    return x
-
-def etd2rk_cox_and_matthews_midpoint_rule(t0, tf, n, x0, A, g):
-    '''(float, float, int, np.array, np.matrix, function) -> np.matrix'''
-    h = (tf-t0)/n
-    x = np.zeros((x0.size,n), dtype=np.complex_)
-    x[:,0]=x0
-    t = t0
-    exponential_matrix = expm(-h*A)
-    exponential_matrix_2 = expm(-h/2*A)
-    h_2phi1_2 = calculate_hphi1(h/2, A)
-    hphi1 = calculate_hphi1(h, A)
-    hphi2 = calculate_hphi2(h, A, hphi1)
-    for i in range(1, n):
-        b = np.matmul(exponential_matrix_2, x[:,i-1]) + np.matmul(h_2phi1_2,g(x[:,i-1],t))
-        x[:,i] = np.matmul(exponential_matrix, x[:,i-1]) + np.matmul(hphi1,g(x[:,i-1],t)) + 2*np.matmul(hphi2,g(b, t + h/2)-g(x[:,i-1],t))
-        t = t0 + i*h
-    return x
-
-def etd2rk_trapezoidal_rule(t0, tf, n, x0, A, g):
-    '''(float, float, int, np.array, np.matrix, function) -> np.matrix'''
-    h = (tf-t0)/n
-    x = np.zeros((x0.size,n), dtype=np.complex_)
-    x[:,0]=x0
-    t = t0
-    exponential_matrix = expm(-h*A)
-    hphi1 = calculate_hphi1(h, A)
-    for i in range(1, n):
-        a = np.matmul(exponential_matrix, x[:,i-1]) + np.matmul(hphi1,g(x[:,i-1],t))
-        x[:,i] = np.matmul(exponential_matrix, x[:,i-1]) + .5 * h * (np.matmul(exponential_matrix, g(x[:,i-1],t)) + g(a, t0 + i*h))
-        t = t0 + i*h
-    return x
-
-def etd2rk_midpoint_rule(t0, tf, n, x0, A, g):
-    '''(float, float, int, np.array, np.matrix, function, np.matrix) -> np.matrix'''
-    h = (tf-t0)/n
-    x = np.zeros((x0.size,n), dtype=np.complex_)
-    x[:,0]=x0
-    t = t0
-    exponential_matrix = expm(-h*A)
-    exponential_matrix_2 = expm(-h/2*A)
-    h_2phi1_2 = calculate_hphi1(h/2, A)
-    for i in range(1, n):
-        b = np.matmul(exponential_matrix_2, x[:,i-1]) + np.matmul(h_2phi1_2,g(x[:,i-1],t))
-        x[:,i] = np.matmul(exponential_matrix, x[:,i-1]) + h * np.matmul(exponential_matrix_2, g(b, t+h/2))
-        t = t0 + i*h
-    return x
-
-def vectorize_sol(t0, t1, n, sol):
-    '''
-    (float, float, int, function) -> np.vector
-    n is the number of steps
-    '''
-    x = np.zeros(n, dtype=np.complex_)
-    h = (t1-t0)/n
-    for i in range(n):
-        x[i] = sol(t0+i*h)
-    return x
-
-def error_2(x_approx, x_exact):
-    ''' (np.vector, np.vector) -> float '''
-    #make sure that x_approx and x_exact have the same lenght
-    v = (x_approx - x_exact)*(x_approx - x_exact).conjugate()
-    #^certainly pure real
-    return np.sqrt(float(np.sum(v)/x_approx.size)) #normalized
-
-def error_sup(x_approx, x_exact):
-    ''' (np.vector, np.vector) -> float '''
-    #make sure that x_approx and x_exact have the same lenght
-    v = abs(x_approx - x_exact)
-    return np.amax(v)
-
-def g( x, t ):
-    ''' (np.array, float) -> float
-        (x, t) -> g(x, t)
-    '''
-    g = np.array([np.sin(t)])
-    return g
-
-def g_linear_deprec( x, t ):
-    ''' (float, float) -> float
-        (x, t) -> g(x, t)
-    '''
-    g = 0
-    return g
-
-def g_linear( x, t ):
-    ''' (np.array, float) -> np.array
-        (x, t) -> g(x, t)
-    '''
-    g = np.zeros(x.size)
-    return g
-
-def g_cm1 (x, t):
-    ''' (np.array, float) -> np.array
-        (x, t) -> g(x, t)
-    '''
-    lamb = .5
-    c = 100
-    r_2 = x[0]**2 + x[1]**2
-    g = np.array([(lamb*x[1]-c*x[0])*r_2, -(lamb*x[0]+c*x[1])*r_2])
-    return g
-
-def sol( t ):
-    ''' (float, float) -> float
-    RECEIVES the initial value and a real (t).
-    APPLIES the cauchy problem solution to this initial value at this point.
-    RETURNS a real value.
-    '''
-    lmba = 100
-    sol = np.exp(-lmba*t)+(np.exp(-lmba*t)+lmba*np.sin(t)-np.cos(t))/(1+lmba*lmba)
-    return sol
-
-def sol_100_linear( t ):
-    ''' (float, float) -> float
-    RECEIVES the initial value and a real (t).
-    APPLIES the cauchy problem solution to this initial value at this point.
-    RETURNS a real value.
-    '''
-    sol = exp(-100*t) #u0=1
-    return sol
-
-def sol_1j_linear( t ):
-    ''' (float, float) -> float
-    RECEIVES the initial value and a real (t).
-    APPLIES the cauchy problem solution to this initial value at this point.
-    RETURNS a real value.
-    '''
-    return np.exp(1j*t)
-
-def sol_non_linear_sin( t ):
-    ''' (float, float) -> float
-    RECEIVES the initial value and a real (t).
-    APPLIES the cauchy problem solution to this initial value at this point.
-    RETURNS a real value.
-    '''
-    sol = 2-cos(t) #u0=1
-    return sol
-
-def errors_array(n0, nf, method, t0, tf, x0, lmba, g, sol, vectorize_sol, error):
-  '''
-  This function will RETURN 2 arrays.
-  The first one has the errors of the approximations given by the method with
-  number of steps n = n0, n0+1, n0+2, ..., nf-1.
-  The second is [n0, n0+1, n0+2, ..., nf-1]
-
-  RECEIVES:
-  n0 is the first number of steps. (int)
-  nf is the last one plus 1. (int)
-  method have arguments (t0, tf, n, x0, lmba, g) and return a
-  np.vector of length n (0, 1, 2, ..., n-1), n is the number of steps. (function)
-  t0 is the initial point of the approximation. (float)
-  tf is the last one. (float)
-  x0 is the initial value of the Cauchy problem. (float)
-  lmbda is the coefficient os the linear part of the ploblem. (float)
-  g is a function (float, float) -> (float). (function)
-  sol is a function (float) -> (float). (function)
-  vectorize_sol is a function that "transforms sol in a vector" (function)
-  (float, float, int, function) -> (np.array)
-  (t0, tf, n, sol) -> np.array([sol[t0], sol[t0+h], sol[t0+2h], ..., sol[tf-1]])
-  error is a function (np.array, np.array) -> (float) (function)
-  '''
-  v = np.zeros(nf-n0)
-  domain = np.zeros(nf-n0)
-  for n in range(n0, nf):
-    domain[n-n0] = n
-    m = method(t0, tf, n, x0, lmba, g)
-    exact = vectorize_sol(t0, tf, n, sol)
-    if np.max(np.abs(m))>1000:
-        v[n-n0]=np.nan
-    else:
-        v[n-n0] = error(m, exact)
-  return v, domain
-
-def graphic_2D(domain, matrix, names, labelx, labely, title, key1, key2):
-  '''
-  domain is a list of np.arrays [[length n1], [legth n2], ..., [length nk]]
-  k = 1, 2, ..., 5 lines. (list)
-  matrix is a list of np.arrays [[length n1], [legth n2], ..., [length nk]]
-  k = 1, 2, ..., 5 lines - same length that domain. (list)
-  names is a list of the labels for the graphs, must have the same length that
-  the number of lines in matrix. (list of Strings)
-  labelx is the name of the x coordinate. (String)
-  labely is the name of the y coordinate. (String)
-  title is the title of the graph. (String)
-  key1 is a boolean that indicates if the last graph must be black. (bool)
-  key2 is a boolean that indicates if it should use the log scale. (bool)
-  '''
-  fig, ax = plt.subplots()
-
-  colors = ['blue', 'green', 'red', 'cyan', 'magenta', 'yellow']
-  for i in range(len(names)-1):
-    ax.plot(domain[i], matrix[i], color=colors[i], label=names[i])
-  if key1:
-    ax.plot(domain[len(names)-1], matrix[len(names)-1], color='black', label=names[len(names)-1])
-  else:
-    ax.plot(domain[len(names)-1], matrix[len(names)-1], color=colors[len(names)-1], label=names[len(names)-1])
-  if key2:
-    plt.yscale('log')
-  ax.legend()
-  ax.set_xlabel(labelx)
-  ax.set_ylabel(labely)
-  ax.set_title(title)
-  return fig, ax
-
-def graphic_3D(domain, matrix1, matrix2, names, labelx, labely, labelz, title, key1, key2):
-  '''
-  domain is a list of np.arrays [[length n1], [legth n2], ..., [length nk]]
-  k = 1, 2, ..., 5 lines. (list)
-  matrix1 and matrix2 are lists of np.arrays [[length n1], [legth n2], ..., [length nk]]
-  k = 1, 2, ..., 5 lines - same length that domain. (list)
-  names is a list of the labels for the graphs, must have the same length that
-  the number of lines in matrix. (list of Strings)
-  labelx is the name of the x coordinate. (String)
-  labely is the name of the y coordinate. (String)
-  labelz is the name of the z coordinate. (String)
-  title is the title of the graph. (String)
-  key1 is a boolean that indicates if the last graph must be black. (bool)
-  key2 is a boolean that indicates if it should use the log scale. (bool)
-  '''
-  fig = plt.figure()
-  ax = plt.figure().add_subplot(projection='3d')
-
-  colors = ['blue', 'green', 'red', 'cyan', 'magenta', 'yellow']
-  for i in range(len(names)-1):
-    ax.plot(domain[i], matrix1[i], matrix2[i], color=colors[i], label=names[i])
-  if key1:
-    ax.plot(domain[len(names)-1], matrix1[len(names)-1], matrix2[len(names)-1], color='black', label=names[len(names)-1])
-  else:
-    ax.plot(domain[len(names)-1], matrix1[len(names)-1], matrix2[len(names)-1], color=colors[len(names)-1], label=names[len(names)-1])
-  if key2:
-    plt.yscale('log')
-  ax.legend()
-  ax.set_xlabel(labelx)
-  ax.set_ylabel(labely)
-  ax.set_zlabel(labelz)
-  ax.set_title(title)
-  return fig, ax
-
-def errors_2x(n0, k, method, t0, tf, x0, lmba, g, sol, vectorize_sol, error):
-  '''
-  This function will RETURN a np.array with the errors of the approximations given
-  by the method with number of steps n = n0, 2*n0, 2**2*n0, ..., 2**(k-1)*n0.
-
-  RECEIVES:
-  n0 is the first number of steps. (int)
-  k is the number of errors in the final array. (int)
-  method have arguments (t0, tf, n, x0, lmba, g) and return a
-  np.vector of length n (0, 1, 2, ..., n-1), n is the number of steps. (function)
-  t0 is the initial point of the approximation. (float)
-  tf is the last one. (float)
-  x0 is the initial value of the Cauchy problem. (float)
-  lmbda is the coefficient os the linear part of the ploblem. (float)
-  g is a function (float, float) -> (float). (function)
-  sol is a function (float) -> (float). (function)
-  vectorize_sol is a function that "transforms sol in a vector" (function)
-  (float, float, int, function) -> (np.array)
-  (t0, tf, n, sol) -> np.array([sol[t0], sol[t0+h], sol[t0+2h], ..., sol[tf-1]])
-  error is a function (np.array, np.array) -> (float) (function)
-  '''
-  v = np.zeros(k)
-  for i in range(k):
-    m = method(t0, tf, n0*2**i, x0, lmba, g)
-    exact = vectorize_sol(t0, tf, n0*2**i, sol)
-    v[i] = error(m, exact)
-  return v
-
-def convergence_table(errors_2x, n0, k, t0, tf):
-  '''
-  RECEIVES:
-  errors_2x is a array with the errors of the approximations given
-  by a method with number of steps n = n0, 2*n0, 2**2*n0, ..., 2**(k-1)*n0. (np.array)
-  n0 is the first number of steps. (int)
-  k is the number of errors in the final array. (int)
-  t0 is the initial point of the approximation. (float)
-  tf is the last one. (float)
-  '''
-  n = n0
-  print(n, (tf-t0)/n, errors_2x[0], "-", sep=" & ", end=" \\\\ \n")
-  for k in range(1, 4):
-      n = n0 * 2 ** k
-      h = (tf-t0)/n
-      q = errors_2x[k-1]/errors_2x[k] #q=erro(h)/erro(h)
-      r = ((tf-t0)/(n/2))/((tf-t0)/n)
-      print(n, h, errors_2x[k], log(q,2)/log(r,2), sep=" & ", end=" \\\\ \n")
-
-
 # ## Exponential Euler method
 
 # For
@@ -452,3 +87,123 @@ def convergence_table(errors_2x, n0, k, t0, tf):
 # $$
 # 
 # with $y_k \thickapprox y(t_k)$.
+
+# ## Exponential time differencing methods (ETD)
+# 
+# In the same conditions as above, it is taken a general Taylor expansion of $g$:
+# 
+# $\tau \in (t_k, t_{k+1}), n \in \mathbb{N}$
+# 
+# $$
+#     g(y(\tau), \tau) = g(y(t_k), t_k) + (\tau - t_k) \frac{dg}{dt} (y(t_k), t_k) + \frac{(\tau - t_k)^2}{2!} \frac{d^2g}{dt^2} (y(t_k), t_k) + \\
+#     \dotsi + \frac{(\tau - t_k)^{n-1}}{(n-1)!} \frac{d^{n-1}g}{dt^{n-1}} (y(t_k), t_k) + \frac{(\tau - t_k)^n}{n!} \frac{d^ng}{dt^n} (y(\theta_k), \theta_k)
+# $$
+# 
+# for a $\theta_k \in (t_k, t_{k+1})$
+# 
+# In
+# 
+# $$
+#     y(t_{k+1}) = e^{-h \lambda}y(t_k) + \int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)} g(y(\tau), \tau) d\tau
+# $$
+# 
+# It will now become
+# 
+# $$
+# y(t_{k+1}) = e^{-h \lambda}y(t_k) + \int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)}  g(y(t_k), t_k) +
+# (\tau - t_k) \frac{dg}{dt} (y(t_k), t_k) +
+# $$
+# 
+# $$
+#  \frac{(\tau - t_k)^2}{2!} \frac{d^2g}{dt^2} (y(t_k), t_k) + \dotsi + 
+# $$
+# 
+# $$
+#  + \frac{(\tau - t_k)^{n-1}}{(n-1)!} \frac{d^{n-1}g}{dt^{n-1}} (y(t_k), t_k) + \frac{(\tau - t_k)^n}{n!} \frac{d^ng}{dt^n} (y(\theta_k), \theta_k)  d\tau,
+# $$
+# 
+# $$
+# y(t_{k+1}) = e^{-h \lambda}y(t_k) +
+# g(y(t_k), t_k)\int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)} d \tau +
+# $$
+# 
+# $$
+# + \frac{dg}{dt}(y(t_k), t_k)\int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)} (\tau - t_k)d\tau + \frac{d^2g}{dt^2} (y(t_k), t_k)\int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)} \frac{(\tau - t_k)^2}{2!}d\tau +
+# $$
+# 
+# $$
+# + \dotsi +
+# $$
+# 
+# $$
+# + \frac{d^{n-1}g}{dt^{n-1}} (y(t_k), t_k)\int_{t_k}^{t_{k+1}}  e^{-\lambda(t_{k+1}-\tau)} \frac{(\tau - t_k)^{n-1}}{(n-1)!} d\tau + \frac{d^ng}{dt^n} (y(\theta_k), \theta_k) \int_{t_k}^{t_{k+1}}  e^{-\lambda(t_{k+1}-\tau)} \frac{(\tau - t_k)^n}{n!} d\tau,
+# $$
+# 
+# $$
+# y(t_{k+1}) = e^{-h \lambda}y(t_k) +
+# h\phi_1(-\lambda h) g(y(t_k), t_k) +
+# h^2\phi_2(-\lambda h) \frac{dg}{dt}(y(t_k), t_k) +
+# h^3\phi_3(-\lambda h)\frac{d^2g}{dt^2} (y(t_k), t_k)
+# $$
+# 
+# $$
+# + \dotsi +
+# $$
+# 
+# $$
+# + h^n\phi_n(-\lambda h) \frac{d^{n-1}g}{dt^{n-1}} (y(t_k), t_k)+
+# h^{n+1}\phi_{n+1}(-\lambda h) \frac{d^ng}{dt^n} (y(\theta_k), \theta_k).
+# $$
+# 
+# From the discussion about the exponential Euler, that is known that
+# 
+# $$
+# h^2\phi_2(-\lambda h) = \frac{h^2}{2} - \frac{h^3}{3!} \lambda + \dotsi + \frac{h^l}{l!} (-\lambda)^{l-2} + \dotsi = \frac{1}{(-\lambda)^2} \sum\limits_{i=2}^{\infty} \frac{(-\lambda h)^i}{i!}.
+# $$
+# 
+# Since
+# 
+# $$
+#   \phi_{n+1}(-\lambda h) = \frac{\phi_n(-\lambda h) - \phi_n(0)}{-\lambda h} \text{ and}\\
+#   \phi_n(0) = \frac{1}{n!},
+# $$
+# 
+# $$
+#   h^3 \phi_3(-\lambda h) = h^2 \frac{\phi_2(0) - \phi_2(-\lambda h)}{\lambda} = \frac{\frac{h^2}{2} - (\frac{h^2}{2} - \frac{h^3}{3!} \lambda + \dotsi + \frac{h^l}{l!} (-\lambda)^{l-2} + O(h^{l+1}))}{\lambda} = \frac{1}{(-\lambda)^3} \sum\limits_{i=3}^{\infty} \frac{(-\lambda h)^i}{i!}.
+# $$
+# 
+# And if
+# 
+# $$
+# h^l \phi_l(-\lambda h) = \frac{1}{(-\lambda)^l} \sum\limits_{i=l}^{\infty} \frac{(-\lambda h)^i}{i!}, \text{for a } l \in \mathbb{N},
+# $$
+# 
+# $$
+#   h^{l+1}\phi_{l+1}(-\lambda h) = h^{l+1} \frac{\phi_l(-\lambda h) - \phi_l(0)}{-\lambda h} = \frac{h^l \phi_l(0) - h^l \phi_l(-\lambda h)}{\lambda} = \frac{h^l}{l! \lambda} - \frac{1}{\lambda} \frac{1}{(-\lambda)^l} \sum\limits_{i=l}^{\infty} \frac{(-\lambda h)^i}{i!} = \frac{1}{(-\lambda)^{l+1}} \sum\limits_{i=l+1}^{\infty} \frac{(-\lambda h)^i}{i!}.
+# $$
+# 
+# So, by induction,
+# 
+# $$
+# h^n \phi_n(-\lambda h) = \frac{1}{(-\lambda)^n} \sum\limits_{i=n}^{\infty} \frac{(-\lambda h)^i}{i!} = O(h^n), \forall n \geq 2.
+# $$
+
+# Then,
+# 
+# $$
+# y(t_{k+1}) = e^{-h \lambda}y(t_k) +
+# h\phi_1(-\lambda h) g(y(t_k), t_k) +
+# h^2\phi_2(-\lambda h) \frac{dg}{dt}(y(t_k), t_k) +
+# h^3\phi_3(-\lambda h)\frac{d^2g}{dt^2} (y(t_k), t_k) +
+# \dotsi + \\
+# h^n\phi_n(-\lambda h) \frac{d^{n-1}g}{dt^{n-1}} (y(t_k), t_k)+
+# O(h^{n+1}).
+# $$
+
+# It is possible to note that the exponential euler is essentially the exponential time differencing method of order 1.
+# 
+# In the same way as Taylor methods, the problem here is that at the expense of a higher order of convergence, ends up requiring the evaluation and implementation of multiple derivatives that may not even be easy to calculate. It can be avoided using Runge-Kutta methods.
+
+# ## Exponential time differencing methods with Runge-Kutta time stepping
+# 
+# For the Runge-Kutte methods, that is used approximations of the derivatives that converges together with the whole expression as the time step decreases.
