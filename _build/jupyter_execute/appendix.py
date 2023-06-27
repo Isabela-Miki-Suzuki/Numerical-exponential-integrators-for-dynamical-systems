@@ -3,6 +3,8 @@
 
 # # Appendix
 
+# ## Code
+
 # All the functions coded are in the following environment.
 
 # In[1]:
@@ -384,13 +386,15 @@ def convergence_table(errors_2x, n0, k, t0, tf):
   tf is the last one. (float)
   '''
   n = n0
-  print(n, (tf-t0)/n, errors_2x[0], "-", sep=" & ", end=" \\\\ \n")
+  print("| n | h = $\\frac{1}{h}$ | $\\tau(0,h)$ | q = $\\frac{tau(0,h)}{tau(0, 2h)}$ | $log_4 ^q$|")
+  print("|---|-----------------|-----------|---------------------------------|-------|")
+  print("", n, (tf-t0)/n, errors_2x[0], "-", sep=" | ", end=" | \n")
   for i in range(1, k):
       n = n0 * 2 ** i
       h = (tf-t0)/n
       q = errors_2x[i-1]/errors_2x[i] #q=erro(h)/erro(h)
       r = ((tf-t0)/(n/2))/((tf-t0)/n)
-      print(n, h, errors_2x[i], log(q,2)/log(r,2), sep=" & ", end=" \\\\ \n")
+      print( "", n, h, errors_2x[i], log(q,2)/log(r,2), sep=" | ", end=" | \n")
 
 
 # The execution done are the following.
@@ -476,3 +480,446 @@ A = np.array([[100]])
 errors_2x_vector = errors_2x(n0, k, etd2rk_midpoint_rule, t0, tf, x0, A, g, sol, vectorize_sol, error_sup)
 convergence_table(errors_2x_vector, n0, k, t0, tf)
 
+
+# ## Some deductions
+
+# Here is used informations from [1], [6], [7].
+
+# ### Exponential Euler method
+# 
+# For
+# 
+# $\begin{cases}
+#     y'(t) + \lambda y(t) = g(y(t), t), t \in (t_0, T) \\
+#     y(0) = y_0
+# \end{cases}$
+# 
+# the domain is evenly discretized:
+# 
+# $$
+#     N \in \mathbb{N}; h = \frac{T-t_0}{N}; \text{Domain: }\{t_k = t_0 + k h : k = 0, 1, ...\}.
+# $$
+# 
+# The discretization of the ODE takes the exact solution of the Cauchy problem, given by the variation of constants formula
+# 
+# $$
+#     y(t) = e^{-(t-t_0) \lambda}y_0 + \int_{t_0}^t [e^{-\lambda(t-\tau)} g(y(\tau), \tau)] d\tau
+# $$
+# 
+# and, by Taylor expansion on $g$:
+# 
+# $\tau \in (t_k, t_{k+1})$
+# 
+# $$
+#     g(y(\tau), \tau) = g(y(t_k), t_k) + (\tau - t_k) \frac{dg}{dt} (y(\theta_k), \theta_k)
+# $$
+# 
+# for a $\theta_k \in (t_k, t_{k+1}),$
+# 
+# $$
+#     y(t_{k+1}) = e^{-(t_{k+1}-t_k) \lambda}y(t_k) + \int_{t_k}^{t_{k+1}} [e^{-\lambda(t_{k+1}-\tau)} g(y(\tau), \tau)] d\tau
+# $$
+# 
+# $$
+#     = e^{-h \lambda}y(t_k) + \int_{t_k}^{t_{k+1}} \left[e^{-\lambda(t_{k+1}-\tau)} \left( g(y(t_k), t_k) + (\tau - t_k) \frac{dg}{dt} (y(\theta_k), \theta_k)\right)\right] d\tau
+# $$
+# 
+# $$
+#     = e^{-h \lambda}y(t_k) + g(y(t_k), t_k) \int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)} d\tau + \frac{dg}{dt} (y(\theta_k), \theta_k) \int_{t_k}^{t_{k+1}} (\tau - t_k) e^{-\lambda(t_{k+1}-\tau)} d\tau.
+# $$
+# 
+# Since
+# 
+# $$
+#     \int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)} d\tau = h\phi_1(-\lambda h)= \frac{1-e^{-h \lambda}}{\lambda}
+# $$
+# 
+# and, by the Taylor expansion of $e^{-\lambda h}$ in the point zero
+# 
+# $$
+#     e^{-\lambda h} = 1 - \lambda h + \frac{1}{2}\lambda^2h^2 - \frac{1}{3!}\lambda^3h^3 + \dotsi + \frac{1}{n!} (-\lambda h)^n + \dotsi, n \in \mathbb{N}
+# $$
+# 
+# $$
+#      \int_{t_k}^{t_{k+1}} (\tau - t_k) e^{-\lambda(t_{k+1}-\tau)} d\tau =
+#      h^2 \phi_2 (-\lambda h) =
+#      h \frac{\phi_1(0) - \phi_1(-\lambda h)}{\lambda} =
+#      \frac{h}{\lambda} - \frac{1-e^{-h \lambda}}{\lambda^2} = \\
+#      \frac{h}{\lambda} - \frac{1-(1 - \lambda h + \frac{1}{2}\lambda^2h^2 - \frac{1}{3!}\lambda^3h^3 + \dotsi + \frac{1}{n!} (-\lambda h)^n + \dotsi)}{\lambda^2} = \\
+#      \frac{h^2}{2} - \frac{h^3}{3!} \lambda + \dotsi + \frac{h^n}{n!} (-\lambda)^{n-2} + \dotsi  =  O(h^2),
+# $$
+# 
+# $$
+#     y(t_{k+1}) = e^{-h \lambda}y(t_k) + g(y(t_k), t_k) \frac{1-e^{-h \lambda}}{\lambda} + \frac{dg}{dt} (y(\theta_k), \theta_k) O(h^2),
+# $$
+# 
+# $$
+#   y(t_{k+1}) = e^{-h \lambda}y(t_k) + g(y(t_k), t_k) \frac{1-e^{-h \lambda}}{\lambda} + O(h^2).
+# $$
+# 
+# That inspires the $\textbf{Exponential Euler method}$ :
+# 
+# $$
+# y_0 = y(t_0)\\
+# \textbf{for } k = 0, 1, 2, ..., N-1 :\\
+#     y_{k+1} = e^{-h \lambda}y_k + g(y_k, t_k) \frac{1-e^{-h \lambda}}{\lambda}\\
+#     t_{k+1} = t_k + h
+# $$
+# 
+# with $y_k \thickapprox y(t_k)$.
+
+# ### Exponential time differencing methods (ETD)
+# 
+# In the same conditions as above, it is taken a general Taylor expansion of $g$:
+# 
+# $\tau \in (t_k, t_{k+1}), n \in \mathbb{N}$
+# 
+# $$
+#     g(y(\tau), \tau) = g(y(t_k), t_k) + (\tau - t_k) \frac{dg}{dt} (y(t_k), t_k) + \frac{(\tau - t_k)^2}{2!} \frac{d^2g}{dt^2} (y(t_k), t_k) + \\
+#     \dotsi + \frac{(\tau - t_k)^{n-1}}{(n-1)!} \frac{d^{n-1}g}{dt^{n-1}} (y(t_k), t_k) + \frac{(\tau - t_k)^n}{n!} \frac{d^ng}{dt^n} (y(\theta_k), \theta_k)
+# $$
+# 
+# for a $\theta_k \in (t_k, t_{k+1})$
+# 
+# In
+# 
+# $$
+#     y(t_{k+1}) = e^{-h \lambda}y(t_k) + \int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)} g(y(\tau), \tau) d\tau
+# $$
+# 
+# It will now become
+# 
+# $$
+# y(t_{k+1}) = e^{-h \lambda}y(t_k) + \int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)}  g(y(t_k), t_k) +
+# (\tau - t_k) \frac{dg}{dt} (y(t_k), t_k) +
+# $$
+# 
+# $$
+#  \frac{(\tau - t_k)^2}{2!} \frac{d^2g}{dt^2} (y(t_k), t_k) + \dotsi + 
+# $$
+# 
+# $$
+#  + \frac{(\tau - t_k)^{n-1}}{(n-1)!} \frac{d^{n-1}g}{dt^{n-1}} (y(t_k), t_k) + \frac{(\tau - t_k)^n}{n!} \frac{d^ng}{dt^n} (y(\theta_k), \theta_k)  d\tau,
+# $$
+# 
+# $$
+# y(t_{k+1}) = e^{-h \lambda}y(t_k) +
+# g(y(t_k), t_k)\int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)} d \tau +
+# $$
+# 
+# $$
+# + \frac{dg}{dt}(y(t_k), t_k)\int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)} (\tau - t_k)d\tau + \frac{d^2g}{dt^2} (y(t_k), t_k)\int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)} \frac{(\tau - t_k)^2}{2!}d\tau +
+# $$
+# 
+# $$
+# + \dotsi +
+# $$
+# 
+# $$
+# + \frac{d^{n-1}g}{dt^{n-1}} (y(t_k), t_k)\int_{t_k}^{t_{k+1}}  e^{-\lambda(t_{k+1}-\tau)} \frac{(\tau - t_k)^{n-1}}{(n-1)!} d\tau + \frac{d^ng}{dt^n} (y(\theta_k), \theta_k) \int_{t_k}^{t_{k+1}}  e^{-\lambda(t_{k+1}-\tau)} \frac{(\tau - t_k)^n}{n!} d\tau,
+# $$
+# 
+# $$
+# y(t_{k+1}) = e^{-h \lambda}y(t_k) +
+# h\phi_1(-\lambda h) g(y(t_k), t_k) +
+# h^2\phi_2(-\lambda h) \frac{dg}{dt}(y(t_k), t_k) +
+# h^3\phi_3(-\lambda h)\frac{d^2g}{dt^2} (y(t_k), t_k)
+# $$
+# 
+# $$
+# + \dotsi +
+# $$
+# 
+# $$
+# + h^n\phi_n(-\lambda h) \frac{d^{n-1}g}{dt^{n-1}} (y(t_k), t_k)+
+# h^{n+1}\phi_{n+1}(-\lambda h) \frac{d^ng}{dt^n} (y(\theta_k), \theta_k).
+# $$
+# 
+# From the discussion about the exponential Euler, that is known that
+# 
+# $$
+# h^2\phi_2(-\lambda h) = \frac{h^2}{2} - \frac{h^3}{3!} \lambda + \dotsi + \frac{h^l}{l!} (-\lambda)^{l-2} + \dotsi = \frac{1}{(-\lambda)^2} \sum\limits_{i=2}^{\infty} \frac{(-\lambda h)^i}{i!}.
+# $$
+# 
+# Since
+# 
+# $$
+#   \phi_{n+1}(-\lambda h) = \frac{\phi_n(-\lambda h) - \phi_n(0)}{-\lambda h} \text{ and}\\
+#   \phi_n(0) = \frac{1}{n!},
+# $$
+# 
+# $$
+#   h^3 \phi_3(-\lambda h) = h^2 \frac{\phi_2(0) - \phi_2(-\lambda h)}{\lambda} = \frac{\frac{h^2}{2} - (\frac{h^2}{2} - \frac{h^3}{3!} \lambda + \dotsi + \frac{h^l}{l!} (-\lambda)^{l-2} + O(h^{l+1}))}{\lambda} = \frac{1}{(-\lambda)^3} \sum\limits_{i=3}^{\infty} \frac{(-\lambda h)^i}{i!}.
+# $$
+# 
+# And if
+# 
+# $$
+# h^l \phi_l(-\lambda h) = \frac{1}{(-\lambda)^l} \sum\limits_{i=l}^{\infty} \frac{(-\lambda h)^i}{i!}, \text{for a } l \in \mathbb{N},
+# $$
+# 
+# $$
+#   h^{l+1}\phi_{l+1}(-\lambda h) = h^{l+1} \frac{\phi_l(-\lambda h) - \phi_l(0)}{-\lambda h} = \frac{h^l \phi_l(0) - h^l \phi_l(-\lambda h)}{\lambda} = \frac{h^l}{l! \lambda} - \frac{1}{\lambda} \frac{1}{(-\lambda)^l} \sum\limits_{i=l}^{\infty} \frac{(-\lambda h)^i}{i!} = \frac{1}{(-\lambda)^{l+1}} \sum\limits_{i=l+1}^{\infty} \frac{(-\lambda h)^i}{i!}.
+# $$
+# 
+# So, by induction,
+# 
+# $$
+# h^n \phi_n(-\lambda h) = \frac{1}{(-\lambda)^n} \sum\limits_{i=n}^{\infty} \frac{(-\lambda h)^i}{i!} = O(h^n), \forall n \geq 2.
+# $$
+# 
+# Then,
+# 
+# $$
+# y(t_{k+1}) = e^{-h \lambda}y(t_k) +
+# h\phi_1(-\lambda h) g(y(t_k), t_k) +
+# h^2\phi_2(-\lambda h) \frac{dg}{dt}(y(t_k), t_k) +
+# h^3\phi_3(-\lambda h)\frac{d^2g}{dt^2} (y(t_k), t_k) +
+# \dotsi + \\
+# h^n\phi_n(-\lambda h) \frac{d^{n-1}g}{dt^{n-1}} (y(t_k), t_k)+
+# O(h^{n+1}).
+# $$
+
+# ### Exponential time differencing methods with Runge-Kutta time stepping - order 2 - Cox and Matthews - Trapezoidal rule
+# 
+# For the second order method, that is used the approximation
+# 
+# $$
+#     g(y(\tau), \tau) = g(y(t_k), t_k) + (\tau - t_k) \frac{dg}{dt} (y(t_k), t_k) + O(h^2),
+# $$
+# 
+# $\forall \tau \in (t_k, t_{k+1}).$
+# 
+# The first derivative is discretized with the Taylor expansion
+# 
+# $$
+# g(y(t_{k+1}), t_{k+1}) = g(y(t_k), t_k) + h \frac{dg}{dt} (y(t_k), t_k) + O(h^2)
+# $$
+# 
+# and the exponential Euler expression
+# 
+# $$
+#   y(t_{k+1}) = e^{-h \lambda}y(t_k) + g(y(t_k), t_k) \frac{1-e^{-h \lambda}}{\lambda} + O(h^2),
+# $$
+# 
+# so that
+# 
+# $$
+# \frac{dg}{dt} (y(t_k), t_k)  = \frac{g(a_k, t_{k+1}) - g(y(t_k), t_k)}{h} + O(h), \\
+# \text{with } a_k = e^{-h \lambda}y(t_k) + g(y(t_k), t_k) \frac{1-e^{-h\lambda}}{\lambda},
+# $$
+# 
+# which results in the expression
+# 
+# $$
+# g(y(\tau), \tau) = g(y(t_k), t_k) + (\tau - t_k) \frac{g(a_k, t_{k+1}) - g(y(t_k), t_k)}{h} + (\tau - t_k)O(h) \\
+# \text{with } a_k = e^{-h \lambda}y(t_k) + g(y(t_k), t_k) \frac{1-e^{-h\lambda}}{\lambda}.
+# $$
+# 
+# Putting in the variation of constants formula
+# 
+# $$
+# y(t) = e^{-(t-t_0) \lambda}y_0 + \int_{t_0}^t e^{-\lambda(t-\tau)} g(y(\tau), \tau) d\tau,
+# $$
+# 
+# $$
+#   y(t_{k+1}) = e^{-h \lambda}y(t_k) + \\
+#   + \int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)} \left[ g(y(t_k), t_k) + (\tau - t_k)  \frac{g(a_k, t_{k+1}) - g(y(t_k), t_k)}{h}  + (\tau - t_k)O(h) \right] d\tau
+# $$
+# 
+# $$
+# y(t_{k+1}) = e^{-h \lambda} y(t_k) + g(y(t_k), t_k)\int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)} d \tau + \frac{g(a_k, t_{k+1}) - g(y(t_k), t_k)}{h} \int_{t_k}^{t_{k+1}} (\tau - t_k) e^{-\lambda(t_{k+1}-\tau)} d \tau + \\
+# + O(h)\int_{t_k}^{t_{k+1}} (\tau - t_k) e^{-\lambda(t_{k+1}-\tau)} d \tau \\
+# \text{with } a_k = e^{-h \lambda}y(t_k) + g(y(t_k), t_k) \frac{1-e^{-h\lambda}}{\lambda}.
+# $$
+# 
+# Then,
+# 
+# $$
+# y(t_{k+1}) = e^{-h \lambda} y(t_k) +
+#   h \phi_1 (-\lambda h) g(y(t_k), t_k) +
+#   \frac{g(a_k, t_{k+1}) - g(y(t_k), t_k)}{h} h^2 \phi_2 (-\lambda h) + \\
+#   + O(h)h^2 \phi_2 (-\lambda h) \\
+#   y(t_{k+1}) = e^{-h \lambda} y(t_k) +
+#   h \phi_1 (-\lambda h) g(y(t_k), t_k) +
+#   \left[g(a_k, t_{k+1}) - g(y(t_k), t_k) \right] h \phi_2 (-\lambda h) + \\
+#   + O(h^3) \\
+#   \text{with } a_k = e^{-h \lambda}y(t_k) + g(y(t_k), t_k) \frac{1-e^{-h\lambda}}{\lambda}.
+# $$
+# 
+# Butcher tableau:
+# 
+# $$
+# \begin{array}
+# {c|cc}
+# 0\\
+# 1 & \phi_1(-\lambda h)\\
+# \hline
+# & \phi_1 (-\lambda h) - \phi_2 (-\lambda h) & \phi_2 (-\lambda h)
+# \end{array}
+# $$
+
+# ### Exponential time differencing methods with Runge-Kutta time stepping - order 2 - Cox and Matthews - Midpoint rule
+# 
+# From the same expression:
+# 
+# $$
+#     g(y(\tau), \tau) = g(y(t_k), t_k) + (\tau - t_k) \frac{dg}{dt} (y(t_k), t_k) + O(h^2),
+# $$
+# 
+# $\forall \tau \in (t_k, t_{k+1}).$
+# 
+# The first derivative is now discretized with the Taylor expansion
+# 
+# $$
+# g\left(y\left(t_k + \frac{h}{2}\right), t_k + \frac{h}{2} \right) = g(y(t_k), t_k) + \frac{h}{2} \frac{dg}{dt} (y(t_k), t_k) + O(h^2)
+# $$
+# 
+# and the exponential Euler expression taken is with time step $\frac{h}{2}$
+#  
+# $$
+#   y\left(t_k + \frac{h}{2}\right) = e^{-\frac{h \lambda}{2}}y(t_k) + g(y(t_k), t_k) \frac{h}{2} \phi_1\left( -\frac{\lambda h}{2} \right) + O(h^2),
+# $$
+# 
+# so that
+# 
+# $$
+# \frac{dg}{dt} (y(t_k), t_k)  = 2 \frac{g\left(b_k, t_k + \frac{h}{2} \right) - g(y(t_k), t_k)}{h} + O(h), \\
+# \text{with } b_k =e^{-\frac{h \lambda}{2}}y(t_k) + g(y(t_k), t_k) \frac{h}{2} \phi_1\left( -\frac{\lambda h}{2} \right),
+# $$
+# 
+# which results in the expression
+# 
+# $$
+# g(y(\tau), \tau) = g(y(t_k), t_k) + 2(\tau - t_k) \frac{g\left(b_k, t_k + \frac{h}{2}\right) - g(y(t_k), t_k)}{h} + (\tau - t_k)O(h) \\
+# \text{with } b_k =e^{-\frac{h \lambda}{2}}y(t_k) + g(y(t_k), t_k) \frac{h}{2} \phi_1\left( -\frac{\lambda h}{2} \right).
+# $$
+# 
+# Putting in the variation of constants formula
+# 
+# $$
+# y(t) = e^{-(t-t_0) \lambda}y_0 + \int_{t_0}^t e^{-\lambda(t-\tau)} g(y(\tau), \tau) d\tau,
+# $$
+# 
+# $$
+#   y(t_{k+1}) = e^{-h \lambda}y(t_k) + \\
+#     + \int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)} \left[ g(y(t_k), t_k) + 2(\tau - t_k) \frac{g\left(b_k, t_k + \frac{h}{2}\right) - g(y(t_k), t_k)}{h} + (\tau - t_k)O(h) \right] d\tau
+# $$
+# 
+# $$
+# y(t_{k+1}) = e^{-h \lambda} y(t_k) + g(y(t_k), t_k)\int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)} d \tau + \\
+#   + 2\frac{g\left(b_k, t_k + \frac{h}{2}\right) - g(y(t_k), t_k)}{h} \int_{t_k}^{t_{k+1}} (\tau - t_k) e^{-\lambda(t_{k+1}-\tau)} d \tau + O(h)\int_{t_k}^{t_{k+1}} (\tau - t_k) e^{-\lambda(t_{k+1}-\tau)} d \tau \\
+#   \text{with } b_k =e^{-\frac{h \lambda}{2}}y(t_k) + g(y(t_k), t_k) \frac{h}{2} \phi_1\left( -\frac{\lambda h}{2} \right).
+# $$
+# 
+# Then,
+# 
+# $$
+# y(t_{k+1}) = e^{-h \lambda} y(t_k) +
+#   h \phi_1 (-\lambda h) g(y(t_k), t_k) +
+#   2\frac{g\left(b_k, t_k + \frac{h}{2}\right) - g(y(t_k), t_k)}{h} h^2 \phi_2 (-\lambda h) + \\
+#   + O(h)h^2 \phi_2 (-\lambda h) \\
+#   y(t_{k+1}) = e^{-h \lambda} y(t_k) +
+#   h \phi_1 (-\lambda h) g(y(t_k), t_k) +
+#   2 \left[g\left(b_k, t_k + \frac{h}{2}\right) - g(y(t_k), t_k) \right] h \phi_2 (-\lambda h) + \\
+#   + O(h^3) \\
+#   \text{with } b_k =e^{-\frac{h \lambda}{2}}y(t_k) + g(y(t_k), t_k) \frac{h}{2} \phi_1\left( -\frac{\lambda h}{2} \right).
+# $$
+# 
+# Butcher tableau:
+# 
+# \begin{array}
+# {c|cc}
+# 0\\
+# \frac{1}{2} & \frac{1}{2}\phi_1\left(-\frac{\lambda h}{2}\right)\\
+# \hline
+# & \phi_1 (-\lambda h) - 2 \phi_2 (-\lambda h) & -2 \phi_2 (-\lambda h)
+# \end{array}
+
+# ### Exponential time differencing methods with Runge-Kutta time stepping - order 2 - Classical approach - Trapezoidal rule
+# 
+# It is also possible to think the exponential time differencing methods with Runge-Kutta time stepping using the numerical integration, for example, for the one with second order, it starts with the trapezoidal rule (which was taken from [8]) on the variation of constants formula:
+# 
+# $$
+# y(t_{k+1}) = e^{-h \lambda}y(t_k) + \frac{h}{2} \left[ e^{-\lambda(t_{k+1}-t_k)} g(y(t_k), t_k) + e^{-\lambda(t_{k+1}-t_{k+1})} g(y(t_{k+1}), t_{k+1}) \right] + O(h^3), \\
+#     y(t_{k+1}) = e^{-h \lambda}y(t_k) + \frac{h}{2} \left[ e^{-\lambda h} g(y(t_k), t_k) + g(y(t_{k+1}), t_{k+1}) \right] +  O(h^3).
+# $$
+# 
+# And then, from the expression seen before:
+# 
+# $$
+# y(t_{k+1}) = e^{-h \lambda}y(t_k) + g(y(t_k), t_k) \frac{1-e^{-h \lambda}}{\lambda} + O(h^2),
+# $$
+# 
+# $$
+#     g(y(t_{k+1}), t_{k+1}) = g(a_k, t_{k+1}) + O(h^2) \text{, with } a_k = e^{-h \lambda}y(t_k) + g(y(t_k), t_k) \frac{1-e^{-h\lambda}}{\lambda}.
+# $$
+# 
+# So,
+# 
+# $$
+# y(t_{k+1}) = e^{-h \lambda}y(t_k) + \frac{h}{2} \left[ e^{-\lambda h} g(y(t_k), t_k) + g(a_k, t_{k+1}) + O(h^2) \right] +  O(h^3),
+# $$
+# 
+# $$
+# y(t_{k+1}) = e^{-h \lambda}y(t_k) + \frac{h}{2} \left[ e^{-\lambda h} g(y(t_k), t_k) + g(a_k, t_{k+1}) \right] +  O(h^3) \\
+#     \text{with } a_k = e^{-h \lambda}y(t_k) + g(y(t_k), t_k) h \phi_1 (-\lambda h).
+# $$
+# 
+# Butcher tableau:
+# 
+# $$
+# \begin{array}
+# {c|cc}
+# 0\\
+# 1 & \phi_1(-\lambda h)\\
+# \hline
+# & \frac{1}{2} e^{-h \lambda} & \frac{1}{2}
+# \end{array}
+# $$
+
+# ### Exponential time differencing methods with Runge-Kutta time stepping - order 2 - Classical approach - Midpoint rule
+# 
+# Besides that, using the midpoint rule, also known as rectangle rule, again taken from [8],
+# 
+# $$
+# y(t_{k+1}) = e^{-(t_{k+1}-t_k) \lambda}y(t_k) + \int_{t_k}^{t_{k+1}} [e^{-\lambda(t_{k+1}-\tau)} g(y(\tau), \tau)] d\tau,
+# $$
+# 
+# $$
+# y(t_{k+1}) = e^{-h\lambda}y(t_k) + h e^{-\lambda\left(t_{k+1}-\frac{t_{k+1}+t_k}{2}\right)} g\left(y\left(\frac{t_{k+1}+t_k}{2}\right), \frac{t_{k+1}+t_k}{2}\right) + O(h^3),
+# $$
+# 
+# $$
+# y(t_{k+1}) = e^{-h\lambda}y(t_k) + h e^{- \frac{h\lambda}{2}} g\left(y\left(t_k + \frac{h}{2}\right), t_k+\frac{h}{2}\right) + O(h^3),
+# $$
+# 
+# and Exponential Euler with time step $\frac{h}{2}$
+# 
+# $$
+# y\left(t_k + \frac{h}{2}\right) = e^{-\frac{h \lambda}{2}}y(t_k) + g(y(t_k), t_k) \frac{h}{2} \phi_1\left( -\frac{\lambda h}{2} \right) + O(h^2),
+# $$
+# 
+# results in
+# 
+# $$
+# y(t_{k+1}) = e^{-h\lambda}y(t_k) + h e^{- \frac{h\lambda}{2}} g\left(b_k + O(h^2), t_k + \frac{h}{2}\right) + O(h^3) \\
+#     \text{with } b_k =e^{-\frac{h \lambda}{2}}y(t_k) + g(y(t_k), t_k) \frac{h}{2} \phi_1\left( -\frac{\lambda h}{2} \right),
+# $$
+# 
+# $$
+# y(t_{k+1}) = e^{-h\lambda}y(t_k) + h e^{- \frac{h\lambda}{2}} g\left(b_k , t_k + \frac{h}{2}\right) + O(h^3) \\
+#     \text{with } b_k =e^{-\frac{h \lambda}{2}}y(t_k) + g(y(t_k), t_k) \frac{h}{2} \phi_1\left( -\frac{\lambda h}{2} \right),
+# $$
+# 
+# Butcher tableau:
+# 
+# $$
+# \begin{array}
+# {c|cc}
+# 0\\
+# \frac{1}{2} &  \frac{1}{2} \phi_1( -\frac{\lambda h}{2})\\
+# \hline
+# & 0 & e^{-\frac{h \lambda}{2}}
+# \end{array}
+# $$
