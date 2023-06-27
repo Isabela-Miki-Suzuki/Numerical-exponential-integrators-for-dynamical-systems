@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2023.6.26)  27 JUN 2023 00:55
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2023.6.26)  27 JUN 2023 01:03
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1694,38 +1694,26 @@ Underfull \hbox (badness 5637) in paragraph at lines 373--379
  for this problem, can be written as $$[][] []
  []
 
-[8] [9]
-Underfull \hbox (badness 10000) in paragraph at lines 553--559
-[]\TU/FreeSerif(0)/m/n/10 If $[][] [] [][][] [] []$, for fixed $[]$, it will be
- a divergent series $$[][] [] [] [] [][] []
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 553--559
-[][][]$$[][][] [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
-[][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][][][][][][][]
-[][][][][][][][][][][][]$\TU/FreeSerif(0)/m/n/10 h$
- []
-
-[10]
-Underfull \hbox (badness 10000) in paragraph at lines 581--595
+[8] [9] [10]
+Underfull \hbox (badness 10000) in paragraph at lines 618--632
 \TU/FreeSerif(0)/m/n/10 Since $$[][] [][] [] [][][]$$[][][][] []$\frac{T-t_0}{N
 }$[] [][][]$y_N$[][][][][][]$$[][] [][] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 581--595
+Underfull \hbox (badness 10000) in paragraph at lines 618--632
 [][] [][] [][] [] [][] [][] [][][]$$[][][][][][][][][][][][][][][][][][][][]$\T
 U/FreeSerif(0)/m/n/10 p = -(T-t_0)
  []
 
 
-Overfull \hbox (7.48698pt too wide) in paragraph at lines 581--595
+Overfull \hbox (7.48698pt too wide) in paragraph at lines 618--632
 \TU/FreeSerif(0)/m/n/10 \lambda$[][][][][][][][][][][][][][][][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]$$[]
 [][][][]$$[][][][][][][][][][][][][][][][]$y(T)$
  []
 
+[11]
 
 ! LaTeX Error: Bad math environment delimiter.
 
@@ -1733,13 +1721,13 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.649 ...backslash{}forall A\( as decribed above,}
+l.686 ...backslash{}forall A\( as decribed above,}
                                                   
 ? 
 ! Emergency stop.
  ...                                              
                                                   
-l.649 ...backslash{}forall A\( as decribed above,}
+l.686 ...backslash{}forall A\( as decribed above,}
                                                   
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -1754,4 +1742,4 @@ Here is how much of TeX's memory you used:
  474719 words of font info for 105 fonts, out of 8000000 for 9000
  15 hyphenation exceptions out of 8191
  99i,17n,115p,742b,2041s stack positions out of 5000i,500n,10000p,200000b,80000s
-Output written on book.pdf (14 pages).
+Output written on book.pdf (15 pages).
