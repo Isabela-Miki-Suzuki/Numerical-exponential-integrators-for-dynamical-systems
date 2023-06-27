@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # 3.2 Chapter 2: Classical methods
+# # Classical methods
 # 
 # In order to show that the exponential methods improve in dealing with Stiff problems, that is necessary to know how the previows methods deal with them, so a review on the theory of the classical methods is made in this chapter. In particular there will be focus on the one step methods. All the information is from [3].
 
@@ -14,11 +14,15 @@
 # \end{cases}$
 
 # they are of the form:
+# 
 # $$
 # y_{k+1} = y_{k} + h \phi (t_{k},y_{k},t_{k+1},y_{k+1},h) \text{,}
 # $$
 
-# with $$k = 0, 1, ..., n-1;$$
+# with 
+# 
+# $$k = 0, 1, ..., n-1;$$
+# 
 # $$
 # N \in \mathbb{N}; h = \frac{T-t_0}{N}; \\
 # \{t_i = t_0 + ih : i = 0, 1, ..., N\}; \\ 
@@ -37,27 +41,18 @@
 # whose solution is $y(t) = y_0 e^{-\lambda (t-t_0)}$
 # with $\lambda > 0.$
 
-# If that is possible to manipulate the method so that, for this problem, can be written as
+# If that is possible to manipulate the method so that, for this problem, can be written as $y_{k+1} = \zeta(\lambda,h) y_k,$
 # 
-# $$
-# y_{k+1} = \zeta(\lambda,h) y_k,
-# $$
-# 
-# then 
-# 
-# $$\zeta(\lambda,h)$$ 
-# 
-# is called $\textbf{amplification factor}$ of the method.
+# then $\zeta(\lambda,h)$ is called $\textbf{amplification factor}$ of the method.
 
 # By induction, it gives
+# 
 # $$
 # y_{k+1} = \zeta(\lambda, h)^{k+1} y_0.
 # $$
 
-# It is well known that this expression only converges as k goes to infinity if 
-# $$
-# |\zeta(\lambda, h)| < 1
-# $$
+# It is well known that this expression only converges as k goes to infinity if $ |\zeta(\lambda, h)| < 1$
+# 
 # and then converges to zero.
 
 # When it occurs, i.e., 
@@ -119,10 +114,13 @@
 # $$
 
 # so
+# 
+# $$
 # \begin{cases}
 #     \dot{\sigma}(t) \approx \sigma(t) \frac{\partial f}{\partial y} (y(t), t) \\
 #     \sigma(t_k) = \sigma_k.
 # \end{cases}
+# $$
 
 # Other important definitions are:
 # 
@@ -139,14 +137,18 @@
 # $\textbf{Order of consistency:}$ is the smallest order (varying the points at which the local error is calculated) of the local truncation error.
 
 # $\textbf{Convergence:}$ A numerical method is convergent if, and only if, for any well-posed Cauchy problem and for every $t \in (t_0, T)$,
+# 
 # $$\lim_{h \to 0} e_k = 0$$
+# 
 # with $t - t_0 = kh$ fixed and $e_k$ denoting the global error on $t_k$ (following the past notation).
 
 # $\textbf{Theorem:}$ A one-step explicit method given by
+# 
 # $$
 # y_0 = y(t_0) \\
 # y_{k+1} = y_{k} + h \phi (t_{k},y_{k},h)
 # $$
+# 
 # such that $\phi$ is Lipschitzian in y, continuous in their arguments, and consistent for any well-posed Cauchy problem is convergent. Besides that, the convergence order is greater or equal to the consistency order.
 # 
 # $\textit{Prove:}$ [3] pág 29-31.
@@ -232,11 +234,13 @@
 # so, since the computer has a limitant number that can represent, even if the number of steps is such that $h$ is not small enought, it might have sufficient steps to reach the maximum number represented by the machine.
 # 
 # However, if 
+# 
 # $$
 #     |1 - h \lambda| < 1 \text{ and } N \text{ is fixed,}
 # $$ 
 # 
 # it converges to zero 
+# 
 # $$
 #     (k \rightarrow \infty \Rightarrow y_k \rightarrow 0 ).
 # $$
@@ -249,6 +253,7 @@
 # $$ 
 # 
 # is the same as 
+# 
 # $$
 # 0 < h \lambda < 2.
 # $$
@@ -295,16 +300,19 @@
 # Being $\tau(h, t_k)$ the local truncation error.
 # 
 # From
+# 
 # $$
 #     y(t_{k+1}) = y(t_k) + h f(y(t_k),t_k) + O(h^2),
 # $$
 # 
 # we have
+# 
 # $$
 #     h \tau(h, t_k) \doteq \frac{y(t_{k+1}) - y(t_k)}{h} - f(t_k, y(t_k)) = O(h^2),
 # $$
 # 
 # so
+# 
 # $$
 #     \tau(h, t_k) = O(h).
 # $$

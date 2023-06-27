@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Chapter 2: Exponential methods
+# # Exponential methods
 
 # In this chapter, exponential methods are introduced, with further analysis of some of them, being tested and compared to more classical equivalents.
 
@@ -394,9 +394,11 @@ def convergence_table(errors_2x, n0, k, t0, tf):
 # and, by Taylor expansion on $g$:
 # 
 # $\tau \in (t_k, t_{k+1})$
+# 
 # $$
 #     g(y(\tau), \tau) = g(y(t_k), t_k) + (\tau - t_k) \frac{dg}{dt} (y(\theta_k), \theta_k)
 # $$
+# 
 # for a $\theta_k \in (t_k, t_{k+1}),$
 # 
 # $$
@@ -441,10 +443,12 @@ def convergence_table(errors_2x, n0, k, t0, tf):
 # $$
 # 
 # That inspires the $\textbf{Exponential Euler method}$ :
+# 
 # $$
 # y_0 = y(t_0)\\
 # \textbf{for } k = 0, 1, 2, ..., N-1 :\\
 #     y_{k+1} = e^{-h \lambda}y_k + g(y_k, t_k) \frac{1-e^{-h \lambda}}{\lambda}\\
 #     t_{k+1} = t_k + h
 # $$
+# 
 # with $y_k \thickapprox y(t_k)$.

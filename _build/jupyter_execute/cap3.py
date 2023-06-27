@@ -1,18 +1,20 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Chapter 3: important concepts for the study of exponential methods
+# # Important concepts for the study of exponential methods
 
 # In this chapter, a review on the theory of matrix exponential and in $\phi$ functions is done because of its need when applying exponential methods in systems of ODE with initial value. Besides that, the format of the treated problem is shown.
 
 # ## Matrix exponential
 
 # Based on the Maclaurin series of the exponential function
+# 
 # $$
 #     e^x = \sum_{i=0}^{\infty} \frac{x^i}{i!},
 # $$
 
 # the $\textbf{exponential of a square complex matrix }A$ is defined as
+# 
 # $$
 #     e^A \doteq \sum_{i=0}^{\infty} \frac{A^i}{i!}.
 # $$
@@ -81,6 +83,7 @@
 # $$
 
 # so
+# 
 # $$
 #     e^A \doteq \sum_{i=0}^{\infty} \frac{A^i}{i!} = diag\left(\sum_{i=0}^{\infty} \frac{\lambda_1^i}{i!}, \sum_{i=0}^{\infty} \frac{\lambda_2^i}{i!}, \sum_{i=0}^{\infty} \frac{\lambda_3^i}{i!}, \dotsc, \sum_{i=0}^{\infty} \frac{\lambda_N^i}{i!}\right)
 # $$
@@ -223,6 +226,7 @@
 # $$
 
 # And then, with $t \in \mathbb{R}$
+# 
 # $$
 #     e^{tA} \doteq \sum_{i=0}^{\infty} \frac{tA^i}{i!}
 # $$
@@ -362,6 +366,7 @@
 # $$
 
 # so
+# 
 # $$
 #     e^{tJ} = e^{tD+tN} = e^{tD} \cdot e^{tN}
 # $$
@@ -395,6 +400,7 @@
 # ### Exponential of any matrix
 
 # $\textbf{Proposition: } \forall A \in \mathscr{M}_{N \times N}(\mathbb{C}), \exists M \in \mathscr{M}_{N \times N}(\mathbb{C})$ invertible, such that $A = MJM^{-1}$, with 
+# 
 # $$ 
 # J = \left[ {\begin{array}{ccccc}
 #     J_1 & 0 & 0 & \dotsm & 0\\
@@ -404,7 +410,9 @@
 #     0 & 0 & 0 & \dotsm & J_{N}\\
 # \end{array} } \right]
 # $$
+# 
 # and each $J_i$, $i = 1, 2, 3, \dotsc, N$ being a Jordan block, i.e., 
+# 
 # $$
 # J_i = \left[ {\begin{array}{ccccc}
 #     \lambda_i & 0 & 0 & \dotsm & 0\\
@@ -414,6 +422,7 @@
 #     0 & 0 & 0 & \dotsm & \lambda_i\\
 # \end{array} } \right]
 # $$ 
+# 
 # for some $\lambda_i \in \mathbb{C}$ .
 
 # Note that
@@ -446,6 +455,7 @@
 # ## Linear problem
 
 # The linear problem is, following with the used notation:
+# 
 # $$
 # \begin{cases}
 #     y'(t) + \lambda y(t) = g(y(t), t), t \in (t_0, T) \\
@@ -453,9 +463,11 @@
 #     \text{,}
 # \end{cases}
 # $$
+# 
 # the one with $g \equiv 0.$
 
 # So, generaly, it is of the form:
+# 
 # $$
 # \begin{cases}
 #     y'(t) = A y(t), t \in (t_0, T) \\
@@ -463,11 +475,13 @@
 #     \text{,}
 # \end{cases}
 # $$
+# 
 # with $A \in \mathscr{M}_{N \times N}(\mathbb{C}), N \in \mathbb{N}$  (remembering that a matrix $1 \times 1$ is simply a number).
 
 # Because $A y(t)$ is a $C^1$ function in $y$, continuous in $t$ and $t \in (t_0, T)$, a limited interval, by the existence and uniqueness theorem, there is a single solution of the problem.
 
 # Since 
+# 
 # $$
 #     \frac{d}{dt}y_0e^{A(t-t_0)} \doteq \lim_{h\to0} \frac{y_0e^{A(t-t_0+h)}-y_0e^{A(t-t_0)}}{h}
 # $$
@@ -491,6 +505,7 @@
 # using L'Hôpital's rule on the second equality and noting that $A(t-t_0+h) = A(t-t_0)+Ah$ and $A(t-t_0) \cdot Ah = (t-t_0)hAA = Ah \cdot A(t-t_0)$, so it was possible to apply the last proposition and make $e^{A(t-t_0+h)} = e^{A(t-t_0)} \cdot e^{Ah}$,
 
 # taking
+# 
 # $$
 #     y(t) = y_0e^{A(t-t_0)},
 # $$
@@ -514,9 +529,11 @@
 # \end{cases}$
 # 
 # there is the variation of constants formula:
+# 
 # $$
 #     y(t) = e^{-t \lambda}y_0 + \int_{t_0}^t e^{-\lambda(t-\tau)} g(y(\tau), \tau) d\tau.
 # $$
+# 
 # This well known implicit function, gives a solution of the problem. 
 # 
 # If the integral part can be solved, there is a explicit solution, and if the problem satisfies the hypotesis of the Piccard problem, being Lipschitz in $t$, this is the only solution.
@@ -546,6 +563,7 @@
 # $$
 
 # Since
+# 
 # $$
 #   \phi_n(0) = \int_{0}^{1} e^0 \frac{\tau^{n-1}}{(n-1)!} \,d\tau = \int_{0}^{1} \frac{\tau^{n-1}}{(n-1)!} \,d\tau = \frac{1^n}{n!} - 0 = \frac{1}{n!},
 # $$

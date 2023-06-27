@@ -177,34 +177,26 @@ Period covered by this research report:
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-{\hyperref[\detokenize{Summary_of_the_proposed_project::doc}]{\sphinxcrossref{1. Summary of the proposed project}}}
+{\hyperref[\detokenize{Summary_of_the_proposed_project::doc}]{\sphinxcrossref{Summary of the proposed project}}}
 
 \item {} 
 \sphinxAtStartPar
-{\hyperref[\detokenize{Summary_of_the_activities::doc}]{\sphinxcrossref{2. Summary of the activities}}}
+{\hyperref[\detokenize{Project_execution::doc}]{\sphinxcrossref{Project execution}}}
 
 \item {} 
 \sphinxAtStartPar
-{\hyperref[\detokenize{Project_execution::doc}]{\sphinxcrossref{3. Project execution}}}
-
-\item {} 
-\sphinxAtStartPar
-{\hyperref[\detokenize{Description_and_evaluation_of_institutional_support_received_in_the_period::doc}]{\sphinxcrossref{Description and evaluation of institutional support received in the period}}}
-
-\item {} 
-\sphinxAtStartPar
-{\hyperref[\detokenize{Participation_in_scientific_event,_list_of_publications_and_list_of_papers_prepared_or_submitted::doc}]{\sphinxcrossref{Participation in scientific event, list of publications and list of papers prepared or submitted}}}
+{\hyperref[\detokenize{gestao_dados::doc}]{\sphinxcrossref{Description of how the data management plan is being followed and any changes}}}
 
 \end{itemize}
 
 \sphinxstepscope
 
 
-\chapter{1. Summary of the proposed project}
+\chapter{Summary of the proposed project}
 \label{\detokenize{Summary_of_the_proposed_project:summary-of-the-proposed-project}}\label{\detokenize{Summary_of_the_proposed_project::doc}}
 \sphinxAtStartPar
 This is a scientific initiation project that proposes the deep study of some of the main methods
-of exponential integration for problems in dynamic systems, with emphasis on the paper {[}{]}.
+of exponential integration for problems in dynamic systems, with emphasis on the paper {[}1{]}.
 Here, the undergraduate will study the construction, analysis, implementation and application
 of them and at the end, it is expected that she is familiar with modern techniques of numerical
 methods.
@@ -215,18 +207,8 @@ methods.
 \sphinxstepscope
 
 
-\chapter{2. Summary of the activities}
-\label{\detokenize{Summary_of_the_activities:summary-of-the-activities}}\label{\detokenize{Summary_of_the_activities::doc}}
-\sphinxAtStartPar
-To be done.
-
-\sphinxstepscope
-
-
-\chapter{3. Project execution}
+\chapter{Project execution}
 \label{\detokenize{Project_execution:project-execution}}\label{\detokenize{Project_execution::doc}}
-\sphinxstepscope
-
 \sphinxstepscope
 
 
@@ -330,8 +312,8 @@ Definition from {[}2{]}.
 \sphinxstepscope
 
 
-\section{3.2 Chapter 2: Classical methods}
-\label{\detokenize{cap2:chapter-2-classical-methods}}\label{\detokenize{cap2::doc}}
+\section{Classical methods}
+\label{\detokenize{cap2:classical-methods}}\label{\detokenize{cap2::doc}}
 \sphinxAtStartPar
 In order to show that the exponential methods improve in dealing with Stiff problems, that is necessary to know how the previows methods deal with them, so a review on the theory of the classical methods is made in this chapter. In particular there will be focus on the one step methods. All the information is from {[}3{]}.
 
@@ -347,18 +329,22 @@ y(t_0)=y_0 \text{,}
 
 \sphinxAtStartPar
 they are of the form:
-\$\(
+\begin{equation*}
+\begin{split}
 y_{k+1} = y_{k} + h \phi (t_{k},y_{k},t_{k+1},y_{k+1},h) \text{,}
-\)\$
-
+\end{split}
+\end{equation*}
 \sphinxAtStartPar
-with \$\(k = 0, 1, ..., n-1;\)\(
-\)\(
+with
+\begin{equation*}
+\begin{split}k = 0, 1, ..., n-1;\end{split}
+\end{equation*}\begin{equation*}
+\begin{split}
 N \in \mathbb{N}; h = \frac{T-t_0}{N}; \\
 \{t_i = t_0 + ih : i = 0, 1, ..., N\}; \\ 
 y_n \thickapprox y(t_n) .
-\)\$
-
+\end{split}
+\end{equation*}
 \sphinxAtStartPar
 To analyse the method, there is a model problem
 \begin{equation*}
@@ -374,31 +360,22 @@ whose solution is \(y(t) = y_0 e^{-\lambda (t-t_0)}\)
 with \(\lambda > 0.\)
 
 \sphinxAtStartPar
-If that is possible to manipulate the method so that, for this problem, can be written as
-\begin{equation*}
-\begin{split}
-y_{k+1} = \zeta(\lambda,h) y_k,
-\end{split}
-\end{equation*}
+If that is possible to manipulate the method so that, for this problem, can be written as \(y_{k+1} = \zeta(\lambda,h) y_k,\)
+
 \sphinxAtStartPar
-then
-\begin{equation*}
-\begin{split}\zeta(\lambda,h)\end{split}
-\end{equation*}
-\sphinxAtStartPar
-is called \(\textbf{amplification factor}\) of the method.
+then \(\zeta(\lambda,h)\) is called \(\textbf{amplification factor}\) of the method.
 
 \sphinxAtStartPar
 By induction, it gives
-\$\(
+\begin{equation*}
+\begin{split}
 y_{k+1} = \zeta(\lambda, h)^{k+1} y_0.
-\)\$
+\end{split}
+\end{equation*}
+\sphinxAtStartPar
+It is well known that this expression only converges as k goes to infinity if \( |\zeta(\lambda, h)| < 1\)
 
 \sphinxAtStartPar
-It is well known that this expression only converges as k goes to infinity if
-\$\(
-|\zeta(\lambda, h)| < 1
-\)\$
 and then converges to zero.
 
 \sphinxAtStartPar
@@ -471,11 +448,14 @@ and a approximation \(z\) of the solution \(y\), doing
 \end{equation*}
 \sphinxAtStartPar
 so
-\textbackslash{}begin\{cases\}
-\textbackslash{}dot\{\textbackslash{}sigma\}(t) \textbackslash{}approx \textbackslash{}sigma(t) \textbackslash{}frac\{\textbackslash{}partial f\}\{\textbackslash{}partial y\} (y(t), t) \textbackslash{}
-\textbackslash{}sigma(t\_k) = \textbackslash{}sigma\_k.
-\textbackslash{}end\{cases\}
-
+\begin{equation*}
+\begin{split}
+\begin{cases}
+    \dot{\sigma}(t) \approx \sigma(t) \frac{\partial f}{\partial y} (y(t), t) \\
+    \sigma(t_k) = \sigma_k.
+\end{cases}
+\end{split}
+\end{equation*}
 \sphinxAtStartPar
 Other important definitions are:
 
@@ -499,16 +479,22 @@ Other important definitions are:
 
 \sphinxAtStartPar
 \(\textbf{Convergence:}\) A numerical method is convergent if, and only if, for any well\sphinxhyphen{}posed Cauchy problem and for every \(t \in (t_0, T)\),
-\$\(\lim_{h \to 0} e_k = 0\)\(
-with \)t \sphinxhyphen{} t\_0 = kh\( fixed and \)e\_k\( denoting the global error on \)t\_k\$ (following the past notation).
+\begin{equation*}
+\begin{split}\lim_{h \to 0} e_k = 0\end{split}
+\end{equation*}
+\sphinxAtStartPar
+with \(t - t_0 = kh\) fixed and \(e_k\) denoting the global error on \(t_k\) (following the past notation).
 
 \sphinxAtStartPar
 \(\textbf{Theorem:}\) A one\sphinxhyphen{}step explicit method given by
-\$\(
+\begin{equation*}
+\begin{split}
 y_0 = y(t_0) \\
 y_{k+1} = y_{k} + h \phi (t_{k},y_{k},h)
-\)\(
-such that \)\textbackslash{}phi\$ is Lipschitzian in y, continuous in their arguments, and consistent for any well\sphinxhyphen{}posed Cauchy problem is convergent. Besides that, the convergence order is greater or equal to the consistency order.
+\end{split}
+\end{equation*}
+\sphinxAtStartPar
+such that \(\phi\) is Lipschitzian in y, continuous in their arguments, and consistent for any well\sphinxhyphen{}posed Cauchy problem is convergent. Besides that, the convergence order is greater or equal to the consistency order.
 
 \sphinxAtStartPar
 \(\textit{Prove:}\) {[}3{]} pág 29\sphinxhyphen{}31.
@@ -611,16 +597,18 @@ so, since the computer has a limitant number that can represent, even if the num
 
 \sphinxAtStartPar
 However, if
-\$\(
+\begin{equation*}
+\begin{split}
     |1 - h \lambda| < 1 \text{ and } N \text{ is fixed,}
-\)\$
-
+\end{split}
+\end{equation*}
 \sphinxAtStartPar
 it converges to zero
-\$\(
+\begin{equation*}
+\begin{split}
     (k \rightarrow \infty \Rightarrow y_k \rightarrow 0 ).
-\)\$
-
+\end{split}
+\end{equation*}
 \sphinxAtStartPar
 Besides that,
 \begin{equation*}
@@ -630,10 +618,11 @@ Besides that,
 \end{equation*}
 \sphinxAtStartPar
 is the same as
-\$\(
+\begin{equation*}
+\begin{split}
 0 < h \lambda < 2.
-\)\$
-
+\end{split}
+\end{equation*}
 \sphinxAtStartPar
 So the interval of stability is \((0,2)\).
 
@@ -689,30 +678,33 @@ Being \(\tau(h, t_k)\) the local truncation error.
 
 \sphinxAtStartPar
 From
-\$\(
+\begin{equation*}
+\begin{split}
     y(t_{k+1}) = y(t_k) + h f(y(t_k),t_k) + O(h^2),
-\)\$
-
+\end{split}
+\end{equation*}
 \sphinxAtStartPar
 we have
-\$\(
+\begin{equation*}
+\begin{split}
     h \tau(h, t_k) \doteq \frac{y(t_{k+1}) - y(t_k)}{h} - f(t_k, y(t_k)) = O(h^2),
-\)\$
-
+\end{split}
+\end{equation*}
 \sphinxAtStartPar
 so
-\$\(
+\begin{equation*}
+\begin{split}
     \tau(h, t_k) = O(h).
-\)\$
-
+\end{split}
+\end{equation*}
 \sphinxAtStartPar
 Since for one step methods the order of convergence is the order of the local truncation error, the order is of \(O(h)\), order 1.
 
 \sphinxstepscope
 
 
-\section{Chapter 3: important concepts for the study of exponential methods}
-\label{\detokenize{cap3:chapter-3-important-concepts-for-the-study-of-exponential-methods}}\label{\detokenize{cap3::doc}}
+\section{Important concepts for the study of exponential methods}
+\label{\detokenize{cap3:important-concepts-for-the-study-of-exponential-methods}}\label{\detokenize{cap3::doc}}
 \sphinxAtStartPar
 In this chapter, a review on the theory of matrix exponential and in \(\phi\) functions is done because of its need when applying exponential methods in systems of ODE with initial value. Besides that, the format of the treated problem is shown.
 
@@ -721,16 +713,18 @@ In this chapter, a review on the theory of matrix exponential and in \(\phi\) fu
 \label{\detokenize{cap3:matrix-exponential}}
 \sphinxAtStartPar
 Based on the Maclaurin series of the exponential function
-\$\(
+\begin{equation*}
+\begin{split}
     e^x = \sum_{i=0}^{\infty} \frac{x^i}{i!},
-\)\$
-
+\end{split}
+\end{equation*}
 \sphinxAtStartPar
 the \(\textbf{exponential of a square complex matrix }A\) is defined as
-\$\(
+\begin{equation*}
+\begin{split}
     e^A \doteq \sum_{i=0}^{\infty} \frac{A^i}{i!}.
-\)\$
-
+\end{split}
+\end{equation*}
 \sphinxAtStartPar
 This is well defined because it has been proven that the sequence \({p_k}\) with, \(\forall k \in \mathbb{N}\):
 \begin{equation*}
@@ -804,10 +798,11 @@ it is easy to note that
 \end{equation*}
 \sphinxAtStartPar
 so
-\$\(
-    e^A \doteq \sum_{i=0}^{\infty} \frac{A^i}{i!} = diag\left(\sum_{i=0}^{\infty} \frac{\lambda_1^i}{i!}, \sum_{i=0}^{\infty} \frac{\lambda_2^i}{i!}, \sum_{i=0}^{\infty} \frac{\lambda_3^i}{i!}, \dotsc, \sum_{i=0}^{\infty} \frac{\lambda_N^i}{i!}\right)
-\)\$
 \begin{equation*}
+\begin{split}
+    e^A \doteq \sum_{i=0}^{\infty} \frac{A^i}{i!} = diag\left(\sum_{i=0}^{\infty} \frac{\lambda_1^i}{i!}, \sum_{i=0}^{\infty} \frac{\lambda_2^i}{i!}, \sum_{i=0}^{\infty} \frac{\lambda_3^i}{i!}, \dotsc, \sum_{i=0}^{\infty} \frac{\lambda_N^i}{i!}\right)
+\end{split}
+\end{equation*}\begin{equation*}
 \begin{split}
     = diag \left( e^{\lambda_1}, e^{\lambda_2}, e^{\lambda_3}, \dotsc, e^{\lambda_N} \right).
 \end{split}
@@ -952,10 +947,11 @@ A^2 = A \cdot A =
 \end{equation*}
 \sphinxAtStartPar
 And then, with \(t \in \mathbb{R}\)
-\$\(
-    e^{tA} \doteq \sum_{i=0}^{\infty} \frac{tA^i}{i!}
-\)\$
 \begin{equation*}
+\begin{split}
+    e^{tA} \doteq \sum_{i=0}^{\infty} \frac{tA^i}{i!}
+\end{split}
+\end{equation*}\begin{equation*}
 \begin{split}
     = Id + tA + \frac{t^2 A^2}{2} + \frac{t^3 A^3}{6} + \dotsc + \frac{t^{N-2} A^{N-2}}{(N-2)!} + \frac{t^{N-1} A^{N-1}}{(N-1)!} + 0 + 0 + \dotsc + 0
 \end{split}
@@ -1096,10 +1092,11 @@ and
 \end{equation*}
 \sphinxAtStartPar
 so
-\$\(
-    e^{tJ} = e^{tD+tN} = e^{tD} \cdot e^{tN}
-\)\$
 \begin{equation*}
+\begin{split}
+    e^{tJ} = e^{tD+tN} = e^{tD} \cdot e^{tN}
+\end{split}
+\end{equation*}\begin{equation*}
 \begin{split}
 = \left[ {\begin{array}{ccccc}
     e^{t \lambda_i} & 0 & 0 & \dotsm & 0\\
@@ -1131,7 +1128,8 @@ so
 \label{\detokenize{cap3:exponential-of-any-matrix}}
 \sphinxAtStartPar
 \(\textbf{Proposition: } \forall A \in \mathscr{M}_{N \times N}(\mathbb{C}), \exists M \in \mathscr{M}_{N \times N}(\mathbb{C})\) invertible, such that \(A = MJM^{-1}\), with
-\$\( 
+\begin{equation*}
+\begin{split} 
 J = \left[ {\begin{array}{ccccc}
     J_1 & 0 & 0 & \dotsm & 0\\
     0 & J_2 & 0 & \dotsm & 0\\
@@ -1139,9 +1137,12 @@ J = \left[ {\begin{array}{ccccc}
     \vdots & \vdots & \vdots & \ddots & \vdots\\
     0 & 0 & 0 & \dotsm & J_{N}\\
 \end{array} } \right]
-\)\(
-and each \)J\_i\(, \)i = 1, 2, 3, \textbackslash{}dotsc, N\( being a Jordan block, i.e., 
-\)\(
+\end{split}
+\end{equation*}
+\sphinxAtStartPar
+and each \(J_i\), \(i = 1, 2, 3, \dotsc, N\) being a Jordan block, i.e.,
+\begin{equation*}
+\begin{split}
 J_i = \left[ {\begin{array}{ccccc}
     \lambda_i & 0 & 0 & \dotsm & 0\\
     0 & \lambda_i & 0 & \dotsm & 0\\
@@ -1149,8 +1150,10 @@ J_i = \left[ {\begin{array}{ccccc}
     \vdots & \vdots & \vdots & \ddots & \vdots\\
     0 & 0 & 0 & \dotsm & \lambda_i\\
 \end{array} } \right]
-\)\( 
-for some \)\textbackslash{}lambda\_i \textbackslash{}in \textbackslash{}mathbb\{C\}\$ .
+\end{split}
+\end{equation*}
+\sphinxAtStartPar
+for some \(\lambda_i \in \mathbb{C}\) .
 
 \sphinxAtStartPar
 Note that
@@ -1189,35 +1192,42 @@ with each block as the section above indicates.
 \label{\detokenize{cap3:linear-problem}}
 \sphinxAtStartPar
 The linear problem is, following with the used notation:
-\$\(
+\begin{equation*}
+\begin{split}
 \begin{cases}
     y'(t) + \lambda y(t) = g(y(t), t), t \in (t_0, T) \\
     y(t_0) = y_0 
     \text{,}
 \end{cases}
-\)\(
-the one with \)g \textbackslash{}equiv 0.\$
+\end{split}
+\end{equation*}
+\sphinxAtStartPar
+the one with \(g \equiv 0.\)
 
 \sphinxAtStartPar
 So, generaly, it is of the form:
-\$\(
+\begin{equation*}
+\begin{split}
 \begin{cases}
     y'(t) = A y(t), t \in (t_0, T) \\
     y(t_0) = y_0 
     \text{,}
 \end{cases}
-\)\(
-with \)A \textbackslash{}in \textbackslash{}mathscr\{M\}\_\{N \textbackslash{}times N\}(\textbackslash{}mathbb\{C\}), N \textbackslash{}in \textbackslash{}mathbb\{N\}\(  (remembering that a matrix \)1 \textbackslash{}times 1\$ is simply a number).
+\end{split}
+\end{equation*}
+\sphinxAtStartPar
+with \(A \in \mathscr{M}_{N \times N}(\mathbb{C}), N \in \mathbb{N}\)  (remembering that a matrix \(1 \times 1\) is simply a number).
 
 \sphinxAtStartPar
 Because \(A y(t)\) is a \(C^1\) function in \(y\), continuous in \(t\) and \(t \in (t_0, T)\), a limited interval, by the existence and uniqueness theorem, there is a single solution of the problem.
 
 \sphinxAtStartPar
 Since
-\$\(
-    \frac{d}{dt}y_0e^{A(t-t_0)} \doteq \lim_{h\to0} \frac{y_0e^{A(t-t_0+h)}-y_0e^{A(t-t_0)}}{h}
-\)\$
 \begin{equation*}
+\begin{split}
+    \frac{d}{dt}y_0e^{A(t-t_0)} \doteq \lim_{h\to0} \frac{y_0e^{A(t-t_0+h)}-y_0e^{A(t-t_0)}}{h}
+\end{split}
+\end{equation*}\begin{equation*}
 \begin{split}
     = y_0e^{(t-t_0)A}\lim_{h\to0} \frac{e^{Ah}-I}{h} 
 \end{split}
@@ -1239,10 +1249,11 @@ using L’Hôpital’s rule on the second equality and noting that \(A(t-t_0+h) 
 
 \sphinxAtStartPar
 taking
-\$\(
-    y(t) = y_0e^{A(t-t_0)},
-\)\$
 \begin{equation*}
+\begin{split}
+    y(t) = y_0e^{A(t-t_0)},
+\end{split}
+\end{equation*}\begin{equation*}
 \begin{split}
     y'(t) = A y_0 e^{(t-t_0)A} = A y(t) \text{ and } y(t_0) = y_0 e^{(t_0-t_0)A} = y_0 I = y_0.
 \end{split}
@@ -1268,9 +1279,12 @@ Returning to the general case
 
 \sphinxAtStartPar
 there is the variation of constants formula:
-\$\(
+\begin{equation*}
+\begin{split}
     y(t) = e^{-t \lambda}y_0 + \int_{t_0}^t e^{-\lambda(t-\tau)} g(y(\tau), \tau) d\tau.
-\)\$
+\end{split}
+\end{equation*}
+\sphinxAtStartPar
 This well known implicit function, gives a solution of the problem.
 
 \sphinxAtStartPar
@@ -1307,10 +1321,11 @@ By integration by parts,
 \end{equation*}
 \sphinxAtStartPar
 Since
-\$\(
-  \phi_n(0) = \int_{0}^{1} e^0 \frac{\tau^{n-1}}{(n-1)!} \,d\tau = \int_{0}^{1} \frac{\tau^{n-1}}{(n-1)!} \,d\tau = \frac{1^n}{n!} - 0 = \frac{1}{n!},
-\)\$
 \begin{equation*}
+\begin{split}
+  \phi_n(0) = \int_{0}^{1} e^0 \frac{\tau^{n-1}}{(n-1)!} \,d\tau = \int_{0}^{1} \frac{\tau^{n-1}}{(n-1)!} \,d\tau = \frac{1^n}{n!} - 0 = \frac{1}{n!},
+\end{split}
+\end{equation*}\begin{equation*}
 \begin{split}
   \phi_{n+1}(z) = \frac{\phi_n(z) - \phi_n(0)}{z}, \textbf{the recursive characterization}.
 \end{split}
@@ -1334,8 +1349,8 @@ Information from {[}1{]}.
 \sphinxstepscope
 
 
-\section{Chapter 2: Exponential methods}
-\label{\detokenize{cap4:chapter-2-exponential-methods}}\label{\detokenize{cap4::doc}}
+\section{Exponential methods}
+\label{\detokenize{cap4:exponential-methods}}\label{\detokenize{cap4::doc}}
 \sphinxAtStartPar
 In this chapter, exponential methods are introduced, with further analysis of some of them, being tested and compared to more classical equivalents.
 
@@ -1740,10 +1755,13 @@ and, by Taylor expansion on \(g\):
 
 \sphinxAtStartPar
 \(\tau \in (t_k, t_{k+1})\)
-\$\(
+\begin{equation*}
+\begin{split}
     g(y(\tau), \tau) = g(y(t_k), t_k) + (\tau - t_k) \frac{dg}{dt} (y(\theta_k), \theta_k)
-\)\(
-for a \)\textbackslash{}theta\_k \textbackslash{}in (t\_k, t\_\{k+1\}),\$
+\end{split}
+\end{equation*}
+\sphinxAtStartPar
+for a \(\theta_k \in (t_k, t_{k+1}),\)
 \begin{equation*}
 \begin{split}
     y(t_{k+1}) = e^{-(t_{k+1}-t_k) \lambda}y(t_k) + \int_{t_k}^{t_{k+1}} [e^{-\lambda(t_{k+1}-\tau)} g(y(\tau), \tau)] d\tau
@@ -1790,16 +1808,22 @@ and, by the Taylor expansion of \(e^{-\lambda h}\) in the point zero
 \end{equation*}
 \sphinxAtStartPar
 That inspires the \(\textbf{Exponential Euler method}\) :
-\$\(
+\begin{equation*}
+\begin{split}
 y_0 = y(t_0)\\
 \textbf{for } k = 0, 1, 2, ..., N-1 :\\
     y_{k+1} = e^{-h \lambda}y_k + g(y_k, t_k) \frac{1-e^{-h \lambda}}{\lambda}\\
     t_{k+1} = t_k + h
-\)\(
-with \)y\_k \textbackslash{}thickapprox y(t\_k)\$.
+\end{split}
+\end{equation*}
+\sphinxAtStartPar
+with \(y_k \thickapprox y(t_k)\).
 
 \sphinxstepscope
-\begin{enumerate}
+
+
+\section{References}
+\label{\detokenize{References:references}}\label{\detokenize{References::doc}}\begin{enumerate}
 \sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
 \item {} 
 \sphinxAtStartPar
@@ -1826,18 +1850,16 @@ Apostol, T.M. Calculus v. 1. Blaisdell book in pure and applied mathematics. \sp
 \sphinxstepscope
 
 
-\chapter{Description and evaluation of institutional support received in the period}
-\label{\detokenize{Description_and_evaluation_of_institutional_support_received_in_the_period:description-and-evaluation-of-institutional-support-received-in-the-period}}\label{\detokenize{Description_and_evaluation_of_institutional_support_received_in_the_period::doc}}
+\chapter{Description of how the data management plan is being followed and any changes}
+\label{\detokenize{gestao_dados:description-of-how-the-data-management-plan-is-being-followed-and-any-changes}}\label{\detokenize{gestao_dados::doc}}
 \sphinxAtStartPar
-To be done.
+The project is following what was initially proposed, with the student doing an in\sphinxhyphen{}depth study of the main exponential methods, such as exponential Euler, exponential time differencing methods and exponential time differencing methods with Runge\sphinxhyphen{}Kutta time stepping.
 
-\sphinxstepscope
-
-
-\chapter{Participation in scientific event, list of publications and list of papers prepared or submitted}
-\label{\detokenize{Participation_in_scientific_event,_list_of_publications_and_list_of_papers_prepared_or_submitted:participation-in-scientific-event-list-of-publications-and-list-of-papers-prepared-or-submitted}}\label{\detokenize{Participation_in_scientific_event,_list_of_publications_and_list_of_papers_prepared_or_submitted::doc}}
 \sphinxAtStartPar
-To be done.
+Small changes were the most emphasized paper {[}1{]}, which shared a lot of attention with other papers like {[}6{]} and {[}7{]}.
+
+\sphinxAtStartPar
+Until the end of the period of validity, it is expected that the analyzes in methods of the Runge\sphinxhyphen{}Kutta type will be completed and that the methods studied will be applied to problems of dynamical systems.
 
 
 
