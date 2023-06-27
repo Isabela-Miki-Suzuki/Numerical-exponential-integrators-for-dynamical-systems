@@ -84,7 +84,7 @@
         
 
 \title{Numerical exponential integrators for dynamical systems}
-\date{Jun 26, 2023}
+\date{Jun 27, 2023}
 \release{}
 \author{Isabela Miki Suzuki}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -230,8 +230,8 @@ To be done.
 \sphinxstepscope
 
 
-\section{Chapter 1}
-\label{\detokenize{cap1:chapter-1}}\label{\detokenize{cap1::doc}}
+\section{Motivation \sphinxhyphen{} Stiffness}
+\label{\detokenize{cap1:motivation-stiffness}}\label{\detokenize{cap1::doc}}
 \sphinxAtStartPar
 The reason for studying exponential methods is that those are good with \(\textbf{stiff differential equations}\) in terms of precision and how small the time step is required to be to achieve good accuracy.
 
@@ -252,12 +252,11 @@ with \(\mathbb{K}\) a field, \(f\) function with image in \(\mathbb{K}\) and \(t
 
 \sphinxAtStartPar
 Sometimes, it is convenient to separate the linear part of \(f\) as indicated below:
-
-\sphinxAtStartPar
-\textbackslash{}begin\{equation*\}
-f(y(t), t) = g(y(t), t) \sphinxhyphen{} \textbackslash{}lambda y(t) \textbackslash{}text\{,\}
-\textbackslash{}end\{equation*\}
-
+\begin{equation*}
+\begin{split}\begin{equation*}
+    f(y(t), t) = g(y(t), t) - \lambda y(t) \text{,}
+\end{equation*}\end{split}
+\end{equation*}
 \sphinxAtStartPar
 with \(\lambda \in \mathbb{K}\) or \(\mathscr{M}_{N \times N}(\mathbb{K})\).
 
@@ -265,11 +264,11 @@ with \(\lambda \in \mathbb{K}\) or \(\mathscr{M}_{N \times N}(\mathbb{K})\).
 So the system is:
 
 \sphinxAtStartPar
-\textbackslash{}begin\{cases\}
-y’(t) + \textbackslash{}lambda y(t) = g(y(t), t), t \textbackslash{}in (t\_0, T) \textbackslash{}
-y(0) = y\_0
-\textbackslash{}text\{.\}
-\textbackslash{}end\{cases\}
+\(\begin{cases}
+    y'(t) + \lambda y(t) = g(y(t), t), t \in (t_0, T) \\
+    y(0) = y_0 
+    \text{.}
+\end{cases}\)
 
 \sphinxAtStartPar
 In this project, the stiff ones were those addressed.
@@ -291,20 +290,18 @@ Between them, there are the \(\textbf{stiff differential equations}\), that have
 
 \sphinxAtStartPar
 The \(\textbf{transient solution}\) is of the form:
-
-\sphinxAtStartPar
-\textbackslash{}begin\{align*\}
-e\textasciicircum{}\{\sphinxhyphen{}ct\} \textbackslash{}text\{, with c >>1, \}
-\textbackslash{}end\{align*\}
-
+\begin{equation*}
+\begin{split}\begin{align*}
+e^{-ct} \text{, with c >>1, }
+\end{align*}\end{split}
+\end{equation*}
 \sphinxAtStartPar
 which is known to go to zero really fast as t increases. But its \(n\)th derivative
-
-\sphinxAtStartPar
-\textbackslash{}begin\{align*\}
-\textbackslash{}mp c\textasciicircum{}\{n\}e\textasciicircum{}\{\sphinxhyphen{}ct\}
-\textbackslash{}end\{align*\}
-
+\begin{equation*}
+\begin{split}\begin{align*}
+\mp c^{n}e^{-ct}
+\end{align*}\end{split}
+\end{equation*}
 \sphinxAtStartPar
 doesn’t go as quickly and may increase in magnitude.
 
@@ -313,12 +310,11 @@ The \(\textbf{steady state solution}\), however, as its name implies, have small
 
 \sphinxAtStartPar
 In a system of ODE’s, these characteristics are most common in problems in which the solution of the initial value problem is of the form
-
-\sphinxAtStartPar
-\textbackslash{}begin\{align*\}
-e\textasciicircum{}\{A\}
-\textbackslash{}end\{align*\}
-
+\begin{equation*}
+\begin{split}\begin{align*}
+e^{A}
+\end{align*}\end{split}
+\end{equation*}
 \sphinxAtStartPar
 being \(A\) a matrix such that \(\lambda_{min}\) and \(\lambda_{max}\) are the eigenvalue with minimum and maximum value in modulus and \(\lambda_{min} << \lambda_{max}\). On the bigger magnitude eigenvalue direction, the behaviour is very similar to the transient solution, having drastic changes over time and on the smaller one, comparing to that, changes almost nothing as times passes, like the steady state solution.
 

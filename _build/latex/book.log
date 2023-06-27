@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2023.6.26)  26 JUN 2023 23:56
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2023.6.26)  27 JUN 2023 00:07
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1650,19 +1650,7 @@ File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 ] [2
 
 
-] (./book.toc
-LaTeX Info: Redefining \rmfamily on input line 1.
-LaTeX Info: Redefining \sffamily on input line 1.
-LaTeX Info: Redefining \ttfamily on input line 1.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 7.00075pt on input line 5.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 5.00053pt on input line 5.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 6.99925pt on input line 5.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 4.99947pt on input line 5.
-)
+] (./book.toc)
 \tf@toc=\write7
 \openout7 = `book.toc'.
 
@@ -1670,7 +1658,21 @@ LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
 
 ] [2
 
-] [1] [2
+]
+
+LaTeX Warning: Hyper reference `Project_execution::doc' on page 1 undefined on 
+input line 188.
+
+
+LaTeX Warning: Hyper reference `Description_and_evaluation_of_institutional_sup
+port_received_in_the_period::doc' on page 1 undefined on input line 192.
+
+
+LaTeX Warning: Hyper reference `Participation_in_scientific_event,_list_of_publ
+ications_and_list_of_papers_prepared_or_submitted::doc' on page 1 undefined on 
+input line 196.
+
+[1] [2
 
 ]
 Chapter 1.
@@ -1682,192 +1684,27 @@ Chapter 2.
 
 ]
 Chapter 3.
-[7]
-Underfull \hbox (badness 5637) in paragraph at lines 377--383
-[]\TU/FreeSerif(0)/m/n/10 If that is possible to manipulate the method so that,
- for this problem, can be written as $$[][] []
- []
-
-[8] [9]
-Overfull \hbox (131.37868pt too wide) in paragraph at lines 553--560
-\TU/FreeSerif(0)/m/n/10 \infty \Rightarrow y_k \rightarrow \infty $[][] [][][] 
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][] [][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][]$h$
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 575--589
-\TU/FreeSerif(0)/m/n/10 Since $$[][] [][] [] [][][]$$[][][][] []$\frac{T-t_0}{N
-}$[] [][][]$y_N$[][][][][][]$$[][] [][] []
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 575--589
-[][] [][] [][] [] [][] [][] [][][]$$[][][][][][][][][][][][][][][][][][][][]$\T
-U/FreeSerif(0)/m/n/10 p = -(T-t_0)
- []
-
-
-Overfull \hbox (7.48698pt too wide) in paragraph at lines 575--589
-\TU/FreeSerif(0)/m/n/10 \lambda$[][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]$$[]
-[][][][]$$[][][][][][][][][][][][][][][][]$y(T)$
- []
-
-[10] [11]
-Underfull \hbox (badness 10000) in paragraph at lines 708--714
-\TU/FreeSerif(0)/m/n/10 so \begin{align*} e^A \doteq \sum_{i=0}^{\infty} \frac{
-A^i}{i!} = diag\left(\sum_{i=0}^{\infty}
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 708--714
-\TU/FreeSerif(0)/m/n/10 \dotsc, \sum_{i=0}^{\infty} \frac{\lambda_N^i}{i!}\righ
-t) = diag \left( e^{\lambda_1}, e^{\lambda_2},
- []
-
-
-Underfull \hbox (badness 5260) in paragraph at lines 752--782
-[]\TU/FreeSerif(0)/m/n/10 one can calculate $[][] [] [] [] [] [] [] [] [] []
- []
-
-[12]
-Overfull \hbox (83.5907pt too wide) detected at line 884
-[]
- []
-
-[13]
-Underfull \hbox (badness 5359) in paragraph at lines 903--926
-[]\TU/FreeSerif(0)/m/n/10 A Jordan block is of the form: $$[] [] [] [] [] []
- []
-
-[14]
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 8.00085pt on input line 1104.
+(Font)              scaled to size 7.00075pt on input line 236.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 6.00064pt on input line 1104.
+(Font)              scaled to size 5.00053pt on input line 236.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 7.99915pt on input line 1104.
+(Font)              scaled to size 6.99925pt on input line 236.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 5.99936pt on input line 1104.
+(Font)              scaled to size 4.99947pt on input line 236.
 
+! LaTeX Error: Bad math environment delimiter.
 
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1104.
-
-[15]
-Underfull \hbox (badness 10000) in paragraph at lines 1138--1142
-[]\TU/FreeSerif(0)/m/n/10 \begin{equation*} \phi_{n+1}(z) = \frac{\phi_n(z) - \
-phi_n(0)}{z}, \textbf{the recursive characterization}.
- []
-
-[16]
-Underfull \vbox (badness 10000) detected at line 1534
- []
-
-
-Underfull \vbox (badness 10000) detected at line 1534
- []
-
-[17]
-Underfull \vbox (badness 10000) detected at line 1534
- []
-
-
-Underfull \vbox (badness 10000) detected at line 1534
- []
-
-[18]
-Underfull \vbox (badness 10000) detected at line 1534
- []
-
-
-Underfull \vbox (badness 10000) detected at line 1534
- []
-
-[19]
-Underfull \vbox (badness 10000) detected at line 1534
- []
-
-
-Underfull \vbox (badness 10000) detected at line 1534
- []
-
-[20]
-Underfull \vbox (badness 10000) detected at line 1534
- []
-
-
-Overfull \vbox (6.78596pt too high) detected at line 1534
- []
-
-[21]
-Underfull \vbox (badness 10000) detected at line 1534
- []
-
-
-Underfull \vbox (badness 10000) detected at line 1534
- []
-
-[22] [23] [24]
-Chapter 4.
-[25
-
-] [26
-
-]
-Chapter 5.
-(./book.ind)
-The property list \polyglossia@langsetup contains the pairs (without outer
-braces):
->  {latex/script}  =>  {latin}
->  {latex/lcscript}  =>  {latin}
->  {latex/scripttag}  =>  {}
->  {latex/language}  =>  {Latex}
->  {latex/langtag}  =>  {ENG}
->  {latex/bcp47}  =>  {}
->  {latex/hyphennames}  =>  {english}
->  {latex/direction}  =>  {LR}
->  {latex/hyphenmins}  =>  {2,3}
->  {latex/frenchspacing}  =>  {false}
->  {latex/indentfirst}  =>  {false}
->  {latex/fontsetup}  =>  {true}
->  {latex/envname}  =>  {latex}
->  {latex/babelname}  =>  {latex}
->  {latex/localnumeral}  =>  {polyglossia@C@localnumeral}
->  {latex/Localnumeral}  =>  {polyglossia@C@localnumeral}
->  {english/script}  =>  {latin}
->  {english/lcscript}  =>  {latin}
->  {english/scripttag}  =>  {}
->  {english/language}  =>  {English}
->  {english/langtag}  =>  {ENG}
->  {english/bcp47}  =>  {en-US}
->  {english/hyphennames}  =>  {english,american,usenglish,USenglish}
->  {english/direction}  =>  {LR}
->  {english/hyphenmins}  =>  {2,3}
->  {english/frenchspacing}  =>  {false}
->  {english/indentfirst}  =>  {false}
->  {english/fontsetup}  =>  {true}
->  {english/envname}  =>  {english}
->  {english/babelname}  =>  {american}
->  {english/localnumeral}  =>  {polyglossia@C@localnumeral}
->  {english/Localnumeral}  =>  {polyglossia@C@localnumeral}.
- [27] (./book.aux
-LaTeX Info: Redefining \rmfamily on input line 19.
-LaTeX Info: Redefining \sffamily on input line 19.
-LaTeX Info: Redefining \ttfamily on input line 19.
-)
-Package rerunfilecheck Info: File `book.out' has not changed.
-(rerunfilecheck)             Checksum: B599B27FAA17108698960D72C364F8DB;2431.
- ) 
-Here is how much of TeX's memory you used:
- 42962 strings out of 478190
- 988925 string characters out of 5854827
- 1825173 words of memory out of 5000000
- 62758 multiletter control sequences out of 15000+600000
- 477017 words of font info for 124 fonts, out of 8000000 for 9000
- 15 hyphenation exceptions out of 8191
- 99i,23n,115p,1133b,2273s stack positions out of 5000i,500n,10000p,200000b,80000s
-
-Output written on book.pdf (31 pages).
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.258 \end{equation*}\end{split}
+                                
+? H
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+? I
+insert>H
+! Missing \endgroup insert
