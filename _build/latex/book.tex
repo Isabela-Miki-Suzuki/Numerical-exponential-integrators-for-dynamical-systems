@@ -548,15 +548,28 @@ y_0 = y(t_0)\\
 Then the amplification factor is:
 \$\(
 (1 - h \lambda).
-\)\(
-If \)|1 \sphinxhyphen{} h \textbackslash{}lambda| > 1\(, for fixed \)N\(, it will be a divergent series (\)k \textbackslash{}rightarrow \textbackslash{}infty \textbackslash{}Rightarrow y\_k \textbackslash{}rightarrow \textbackslash{}infty \(), so, since the computer has a limitant number that can represent, even if the number of steps is such that \)h\$ is not small enought, it might have sufficient steps to reach the maximum number represented by the machine.
+\)\$
 
 \sphinxAtStartPar
-However, if \(|1 - h \lambda| < 1\) and \(N\) is fixed, it converges to zero (\(k \rightarrow \infty \Rightarrow y_k \rightarrow 0 )\).
+If \(|1 - h \lambda| > 1\), for fixed \(N\), it will be a divergent series
+\$\(
+(k \rightarrow \infty \Rightarrow y_k \rightarrow \infty),
+\)\(
+so, since the computer has a limitant number that can represent, even if the number of steps is such that \)h\$ is not small enought, it might have sufficient steps to reach the maximum number represented by the machine.
+
+\sphinxAtStartPar
+However, if \(|1 - h \lambda| < 1\) and \(N\) is fixed, it converges to zero
+\$\(
+    (k \rightarrow \infty \Rightarrow y_k \rightarrow 0 ).
+\)\$
 
 \sphinxAtStartPar
 Besides that, \(|1 - h \lambda| < 1\) is the same as \(0 < h \lambda < 2\).
+
+\sphinxAtStartPar
 So the interval of stability is (0,2).
+
+\sphinxAtStartPar
 That’s why the method suddenly converged, it was when \(h\) got small enought to \(h \lambda\) be in the interval of stability, i.e., \(h < 2/\lambda\).
 
 \sphinxAtStartPar
@@ -1023,19 +1036,27 @@ so
 \subsubsection{Exponential of any matrix}
 \label{\detokenize{cap3:exponential-of-any-matrix}}
 \sphinxAtStartPar
-\(\textbf{Proposition: } \forall A \in \mathscr{M}_{N \times N}(\mathbb{C}), \exists M \in \mathscr{M}_{N \times N}(\mathbb{C})\) invertible, such that \(A = MJM^{-1}\), with \( J = \left[ {\begin{array}{ccccc}
+\(\textbf{Proposition: } \forall A \in \mathscr{M}_{N \times N}(\mathbb{C}), \exists M \in \mathscr{M}_{N \times N}(\mathbb{C})\) invertible, such that \(A = MJM^{-1}\), with
+\$\( 
+J = \left[ {\begin{array}{ccccc}
     J_1 & 0 & 0 & \dotsm & 0\\
     0 & J_2 & 0 & \dotsm & 0\\
     0 & 0 & J_3 & \dotsm & 0\\
     \vdots & \vdots & \vdots & \ddots & \vdots\\
     0 & 0 & 0 & \dotsm & J_{N}\\
-\end{array} } \right] \) and each \(J_i\), \(i = 1, 2, 3, \dotsc, N\) being a Jordan block, i.e., \(J_i = \left[ {\begin{array}{ccccc}
+\end{array} } \right]
+\)\(
+and each \)J\_i\(, \)i = 1, 2, 3, \textbackslash{}dotsc, N\( being a Jordan block, i.e., 
+\)\(
+J_i = \left[ {\begin{array}{ccccc}
     \lambda_i & 0 & 0 & \dotsm & 0\\
     0 & \lambda_i & 0 & \dotsm & 0\\
     0 & 0 & \lambda_i & \dotsm & 0\\
     \vdots & \vdots & \vdots & \ddots & \vdots\\
     0 & 0 & 0 & \dotsm & \lambda_i\\
-\end{array} } \right]\) for some \(\lambda_i \in \mathbb{C}\) .
+\end{array} } \right]
+\)\( 
+for some \)\textbackslash{}lambda\_i \textbackslash{}in \textbackslash{}mathbb\{C\}\$ .
 
 \sphinxAtStartPar
 Note that
@@ -1074,21 +1095,25 @@ with each block as the section above indicates.
 \label{\detokenize{cap3:linear-problem}}
 \sphinxAtStartPar
 The linear problem is, following with the used notation:
-\(\begin{cases}
+\$\(
+\begin{cases}
     y'(t) + \lambda y(t) = g(y(t), t), t \in (t_0, T) \\
     y(t_0) = y_0 
     \text{,}
-\end{cases}\)
-the one with \(g \equiv 0.\)
+\end{cases}
+\)\(
+the one with \)g \textbackslash{}equiv 0.\$
 
 \sphinxAtStartPar
 So, generaly, it is of the form:
-\(\begin{cases}
+\$\(
+\begin{cases}
     y'(t) = A y(t), t \in (t_0, T) \\
     y(t_0) = y_0 
     \text{,}
-\end{cases}\)
-with \(A \in \mathscr{M}_{N \times N}(\mathbb{C}), N \in \mathbb{N}\)  (remembering that a matrix \(1 \times 1\) is simply a number).
+\end{cases}
+\)\(
+with \)A \textbackslash{}in \textbackslash{}mathscr\{M\}\_\{N \textbackslash{}times N\}(\textbackslash{}mathbb\{C\}), N \textbackslash{}in \textbackslash{}mathbb\{N\}\(  (remembering that a matrix \)1 \textbackslash{}times 1\$ is simply a number).
 
 \sphinxAtStartPar
 Because \(A y(t)\) is a \(C^1\) function in \(y\), continuous in \(t\) and \(t \in (t_0, T)\), a limited interval, by the existence and uniqueness theorem, there is a single solution of the problem.
@@ -1096,9 +1121,25 @@ Because \(A y(t)\) is a \(C^1\) function in \(y\), continuous in \(t\) and \(t \
 \sphinxAtStartPar
 Since
 \$\(
-    \frac{d}{dt}y_0e^{A(t-t_0)} \doteq \lim_{h\to0} \frac{y_0e^{A(t-t_0+h)}-y_0e^{A(t-t_0)}}{h} = y_0e^{(t-t_0)A}\lim_{h\to0} \frac{e^{Ah}-I}{h} = y_0e^{(t-t_0)A}\lim_{h\to0} \frac{Ae^{Ah}}{1} = y_0e^{(t-t_0)A} \frac{Ae^{A0}}{1} = y_0e^{(t-t_0)A} A I = A y_0e^{(t-t_0)A} 
+    \frac{d}{dt}y_0e^{A(t-t_0)} \doteq \lim_{h\to0} \frac{y_0e^{A(t-t_0+h)}-y_0e^{A(t-t_0)}}{h}
 \)\$
-
+\begin{equation*}
+\begin{split}
+    = y_0e^{(t-t_0)A}\lim_{h\to0} \frac{e^{Ah}-I}{h} 
+\end{split}
+\end{equation*}\begin{equation*}
+\begin{split}
+    = y_0e^{(t-t_0)A}\lim_{h\to0} \frac{Ae^{Ah}}{1} 
+\end{split}
+\end{equation*}\begin{equation*}
+\begin{split}
+    = y_0e^{(t-t_0)A} \frac{Ae^{A0}}{1}
+\end{split}
+\end{equation*}\begin{equation*}
+\begin{split}
+    = y_0e^{(t-t_0)A} A I = A y_0e^{(t-t_0)A} 
+\end{split}
+\end{equation*}
 \sphinxAtStartPar
 using L’Hôpital’s rule on the second equality and noting that \(A(t-t_0+h) = A(t-t_0)+Ah\) and \(A(t-t_0) \cdot Ah = (t-t_0)hAA = Ah \cdot A(t-t_0)\), so it was possible to apply the last proposition and make \(e^{A(t-t_0+h)} = e^{A(t-t_0)} \cdot e^{Ah}\),
 
@@ -1163,14 +1204,13 @@ They are \(\mathbb{C} \rightarrow \mathbb{C}\) functions defined as:
 \end{equation*}
 \sphinxAtStartPar
 By integration by parts,
-
-\sphinxAtStartPar
-\textbackslash{}begin\{gather*\}
-\textbackslash{}phi\_\{n+1\} (z) = \textbackslash{}int\_\{0\}\textasciicircum{}\{1\} e\textasciicircum{}\{(1\sphinxhyphen{}\textbackslash{}tau)z\} \textbackslash{}frac\{\textbackslash{}tau\textasciicircum{}n\}\{n!\} ,d\textbackslash{}tau \textbackslash{}
-= \sphinxhyphen{} \textbackslash{}frac\{e\textasciicircum{}\{(1\sphinxhyphen{}1)z\}\}\{z\} \textbackslash{}frac\{1\textasciicircum{}n\}\{n!\} + \textbackslash{}frac\{e\textasciicircum{}\{(1\sphinxhyphen{}0)z\}\}\{z\} \textbackslash{}frac\{0\textasciicircum{}n\}\{l!\} \sphinxhyphen{} \textbackslash{}int\_\{0\}\textasciicircum{}\{1\} \sphinxhyphen{}\textbackslash{}frac\{e\textasciicircum{}\{(1\sphinxhyphen{}\textbackslash{}tau)z\}\}\{z\} \textbackslash{}frac\{\textbackslash{}tau\textasciicircum{}\{n\sphinxhyphen{}1\}\}\{(n\sphinxhyphen{}1)!\} ,d\textbackslash{}tau \textbackslash{}
-= \sphinxhyphen{} \textbackslash{}frac\{1\}\{n!z\} + \textbackslash{}frac\{1\}\{z\}\textbackslash{}int\_\{0\}\textasciicircum{}\{1\} e\textasciicircum{}\{(1\sphinxhyphen{}\textbackslash{}tau)z\} \textbackslash{}frac\{\textbackslash{}tau\textasciicircum{}\{n\sphinxhyphen{}1\}\}\{(n\sphinxhyphen{}1)!\} ,d\textbackslash{}tau.
-\textbackslash{}end\{gather*\}
-
+\begin{equation*}
+\begin{split}
+  \phi_{n+1} (z) = \int_{0}^{1} e^{(1-\tau)z} \frac{\tau^n}{n!} \,d\tau \\
+  = - \frac{e^{(1-1)z}}{z} \frac{1^n}{n!} + \frac{e^{(1-0)z}}{z} \frac{0^n}{l!} - \int_{0}^{1} -\frac{e^{(1-\tau)z}}{z} \frac{\tau^{n-1}}{(n-1)!} \,d\tau \\
+  = - \frac{1}{n!z} + \frac{1}{z}\int_{0}^{1} e^{(1-\tau)z} \frac{\tau^{n-1}}{(n-1)!} \,d\tau.
+\end{split}
+\end{equation*}
 \sphinxAtStartPar
 Since
 \$\(

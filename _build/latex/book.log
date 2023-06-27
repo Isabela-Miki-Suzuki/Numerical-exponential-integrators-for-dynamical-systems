@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2023.6.26)  27 JUN 2023 00:45
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2023.6.26)  27 JUN 2023 00:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1695,27 +1695,32 @@ Underfull \hbox (badness 5637) in paragraph at lines 373--379
  []
 
 [8] [9]
-Overfull \hbox (131.37868pt too wide) in paragraph at lines 546--553
-\TU/FreeSerif(0)/m/n/10 \infty \Rightarrow y_k \rightarrow \infty $[][] [][][] 
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][] [][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][]$h$
+Underfull \hbox (badness 10000) in paragraph at lines 553--559
+[]\TU/FreeSerif(0)/m/n/10 If $[][] [] [][][] [] []$, for fixed $[]$, it will be
+ a divergent series $$[][] [] [] [] [][] []
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 553--559
+[][][]$$[][][] [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
+[][][][][][][][][][][][][][][][][][][] [][][][][][][][][][][][][][][][][][][][]
+[][][][][][][][][][][][]$\TU/FreeSerif(0)/m/n/10 h$
  []
 
 [10]
-Underfull \hbox (badness 10000) in paragraph at lines 568--582
+Underfull \hbox (badness 10000) in paragraph at lines 581--595
 \TU/FreeSerif(0)/m/n/10 Since $$[][] [][] [] [][][]$$[][][][] []$\frac{T-t_0}{N
 }$[] [][][]$y_N$[][][][][][]$$[][] [][] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 568--582
+Underfull \hbox (badness 10000) in paragraph at lines 581--595
 [][] [][] [][] [] [][] [][] [][][]$$[][][][][][][][][][][][][][][][][][][][]$\T
 U/FreeSerif(0)/m/n/10 p = -(T-t_0)
  []
 
 
-Overfull \hbox (7.48698pt too wide) in paragraph at lines 568--582
+Overfull \hbox (7.48698pt too wide) in paragraph at lines 581--595
 \TU/FreeSerif(0)/m/n/10 \lambda$[][][][][][][][][][][][][][][][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]$$[]
 [][][][]$$[][][][][][][][][][][][][][][][]$y(T)$
@@ -1728,13 +1733,13 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.636 ...backslash{}forall A\( as decribed above,}
+l.649 ...backslash{}forall A\( as decribed above,}
                                                   
 ? 
 ! Emergency stop.
  ...                                              
                                                   
-l.636 ...backslash{}forall A\( as decribed above,}
+l.649 ...backslash{}forall A\( as decribed above,}
                                                   
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -1744,7 +1749,7 @@ or  <return>  to continue without it.
 Here is how much of TeX's memory you used:
  42902 strings out of 478190
  987123 string characters out of 5854827
- 1573171 words of memory out of 5000000
+ 1573172 words of memory out of 5000000
  62715 multiletter control sequences out of 15000+600000
  474719 words of font info for 105 fonts, out of 8000000 for 9000
  15 hyphenation exceptions out of 8191

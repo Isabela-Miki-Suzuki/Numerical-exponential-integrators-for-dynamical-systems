@@ -180,13 +180,23 @@
 # $$
 # (1 - h \lambda).
 # $$
-# If $|1 - h \lambda| > 1$, for fixed $N$, it will be a divergent series ($k \rightarrow \infty \Rightarrow y_k \rightarrow \infty $), so, since the computer has a limitant number that can represent, even if the number of steps is such that $h$ is not small enought, it might have sufficient steps to reach the maximum number represented by the machine.
 # 
-# However, if $|1 - h \lambda| < 1$ and $N$ is fixed, it converges to zero ($k \rightarrow \infty \Rightarrow y_k \rightarrow 0 )$.
+# If $|1 - h \lambda| > 1$, for fixed $N$, it will be a divergent series 
+# $$
+# (k \rightarrow \infty \Rightarrow y_k \rightarrow \infty),
+# $$
+# so, since the computer has a limitant number that can represent, even if the number of steps is such that $h$ is not small enought, it might have sufficient steps to reach the maximum number represented by the machine.
+# 
+# However, if $|1 - h \lambda| < 1$ and $N$ is fixed, it converges to zero 
+# $$
+#     (k \rightarrow \infty \Rightarrow y_k \rightarrow 0 ).
+# $$
 # 
 # 
 # Besides that, $|1 - h \lambda| < 1$ is the same as $0 < h \lambda < 2$.
+# 
 # So the interval of stability is (0,2).
+# 
 # That's why the method suddenly converged, it was when $h$ got small enought to $h \lambda$ be in the interval of stability, i.e., $h < 2/\lambda$.
 # 
 # It is worth mentioning here that if $-1 < 1 - h \lambda < 0$, the error will converge oscillating since it takes positive values with even exponents and negative with odd ones.

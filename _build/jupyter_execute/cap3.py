@@ -390,19 +390,27 @@
 
 # ### Exponential of any matrix
 
-# $\textbf{Proposition: } \forall A \in \mathscr{M}_{N \times N}(\mathbb{C}), \exists M \in \mathscr{M}_{N \times N}(\mathbb{C})$ invertible, such that $A = MJM^{-1}$, with $ J = \left[ {\begin{array}{ccccc}
+# $\textbf{Proposition: } \forall A \in \mathscr{M}_{N \times N}(\mathbb{C}), \exists M \in \mathscr{M}_{N \times N}(\mathbb{C})$ invertible, such that $A = MJM^{-1}$, with 
+# $$ 
+# J = \left[ {\begin{array}{ccccc}
 #     J_1 & 0 & 0 & \dotsm & 0\\
 #     0 & J_2 & 0 & \dotsm & 0\\
 #     0 & 0 & J_3 & \dotsm & 0\\
 #     \vdots & \vdots & \vdots & \ddots & \vdots\\
 #     0 & 0 & 0 & \dotsm & J_{N}\\
-# \end{array} } \right] $ and each $J_i$, $i = 1, 2, 3, \dotsc, N$ being a Jordan block, i.e., $J_i = \left[ {\begin{array}{ccccc}
+# \end{array} } \right]
+# $$
+# and each $J_i$, $i = 1, 2, 3, \dotsc, N$ being a Jordan block, i.e., 
+# $$
+# J_i = \left[ {\begin{array}{ccccc}
 #     \lambda_i & 0 & 0 & \dotsm & 0\\
 #     0 & \lambda_i & 0 & \dotsm & 0\\
 #     0 & 0 & \lambda_i & \dotsm & 0\\
 #     \vdots & \vdots & \vdots & \ddots & \vdots\\
 #     0 & 0 & 0 & \dotsm & \lambda_i\\
-# \end{array} } \right]$ for some $\lambda_i \in \mathbb{C}$ .
+# \end{array} } \right]
+# $$ 
+# for some $\lambda_i \in \mathbb{C}$ .
 
 # Note that
 # $$
@@ -434,26 +442,46 @@
 # ## Linear problem
 
 # The linear problem is, following with the used notation:
-# $\begin{cases}
+# $$
+# \begin{cases}
 #     y'(t) + \lambda y(t) = g(y(t), t), t \in (t_0, T) \\
 #     y(t_0) = y_0 
 #     \text{,}
-# \end{cases}$
+# \end{cases}
+# $$
 # the one with $g \equiv 0.$
 
 # So, generaly, it is of the form:
-# $\begin{cases}
+# $$
+# \begin{cases}
 #     y'(t) = A y(t), t \in (t_0, T) \\
 #     y(t_0) = y_0 
 #     \text{,}
-# \end{cases}$
+# \end{cases}
+# $$
 # with $A \in \mathscr{M}_{N \times N}(\mathbb{C}), N \in \mathbb{N}$  (remembering that a matrix $1 \times 1$ is simply a number).
 
 # Because $A y(t)$ is a $C^1$ function in $y$, continuous in $t$ and $t \in (t_0, T)$, a limited interval, by the existence and uniqueness theorem, there is a single solution of the problem.
 
 # Since 
 # $$
-#     \frac{d}{dt}y_0e^{A(t-t_0)} \doteq \lim_{h\to0} \frac{y_0e^{A(t-t_0+h)}-y_0e^{A(t-t_0)}}{h} = y_0e^{(t-t_0)A}\lim_{h\to0} \frac{e^{Ah}-I}{h} = y_0e^{(t-t_0)A}\lim_{h\to0} \frac{Ae^{Ah}}{1} = y_0e^{(t-t_0)A} \frac{Ae^{A0}}{1} = y_0e^{(t-t_0)A} A I = A y_0e^{(t-t_0)A} 
+#     \frac{d}{dt}y_0e^{A(t-t_0)} \doteq \lim_{h\to0} \frac{y_0e^{A(t-t_0+h)}-y_0e^{A(t-t_0)}}{h}
+# $$
+# 
+# $$
+#     = y_0e^{(t-t_0)A}\lim_{h\to0} \frac{e^{Ah}-I}{h} 
+# $$
+# 
+# $$
+#     = y_0e^{(t-t_0)A}\lim_{h\to0} \frac{Ae^{Ah}}{1} 
+# $$
+# 
+# $$
+#     = y_0e^{(t-t_0)A} \frac{Ae^{A0}}{1}
+# $$
+# 
+# $$
+#     = y_0e^{(t-t_0)A} A I = A y_0e^{(t-t_0)A} 
 # $$
 
 # using L'Hôpital's rule on the second equality and noting that $A(t-t_0+h) = A(t-t_0)+Ah$ and $A(t-t_0) \cdot Ah = (t-t_0)hAA = Ah \cdot A(t-t_0)$, so it was possible to apply the last proposition and make $e^{A(t-t_0+h)} = e^{A(t-t_0)} \cdot e^{Ah}$,
@@ -507,11 +535,11 @@
 
 # By integration by parts,
 # 
-# \begin{gather*}
+# $$
 #   \phi_{n+1} (z) = \int_{0}^{1} e^{(1-\tau)z} \frac{\tau^n}{n!} \,d\tau \\
 #   = - \frac{e^{(1-1)z}}{z} \frac{1^n}{n!} + \frac{e^{(1-0)z}}{z} \frac{0^n}{l!} - \int_{0}^{1} -\frac{e^{(1-\tau)z}}{z} \frac{\tau^{n-1}}{(n-1)!} \,d\tau \\
 #   = - \frac{1}{n!z} + \frac{1}{z}\int_{0}^{1} e^{(1-\tau)z} \frac{\tau^{n-1}}{(n-1)!} \,d\tau.
-# \end{gather*}
+# $$
 
 # Since
 # $$
