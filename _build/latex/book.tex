@@ -1501,10 +1501,6 @@ S.M. Cox, P.C. Matthews, Exponential Time Differencing for Stiff Systems, Journa
 \sphinxAtStartPar
 Hochbruck, Marlis, and Alexander Ostermann. “Explicit Exponential Runge\sphinxhyphen{}Kutta Methods for Semilinear Parabolic Problems.” SIAM Journal on Numerical Analysis, vol. 43, no. 3, 2006, pp. 1069–90. JSTOR, \sphinxurl{http://www.jstor.org/stable/4101280}. Accessed 27 June 2023.
 
-\item {} 
-\sphinxAtStartPar
-Burden, R.L.. Numerical Analys. Faires, J.D. 9780538733519. \sphinxurl{https://books.google.com.br/books?id=zXnSxY9G2JgC}. 2010. Cengage Learning.
-
 \end{enumerate}
 
 \sphinxstepscope
@@ -2518,7 +2514,7 @@ Butcher tableau:
 \subsection{Exponential time differencing methods with Runge\sphinxhyphen{}Kutta time stepping \sphinxhyphen{} order 2 \sphinxhyphen{} Classical approach \sphinxhyphen{} Trapezoidal rule}
 \label{\detokenize{appendix:exponential-time-differencing-methods-with-runge-kutta-time-stepping-order-2-classical-approach-trapezoidal-rule}}
 \sphinxAtStartPar
-It is also possible to think the exponential time differencing methods with Runge\sphinxhyphen{}Kutta time stepping using the numerical integration, for example, for the one with second order, it starts with the trapezoidal rule (which was taken from {[}8{]}) on the variation of constants formula:
+It is also possible to think the exponential time differencing methods with Runge\sphinxhyphen{}Kutta time stepping using the numerical integration, for example, for the one with second order, it starts with the trapezoidal rule (which was taken from {[}2{]}) on the variation of constants formula:
 \begin{equation*}
 \begin{split}
 y(t_{k+1}) = e^{-h \lambda}y(t_k) + \frac{h}{2} \left[ e^{-\lambda(t_{k+1}-t_k)} g(y(t_k), t_k) + e^{-\lambda(t_{k+1}-t_{k+1})} g(y(t_{k+1}), t_{k+1}) \right] + O(h^3), \\
@@ -2565,7 +2561,7 @@ Butcher tableau:
 \subsection{Exponential time differencing methods with Runge\sphinxhyphen{}Kutta time stepping \sphinxhyphen{} order 2 \sphinxhyphen{} Classical approach \sphinxhyphen{} Midpoint rule}
 \label{\detokenize{appendix:exponential-time-differencing-methods-with-runge-kutta-time-stepping-order-2-classical-approach-midpoint-rule}}
 \sphinxAtStartPar
-Besides that, using the midpoint rule, also known as rectangle rule, again taken from {[}8{]},
+Besides that, using the midpoint rule, also known as rectangle rule, again taken from {[}2{]},
 \begin{equation*}
 \begin{split}
 y(t_{k+1}) = e^{-(t_{k+1}-t_k) \lambda}y(t_k) + \int_{t_k}^{t_{k+1}} [e^{-\lambda(t_{k+1}-\tau)} g(y(\tau), \tau)] d\tau,

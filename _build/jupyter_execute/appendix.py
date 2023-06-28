@@ -838,7 +838,7 @@ convergence_table(errors_2x_vector, n0, k, t0, tf)
 
 # ### Exponential time differencing methods with Runge-Kutta time stepping - order 2 - Classical approach - Trapezoidal rule
 # 
-# It is also possible to think the exponential time differencing methods with Runge-Kutta time stepping using the numerical integration, for example, for the one with second order, it starts with the trapezoidal rule (which was taken from [8]) on the variation of constants formula:
+# It is also possible to think the exponential time differencing methods with Runge-Kutta time stepping using the numerical integration, for example, for the one with second order, it starts with the trapezoidal rule (which was taken from [2]) on the variation of constants formula:
 # 
 # $$
 # y(t_{k+1}) = e^{-h \lambda}y(t_k) + \frac{h}{2} \left[ e^{-\lambda(t_{k+1}-t_k)} g(y(t_k), t_k) + e^{-\lambda(t_{k+1}-t_{k+1})} g(y(t_{k+1}), t_{k+1}) \right] + O(h^3), \\
@@ -880,7 +880,7 @@ convergence_table(errors_2x_vector, n0, k, t0, tf)
 
 # ### Exponential time differencing methods with Runge-Kutta time stepping - order 2 - Classical approach - Midpoint rule
 # 
-# Besides that, using the midpoint rule, also known as rectangle rule, again taken from [8],
+# Besides that, using the midpoint rule, also known as rectangle rule, again taken from [2],
 # 
 # $$
 # y(t_{k+1}) = e^{-(t_{k+1}-t_k) \lambda}y(t_k) + \int_{t_k}^{t_{k+1}} [e^{-\lambda(t_{k+1}-\tau)} g(y(\tau), \tau)] d\tau,
