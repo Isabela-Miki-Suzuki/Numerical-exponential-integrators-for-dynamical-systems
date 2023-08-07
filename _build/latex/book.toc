@@ -24,7 +24,7 @@
 \contentsline {subsubsection}{New deduction \sphinxhyphen {} Trapezoidal rule}{15}{subsubsection*.8}%
 \contentsline {subsubsection}{New deduction \sphinxhyphen {} Midpoint rule}{15}{subsubsection*.9}%
 \contentsline {chapter}{\numberline {3}References}{17}{chapter.3}%
-\contentsline {chapter}{\numberline {4}Description of how the data management plan is being followed and any changes}{19}{chapter.4}%
+\contentsline {chapter}{\numberline {4}Participation in scientific event, list of publications and list of papers prepared or submitted}{19}{chapter.4}%
 \contentsline {chapter}{\numberline {5}Appendix}{21}{chapter.5}%
 \contentsline {section}{\numberline {5.1}Code}{21}{section.5.1}%
 \contentsline {section}{\numberline {5.2}Some deductions}{30}{section.5.2}%

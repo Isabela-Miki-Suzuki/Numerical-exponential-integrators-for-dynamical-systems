@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2023.6.26)  27 JUN 2023 20:20
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2023.6.26)  28 JUN 2023 15:30
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1705,60 +1705,60 @@ Chapter 4.
 ]
 Chapter 5.
 [21]
-Underfull \vbox (badness 10000) detected at line 1920
+Underfull \vbox (badness 10000) detected at line 1914
  []
 
 
-Underfull \vbox (badness 10000) detected at line 1920
+Underfull \vbox (badness 10000) detected at line 1914
  []
 
 [22]
-Underfull \vbox (badness 10000) detected at line 1920
+Underfull \vbox (badness 10000) detected at line 1914
  []
 
 
-Overfull \vbox (6.78596pt too high) detected at line 1920
+Overfull \vbox (6.78596pt too high) detected at line 1914
  []
 
 [23]
-Underfull \vbox (badness 10000) detected at line 1920
+Underfull \vbox (badness 10000) detected at line 1914
  []
 
 
-Underfull \vbox (badness 10000) detected at line 1920
+Underfull \vbox (badness 10000) detected at line 1914
  []
 
 [24]
-Underfull \vbox (badness 10000) detected at line 1920
+Underfull \vbox (badness 10000) detected at line 1914
  []
 
 
-Underfull \vbox (badness 10000) detected at line 1920
+Underfull \vbox (badness 10000) detected at line 1914
  []
 
 [25]
-Underfull \vbox (badness 10000) detected at line 1920
+Underfull \vbox (badness 10000) detected at line 1914
  []
 
 
-Overfull \vbox (6.78596pt too high) detected at line 1920
+Overfull \vbox (6.78596pt too high) detected at line 1914
  []
 
 [26]
-Underfull \vbox (badness 10000) detected at line 1920
+Underfull \vbox (badness 10000) detected at line 1914
  []
 
 
-Underfull \vbox (badness 10000) detected at line 1920
+Underfull \vbox (badness 10000) detected at line 1914
  []
 
 [27] [28] [29] [30] [31]
-Overfull \hbox (35.59966pt too wide) detected at line 2315
+Overfull \hbox (35.59966pt too wide) detected at line 2309
 []
  []
 
 [32]
-Overfull \hbox (2.31906pt too wide) detected at line 2396
+Overfull \hbox (2.31906pt too wide) detected at line 2390
 []
  []
 
@@ -1803,11 +1803,11 @@ LaTeX Info: Redefining \sffamily on input line 19.
 LaTeX Info: Redefining \ttfamily on input line 19.
 )
 Package rerunfilecheck Info: File `book.out' has not changed.
-(rerunfilecheck)             Checksum: 4C1E737EF8F7BC9DC1857705538BD51C;4036.
+(rerunfilecheck)             Checksum: 86086FF082619F90B24A395AD8EC1194;4058.
  ) 
 Here is how much of TeX's memory you used:
  42997 strings out of 478190
- 989500 string characters out of 5854827
+ 989686 string characters out of 5854827
  1845173 words of memory out of 5000000
  62793 multiletter control sequences out of 15000+600000
  477017 words of font info for 124 fonts, out of 8000000 for 9000
