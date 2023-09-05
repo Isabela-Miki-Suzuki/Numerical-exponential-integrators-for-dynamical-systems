@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2023.6.26)  4 SEP 2023 23:07
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2023.6.26)  4 SEP 2023 23:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1688,12 +1688,15 @@ LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
 (Font)              scaled to size 6.99925pt on input line 226.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
 (Font)              scaled to size 4.99947pt on input line 226.
-[5] [6] [7] [8] [9] [10] [11] [12] [13] [14]
+[5] [6] [7] [8] [9]
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 8.00085pt on input line 1152.
+(Font)              scaled to size 8.00085pt on input line 674.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 6.00064pt on input line 1152.
+(Font)              scaled to size 6.00064pt on input line 674.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 7.99915pt on input line 1152.
+(Font)              scaled to size 7.99915pt on input line 674.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 5.99936pt on in
+(Font)              scaled to size 5.99936pt on input line 674.
+
+
+Package hype

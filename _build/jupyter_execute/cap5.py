@@ -13,12 +13,12 @@ from basecode import *
 
 # From [9], the model is, given $m, k, l$ and $g$,
 # 
-# \begin{cases}
+# $$
 #   \dot{\theta} = \frac{\rho_\theta}{mr^2}\\
 #   \dot{\rho_\theta} = -mgr \sin{\theta}\\
 #   \dot{r} = \frac{\rho_r}{m} \\
 #   \dot{\rho_r} = \frac{\rho^2_\theta}{mr^3} - k(r - l) + mg \cos{\theta}.
-# \end{cases}
+# $$
 # 
 # In matrix form,
 # 
@@ -90,10 +90,4 @@ names = ['theta','p_theta', 'r', 'pr']
 matrix1 = [x[0,:], x[1,:], x[2,:], x[3,:]]
 
 fig1, ax1 = graphic_2D(domains, matrix1, names, 't', ' ', 'swing spring etdrk3 n = '+str(n), False, False)
-
-
-# In[ ]:
-
-
-
 
