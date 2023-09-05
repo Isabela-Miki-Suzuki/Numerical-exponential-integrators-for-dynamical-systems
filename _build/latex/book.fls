@@ -1497,6 +1497,16 @@ INPUT /usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.st
 INPUT /usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/kvoptions/kvoptions.sty
 INPUT /usr/share/texlive/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
+INPUT ./book.out
+INPUT book.out
+INPUT ./book.out
+INPUT book.out
+INPUT ./book.out
+INPUT book.out
+INPUT ./book.out
+INPUT book.out
+INPUT ./book.out
+INPUT ./book.out
 OUTPUT book.out
 INPUT /usr/share/texlive/texmf-dist/tex/generic/stringenc/se-ascii-print.def
 INPUT /usr/share/texlive/texmf-dist/tex/generic/stringenc/se-ascii-print.def
@@ -1527,6 +1537,9 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/jknapltx/ursfs.fd
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/rsfs/rsfs10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/rsfs/rsfs10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/rsfs/rsfs10.tfm
+INPUT ./book.toc
+INPUT book.toc
+INPUT book.toc
 OUTPUT book.toc
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam7.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam5.tfm

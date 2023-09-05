@@ -3045,7 +3045,7 @@ lmba\PYGZus{}1D\PYGZus{}rk4, domain = errors\PYGZus{}for\PYGZus{}lambdas\PYGZus{
 
 \begin{sphinxuseclass}{cell_output}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-/tmp/ipykernel\PYGZus{}11494/3543048019.py:247: ComplexWarning: Casting complex values to real discards the imaginary part
+/tmp/ipykernel\PYGZus{}11908/3543048019.py:247: ComplexWarning: Casting complex values to real discards the imaginary part
   return np.sqrt(float(np.sum(v)/x\PYGZus{}approx.size)) \PYGZsh{}normalized
 \end{sphinxVerbatim}
 
@@ -3096,7 +3096,7 @@ n\PYGZus{}1D\PYGZus{}rk4, domain = errors\PYGZus{}2x(n0, k, rk4, t0, tf, x0, A, 
 
 \begin{sphinxuseclass}{cell_output}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-/tmp/ipykernel\PYGZus{}11494/3543048019.py:247: ComplexWarning: Casting complex values to real discards the imaginary part
+/tmp/ipykernel\PYGZus{}11908/3543048019.py:247: ComplexWarning: Casting complex values to real discards the imaginary part
   return np.sqrt(float(np.sum(v)/x\PYGZus{}approx.size)) \PYGZsh{}normalized
 \end{sphinxVerbatim}
 
@@ -3734,13 +3734,18 @@ y(t) = e^{-(t-t_0) \lambda}y_0 + \int_{t_0}^t e^{-\lambda(t-\tau)} g(y(\tau), \t
 \end{equation*}\begin{equation*}
 \begin{split}
   y(t_{k+1}) = e^{-h \lambda} y(t_k) +
+  \\
   g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right)
   \int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)} d \tau +
+  \\
   \frac{g(y(t_{k+1}), t_{k+1}) - g(y(t_k), t_k)}{h}
   \int_{t_k}^{t_{k+1}} \left(\tau - t_{k+\frac{1}{2}}\right) e^{-\lambda(t_{k+1}-\tau)} d \tau +
   \\
-  + \frac{ 4 \left[g(y(t_{k+1}), t_{k+1}) + g(y(t_k), t_k) - 2 g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) \right]}{h^2}
+  + \frac{ 4 \left[g(y(t_{k+1}), t_{k+1}) + 
+  \\
+  g(y(t_k), t_k) - 2 g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) \right]}{h^2}
   \int_{t_k}^{t_{k+1}} \frac{\left(\tau - t_{k+\frac{1}{2}}\right)^2}{2!} e^{-\lambda(t_{k+1}-\tau)} d \tau
+  \\
   + \int_{t_k}^{t_{k+1}} O((\tau - t_k)^3) e^{-\lambda(t_{k+1}-\tau)} d \tau,
 \end{split}
 \end{equation*}
@@ -3751,10 +3756,13 @@ Since \(\tau - t_{k+ \frac{1}{2}} = \tau - t_k - \frac{h}{2}\) and \(\left(\tau 
   y(t_{k+1}) = e^{-h \lambda} y(t_k) +
   g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right)
   \int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)} d \tau +
+  \\
   \frac{g(y(t_{k+1}), t_{k+1}) - g(y(t_k), t_k)}{h}
   \int_{t_k}^{t_{k+1}} \left(\tau - t_{k}\right) e^{-\lambda(t_{k+1}-\tau)} d \tau +
   \\
-  + \frac{ 4 \left[g(y(t_{k+1}), t_{k+1}) + g(y(t_k), t_k) - 2 g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) \right]}{h^2}
+  + \frac{ 4 \left[g(y(t_{k+1}), t_{k+1}) + 
+  \\
+  g(y(t_k), t_k) - 2 g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) \right]}{h^2}
   \int_{t_k}^{t_{k+1}} \frac{(\tau - t_k)^2}{2!} e^{-\lambda(t_{k+1}-\tau)} d \tau +
   \\
   - \frac{g(y(t_{k+1}), t_{k+1}) - g(y(t_k), t_k)}{h}
@@ -3774,8 +3782,10 @@ Then,
 \begin{equation*}
 \begin{split}
   y(t_{k+1}) = e^{-h \lambda} y(t_k) +
+  \\
   g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right)
   h \phi_1(-h \lambda) +
+  \\
   \frac{g(y(t_{k+1}), t_{k+1}) - g(y(t_k), t_k)}{h}
   h^2 \phi_2 (-h \lambda) +
   \\
@@ -3799,12 +3809,16 @@ i.e.
 \begin{equation*}
 \begin{split}
   y(t_{k+1}) = e^{-h \lambda} y(t_k) +
+  \\
   g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right)
   h \phi_1(-h \lambda) + %ok
+  \\
   \left[g(y(t_{k+1}), t_{k+1}) - g(y(t_k), t_k)\right]
   \left( h \phi_2 (-h \lambda) - \frac{h \phi_1(-h \lambda)}{2} \right) +
   \\
-  + 4 \left[g(y(t_{k+1}), t_{k+1}) + g(y(t_k), t_k) - 2 g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) \right]
+  + 4 \left[g(y(t_{k+1}), t_{k+1}) + 
+  \\
+  g(y(t_k), t_k) - 2 g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) \right]
   \left( h \phi_3 (-h \lambda) + \frac{h \phi_1(-h \lambda)}{8} - \frac{h \phi_2(-h \lambda)}{2} \right) + O(h^4).
 \end{split}
 \end{equation*}
@@ -3813,8 +3827,10 @@ Using the Cox and Mathhews’s ETDRK\sphinxhyphen{}2 expressions to approximate 
 \begin{equation*}
 \begin{split}
   y(t_{k+1}) = e^{-h \lambda} y(t_k) +
+  \\
   g\left(c'_k, t_{k+\frac{1}{2}}\right)
   h \phi_1(-h \lambda) + %ok
+  \\
   \left[g(c_k, t_{k+1}) - g(y(t_k), t_k)\right]
   \left( h \phi_2 (-h \lambda) - \frac{h \phi_1(-h \lambda)}{2} \right) +
   \\
@@ -3827,13 +3843,17 @@ with
 \begin{equation*}
 \begin{split}
   c_k = e^{-h \lambda} y(t_k) +
+  \\
   h \phi_1 (-\lambda h) g(y(t_k), t_k) +
+  \\
   \left[g(a_k, t_{k+1}) - g(y(t_k), t_k) \right] h \phi_2 (-\lambda h),
   \\
   a_k = e^{-h \lambda}y(t_k) + g(y(t_k), t_k) h \phi_1(-h\lambda),
   \\
   c'_k = e^{- \frac{h \lambda}{2}} y(t_k) +
+  \\
   \frac{h}{2} \phi_1 \left(- \frac{\lambda h}{2} \right) g(y(t_k), t_k) +
+  \\
   \left[g\left(a'_k, t_{k+\frac{1}{2}}\right) - g(y(t_k), t_k) \right] \frac{h}{2} \phi_2 \left(-\frac{\lambda h}{2}\right),
   \\
   a'_k = e^{-\frac{h \lambda}{2}}y(t_k) + g(y(t_k), t_k) \frac{h}{2} \phi_1\left(-\frac{h \lambda}{2}\right).
@@ -3866,8 +3886,16 @@ Here, that is taken the variation of constants formula:
 and applied the Simpson’s rule (here was used the order of convergence from Burden) so that it will be:
 \begin{equation*}
 \begin{split}
-    y(t_{k+1}) = e^{-h \lambda}y(t_k) + \frac{h}{6} \left[ e^{-\lambda(t_{k+1}-t_k)} g(y(t_k), t_k) + 4 e^{-\lambda \left(t_{k+1}-t_{k + \frac{1}{2}} \right)} g\left(y\left(t_{k+\frac{1}{2}}\right), t_k + \frac{h}{2} \right) \\ + e^{-\lambda(t_{k+1}-t_{k+1})} g(y(t_{k+1}), t_{k+1}) \right] + O(h^5), \\
-    y(t_{k+1}) = e^{-h \lambda}y(t_k) + \frac{h}{6} \left[ e^{-\lambda h} g(y(t_k), t_k) + 4 e^{-\frac{ \lambda h}{2}} g\left(y\left(t_k + \frac{h}{2} \right), t_k + \frac{h}{2} \right) + g(y(t_{k+1}), t_{k+1}) \right] +  O(h^5).
+    y(t_{k+1}) = e^{-h \lambda}y(t_k) + 
+    \\
+    \frac{h}{6} \left[ e^{-\lambda(t_{k+1}-t_k)} g(y(t_k), t_k) + 4 e^{-\lambda \left(t_{k+1}-t_{k + \frac{1}{2}} \right)} g\left(y\left(t_{k+\frac{1}{2}}\right), t_k + \frac{h}{2} \right) \\ + e^{-\lambda(t_{k+1}-t_{k+1})} g(y(t_{k+1}), t_{k+1}) \right] 
+    \\
+    + O(h^5), \\
+    y(t_{k+1}) = e^{-h \lambda}y(t_k) + 
+    \\
+    \frac{h}{6} \left[ e^{-\lambda h} g(y(t_k), t_k) + 4 e^{-\frac{ \lambda h}{2}} g\left(y\left(t_k + \frac{h}{2} \right), t_k + \frac{h}{2} \right) + g(y(t_{k+1}), t_{k+1}) \right] 
+    \\
+    +  O(h^5).
 \end{split}
 \end{equation*}
 \sphinxAtStartPar

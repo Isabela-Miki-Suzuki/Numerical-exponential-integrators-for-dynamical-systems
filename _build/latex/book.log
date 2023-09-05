@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2023.6.26)  4 SEP 2023 23:01
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2023.6.26)  4 SEP 2023 23:07
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1312,7 +1312,11 @@ File: psdextra.def 2021-06-07 v7.00m Hyperref: Additions to PDF string support
 
 
 Writing index file book.idx
-(./book.aux)
+(./book.aux
+LaTeX Info: Redefining \rmfamily on input line 19.
+LaTeX Info: Redefining \sffamily on input line 19.
+LaTeX Info: Redefining \ttfamily on input line 19.
+)
 \openout1 = `book.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 93.
@@ -1392,12 +1396,10 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 93.
 LaTeX Info: Redefining \pageref on input line 93.
 LaTeX Info: Redefining \nameref on input line 93.
+
+(./book.out) (./book.out)
 \@outlinefile=\write6
 \openout6 = `book.out'.
-
-
-
-Package hyperref Warning: Rerun to get /PageLabels entry.
 
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
 (Font)                  OT1/cmr/m/n --> TU/FreeSerif(0)/m/n on input line 93.
@@ -1609,6 +1611,7 @@ LaTeX Info: Redefining \rmfamily on input line 93.
 LaTeX Info: Redefining \sffamily on input line 93.
 LaTeX Info: Redefining \ttfamily on input line 93.
 Package hyperref Info: Option `pageanchor' set `false' on input line 96.
+
 (/usr/share/texlive/texmf-dist/tex/generic/stringenc/se-ascii-print.def
 File: se-ascii-print.def 2019/11/29 v1.12 stringenc: Printable ASCII characters
 
@@ -1647,24 +1650,15 @@ File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 ] [2
 
 
-]
+] (./book.toc)
 \tf@toc=\write7
 \openout7 = `book.toc'.
 
  [1
 
-]
-[2
+] [2
 
 ]
-
-LaTeX Warning: Hyper reference `Summary_of_the_proposed_project::doc' on page 1
- undefined on input line 180.
-
-
-LaTeX Warning: Hyper reference `Project_execution::doc' on page 1 undefined on 
-input line 184.
-
 
 LaTeX Warning: Hyper reference `References::doc' on page 1 undefined on input l
 ine 188.
@@ -1701,4 +1695,5 @@ LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
 (Font)              scaled to size 6.00064pt on input line 1152.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
 (Font)              scaled to size 7.99915pt on input line 1152.
-LaTeX Font Info:    Font shape `TU/latinmodern
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 5.99936pt on in

@@ -1316,13 +1316,18 @@ plt.xscale('log')
 # 
 # $$
 #   y(t_{k+1}) = e^{-h \lambda} y(t_k) +
+#   \\
 #   g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right)
 #   \int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)} d \tau +
+#   \\
 #   \frac{g(y(t_{k+1}), t_{k+1}) - g(y(t_k), t_k)}{h}
 #   \int_{t_k}^{t_{k+1}} \left(\tau - t_{k+\frac{1}{2}}\right) e^{-\lambda(t_{k+1}-\tau)} d \tau +
 #   \\
-#   + \frac{ 4 \left[g(y(t_{k+1}), t_{k+1}) + g(y(t_k), t_k) - 2 g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) \right]}{h^2}
+#   + \frac{ 4 \left[g(y(t_{k+1}), t_{k+1}) + 
+#   \\
+#   g(y(t_k), t_k) - 2 g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) \right]}{h^2}
 #   \int_{t_k}^{t_{k+1}} \frac{\left(\tau - t_{k+\frac{1}{2}}\right)^2}{2!} e^{-\lambda(t_{k+1}-\tau)} d \tau
+#   \\
 #   + \int_{t_k}^{t_{k+1}} O((\tau - t_k)^3) e^{-\lambda(t_{k+1}-\tau)} d \tau,
 # $$
 # 
@@ -1332,10 +1337,13 @@ plt.xscale('log')
 #   y(t_{k+1}) = e^{-h \lambda} y(t_k) +
 #   g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right)
 #   \int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)} d \tau +
+#   \\
 #   \frac{g(y(t_{k+1}), t_{k+1}) - g(y(t_k), t_k)}{h}
 #   \int_{t_k}^{t_{k+1}} \left(\tau - t_{k}\right) e^{-\lambda(t_{k+1}-\tau)} d \tau +
 #   \\
-#   + \frac{ 4 \left[g(y(t_{k+1}), t_{k+1}) + g(y(t_k), t_k) - 2 g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) \right]}{h^2}
+#   + \frac{ 4 \left[g(y(t_{k+1}), t_{k+1}) + 
+#   \\
+#   g(y(t_k), t_k) - 2 g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) \right]}{h^2}
 #   \int_{t_k}^{t_{k+1}} \frac{(\tau - t_k)^2}{2!} e^{-\lambda(t_{k+1}-\tau)} d \tau +
 #   \\
 #   - \frac{g(y(t_{k+1}), t_{k+1}) - g(y(t_k), t_k)}{h}
@@ -1354,8 +1362,10 @@ plt.xscale('log')
 # 
 # $$
 #   y(t_{k+1}) = e^{-h \lambda} y(t_k) +
+#   \\
 #   g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right)
 #   h \phi_1(-h \lambda) +
+#   \\
 #   \frac{g(y(t_{k+1}), t_{k+1}) - g(y(t_k), t_k)}{h}
 #   h^2 \phi_2 (-h \lambda) +
 #   \\
@@ -1378,12 +1388,16 @@ plt.xscale('log')
 # 
 # $$
 #   y(t_{k+1}) = e^{-h \lambda} y(t_k) +
+#   \\
 #   g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right)
 #   h \phi_1(-h \lambda) + %ok
+#   \\
 #   \left[g(y(t_{k+1}), t_{k+1}) - g(y(t_k), t_k)\right]
 #   \left( h \phi_2 (-h \lambda) - \frac{h \phi_1(-h \lambda)}{2} \right) +
 #   \\
-#   + 4 \left[g(y(t_{k+1}), t_{k+1}) + g(y(t_k), t_k) - 2 g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) \right]
+#   + 4 \left[g(y(t_{k+1}), t_{k+1}) + 
+#   \\
+#   g(y(t_k), t_k) - 2 g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) \right]
 #   \left( h \phi_3 (-h \lambda) + \frac{h \phi_1(-h \lambda)}{8} - \frac{h \phi_2(-h \lambda)}{2} \right) + O(h^4).
 # $$
 # 
@@ -1391,8 +1405,10 @@ plt.xscale('log')
 # 
 # $$
 #   y(t_{k+1}) = e^{-h \lambda} y(t_k) +
+#   \\
 #   g\left(c'_k, t_{k+\frac{1}{2}}\right)
 #   h \phi_1(-h \lambda) + %ok
+#   \\
 #   \left[g(c_k, t_{k+1}) - g(y(t_k), t_k)\right]
 #   \left( h \phi_2 (-h \lambda) - \frac{h \phi_1(-h \lambda)}{2} \right) +
 #   \\
@@ -1404,13 +1420,17 @@ plt.xscale('log')
 # 
 # $$
 #   c_k = e^{-h \lambda} y(t_k) +
+#   \\
 #   h \phi_1 (-\lambda h) g(y(t_k), t_k) +
+#   \\
 #   \left[g(a_k, t_{k+1}) - g(y(t_k), t_k) \right] h \phi_2 (-\lambda h),
 #   \\
 #   a_k = e^{-h \lambda}y(t_k) + g(y(t_k), t_k) h \phi_1(-h\lambda),
 #   \\
 #   c'_k = e^{- \frac{h \lambda}{2}} y(t_k) +
+#   \\
 #   \frac{h}{2} \phi_1 \left(- \frac{\lambda h}{2} \right) g(y(t_k), t_k) +
+#   \\
 #   \left[g\left(a'_k, t_{k+\frac{1}{2}}\right) - g(y(t_k), t_k) \right] \frac{h}{2} \phi_2 \left(-\frac{\lambda h}{2}\right),
 #   \\
 #   a'_k = e^{-\frac{h \lambda}{2}}y(t_k) + g(y(t_k), t_k) \frac{h}{2} \phi_1\left(-\frac{h \lambda}{2}\right).
@@ -1438,8 +1458,16 @@ plt.xscale('log')
 # and applied the Simpson's rule (here was used the order of convergence from Burden) so that it will be:
 # 
 # $$
-#     y(t_{k+1}) = e^{-h \lambda}y(t_k) + \frac{h}{6} \left[ e^{-\lambda(t_{k+1}-t_k)} g(y(t_k), t_k) + 4 e^{-\lambda \left(t_{k+1}-t_{k + \frac{1}{2}} \right)} g\left(y\left(t_{k+\frac{1}{2}}\right), t_k + \frac{h}{2} \right) \\ + e^{-\lambda(t_{k+1}-t_{k+1})} g(y(t_{k+1}), t_{k+1}) \right] + O(h^5), \\
-#     y(t_{k+1}) = e^{-h \lambda}y(t_k) + \frac{h}{6} \left[ e^{-\lambda h} g(y(t_k), t_k) + 4 e^{-\frac{ \lambda h}{2}} g\left(y\left(t_k + \frac{h}{2} \right), t_k + \frac{h}{2} \right) + g(y(t_{k+1}), t_{k+1}) \right] +  O(h^5).
+#     y(t_{k+1}) = e^{-h \lambda}y(t_k) + 
+#     \\
+#     \frac{h}{6} \left[ e^{-\lambda(t_{k+1}-t_k)} g(y(t_k), t_k) + 4 e^{-\lambda \left(t_{k+1}-t_{k + \frac{1}{2}} \right)} g\left(y\left(t_{k+\frac{1}{2}}\right), t_k + \frac{h}{2} \right) \\ + e^{-\lambda(t_{k+1}-t_{k+1})} g(y(t_{k+1}), t_{k+1}) \right] 
+#     \\
+#     + O(h^5), \\
+#     y(t_{k+1}) = e^{-h \lambda}y(t_k) + 
+#     \\
+#     \frac{h}{6} \left[ e^{-\lambda h} g(y(t_k), t_k) + 4 e^{-\frac{ \lambda h}{2}} g\left(y\left(t_k + \frac{h}{2} \right), t_k + \frac{h}{2} \right) + g(y(t_{k+1}), t_{k+1}) \right] 
+#     \\
+#     +  O(h^5).
 # $$
 # 
 # To approximate $y\left(t_k + \frac{h}{2} \right)$:
