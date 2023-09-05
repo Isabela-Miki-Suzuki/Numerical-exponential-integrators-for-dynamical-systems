@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>3.1 Chapter 1 &#8212; Numerical exponential integrators for dynamical systems</title>
+    <title>Motivation - Stiffness &#8212; Numerical exponential integrators for dynamical systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -54,8 +54,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="3.2 Chapter 2: Classical methods" href="cap2.html" />
-    <link rel="prev" title="&lt;no title&gt;" href="Introduction.html" />
+    <link rel="next" title="Classical methods" href="cap2.html" />
+    <link rel="prev" title="Project execution" href="Project_execution.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -118,17 +118,12 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="Summary_of_the_proposed_project.html">
-   1. Summary of the proposed project
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Summary_of_the_activities.html">
-   2. Summary of the activities
+   Summary of the proposed project
   </a>
  </li>
  <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="Project_execution.html">
-   3. Project execution
+   Project execution
   </a>
   <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
@@ -138,34 +133,44 @@ const thebe_selector_output = ".output, .cell_output"
   <ul class="current">
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     3.1 Chapter 1
+     Motivation - Stiffness
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="cap2.html">
-     3.2 Chapter 2: Classical methods
+     Classical methods
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="cap3.html">
-     Chapter 3: important concepts for the study of exponential methods
+     Important concepts for the study of exponential methods
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="cap4.html">
-     Chapter 2: Exponential methods
+     Exponential methods
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="cap5.html">
+     Swing spring application
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="Description_and_evaluation_of_institutional_support_received_in_the_period.html">
-   Description and evaluation of institutional support received in the period
+  <a class="reference internal" href="References.html">
+   References
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Participation_in_scientific_event%2C_list_of_publications_and_list_of_papers_prepared_or_submitted.html">
    Participation in scientific event, list of publications and list of papers prepared or submitted
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="appendix.html">
+   Appendix
   </a>
  </li>
 </ul>
@@ -376,12 +381,12 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#cauchy-problem">
-   3.1.1 Cauchy problem
+   Cauchy problem
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#stiffness">
-   3.1.2 Stiffness
+   Stiffness
   </a>
  </li>
 </ul>
@@ -393,7 +398,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>3.1 Chapter 1</h1>
+                <h1>Motivation - Stiffness</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -405,12 +410,12 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#cauchy-problem">
-   3.1.1 Cauchy problem
+   Cauchy problem
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#stiffness">
-   3.1.2 Stiffness
+   Stiffness
   </a>
  </li>
 </ul>
@@ -423,50 +428,54 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="chapter-1">
-<h1>3.1 Chapter 1<a class="headerlink" href="#chapter-1" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="motivation-stiffness">
+<h1>Motivation - Stiffness<a class="headerlink" href="#motivation-stiffness" title="Permalink to this headline">#</a></h1>
 <p>The reason for studying exponential methods is that those are good with <span class="math notranslate nohighlight">\(\textbf{stiff differential equations}\)</span> in terms of precision and how small the time step is required to be to achieve good accuracy.</p>
 <section id="cauchy-problem">
-<h2>3.1.1 Cauchy problem<a class="headerlink" href="#cauchy-problem" title="Permalink to this headline">#</a></h2>
+<h2>Cauchy problem<a class="headerlink" href="#cauchy-problem" title="Permalink to this headline">#</a></h2>
 <p>A <span class="math notranslate nohighlight">\(\textbf{Cauchy problem}\)</span> is a ordinary differential equation (ODE) with initial conditions. Being its standard scalar form:</p>
-<p>\begin{cases}
-y’(t) = f(y(t), t), t \in (t_0, T) \
-y(t_0) = y_0 \in \mathbb{K} \text{,}
-\end{cases}</p>
+<p><span class="math notranslate nohighlight">\(\begin{cases}
+    y'(t) = f(y(t), t), t \in (t_0, T) \\
+    y(t_0) = y_0 \in \mathbb{K} \text{,}
+\end{cases}\)</span></p>
 <p>with <span class="math notranslate nohighlight">\(\mathbb{K}\)</span> a field, <span class="math notranslate nohighlight">\(f\)</span> function with image in <span class="math notranslate nohighlight">\(\mathbb{K}\)</span> and <span class="math notranslate nohighlight">\(t_0, T \in \mathbb{R}\)</span>.</p>
 <p>Sometimes, it is convenient to separate the linear part of <span class="math notranslate nohighlight">\(f\)</span> as indicated below:</p>
-<p>\begin{equation*}
-f(y(t), t) = g(y(t), t) - \lambda y(t) \text{,}
-\end{equation*}</p>
+<div class="math notranslate nohighlight">
+\[
+    f(y(t), t) = g(y(t), t) - \lambda y(t) \text{,}
+\]</div>
 <p>with <span class="math notranslate nohighlight">\(\lambda \in \mathbb{K}\)</span> or <span class="math notranslate nohighlight">\(\mathscr{M}_{N \times N}(\mathbb{K})\)</span>.</p>
 <p>So the system is:</p>
-<p>\begin{cases}
-y’(t) + \lambda y(t) = g(y(t), t), t \in (t_0, T) \
-y(0) = y_0
-\text{.}
-\end{cases}</p>
+<p><span class="math notranslate nohighlight">\(\begin{cases}
+    y'(t) + \lambda y(t) = g(y(t), t), t \in (t_0, T) \\
+    y(0) = y_0 
+    \text{.}
+\end{cases}\)</span></p>
 <p>In this project, the stiff ones were those addressed.</p>
 <p>Notation as in [1].</p>
 </section>
 <section id="stiffness">
-<h2>3.1.2 Stiffness<a class="headerlink" href="#stiffness" title="Permalink to this headline">#</a></h2>
+<h2>Stiffness<a class="headerlink" href="#stiffness" title="Permalink to this headline">#</a></h2>
 <p>The error of the approximation given by a method trying to estimate the solution of a Cauchy problem is always given by a term multiplied by a higher derivative of the exact solution, because of the Taylor expansion with Lagrange form of the remainder. In that way, if that is enough information about this derivative, the error can be estimated.</p>
 <p>If the norm of the derivative increases with the time, but the exact solution doesn’t, that is possible that the error dominates the approximation and the precision is lost. Those problems are called <span class="math notranslate nohighlight">\(\textbf{stiff equations}\)</span>.</p>
 <p>Between them, there are the <span class="math notranslate nohighlight">\(\textbf{stiff differential equations}\)</span>, that have exact solution given by the sum of a <span class="math notranslate nohighlight">\(\textit{transient solution}\)</span> with a <span class="math notranslate nohighlight">\(\textit{steady state solution}\)</span>.</p>
 <p>The <span class="math notranslate nohighlight">\(\textbf{transient solution}\)</span> is of the form:</p>
-<p>\begin{align*}
-e^{-ct} \text{, with c &gt;&gt;1, }
-\end{align*}</p>
+<div class="math notranslate nohighlight">
+\[
+    e^{-ct} \text{, with c &gt;&gt;1, }
+\]</div>
 <p>which is known to go to zero really fast as t increases. But its <span class="math notranslate nohighlight">\(n\)</span>th derivative</p>
-<p>\begin{align*}
-\mp c^{n}e^{-ct}
-\end{align*}</p>
+<div class="math notranslate nohighlight">
+\[
+    \mp c^{n}e^{-ct}
+\]</div>
 <p>doesn’t go as quickly and may increase in magnitude.</p>
 <p>The <span class="math notranslate nohighlight">\(\textbf{steady state solution}\)</span>, however, as its name implies, have small changes as time passes, with higher derivative being almost constant zero.</p>
 <p>In a system of ODE’s, these characteristics are most common in problems in which the solution of the initial value problem is of the form</p>
-<p>\begin{align*}
-e^{A}
-\end{align*}</p>
+<div class="math notranslate nohighlight">
+\[
+    e^{A}
+\]</div>
 <p>being <span class="math notranslate nohighlight">\(A\)</span> a matrix such that <span class="math notranslate nohighlight">\(\lambda_{min}\)</span> and <span class="math notranslate nohighlight">\(\lambda_{max}\)</span> are the eigenvalue with minimum and maximum value in modulus and <span class="math notranslate nohighlight">\(\lambda_{min} &lt;&lt; \lambda_{max}\)</span>. On the bigger magnitude eigenvalue direction, the behaviour is very similar to the transient solution, having drastic changes over time and on the smaller one, comparing to that, changes almost nothing as times passes, like the steady state solution.</p>
 <p>Work around these problems and being able to accurately approximate these so contrasting parts of the solutions requires more robust methods than the more classic and common one-step methods addressed at the beginning of the study of numerical methods for Cauchy problems. For the systems, it is also required that that is a precise way to calculate the exponential of a matrix.</p>
 <p>In this project, we studied the <span class="math notranslate nohighlight">\(\textbf{exponential methods}\)</span>, their capabilities to deal with these problems and the comparision with other simpler methods.</p>
@@ -501,17 +510,17 @@ e^{A}
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="Introduction.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="Project_execution.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">&lt;no title&gt;</p>
+            <p class="prev-next-title">Project execution</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="cap2.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">3.2 Chapter 2: Classical methods</p>
+        <p class="prev-next-title">Classical methods</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

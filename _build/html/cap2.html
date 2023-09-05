@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>3.2 Chapter 2: Classical methods &#8212; Numerical exponential integrators for dynamical systems</title>
+    <title>Classical methods &#8212; Numerical exponential integrators for dynamical systems</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -54,8 +54,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Chapter 3: important concepts for the study of exponential methods" href="cap3.html" />
-    <link rel="prev" title="3.1 Chapter 1" href="cap1.html" />
+    <link rel="next" title="Important concepts for the study of exponential methods" href="cap3.html" />
+    <link rel="prev" title="Motivation - Stiffness" href="cap1.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -118,17 +118,12 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="Summary_of_the_proposed_project.html">
-   1. Summary of the proposed project
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Summary_of_the_activities.html">
-   2. Summary of the activities
+   Summary of the proposed project
   </a>
  </li>
  <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="Project_execution.html">
-   3. Project execution
+   Project execution
   </a>
   <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
@@ -138,34 +133,44 @@ const thebe_selector_output = ".output, .cell_output"
   <ul class="current">
    <li class="toctree-l2">
     <a class="reference internal" href="cap1.html">
-     3.1 Chapter 1
+     Motivation - Stiffness
     </a>
    </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     3.2 Chapter 2: Classical methods
+     Classical methods
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="cap3.html">
-     Chapter 3: important concepts for the study of exponential methods
+     Important concepts for the study of exponential methods
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="cap4.html">
-     Chapter 2: Exponential methods
+     Exponential methods
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="cap5.html">
+     Swing spring application
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="Description_and_evaluation_of_institutional_support_received_in_the_period.html">
-   Description and evaluation of institutional support received in the period
+  <a class="reference internal" href="References.html">
+   References
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Participation_in_scientific_event%2C_list_of_publications_and_list_of_papers_prepared_or_submitted.html">
    Participation in scientific event, list of publications and list of papers prepared or submitted
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="appendix.html">
+   Appendix
   </a>
  </li>
 </ul>
@@ -384,28 +389,6 @@ title="Print to PDF"
    Examples
   </a>
  </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#euler-method">
-   Euler method
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#stability">
-     Stability
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#convergence">
-     Convergence
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#order-of-convergence">
-     Order of convergence
-    </a>
-   </li>
-  </ul>
- </li>
 </ul>
 
     </nav>
@@ -415,7 +398,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>3.2 Chapter 2: Classical methods</h1>
+                <h1>Classical methods</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -435,28 +418,6 @@ title="Print to PDF"
    Examples
   </a>
  </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#euler-method">
-   Euler method
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#stability">
-     Stability
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#convergence">
-     Convergence
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#order-of-convergence">
-     Order of convergence
-    </a>
-   </li>
-  </ul>
- </li>
 </ul>
 
                         </nav>
@@ -467,71 +428,105 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="chapter-2-classical-methods">
-<h1>3.2 Chapter 2: Classical methods<a class="headerlink" href="#chapter-2-classical-methods" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="classical-methods">
+<h1>Classical methods<a class="headerlink" href="#classical-methods" title="Permalink to this headline">#</a></h1>
 <p>In order to show that the exponential methods improve in dealing with Stiff problems, that is necessary to know how the previows methods deal with them, so a review on the theory of the classical methods is made in this chapter. In particular there will be focus on the one step methods. All the information is from [3].</p>
 <section id="one-step-methods-for-ode">
 <h2>One step methods for ODE<a class="headerlink" href="#one-step-methods-for-ode" title="Permalink to this headline">#</a></h2>
 <p>In order to find a approximation for the solution of the problem
-\begin{cases}
-y’(t) = f(t, y(t)), t \in [t_0,T] \
+<span class="math notranslate nohighlight">\(\begin{cases}
+y'(t) = f(t, y(t)), t \in [t_0,T] \\
 y(t_0)=y_0 \text{,}
-\end{cases}</p>
-<p>they are of the form:
-$<span class="math notranslate nohighlight">\(
+\end{cases}\)</span></p>
+<p>they are of the form:</p>
+<div class="math notranslate nohighlight">
+\[
 y_{k+1} = y_{k} + h \phi (t_{k},y_{k},t_{k+1},y_{k+1},h) \text{,}
-\)</span>$</p>
-<p>with $<span class="math notranslate nohighlight">\(k = 0, 1, ..., n-1;\)</span><span class="math notranslate nohighlight">\(
-\)</span><span class="math notranslate nohighlight">\(
+\]</div>
+<p>with</p>
+<div class="math notranslate nohighlight">
+\[k = 0, 1, ..., n-1;\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
 N \in \mathbb{N}; h = \frac{T-t_0}{N}; \\
 \{t_i = t_0 + ih : i = 0, 1, ..., N\}; \\ 
 y_n \thickapprox y(t_n) .
-\)</span>$</p>
-<p>To analyse the method, there is a model problem
+\end{split}\]</div>
+<p>To analyse the method, there is a model problem</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
 \begin{cases}
-y’(t) = - \lambda y(t) \text{ ; } t \in[t_0,T]\
-y(t_0)=y_0,\
-\end{cases}</p>
+    y'(t) = - \lambda y(t) \text{ ; } t \in[t_0,T]\\ 
+    y(t_0)=y_0,\\
+\end{cases}
+\end{split}\]</div>
 <p>whose solution is <span class="math notranslate nohighlight">\(y(t) = y_0 e^{-\lambda (t-t_0)}\)</span>
 with <span class="math notranslate nohighlight">\(\lambda &gt; 0.\)</span></p>
-<p>If that is possible to manipulate the method so that, for this problem, can be written as
-$<span class="math notranslate nohighlight">\(
-y_{k+1} = \zeta(\lambda,h) y_k,
-\)</span><span class="math notranslate nohighlight">\(
-then \)</span><span class="math notranslate nohighlight">\(\zeta(\lambda,h)\)</span><span class="math notranslate nohighlight">\( is called \)</span>\textbf{amplification factor}$ of the method.</p>
-<p>By induction, it gives
-$<span class="math notranslate nohighlight">\(
+<p>If that is possible to manipulate the method so that, for this problem, can be written as <span class="math notranslate nohighlight">\(y_{k+1} = \zeta(\lambda,h) y_k,\)</span></p>
+<p>then <span class="math notranslate nohighlight">\(\zeta(\lambda,h)\)</span> is called <span class="math notranslate nohighlight">\(\textbf{amplification factor}\)</span> of the method.</p>
+<p>By induction, it gives</p>
+<div class="math notranslate nohighlight">
+\[
 y_{k+1} = \zeta(\lambda, h)^{k+1} y_0.
-\)</span>$</p>
-<p>It is well known that this expression only converges as k goes to infinity if
-$<span class="math notranslate nohighlight">\(
-|\zeta(\lambda, h)| &lt; 1
-\)</span>$
-and then converges to zero.</p>
-<p>When it occurs, i.e., <span class="math notranslate nohighlight">\(k \rightarrow \infty \Rightarrow y_k \rightarrow 0\)</span> such as the exact solution <span class="math notranslate nohighlight">\(y(t) = y_0 e^{-\lambda (t-t_0)}\)</span>, it is said that there is <span class="math notranslate nohighlight">\(\textbf{stability}\)</span>.</p>
-<p>The inequation gives a interval for which values of <span class="math notranslate nohighlight">\(\lambda h\)</span>, <span class="math notranslate nohighlight">\(|\zeta(\lambda, h)|&lt;1\)</span>, called <span class="math notranslate nohighlight">\(\textbf{interval of stability}\)</span>.</p>
-<p>And if the interval of stability contains all the points <span class="math notranslate nohighlight">\(z\)</span> such that <span class="math notranslate nohighlight">\(Re(z) &lt; 0\)</span>, the method is said <span class="math notranslate nohighlight">\(\textbf{A-stable}\)</span>.</p>
+\]</div>
+<p>It is well known that this expression only converges as k goes to infinity if <span class="math notranslate nohighlight">\( |\zeta(\lambda, h)| &lt; 1\)</span></p>
+<p>and then converges to zero.</p>
+<p>When it occurs, i.e.,</p>
+<div class="math notranslate nohighlight">
+\[
+    k \rightarrow \infty \Rightarrow y_k \rightarrow 0
+\]</div>
+<p>such as the exact solution</p>
+<div class="math notranslate nohighlight">
+\[
+    y(t) = y_0 e^{-\lambda (t-t_0)},
+\]</div>
+<p>it is said that there is <span class="math notranslate nohighlight">\(\textbf{stability}\)</span>.</p>
+<p>The interval with the values of <span class="math notranslate nohighlight">\(\lambda h\)</span> such as</p>
+<div class="math notranslate nohighlight">
+\[
+|\zeta(\lambda, h)|&lt;1,
+\]</div>
+<p>is called <span class="math notranslate nohighlight">\(\textbf{interval of stability}\)</span>.</p>
+<p>And if the interval of stability contains all the points <span class="math notranslate nohighlight">\(z\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+    Re(z) &lt; 0,
+\]</div>
+<p>the method is said <span class="math notranslate nohighlight">\(\textbf{A-stable}\)</span>.</p>
 <p>The reason for taking this specific problem is that it models the behaviour of the difference between the approximation and the solution on a small neighbourhood of any Cauchy problem:</p>
-<p>Taking
+<p>Taking</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
 \begin{cases}
-y’(t) = f(y(t), t), t \in (t_0, T) \
-y(t_0) = y_0 \in \mathbb{K}
-\end{cases}</p>
+    y'(t) = f(y(t), t), t \in (t_0, T) \\
+    y(t_0) = y_0 \in \mathbb{K}
+\end{cases}
+\end{split}\]</div>
 <p>and a approximation <span class="math notranslate nohighlight">\(z\)</span> of the solution <span class="math notranslate nohighlight">\(y\)</span>, doing
-\begin{align*}
+$<span class="math notranslate nohighlight">\(
 \sigma(t) = z(t) - y(t) \Rightarrow
-\end{align*}</p>
-<p>\begin{align*}
+\)</span>$</p>
+<div class="math notranslate nohighlight">
+\[
 \dot{\sigma}(t) = \dot{z}(t) - \dot{y}(t) = f(z(t), t) - f(y(t), t) \Rightarrow
-\end{align*}</p>
-<p>\begin{align*}
-\dot{\sigma}(t) + \dot{y}(t) = \dot{z}(t) = f(z(t), t) = f(y(t)+\sigma(t), t) = f(y(t), t) + \sigma(t)\frac{\partial f}{\partial y} + O(\sigma^2(t)),
-\end{align*}</p>
-<p>so
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\dot{\sigma}(t) + \dot{y}(t) = \dot{z}(t) = f(z(t), t) = f(y(t)+\sigma(t), t)
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+ = f(y(t), t) + \sigma(t)\frac{\partial f}{\partial y} + O(\sigma^2(t)),
+\]</div>
+<p>so</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
 \begin{cases}
-\dot{\sigma}(t) \approx \sigma(t) \frac{\partial f}{\partial y} (y(t), t) \
-\sigma(t_k) = \sigma_k.
-\end{cases}</p>
+    \dot{\sigma}(t) \approx \sigma(t) \frac{\partial f}{\partial y} (y(t), t) \\
+    \sigma(t_k) = \sigma_k.
+\end{cases}
+\end{split}\]</div>
 <p>Other important definitions are:</p>
 <p><span class="math notranslate nohighlight">\(\textbf{Local truncation error:}\)</span> Is the difference between the exact expression and its numerical approximation in a certain point and with a certain domain discretization. If the domain is equally spaced by <span class="math notranslate nohighlight">\(h\)</span> is often denoted by <span class="math notranslate nohighlight">\(\tau(h,t_0)\)</span> being <span class="math notranslate nohighlight">\(t_0\)</span> the point.</p>
 <p><span class="math notranslate nohighlight">\(\textbf{Order of the local truncation error:}\)</span> the local truncation error (which depends on the <span class="math notranslate nohighlight">\(h\)</span> spacing of the discretized domain) <span class="math notranslate nohighlight">\(\tau(h)\)</span> has order <span class="math notranslate nohighlight">\(n \in \mathbb{N}\)</span> if <span class="math notranslate nohighlight">\(\tau(h) = O(h^n) \)</span>, i.e., if there is constant <span class="math notranslate nohighlight">\(M \in \mathbb{R}\)</span> and <span class="math notranslate nohighlight">\(h_0 \in \mathbb{R}\)</span> such that <span class="math notranslate nohighlight">\(\tau(h) \leq M h^n\)</span>, <span class="math notranslate nohighlight">\(\forall h \leq h_0\)</span>.</p>
@@ -539,109 +534,51 @@ y(t_0) = y_0 \in \mathbb{K}
 <p><span class="math notranslate nohighlight">\(\textbf{Consistency:}\)</span> The method is said consistent if <span class="math notranslate nohighlight">\(\lim _{h \to 0} \frac{1}{h}\tau(h,x_0) = 0\)</span>.</p>
 <p><span class="math notranslate nohighlight">\(\textbf{Obs.:}\)</span> For consistency, we usually only analyse for the linear part of the Cauchy problem, since this is the part that most influences in the consistency.</p>
 <p><span class="math notranslate nohighlight">\(\textbf{Order of consistency:}\)</span> is the smallest order (varying the points at which the local error is calculated) of the local truncation error.</p>
-<p><span class="math notranslate nohighlight">\(\textbf{Convergence:}\)</span> A numerical method is convergent if, and only if, for any well-posed Cauchy problem and for every <span class="math notranslate nohighlight">\(t \in (t_0, T)\)</span>,
-$<span class="math notranslate nohighlight">\(\lim_{h \to 0} e_k = 0\)</span><span class="math notranslate nohighlight">\(
-with \)</span>t - t_0 = kh<span class="math notranslate nohighlight">\( fixed and \)</span>e_k<span class="math notranslate nohighlight">\( denoting the global error on \)</span>t_k$ (following the past notation).</p>
-<p><span class="math notranslate nohighlight">\(\textbf{Theorem:}\)</span> A one-step explicit method given by
-$<span class="math notranslate nohighlight">\(
+<p><span class="math notranslate nohighlight">\(\textbf{Convergence:}\)</span> A numerical method is convergent if, and only if, for any well-posed Cauchy problem and for every <span class="math notranslate nohighlight">\(t \in (t_0, T)\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[\lim_{h \to 0} e_k = 0\]</div>
+<p>with <span class="math notranslate nohighlight">\(t - t_0 = kh\)</span> fixed and <span class="math notranslate nohighlight">\(e_k\)</span> denoting the global error on <span class="math notranslate nohighlight">\(t_k\)</span> (following the past notation).</p>
+<p><span class="math notranslate nohighlight">\(\textbf{Theorem:}\)</span> A one-step explicit method given by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
 y_0 = y(t_0) \\
 y_{k+1} = y_{k} + h \phi (t_{k},y_{k},h)
-\)</span><span class="math notranslate nohighlight">\(
-such that \)</span>\phi$ is Lipschitzian in y, continuous in their arguments, and consistent for any well-posed Cauchy problem is convergent. Besides that, the convergence order is greater or equal to the consistency order.</p>
+\end{split}\]</div>
+<p>such that <span class="math notranslate nohighlight">\(\phi\)</span> is Lipschitzian in y, continuous in their arguments, and consistent for any well-posed Cauchy problem is convergent. Besides that, the convergence order is greater or equal to the consistency order.</p>
 <p><span class="math notranslate nohighlight">\(\textit{Prove:}\)</span> [3] pág 29-31.</p>
 </section>
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">#</a></h2>
 <p>Euler method:</p>
-<p>\begin{equation*}
-\phi (t_{k},y_{k},h) = f(t_{k},y_{k})
-\end{equation*}</p>
-<p>Modified Euler method:</p>
-<p>\begin{equation*}
-\phi (t_{k},y_{k},h) = \frac{1}{2} \left[ f(t_{k},y_{k}) + f(t_{k+1},y_{k} + h f(t_{k},y_{k})) \right]
-\end{equation*}</p>
-<p>Midpoint method:</p>
-<p>\begin{equation*}
-\phi (t_{k},y_{k},h) = f(t_{k} + \frac{h}{2},y_{k} + \frac{h}{2} f(t_{k},y_{k}))
-\end{equation*}</p>
-<p>Classic Runge-Kutta (RK 4-4):</p>
-<p>\begin{gather*}
-\phi (t_{k},y_{k},h) = \frac{1}{6} \left( \kappa_1 + 2 \kappa_2 + 2 \kappa_3 + \kappa_4 \right), \text{with }\
-\kappa_1 = f(t_{k},y_{k})\
-\kappa_2 = f(t_{k} + \frac{h}{2},y_{k} + \frac{h}{2} \kappa_1)\
-\kappa_3 = f(t_{k} + \frac{h}{2},y_{k} + \frac{h}{2} \kappa_2)\
-\kappa_4 = f(t_{k} + h, y_{k} + h \kappa_3)
-\end{gather*}</p>
-</section>
-<section id="euler-method">
-<h2>Euler method<a class="headerlink" href="#euler-method" title="Permalink to this headline">#</a></h2>
-<p>Further detailing this explicit one-step method of</p>
-<p>\begin{equation*}
-\phi (t_{k},y_{k},h) = f(t_{k},y_{k}),
-\end{equation*}</p>
-<p>an analysis on stability, convergence and order of convergence is done.</p>
-<section id="stability">
-<h3>Stability<a class="headerlink" href="#stability" title="Permalink to this headline">#</a></h3>
-<p>For the problem
-\begin{cases}
-y’(t) = - \lambda y(t) \text{ ; } t \in [t_0 , T] \
-y(t_0)=y_0,
-\end{cases}</p>
-<p>with known solution</p>
 <div class="math notranslate nohighlight">
-\[ y(t) = y_0e^{-\lambda (t-t_0)},\]</div>
-<p>the method turn into:</p>
+\[
+    \phi (t_{k},y_{k},h) = f(t_{k},y_{k})
+\]</div>
+<p>Modified Euler method:</p>
+<div class="math notranslate nohighlight">
+\[
+    \phi (t_{k},y_{k},h) = \frac{1}{2} \left[ f(t_{k},y_{k}) + f(t_{k+1},y_{k} + h f(t_{k},y_{k})) \right]
+\]</div>
+<p>Midpoint method:</p>
+<div class="math notranslate nohighlight">
+\[
+    \phi (t_{k},y_{k},h) = f(t_{k} + \frac{h}{2},y_{k} + \frac{h}{2} f(t_{k},y_{k}))
+\]</div>
+<p>Classic Runge-Kutta (RK 4-4):</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
-y_0 = y(t_0)\\
-\textbf{for } k = 0, 1, 2, ..., N-1 :\\
-    y_{k+1} = y_k + h \lambda y_k \\
-    t_{k+1} = t_k + h.
+    \phi (t_{k},y_{k},h) = \frac{1}{6} \left( \kappa_1 + 2 \kappa_2 + 2 \kappa_3 + \kappa_4 \right), \text{with }\\
+    \kappa_1 = f(t_{k},y_{k})\\
+    \kappa_2 = f(t_{k} + \frac{h}{2},y_{k} + \frac{h}{2} \kappa_1)\\
+    \kappa_3 = f(t_{k} + \frac{h}{2},y_{k} + \frac{h}{2} \kappa_2)\\
+    \kappa_4 = f(t_{k} + h, y_{k} + h \kappa_3)
 \end{split}\]</div>
-<p>Then the amplification factor is:
-$<span class="math notranslate nohighlight">\(
-(1 - h \lambda).
-\)</span><span class="math notranslate nohighlight">\(
-If \)</span>|1 - h \lambda| &gt; 1<span class="math notranslate nohighlight">\(, for fixed \)</span>N<span class="math notranslate nohighlight">\(, it will be a divergent series (\)</span>k \rightarrow \infty \Rightarrow y_k \rightarrow \infty <span class="math notranslate nohighlight">\(), so, since the computer has a limitant number that can represent, even if the number of steps is such that \)</span>h$ is not small enought, it might have sufficient steps to reach the maximum number represented by the machine.</p>
-<p>However, if <span class="math notranslate nohighlight">\(|1 - h \lambda| &lt; 1\)</span> and <span class="math notranslate nohighlight">\(N\)</span> is fixed, it converges to zero (<span class="math notranslate nohighlight">\(k \rightarrow \infty \Rightarrow y_k \rightarrow 0 )\)</span>.</p>
-<p>Besides that, <span class="math notranslate nohighlight">\(|1 - h \lambda| &lt; 1\)</span> is the same as <span class="math notranslate nohighlight">\(0 &lt; h \lambda &lt; 2\)</span>.
-So the interval of stability is (0,2).
-That’s why the method suddenly converged, it was when <span class="math notranslate nohighlight">\(h\)</span> got small enought to <span class="math notranslate nohighlight">\(h \lambda\)</span> be in the interval of stability, i.e., <span class="math notranslate nohighlight">\(h &lt; 2/\lambda\)</span>.</p>
-<p>It is worth mentioning here that if <span class="math notranslate nohighlight">\(-1 &lt; 1 - h \lambda &lt; 0\)</span>, the error will converge oscillating since it takes positive values with even exponents and negative with odd ones.</p>
-</section>
-<section id="convergence">
-<h3>Convergence<a class="headerlink" href="#convergence" title="Permalink to this headline">#</a></h3>
-<p>Since
-$<span class="math notranslate nohighlight">\(
-\lim_{m \to +\infty} \left(1 + \frac{p}{m} \right)^m = e^p,
-\)</span><span class="math notranslate nohighlight">\(
-and h = \)</span>\frac{T-t_0}{N}<span class="math notranslate nohighlight">\(, for \)</span>y_N<span class="math notranslate nohighlight">\( we have
-\)</span><span class="math notranslate nohighlight">\(
-\lim_{N \to +\infty} y_N = \lim_{N \to +\infty} \left(1 - h \lambda \right)^N y_0 = \lim_{N \to +\infty} \left(1 - \frac{(T-t_0) \lambda}{N} \right)^N y_0.
-\)</span><span class="math notranslate nohighlight">\(
-It is reasonable to take \)</span>p = -(T-t_0) \lambda<span class="math notranslate nohighlight">\( and conclude that the last point estimated by the method will converge to
-\)</span><span class="math notranslate nohighlight">\(
-y_0e^{-\lambda (T-t_0)}.
-\)</span><span class="math notranslate nohighlight">\(
-Which is precisely \)</span>y(T)$ and proves the convergence.</p>
-</section>
-<section id="order-of-convergence">
-<h3>Order of convergence<a class="headerlink" href="#order-of-convergence" title="Permalink to this headline">#</a></h3>
-<p>Being <span class="math notranslate nohighlight">\(\tau(h, t_k)\)</span> the local truncation error.</p>
-<p>From
-\begin{equation*}
-y(t_{k+1}) = y(t_k) + h f(y(t_k),t_k) + O(h^2),
-\end{equation*}</p>
-<p>we have
-\begin{equation*}
-h \tau(h, t_k) \doteq \frac{y(t_{k+1}) - y(t_k)}{h} - f(t_k, y(t_k)) = O(h^2),
-\end{equation*}</p>
-<p>so
-\begin{equation*}
-\tau(h, t_k) = O(h).
-\end{equation*}</p>
-<p>Since for one step methods the order of convergence is the order of the local truncation error, the order is of <span class="math notranslate nohighlight">\(O(h)\)</span>, order 1.</p>
-</section>
+<p>Further detailing the Euler mathod, explicit one-step method of</p>
+<div class="math notranslate nohighlight">
+\[
+    \phi (t_{k},y_{k},h) = f(t_{k},y_{k}),
+\]</div>
+<p>an analysis on stability, convergence and order of convergence is done on the appendix.</p>
 </section>
 </section>
 
@@ -676,13 +613,13 @@ h \tau(h, t_k) \doteq \frac{y(t_{k+1}) - y(t_k)}{h} - f(t_k, y(t_k)) = O(h^2),
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">3.1 Chapter 1</p>
+            <p class="prev-next-title">Motivation - Stiffness</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="cap3.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Chapter 3: important concepts for the study of exponential methods</p>
+        <p class="prev-next-title">Important concepts for the study of exponential methods</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

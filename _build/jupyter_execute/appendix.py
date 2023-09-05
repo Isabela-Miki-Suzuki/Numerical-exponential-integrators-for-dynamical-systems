@@ -19,31 +19,6 @@ from scipy import linalg
 
 stab_lim = 1000.0
 
-def classic_euler_deprec(t0, tf, n, x0, lamb, g):
-    '''(float, float, int, float, float, function) -> np.vector'''
-    h = (tf-t0)/n
-    x = np.zeros(n)
-    x[0]=x0
-    t = t0
-    for i in range(1, n):
-        x[i] = x[i-1] + h*(-lamb*x[i-1] + g(x[i-1],t))
-        t = t0 + i*h
-        if np.abs(x[i]) > stab_lim:
-            x[i] = 0.0
-    return x
-
-def exponential_euler_deprec(t0, tf, n, x0, lamb, g):
-    '''(float, float, int, float, function) -> np.vector'''
-    h = (tf-t0)/n
-    x = np.zeros(n)
-    x[0]=x0
-    t = t0
-    phi1 = (1-np.exp(-h*lamb))/lamb
-    for i in range(1, n):
-        x[i] = np.exp(-h*lamb)*x[i-1] + phi1*g(x[i-1],t)
-        t = t0 + i*h
-    return x
-
 def classic_euler(t0, tf, n, x0, A, g):
     '''(float, float, int, np.array, np.matrix, function) -> np.matrix'''
     h = (tf-t0)/n
@@ -71,15 +46,23 @@ def exponential_euler(t0, tf, n, x0, A, g):
     return x
 
 def calculate_hphi1(h, A):
-    '''(float, np.matrix) -> np.matrix'''
-    hphi1 = np.matmul(1-expm(-h*A), linalg.inv(A))
-    return hphi1
+  '''(float, np.matrix) -> np.matrix'''
+  dim = A.shape[0]
+  hphi1 = np.matmul(np.eye(dim)-expm(-h*A), linalg.inv(A))
+  return hphi1
 
 def calculate_hphi2(h, A, hphi1):
     #IT IS NOT H2PHI2
     '''(float, np.matrix, np.matrix) -> np.matrix'''
-    hphi2 = np.matmul(1-hphi1/h, linalg.inv(A))
+    dim = A.shape[0]
+    hphi2 = np.matmul(np.eye(dim)-hphi1/h, linalg.inv(A))
     return hphi2
+
+def calculate_hphi3(h, A, hphi2):
+    '''(float, np.matrix, np.matrix) -> np.matrix'''
+    dim = A.shape[0]
+    hphi3 = np.matmul(1/2*np.eye(dim)-hphi2/h, linalg.inv(A))
+    return hphi3
 
 def etd2(t0, tf, n, x0, A, g, derivate_of_g):
     '''(float, float, int, np.array, np.matrix, function, function) -> np.matrix'''
@@ -95,7 +78,23 @@ def etd2(t0, tf, n, x0, A, g, derivate_of_g):
         t = t0 + i*h
     return x
 
-def etd2rk_cox_and_matthews(t0, tf, n, x0, A, g):
+def rk2(t0, tf, n, x0, A, g): #heun s method
+    '''(float, float, int, np.array, np.matrix, function) -> np.matrix'''
+    h = (tf-t0)/n
+    x = np.zeros((x0.size,n), dtype=np.complex_)
+    x[:,0]=x0
+    t = t0
+    for i in range(1, n):
+        a = x[:,i-1] + h*(np.matmul(-A,x[:,i-1]) + g(x[:,i-1],t))
+        f1 = np.matmul(-A,x[:,i-1]) + g(x[:,i-1],t)
+        f2 = np.matmul(-A,a) + g(a,t)
+        x[:,i] = x[:,i-1] + .5 * h * (f1 + f2)
+        t = t0 + i*h
+        if np.any(x[:,i].real > stab_lim):
+            x[:,i] = np.nan
+    return x
+
+def etd2rk(t0, tf, n, x0, A, g):
     '''(float, float, int, np.array, np.matrix, function) -> np.matrix'''
     h = (tf-t0)/n
     x = np.zeros((x0.size,n), dtype=np.complex_)
@@ -110,7 +109,7 @@ def etd2rk_cox_and_matthews(t0, tf, n, x0, A, g):
         t = t0 + i*h
     return x
 
-def etd2rk_cox_and_matthews_midpoint_rule(t0, tf, n, x0, A, g):
+def etd2rk_midpoint_rule(t0, tf, n, x0, A, g):
     '''(float, float, int, np.array, np.matrix, function) -> np.matrix'''
     h = (tf-t0)/n
     x = np.zeros((x0.size,n), dtype=np.complex_)
@@ -127,7 +126,7 @@ def etd2rk_cox_and_matthews_midpoint_rule(t0, tf, n, x0, A, g):
         t = t0 + i*h
     return x
 
-def etd2rk_trapezoidal_rule(t0, tf, n, x0, A, g):
+def etd2rk_trapezoidal_naive(t0, tf, n, x0, A, g):
     '''(float, float, int, np.array, np.matrix, function) -> np.matrix'''
     h = (tf-t0)/n
     x = np.zeros((x0.size,n), dtype=np.complex_)
@@ -141,7 +140,7 @@ def etd2rk_trapezoidal_rule(t0, tf, n, x0, A, g):
         t = t0 + i*h
     return x
 
-def etd2rk_midpoint_rule(t0, tf, n, x0, A, g):
+def etd2rk_midpoint_rule_naive(t0, tf, n, x0, A, g):
     '''(float, float, int, np.array, np.matrix, function, np.matrix) -> np.matrix'''
     h = (tf-t0)/n
     x = np.zeros((x0.size,n), dtype=np.complex_)
@@ -156,16 +155,101 @@ def etd2rk_midpoint_rule(t0, tf, n, x0, A, g):
         t = t0 + i*h
     return x
 
-def vectorize_sol(t0, t1, n, sol):
-    '''
-    (float, float, int, function) -> np.vector
-    n is the number of steps
-    '''
-    x = np.zeros(n, dtype=np.complex_)
-    h = (t1-t0)/n
-    for i in range(n):
-        x[i] = sol(t0+i*h)
+def rk4(t0, tf, n, x0, A, g):
+    '''(float, float, int, np.array, np.matrix, function) -> np.matrix'''
+    h = (tf-t0)/n
+    x = np.zeros((x0.size,n), dtype=np.complex_)
+    x[:,0]=x0
+    t = t0
+    for i in range(1, n):
+        k1 = np.matmul(-A,x[:,i-1]) + g(x[:,i-1],t)
+        x2 = x[:,i-1] + h * k1 / 2
+        k2 = np.matmul(-A,x2) + g(x2,t+h/2)
+        x3 = x[:,i-1] + h * k2 / 2
+        k3 = np.matmul(-A,x3) + g(x3,t+h/2)
+        x4 = x[:,i-1] + h * k3
+        k4 = np.matmul(-A,x4) + g(x4,t0 + i*h)
+        x[:,i] = x[:,i-1] + h / 6 * (k1 + 2*k2 + 2*k3 + k4)
+        t = t0 + i*h
+        if np.any(x[:,i].real > stab_lim):
+            x[:,i] = np.nan
     return x
+
+def etd3rk_similar(t0, tf, n, x0, A, g):
+  '''(float, float, int, np.array, np.matrix, function, np.matrix) -> np.matrix'''
+  h = (tf-t0)/n
+  x = np.zeros((x0.size,n), dtype=np.complex_)
+  x[:,0]=x0
+  t = t0
+  exponential_matrix = expm(-h*A)
+  exponential_matrix_2 = expm(-h/2*A)
+  hphi1 = calculate_hphi1(h, A)
+  h_2phi1_2 = calculate_hphi1(h/2, A)
+  hphi2 = calculate_hphi2(h, A, hphi1)
+  h_2phi2_2 = calculate_hphi2(h/2, A, h_2phi1_2)
+  hphi3 = calculate_hphi3(h, A, hphi2)
+  for i in range(1, n):
+    fst_term = np.matmul(exponential_matrix, x[:,i-1])
+    fst_term_2 = np.matmul(exponential_matrix_2, x[:,i-1])
+    a = fst_term + np.matmul(hphi1,g(x[:,i-1],t))
+    a_ = fst_term_2 + np.matmul(h_2phi1_2,g(x[:,i-1],t))
+    c = fst_term + np.matmul(hphi1,g(x[:,i-1],t)) + np.matmul(hphi2,g(a, t0 + i*h)-g(x[:,i-1],t))
+    c_ = fst_term_2 + np.matmul(h_2phi1_2,g(x[:,i-1],t)) + np.matmul(h_2phi2_2,g(a_, t0 + i*h)-g(x[:,i-1],t))
+    snd_term = np.matmul(hphi1, g(c_, t+h/2))
+    trd_term = np.matmul(hphi2 - hphi1/2,g(c, t0 + i*h)-g(x[:,i-1],t))
+    fth_term = 4 * np.matmul(hphi3+hphi1/8-hphi2/2, g(c, t0 + i*h)+g(x[:,i-1],t)-2*g(c_, t + h/2))
+    x[:,i] = fst_term + snd_term + trd_term + fth_term
+    t = t0 + i*h
+  return x
+
+def etd3rk(t0, tf, n, x0, A, g):
+  '''(float, float, int, np.array, np.matrix, function, np.matrix) -> np.matrix'''
+  h = (tf-t0)/n
+  x = np.zeros((x0.size,n), dtype=np.complex_)
+  x[:,0]=x0
+  t = t0
+  exponential_matrix = expm(-h*A)
+  exponential_matrix_2 = expm(-h/2*A)
+  hphi1 = calculate_hphi1(h, A)
+  h_2phi1_2 = calculate_hphi1(h/2, A)
+  hphi2 = calculate_hphi2(h, A, hphi1)
+  h_2phi2_2 = calculate_hphi2(h/2, A, h_2phi1_2)
+  hphi3 = calculate_hphi3(h, A, hphi2)
+  for i in range(1, n):
+    fst_term = np.matmul(exponential_matrix, x[:,i-1])
+    fst_term_2 = np.matmul(exponential_matrix_2, x[:,i-1])
+    a = fst_term_2 + np.matmul(h_2phi1_2,g(x[:,i-1],t))
+    b = fst_term + np.matmul(hphi1,2*g(a,t+h/2)-g(x[:,i-1],t))
+    snd_term = np.matmul(hphi1, g(a, t+h/2))
+    trd_term = np.matmul(hphi2 - hphi1/2,g(b, t0 + i*h)-g(x[:,i-1],t))
+    fth_term = 4 * np.matmul(hphi3+hphi1/8-hphi2/2, g(b, t0 + i*h)+g(x[:,i-1],t)-2*g(a, t + h/2))
+    x[:,i] = fst_term + snd_term + trd_term + fth_term
+    t = t0 + i*h
+  return x
+
+def etd3rk_naive(t0, tf, n, x0, A, g):
+  '''(float, float, int, np.array, np.matrix, function, np.matrix) -> np.matrix'''
+  h = (tf-t0)/n
+  x = np.zeros((x0.size,n), dtype=np.complex_)
+  x[:,0]=x0
+  t = t0
+  exponential_matrix = expm(-h*A)
+  exponential_matrix_2 = expm(-h/2*A)
+  hphi1 = calculate_hphi1(h, A)
+  h_2phi1_2 = calculate_hphi1(h/2, A)
+  for i in range(1, n):
+    fst_term = np.matmul(exponential_matrix, x[:,i-1])
+    fst_term_2 = np.matmul(exponential_matrix_2, x[:,i-1])
+    a = fst_term + np.matmul(hphi1,g(x[:,i-1],t))
+    a_ = fst_term_2 + np.matmul(h_2phi1_2,g(x[:,i-1],t))
+    c = fst_term + .5 * h * (np.matmul(exponential_matrix, g(x[:,i-1],t)) + g(a, t0 + i*h))
+    c_ = fst_term_2 + .25 * h * (np.matmul(exponential_matrix_2, g(x[:,i-1],t)) + g(a_, t0 + i*h))
+    snd_term = np.matmul(exponential_matrix, g(x[:,i-1],t))
+    trd_term = 4*np.matmul(exponential_matrix_2, g(c_,t+h/2))
+    fth_term = g(c, t0 + i*h)
+    x[:,i] = fst_term + h*(snd_term + trd_term + fth_term)/6
+    t = t0 + i*h
+  return x
 
 def error_2(x_approx, x_exact):
     ''' (np.vector, np.vector) -> float '''
@@ -180,18 +264,11 @@ def error_sup(x_approx, x_exact):
     v = abs(x_approx - x_exact)
     return np.amax(v)
 
-def g( x, t ):
+def g(x, t):
     ''' (np.array, float) -> float
         (x, t) -> g(x, t)
     '''
     g = np.array([np.sin(t)])
-    return g
-
-def g_linear_deprec( x, t ):
-    ''' (float, float) -> float
-        (x, t) -> g(x, t)
-    '''
-    g = 0
     return g
 
 def g_linear( x, t ):
@@ -199,16 +276,6 @@ def g_linear( x, t ):
         (x, t) -> g(x, t)
     '''
     g = np.zeros(x.size)
-    return g
-
-def g_cm1 (x, t):
-    ''' (np.array, float) -> np.array
-        (x, t) -> g(x, t)
-    '''
-    lamb = .5
-    c = 100
-    r_2 = x[0]**2 + x[1]**2
-    g = np.array([(lamb*x[1]-c*x[0])*r_2, -(lamb*x[0]+c*x[1])*r_2])
     return g
 
 def sol( t ):
@@ -221,33 +288,86 @@ def sol( t ):
     sol = np.exp(-lmba*t)+(np.exp(-lmba*t)+lmba*np.sin(t)-np.cos(t))/(1+lmba*lmba)
     return sol
 
-def sol_100_linear( t ):
+def sol_given_lmba(lmba, t ):
     ''' (float, float) -> float
     RECEIVES the initial value and a real (t).
     APPLIES the cauchy problem solution to this initial value at this point.
     RETURNS a real value.
     '''
-    sol = exp(-100*t) #u0=1
+    sol = np.exp(-lmba*t)+(np.exp(-lmba*t)+lmba*np.sin(t)-np.cos(t))/(1+lmba*lmba)
     return sol
 
-def sol_1j_linear( t ):
-    ''' (float, float) -> float
-    RECEIVES the initial value and a real (t).
-    APPLIES the cauchy problem solution to this initial value at this point.
-    RETURNS a real value.
+def vectorize_sol_given_lmba(lmba, t0, t1, n, sol):
     '''
-    return np.exp(1j*t)
-
-def sol_non_linear_sin( t ):
-    ''' (float, float) -> float
-    RECEIVES the initial value and a real (t).
-    APPLIES the cauchy problem solution to this initial value at this point.
-    RETURNS a real value.
+    (float, float, float, int, function) -> np.vector
+    n is the number of steps
     '''
-    sol = 2-cos(t) #u0=1
-    return sol
+    x = np.zeros((sol(lmba,t0).size,n), dtype=np.complex_)
+    h = (t1-t0)/n
+    for i in range(n):
+        x[:,i] = sol(lmba, t0+i*h)
+    return x
 
-def errors_array(n0, nf, method, t0, tf, x0, lmba, g, sol, vectorize_sol, error):
+def vectorize_sol(t0, t1, n, sol):
+    '''
+    (float, float, int, function) -> np.vector
+    n is the number of steps
+    '''
+    x = np.zeros((sol(t0).size,n), dtype=np.complex_)
+    h = (t1-t0)/n
+    for i in range(n):
+        x[:,i] = sol(t0+i*h)
+    return x
+
+def A_1D(lmba):
+  '''(int) -> np.matrix'''
+  return np.array([[lmba]])
+
+def A_2D(lmba):
+  '''(int) -> np.matrix'''
+  return np.array([[0, -lmba],[lmba, 0]])
+
+def errors_for_lambdas_array(n, method, t0, tf, x0, lmba0, lmbaf, Af, g, sol_given_lmba, vectorize_sol_given_lmba, error):
+    '''
+    This function is a variation of the errors_array function. Here, the linear
+    part of the problem is varying instead of the number of steps, which is now
+    fixed.
+    This function will RETURN 2 arrays.
+    The first one has the errors of the approximations given by the method with
+    coefficient of the linear part of the ploblem
+    A = Af(lmba0), Af(lmba0+1), Af(lmba0+2), ..., Af(lmbaf-1).
+    The second is [lmba0, lmba0+1, lmba0+2, ..., lmbaf-1]
+
+    RECEIVES:
+    n is the number of steps. (int)
+    method have arguments (t0, tf, n, x0, lmba, g) and return a
+    np.vector of length n (0, 1, 2, ..., n-1), n is the number of steps. (function)
+    t0 is the initial point of the approximation. (float)
+    tf is the last one. (float)
+    x0 is the initial value of the Cauchy problem. (np.array)
+    lmba0 and lmbaf are integers as described before. (int)
+    Af is a function that receives the stiffness parameter and returns the
+    corresponding linear coefficient. (function)
+    g is a function (float, float) -> (float). (function)
+    sol is a function (float) -> (float). (function)
+    vectorize_sol is a function that "transforms sol in a vector" (function)
+    (float, float, int, function) -> (np.array)
+    (t0, tf, n, sol) -> np.array([sol[t0], sol[t0+h], sol[t0+2h], ..., sol[tf-1]])
+    error is a function (np.array, np.array) -> (float) (function)
+    '''
+    v = np.zeros(lmbaf-lmba0)
+    domain = np.arange(lmba0, lmbaf)
+    for i in range(lmbaf-lmba0):
+        lmba = lmba0 + i
+        m = method(t0, tf, n, x0, Af(lmba), g)
+        exact = vectorize_sol_given_lmba(lmba, t0, tf, n, sol_given_lmba)
+        if np.max(np.abs(m))>1000:
+            v[lmba-lmba0]=np.nan
+        else:
+            v[lmba-lmba0] = error(m, exact)
+    return v, domain
+
+def errors_array(n0, nf, method, t0, tf, x0, A, g, sol, vectorize_sol, error):
   '''
   This function will RETURN 2 arrays.
   The first one has the errors of the approximations given by the method with
@@ -257,24 +377,23 @@ def errors_array(n0, nf, method, t0, tf, x0, lmba, g, sol, vectorize_sol, error)
   RECEIVES:
   n0 is the first number of steps. (int)
   nf is the last one plus 1. (int)
-  method have arguments (t0, tf, n, x0, lmba, g) and return a
+  method have arguments (t0, tf, n, x0, A, lmba, g) and return a
   np.vector of length n (0, 1, 2, ..., n-1), n is the number of steps. (function)
   t0 is the initial point of the approximation. (float)
   tf is the last one. (float)
   x0 is the initial value of the Cauchy problem. (float)
-  lmbda is the coefficient os the linear part of the ploblem. (float)
-  g is a function (float, float) -> (float). (function)
-  sol is a function (float) -> (float). (function)
+  A is the coefficient os the linear part of the ploblem. (float)
+  g is a function (int, float, float) -> (float). (function)
+  sol is a function (int, float) -> (float). (function)
   vectorize_sol is a function that "transforms sol in a vector" (function)
   (float, float, int, function) -> (np.array)
   (t0, tf, n, sol) -> np.array([sol[t0], sol[t0+h], sol[t0+2h], ..., sol[tf-1]])
   error is a function (np.array, np.array) -> (float) (function)
   '''
   v = np.zeros(nf-n0)
-  domain = np.zeros(nf-n0)
+  domain = np.arange(n0, nf)
   for n in range(n0, nf):
-    domain[n-n0] = n
-    m = method(t0, tf, n, x0, lmba, g)
+    m = method(t0, tf, n, x0, A, g)
     exact = vectorize_sol(t0, tf, n, sol)
     if np.max(np.abs(m))>1000:
         v[n-n0]=np.nan
@@ -298,7 +417,7 @@ def graphic_2D(domain, matrix, names, labelx, labely, title, key1, key2):
   '''
   fig, ax = plt.subplots()
 
-  colors = ['blue', 'green', 'red', 'cyan', 'magenta', 'yellow']
+  colors = ['red', 'orange', 'brown', 'green', 'cyan', 'blue', 'pink', 'yellow', 'gold', 'maroon']
   for i in range(len(names)-1):
     ax.plot(domain[i], matrix[i], color=colors[i], label=names[i])
   if key1:
@@ -347,7 +466,7 @@ def graphic_3D(domain, matrix1, matrix2, names, labelx, labely, labelz, title, k
   ax.set_title(title)
   return fig, ax
 
-def errors_2x(n0, k, method, t0, tf, x0, lmba, g, sol, vectorize_sol, error):
+def errors_2x(n0, k, method, t0, tf, x0, A, g, sol, vectorize_sol, error):
   '''
   This function will RETURN a np.array with the errors of the approximations given
   by the method with number of steps n = n0, 2*n0, 2**2*n0, ..., 2**(k-1)*n0.
@@ -360,7 +479,7 @@ def errors_2x(n0, k, method, t0, tf, x0, lmba, g, sol, vectorize_sol, error):
   t0 is the initial point of the approximation. (float)
   tf is the last one. (float)
   x0 is the initial value of the Cauchy problem. (float)
-  lmbda is the coefficient os the linear part of the ploblem. (float)
+  A is the coefficient of the linear part of the ploblem. (np.matrix)
   g is a function (float, float) -> (float). (function)
   sol is a function (float) -> (float). (function)
   vectorize_sol is a function that "transforms sol in a vector" (function)
@@ -369,11 +488,32 @@ def errors_2x(n0, k, method, t0, tf, x0, lmba, g, sol, vectorize_sol, error):
   error is a function (np.array, np.array) -> (float) (function)
   '''
   v = np.zeros(k)
+  domain = np.zeros(k)
   for i in range(k):
-    m = method(t0, tf, n0*2**i, x0, lmba, g)
+    domain[i] = n0*2**i
+    m = method(t0, tf, n0*2**i, x0, A, g)
     exact = vectorize_sol(t0, tf, n0*2**i, sol)
     v[i] = error(m, exact)
-  return v
+  return v, domain
+
+def convergence_table(errors_2x, n0, k, t0, tf):
+  '''
+  RECEIVES:
+  errors_2x is a array with the errors of the approximations given
+  by a method with number of steps n = n0, 2*n0, 2**2*n0, ..., 2**(k-1)*n0. (np.array)
+  n0 is the first number of steps. (int)
+  k is the number of errors in the final array. (int)
+  t0 is the initial point of the approximation. (float)
+  tf is the last one. (float)
+  '''
+  n = n0
+  print(n, (tf-t0)/n, errors_2x[0], "-", sep=" & ", end=" \\\\ \n")
+  for i in range(1, k):
+      n = n0 * 2 ** i
+      h = (tf-t0)/n
+      q = errors_2x[i-1]/errors_2x[i] #q=erro(h)/erro(h)
+      r = ((tf-t0)/(n/2))/((tf-t0)/n)
+      print(n, h, errors_2x[i], log(q,2)/log(r,2), sep=" & ", end=" \\\\ \n")
 
 def convergence_table(errors_2x, n0, k, t0, tf):
   '''
@@ -396,8 +536,37 @@ def convergence_table(errors_2x, n0, k, t0, tf):
       r = ((tf-t0)/(n/2))/((tf-t0)/n)
       print( "", n, h, errors_2x[i], log(q,2)/log(r,2), sep=" | ", end=" | \n")
 
+def lmba_n_error(errors_for_lambdas_array, method, x0, Af, g, sol_given_lmba, vectorize_sol_given_lmba, error, method_name):
+  lmba0 = 5
+  lmbaf = 100
+  n0 = 10
+  nf = 128
+  t0 = 0.0
+  tf = 1.0
+  # Create data for X, Y
+  lmba_values = np.arange(lmba0, lmbaf)
+  n_values = np.arange(n0, nf)
+  X, Y = np.meshgrid(lmba_values, 1/n_values)
+  # Create a matrix of zeros for Z
+  Z = np.zeros_like(X)
+  # Populate the Z matrix with data using a function
+  for n in range(n0, nf):
+    Z[n-n0], domain = errors_for_lambdas_array(n, method, t0, tf, x0, lmba0, lmbaf, Af, g, sol_given_lmba, vectorize_sol_given_lmba, error)
+  # Create filled contour plot
+  plt.contourf(X, Y, Z)
+  # Add color bar for the contour plot
+  plt.colorbar()
+  # Add labels and title (optional)
+  plt.xlabel('lambda')
+  plt.ylabel('h')
+  plt.title('errors for the '+method_name+' method ')
+  # Show the plot
+  plt.show()
 
-# The execution done are the following.
+
+# ## Convergence tables
+
+# ### Classic Euler
 
 # In[2]:
 
@@ -408,9 +577,11 @@ t0 = 0
 tf = 1
 x0 = np.array([1])
 A = np.array([[100]])
-errors_2x_vector = errors_2x(n0, k, classic_euler, t0, tf, x0, A, g, sol, vectorize_sol, error_sup)
+errors_2x_vector, domain = errors_2x(n0, k, classic_euler, t0, tf, x0, A, g, sol, vectorize_sol, error_sup)
 convergence_table(errors_2x_vector, n0, k, t0, tf)
 
+
+# ### Exponential Euler
 
 # In[3]:
 
@@ -421,9 +592,11 @@ t0 = 0
 tf = 1
 x0 = np.array([1])
 A = np.array([[100]])
-errors_2x_vector = errors_2x(n0, k, exponential_euler, t0, tf, x0, A, g, sol, vectorize_sol, error_sup)
+errors_2x_vector, domain = errors_2x(n0, k, exponential_euler, t0, tf, x0, A, g, sol, vectorize_sol, error_sup)
 convergence_table(errors_2x_vector, n0, k, t0, tf)
 
+
+# ### rk2
 
 # In[4]:
 
@@ -435,9 +608,11 @@ tf = 1
 x0 = np.array([1])
 A = np.array([[100]])
 
-errors_2x_vector = errors_2x(n0, k, etd2rk_cox_and_matthews, t0, tf, x0, A, g, sol, vectorize_sol, error_sup)
+errors_2x_vector, domain = errors_2x(n0, k, rk2, t0, tf, x0, A, g, sol, vectorize_sol, error_sup)
 convergence_table(errors_2x_vector, n0, k, t0, tf)
 
+
+# ### etd2rk (trapezoidal)
 
 # In[5]:
 
@@ -449,9 +624,11 @@ tf = 1
 x0 = np.array([1])
 A = np.array([[100]])
 
-errors_2x_vector = errors_2x(n0, k, etd2rk_cox_and_matthews_midpoint_rule, t0, tf, x0, A, g, sol, vectorize_sol, error_sup)
+errors_2x_vector, domain = errors_2x(n0, k, etd2rk, t0, tf, x0, A, g, sol, vectorize_sol, error_sup)
 convergence_table(errors_2x_vector, n0, k, t0, tf)
 
+
+# ### Naive version of etd2rk (trapezoidal)
 
 # In[6]:
 
@@ -463,9 +640,11 @@ tf = 1
 x0 = np.array([1])
 A = np.array([[100]])
 
-errors_2x_vector = errors_2x(n0, k, etd2rk_trapezoidal_rule, t0, tf, x0, A, g, sol, vectorize_sol, error_sup)
+errors_2x_vector, domain = errors_2x(n0, k, etd2rk_trapezoidal_naive, t0, tf, x0, A, g, sol, vectorize_sol, error_sup)
 convergence_table(errors_2x_vector, n0, k, t0, tf)
 
+
+# ### rk4
 
 # In[7]:
 
@@ -477,8 +656,118 @@ tf = 1
 x0 = np.array([1])
 A = np.array([[100]])
 
-errors_2x_vector = errors_2x(n0, k, etd2rk_midpoint_rule, t0, tf, x0, A, g, sol, vectorize_sol, error_sup)
+errors_2x_vector, domain = errors_2x(n0, k, rk4, t0, tf, x0, A, g, sol, vectorize_sol, error_sup)
 convergence_table(errors_2x_vector, n0, k, t0, tf)
+
+
+# ### Deduced like etd3rk
+
+# In[8]:
+
+
+n0 = 128
+k = 4
+t0 = 0
+tf = 1
+x0 = np.array([1])
+A = np.array([[100]])
+
+errors_2x_vector, domain = errors_2x(n0, k, etd3rk_similar, t0, tf, x0, A, g, sol, vectorize_sol, error_sup)
+convergence_table(errors_2x_vector, n0, k, t0, tf)
+
+
+# ### Naive version of etd3rk
+
+# In[9]:
+
+
+n0 = 128
+k = 4
+t0 = 0
+tf = 1
+x0 = np.array([1])
+A = np.array([[100]])
+
+errors_2x_vector, domain = errors_2x(n0, k, etd3rk_naive, t0, tf, x0, A, g, sol, vectorize_sol, error_sup)
+convergence_table(errors_2x_vector, n0, k, t0, tf)
+
+
+# ## Some graphics
+
+# The following notation is used
+# 
+# \begin{cases}
+#   u'(t) + A u(t) = g(u(t), t)\\
+#   u(0) = u_0.
+# \end{cases}
+# 
+# A Stiff problem shown in [1] is
+# 
+# \begin{cases}
+#     u'(t) + 100 u(t) = \sin(t)\\
+#     u(0) = u_0,
+# \end{cases}
+# 
+# with solution
+# 
+# $$
+# u(t) = u_0 \exp(-100t)+\frac{\exp(-100t)+100\sin(t)-\cos(t)}{1+100^2}.
+# $$
+
+# In[10]:
+
+
+n = 128
+lmba0 = 1
+lmbaf = 100
+t0 = 0.0
+tf = 1.0
+x0 = np.array([1])
+lmba_1D_classic, domain = errors_for_lambdas_array(n, classic_euler, t0, tf, x0, lmba0, lmbaf, A_1D, g, sol_given_lmba, vectorize_sol_given_lmba, error_2)
+lmba_1D_exponential, domain = errors_for_lambdas_array(n, exponential_euler, t0, tf, x0, lmba0, lmbaf, A_1D, g, sol_given_lmba, vectorize_sol_given_lmba, error_2)
+lmba_1D_etd2rk, domain = errors_for_lambdas_array(n, etd2rk, t0, tf, x0, lmba0, lmbaf, A_1D, g, sol_given_lmba, vectorize_sol_given_lmba, error_2)
+lmba_1D_etd2rk_trapezoidal_naive, domain = errors_for_lambdas_array(n, etd2rk_trapezoidal_naive, t0, tf, x0, lmba0, lmbaf, A_1D, g, sol_given_lmba, vectorize_sol_given_lmba, error_2)
+lmba_1D_etd3rk_similar, domain = errors_for_lambdas_array(n, etd3rk_similar, t0, tf, x0, lmba0, lmbaf, A_1D, g, sol_given_lmba, vectorize_sol_given_lmba, error_2)
+lmba_1D_etd3rk_naive, domain = errors_for_lambdas_array(n, etd3rk_naive, t0, tf, x0, lmba0, lmbaf, A_1D, g, sol_given_lmba, vectorize_sol_given_lmba, error_2)
+lmba_1D_rk2, domain = errors_for_lambdas_array(n, rk2, t0, tf, x0, lmba0, lmbaf, A_1D, g, sol_given_lmba, vectorize_sol_given_lmba, error_2)
+lmba_1D_rk4, domain = errors_for_lambdas_array(n, rk4, t0, tf, x0, lmba0, lmbaf, A_1D, g, sol_given_lmba, vectorize_sol_given_lmba, error_2)
+
+
+# In[11]:
+
+
+matrix_1D = [lmba_1D_classic, lmba_1D_exponential, lmba_1D_rk2, lmba_1D_etd2rk_trapezoidal_naive, lmba_1D_etd2rk, lmba_1D_rk4, lmba_1D_etd3rk_naive, lmba_1D_etd3rk_similar]
+names = ['classic euler', 'exponential euler', 'rk2', 'etd2rk naive', 'etd2rk', 'rk4', 'etd3rk naive', "etd3rk (similar)"]
+fig, ax = graphic_2D(8*[domain], matrix_1D, names, "lambda", "error", "1D problem from [1]", False, True)
+
+
+# In[12]:
+
+
+n0 = 10
+k = 10
+lmba = 100
+A = lmba * np.array([[1]])
+t0 = 0.0
+tf = 1.0
+x0 = np.array([1])
+n_1D_classic, domain = errors_2x(n0, k, classic_euler, t0, tf, x0, A, g, sol, vectorize_sol, error_2)
+n_1D_exponential, domain = errors_2x(n0, k, exponential_euler, t0, tf, x0, A, g, sol, vectorize_sol, error_2)
+n_1D_etd2rk, domain = errors_2x(n0, k, etd2rk, t0, tf, x0, A, g, sol, vectorize_sol, error_2)
+n_1D_etd2rk_trapezoidal_naive, domain = errors_2x(n0, k, etd2rk_trapezoidal_naive, t0, tf, x0, A, g, sol, vectorize_sol, error_2)
+n_1D_etd3rk_similar, domain = errors_2x(n0, k, etd3rk_similar, t0, tf, x0, A, g, sol, vectorize_sol, error_2)
+n_1D_etd3rk_naive, domain = errors_2x(n0, k, etd3rk_naive, t0, tf, x0, A, g, sol, vectorize_sol, error_2)
+n_1D_rk2, domain = errors_2x(n0, k, rk2, t0, tf, x0, A, g, sol, vectorize_sol, error_2)
+n_1D_rk4, domain = errors_2x(n0, k, rk4, t0, tf, x0, A, g, sol, vectorize_sol, error_2)
+
+
+# In[13]:
+
+
+matrix_2D = [n_1D_classic, n_1D_exponential, n_1D_rk2, n_1D_etd2rk_trapezoidal_naive, n_1D_etd2rk, n_1D_rk4, n_1D_etd3rk_naive, n_1D_etd3rk_similar]
+names = ['classic euler', 'exponential euler', 'rk2', 'etd2rk naive', 'etd2rk', 'rk4', 'etd3rk naive', "etd3rk (similar)"]
+fig_2D, ax_2D = graphic_2D(8*[1/domain], matrix_2D, names, "h", "error", "1D problem with lmba = "+str(lmba), False, True)
+plt.xscale('log')
 
 
 # ## Some deductions
@@ -922,6 +1211,259 @@ convergence_table(errors_2x_vector, n0, k, t0, tf)
 # \hline
 # & 0 & e^{-\frac{h \lambda}{2}}
 # \end{array}
+# $$
+
+# ### Third order exponential time differencing methods with Runge-Kutta time stepping (ETDRK-3)
+# 
+# $$
+#     g(y(\tau), \tau) = g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) +
+#     \left(\tau - t_{k+\frac{1}{2}}\right) \frac{dg}{dt} \left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) + \\
+#     + \frac{\left(\tau - t_{k+\frac{1}{2}}\right)^2}{2!} \frac{d^2g}{dt^2} \left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) + \\
+#     + \frac{\left(\tau - t_{k+\frac{1}{2}}\right)^3}{3!} \frac{d^3g}{dt^3} \left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right)
+#     + O((\tau - t_k)^4),
+# $$
+# 
+# $\forall \tau \in \mathbb{R}.$
+# 
+# $$
+#     g(y(t_{k+1}), t_{k+1}) = g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) +
+#     \left(t_{k+1} - t_{k+\frac{1}{2}}\right) \frac{dg}{dt} \left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) + \\
+#     + \frac{\left(t_{k+1} - t_{k+\frac{1}{2}}\right)^2}{2!} \frac{d^2g}{dt^2} \left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) + \\
+#     + \frac{\left(t_{k+1} - t_{k+\frac{1}{2}}\right)^3}{3!} \frac{d^3g}{dt^3} \left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right)
+#     + O(h^4),
+# $$
+# 
+# $$
+#     g(y(t_{k+1}), t_{k+1}) = g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) +
+#     \frac{h}{2} \frac{dg}{dt} \left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) + \\
+#     +\frac{h^2}{8} \frac{d^2g}{dt^2} \left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right)
+#     + \frac{h^3}{48} \frac{d^3g}{dt^3} \left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right)
+#     + O(h^4),
+# $$
+# 
+# and
+# 
+# $$
+#     g(y(t_k), t_k) = g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) +
+#     \left(t_k - t_{k+\frac{1}{2}}\right) \frac{dg}{dt} \left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) + \\
+#     + \frac{\left(t_k - t_{k+\frac{1}{2}}\right)^2}{2!} \frac{d^2g}{dt^2} \left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) + \\
+#     + \frac{\left(t_k - t_{k+\frac{1}{2}}\right)^3}{3!} \frac{d^3g}{dt^3} \left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right)
+#     + O(h^4),
+# $$
+# 
+# $$
+#     g(y(t_k), t_k) = g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) -
+#     \frac{h}{2} \frac{dg}{dt} \left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) + \\
+#     + \frac{h^2}{8} \frac{d^2g}{dt^2} \left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right)
+#     - \frac{h^3}{48} \frac{d^3g}{dt^3} \left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right)
+#     + O(h^4).
+# $$
+# 
+# Subtracting the two expressions,
+# 
+# $$
+#   g(y(t_{k+1}), t_{k+1}) - g(y(t_k), t_k) = h \frac{dg}{dt} \left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) + O(h^3).
+# $$
+# 
+# So,
+# 
+# $$
+#   \frac{dg}{dt} \left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) = \frac{g(y(t_{k+1}), t_{k+1}) - g(y(t_k), t_k)}{h} + O(h^2).
+# $$
+# 
+# And summing them
+# 
+# $$
+#   g(y(t_{k+1}), t_{k+1}) + g(y(t_k), t_k) =
+#   2 g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right)
+#   + \frac{h^2}{4} \frac{d^2g}{dt^2} \left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) + O(h^4).
+# $$
+# 
+# So,
+# 
+# $$
+#   \frac{d^2g}{dt^2} \left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) =
+#   4\frac{ g(y(t_{k+1}), t_{k+1}) + g(y(t_k), t_k) -
+#   2 g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right)}{h^2}
+#   + O(h^2).
+# $$
+# 
+# This results in the expression
+# 
+# $$
+#     g(y(\tau), \tau) = g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) +
+#     \left(\tau - t_{k+\frac{1}{2}}\right)  \frac{g(y(t_{k+1}), t_{k+1}) - g(y(t_k), t_k)}{h} + \\
+#     + \frac{\left(\tau - t_{k+\frac{1}{2}}\right)^2}{2!} \frac{ 4 \left[g(y(t_{k+1}), t_{k+1}) + g(y(t_k), t_k) -
+#   2 g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) \right]}{h^2} + \\
+#     + O((\tau - t_k)^3),
+# $$
+# 
+# $\forall \tau \in \mathbb{R}.$
+# 
+# Putting in the variation of constants formula
+# 
+# $$
+# y(t) = e^{-(t-t_0) \lambda}y_0 + \int_{t_0}^t e^{-\lambda(t-\tau)} g(y(\tau), \tau) d\tau,
+# $$
+# 
+# $$
+#   y(t_{k+1}) = e^{-h \lambda}y(t_k) + \\
+#   + \int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)} \left[ g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) +
+#     \left(\tau - t_{k+\frac{1}{2}}\right)  \frac{g(y(t_{k+1}), t_{k+1}) - g(y(t_k), t_k)}{h} + \\
+#     + \frac{\left(\tau - t_{k+\frac{1}{2}}\right)^2}{2!} \frac{ 4 \left[g(y(t_{k+1}), t_{k+1}) + g(y(t_k), t_k) -
+#   2 g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) \right]}{h^2} + O((\tau - t_k)^3) \right] d\tau,
+# $$
+# 
+# $$
+#   y(t_{k+1}) = e^{-h \lambda} y(t_k) +
+#   g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right)
+#   \int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)} d \tau +
+#   \frac{g(y(t_{k+1}), t_{k+1}) - g(y(t_k), t_k)}{h}
+#   \int_{t_k}^{t_{k+1}} \left(\tau - t_{k+\frac{1}{2}}\right) e^{-\lambda(t_{k+1}-\tau)} d \tau +
+#   \\
+#   + \frac{ 4 \left[g(y(t_{k+1}), t_{k+1}) + g(y(t_k), t_k) - 2 g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) \right]}{h^2}
+#   \int_{t_k}^{t_{k+1}} \frac{\left(\tau - t_{k+\frac{1}{2}}\right)^2}{2!} e^{-\lambda(t_{k+1}-\tau)} d \tau
+#   + \int_{t_k}^{t_{k+1}} O((\tau - t_k)^3) e^{-\lambda(t_{k+1}-\tau)} d \tau,
+# $$
+# 
+# Since $\tau - t_{k+ \frac{1}{2}} = \tau - t_k - \frac{h}{2}$ and $\left(\tau - t_{k+ \frac{1}{2}} \right)^2 = (\tau - t_k)^2 + \frac{h^2}{4} - h (\tau - t_k)$,
+# 
+# $$
+#   y(t_{k+1}) = e^{-h \lambda} y(t_k) +
+#   g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right)
+#   \int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)} d \tau +
+#   \frac{g(y(t_{k+1}), t_{k+1}) - g(y(t_k), t_k)}{h}
+#   \int_{t_k}^{t_{k+1}} \left(\tau - t_{k}\right) e^{-\lambda(t_{k+1}-\tau)} d \tau +
+#   \\
+#   + \frac{ 4 \left[g(y(t_{k+1}), t_{k+1}) + g(y(t_k), t_k) - 2 g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) \right]}{h^2}
+#   \int_{t_k}^{t_{k+1}} \frac{(\tau - t_k)^2}{2!} e^{-\lambda(t_{k+1}-\tau)} d \tau +
+#   \\
+#   - \frac{g(y(t_{k+1}), t_{k+1}) - g(y(t_k), t_k)}{h}
+#   \int_{t_k}^{t_{k+1}} \frac{h}{2} e^{-\lambda(t_{k+1}-\tau)} d \tau +
+#   \\
+#   + \frac{ 4 \left[g(y(t_{k+1}), t_{k+1}) + g(y(t_k), t_k) - 2 g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) \right]}{h^2}
+#   \int_{t_k}^{t_{k+1}} \frac{h^2}{4 \cdot 2!} e^{-\lambda(t_{k+1}-\tau)} d \tau +
+#   \\
+#   - \frac{ 4 \left[g(y(t_{k+1}), t_{k+1}) + g(y(t_k), t_k) - 2 g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) \right]}{h^2}
+#   \int_{t_k}^{t_{k+1}} \frac{h (\tau - t_k)}{2!} e^{-\lambda(t_{k+1}-\tau)} d \tau +
+#   \\
+#   + \int_{t_k}^{t_{k+1}} O((\tau - t_k)^3) e^{-\lambda(t_{k+1}-\tau)} d \tau.
+# $$
+# 
+# Then,
+# 
+# $$
+#   y(t_{k+1}) = e^{-h \lambda} y(t_k) +
+#   g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right)
+#   h \phi_1(-h \lambda) +
+#   \frac{g(y(t_{k+1}), t_{k+1}) - g(y(t_k), t_k)}{h}
+#   h^2 \phi_2 (-h \lambda) +
+#   \\
+#   + \frac{ 4 \left[g(y(t_{k+1}), t_{k+1}) + g(y(t_k), t_k) - 2 g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) \right]}{h^2}
+#   h^3 \phi_3 (-h \lambda) +
+#   \\
+#   - \frac{g(y(t_{k+1}), t_{k+1}) - g(y(t_k), t_k)}{h}
+#   \frac{h^2 \phi_1(-h \lambda)}{2} +
+#   \\
+#   + \frac{ 4 \left[g(y(t_{k+1}), t_{k+1}) + g(y(t_k), t_k) - 2 g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) \right]}{h^2}
+#   \frac{h^3 \phi_1(-h \lambda)}{8} +
+#   \\
+#   - \frac{ 4 \left[g(y(t_{k+1}), t_{k+1}) + g(y(t_k), t_k) - 2 g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) \right]}{h^2}
+#   \frac{h^3 \phi_2(-h \lambda)}{2} +
+#   \\
+#   + O(h^4 \phi_4(-h \lambda)).
+# $$
+# 
+# i.e.
+# 
+# $$
+#   y(t_{k+1}) = e^{-h \lambda} y(t_k) +
+#   g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right)
+#   h \phi_1(-h \lambda) + %ok
+#   \left[g(y(t_{k+1}), t_{k+1}) - g(y(t_k), t_k)\right]
+#   \left( h \phi_2 (-h \lambda) - \frac{h \phi_1(-h \lambda)}{2} \right) +
+#   \\
+#   + 4 \left[g(y(t_{k+1}), t_{k+1}) + g(y(t_k), t_k) - 2 g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) \right]
+#   \left( h \phi_3 (-h \lambda) + \frac{h \phi_1(-h \lambda)}{8} - \frac{h \phi_2(-h \lambda)}{2} \right) + O(h^4).
+# $$
+# 
+# Using the Cox and Mathhews's ETDRK-2 expressions to approximate $y\left(t_{k+\frac{1}{2}}\right)$ and $y(t_{k+1})$, since those are of order 2, i.e., $O(h^3)$, the expression of the method is
+# 
+# $$
+#   y(t_{k+1}) = e^{-h \lambda} y(t_k) +
+#   g\left(c'_k, t_{k+\frac{1}{2}}\right)
+#   h \phi_1(-h \lambda) + %ok
+#   \left[g(c_k, t_{k+1}) - g(y(t_k), t_k)\right]
+#   \left( h \phi_2 (-h \lambda) - \frac{h \phi_1(-h \lambda)}{2} \right) +
+#   \\
+#   + 4 \left[g(c_k, t_{k+1}) + g(y(t_k), t_k) - 2 g\left(c'_k, t_{k+\frac{1}{2}}\right) \right]
+#   \left( h \phi_3 (-h \lambda) + \frac{h \phi_1(-h \lambda)}{8} - \frac{h \phi_2(-h \lambda)}{2} \right) + O(h^4),
+# $$
+# 
+# with
+# 
+# $$
+#   c_k = e^{-h \lambda} y(t_k) +
+#   h \phi_1 (-\lambda h) g(y(t_k), t_k) +
+#   \left[g(a_k, t_{k+1}) - g(y(t_k), t_k) \right] h \phi_2 (-\lambda h),
+#   \\
+#   a_k = e^{-h \lambda}y(t_k) + g(y(t_k), t_k) h \phi_1(-h\lambda),
+#   \\
+#   c'_k = e^{- \frac{h \lambda}{2}} y(t_k) +
+#   \frac{h}{2} \phi_1 \left(- \frac{\lambda h}{2} \right) g(y(t_k), t_k) +
+#   \left[g\left(a'_k, t_{k+\frac{1}{2}}\right) - g(y(t_k), t_k) \right] \frac{h}{2} \phi_2 \left(-\frac{\lambda h}{2}\right),
+#   \\
+#   a'_k = e^{-\frac{h \lambda}{2}}y(t_k) + g(y(t_k), t_k) \frac{h}{2} \phi_1\left(-\frac{h \lambda}{2}\right).
+# $$
+# 
+# Here de deducing isn't exactly in Runge Kutta form, differing on the approximations for steps in minor order, so it cannot be a Butcher tableau, but doing language abuse only on the part that would form the triangle, it would be:
+# 
+# \begin{array}
+# {c|cccc}
+# 0 \\
+# \frac{1}{2} & \frac{1}{2} \left( \phi_1\left(- \frac{\lambda h}{2} \right) - \phi_2\left(- \frac{\lambda h}{2} \right) \right) & \frac{1}{2}\phi_2\left(- \frac{\lambda h}{2} \right) \\
+# 1 & \phi_1\left(- \lambda h \right) - \phi_2\left(- \lambda h \right) & 0 & \phi_2\left(- \lambda h \right)  \\
+# \hline
+# & 4 \phi_3(-h \lambda)-3\phi_2(-h\lambda)+\phi_1(-h\lambda) & -8\phi_3(-h\lambda)+4\phi_2(-h\lambda) & 4 \phi_3(-h\lambda)-\phi_2(-h\lambda) \text{   }.
+# \end{array}
+
+# ### Naive etd3rk
+# 
+# Here, that is taken the variation of constants formula:
+# 
+# $$
+#     y(t_{k+1}) = e^{-h \lambda}y(t_k) + \int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)} g(y(\tau), \tau) d\tau,
+# $$
+# 
+# and applied the Simpson's rule (here was used the order of convergence from Burden) so that it will be:
+# 
+# $$
+#     y(t_{k+1}) = e^{-h \lambda}y(t_k) + \frac{h}{6} \left[ e^{-\lambda(t_{k+1}-t_k)} g(y(t_k), t_k) + 4 e^{-\lambda \left(t_{k+1}-t_{k + \frac{1}{2}} \right)} g\left(y\left(t_{k+\frac{1}{2}}\right), t_k + \frac{h}{2} \right) \\ + e^{-\lambda(t_{k+1}-t_{k+1})} g(y(t_{k+1}), t_{k+1}) \right] + O(h^5), \\
+#     y(t_{k+1}) = e^{-h \lambda}y(t_k) + \frac{h}{6} \left[ e^{-\lambda h} g(y(t_k), t_k) + 4 e^{-\frac{ \lambda h}{2}} g\left(y\left(t_k + \frac{h}{2} \right), t_k + \frac{h}{2} \right) + g(y(t_{k+1}), t_{k+1}) \right] +  O(h^5).
+# $$
+# 
+# To approximate $y\left(t_k + \frac{h}{2} \right)$:
+# 
+# $$
+#     y\left(t_k + \frac{h}{2} \right) = e^{- \frac{h \lambda}{2}}y(t_k) + \frac{h}{4} \left[ e^{- \frac{h \lambda}{2}} g(y(t_k), t_k) + g \left(a'_{k}, t_k + \frac{h}{2} \right) \right] +  O(h^3), \\
+#     \text{with } a'_{k} = e^{- \frac{h \lambda}{2}} y(t_k) + g(y(t_k), t_k) \frac{h}{2} \phi_1 \left(-\lambda \frac{h}{2} \right),
+# $$
+# 
+# and, for $y\left(t_{k+1} \right)$:
+# 
+# $$
+#     y(t_{k+1}) = e^{-h \lambda}y(t_k) + \frac{h}{2} \left[ e^{-\lambda h} g(y(t_k), t_k) + g(a_k, t_{k+1}) \right] +  O(h^3), \\
+#     \text{with } a_k = e^{-h \lambda}y(t_k) + g(y(t_k), t_k) h \phi_1 (-\lambda h).
+# $$
+# 
+# So, the expression is
+# 
+# $$
+#   y(t_{k+1}) = e^{-h \lambda}y(t_k) + \frac{h}{6} \left[ e^{-\lambda h} g(y(t_k), t_k) + 4 e^{-\frac{ \lambda h}{2}} g\left( b'_{k}, t_k + \frac{h}{2} \right) + g(b_k, t_{k+1}) \right] +  O(h^4), \\
+#   \text{with } b'_{k} = e^{- \frac{h \lambda}{2}}y(t_k) + \frac{h}{4} \left[ e^{- \frac{h \lambda}{2}} g(y(t_k), t_k) + g \left(a'_{k}, t_k + \frac{h}{2} \right) \right], \\
+#   b_k = e^{-h \lambda}y(t_k) + \frac{h}{2} \left[ e^{-\lambda h} g(y(t_k), t_k) + g(a_k, t_{k+1}) \right], \\
+#   a'_{k} = e^{- \frac{h \lambda}{2}} y(t_k) + g(y(t_k), t_k) \frac{h}{2} \phi_1 \left(-\lambda \frac{h}{2} \right), \\
+#   a_k = e^{-h \lambda}y(t_k) + g(y(t_k), t_k) h \phi_1 (-\lambda h).
 # $$
 
 # ## Matrix exponential
@@ -1372,3 +1914,139 @@ convergence_table(errors_2x_vector, n0, k, t0, tf)
 #     \end{array} } \right] M^{-1}, t \in \mathbb{R},
 # $$
 # with each block as the section above indicates.
+
+# ## Euler method
+# 
+# Further detailing this explicit one-step method of
+# 
+# $$
+#     \phi (t_{k},y_{k},h) = f(t_{k},y_{k}),
+# $$
+# 
+# an analysis on stability, convergence and order of convergence is done.
+# 
+# ### Stability
+# 
+# For the problem
+# $\begin{cases}
+#     y'(t) = - \lambda y(t) \text{ ; } t \in [t_0 , T] \\
+#     y(t_0)=y_0,
+# \end{cases}$
+# 
+# with known solution
+# 
+# $$ y(t) = y_0e^{-\lambda (t-t_0)},$$
+# 
+# the method turn into:
+# 
+# $$
+# y_0 = y(t_0)\\
+# \textbf{for } k = 0, 1, 2, ..., N-1 :\\
+#     y_{k+1} = y_k + h \lambda y_k \\
+#     t_{k+1} = t_k + h.
+# $$
+# 
+# Then the amplification factor is:
+# $$
+# (1 - h \lambda).
+# $$
+# 
+# If
+# 
+# $$
+# |1 - h \lambda| > 1, \text{for fixed } N,
+# $$ 
+# 
+# it will be a divergent series 
+# 
+# $$
+# (k \rightarrow \infty \Rightarrow y_k \rightarrow \infty),
+# $$
+# 
+# so, since the computer has a limitant number that can represent, even if the number of steps is such that $h$ is not small enought, it might have sufficient steps to reach the maximum number represented by the machine.
+# 
+# However, if 
+# 
+# $$
+#     |1 - h \lambda| < 1 \text{ and } N \text{ is fixed,}
+# $$ 
+# 
+# it converges to zero 
+# 
+# $$
+#     (k \rightarrow \infty \Rightarrow y_k \rightarrow 0 ).
+# $$
+# 
+# 
+# Besides that, 
+# 
+# $$
+# |1 - h \lambda| < 1
+# $$ 
+# 
+# is the same as 
+# 
+# $$
+# 0 < h \lambda < 2.
+# $$
+# 
+# So the interval of stability is $(0,2)$.
+# 
+# That's why the method suddenly converged, it was when $h$ got small enought to $h \lambda$ be in the interval of stability, i.e., 
+# 
+# $$
+#     h < 2/\lambda.
+# $$
+# 
+# It is worth mentioning here that if 
+# 
+# $$
+# -1 < 1 - h \lambda < 0,
+# $$
+# 
+# the error will converge oscillating since it takes positive values with even exponents and negative with odd ones.
+# 
+# ### Convergence
+# Since
+# 
+# $$
+# \lim_{m \to +\infty} \left(1 + \frac{p}{m} \right)^m = e^p,
+# $$
+# 
+# and h = $\frac{T-t_0}{N}$, for $y_N$ we have
+# 
+# $$
+# \lim_{N \to +\infty} y_N = \lim_{N \to +\infty} \left(1 - h \lambda \right)^N y_0 = \lim_{N \to +\infty} \left(1 - \frac{(T-t_0) \lambda}{N} \right)^N y_0.
+# $$
+# 
+# It is reasonable to take $p = -(T-t_0) \lambda$ and conclude that the last point estimated by the method will converge to
+# 
+# $$
+# y_0e^{-\lambda (T-t_0)}.
+# $$
+# 
+# Which is precisely $y(T)$ and proves the convergence.
+# 
+# ### Order of convergence
+# 
+# Being $\tau(h, t_k)$ the local truncation error.
+# 
+# From
+# 
+# $$
+#     y(t_{k+1}) = y(t_k) + h f(y(t_k),t_k) + O(h^2),
+# $$
+# 
+# we have
+# 
+# $$
+#     h \tau(h, t_k) \doteq \frac{y(t_{k+1}) - y(t_k)}{h} - f(t_k, y(t_k)) = O(h^2),
+# $$
+# 
+# so
+# 
+# $$
+#     \tau(h, t_k) = O(h).
+# $$
+# 
+# Since for one step methods the order of convergence is the order of the local truncation error, the order is of $O(h)$, order 1.

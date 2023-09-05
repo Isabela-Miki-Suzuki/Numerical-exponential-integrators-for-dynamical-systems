@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2023.6.26)  28 JUN 2023 15:30
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2023.6.26)  4 SEP 2023 22:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1317,6 +1317,14 @@ LaTeX Info: Redefining \rmfamily on input line 19.
 LaTeX Info: Redefining \sffamily on input line 19.
 LaTeX Info: Redefining \ttfamily on input line 19.
 )
+Runaway argument?
+{{2.5}{21}{Sw 
+! File ended while scanning use of \@newl@bel.
+<inserted text> 
+                \par 
+l.93 \begin{document}
+                     
+? 
 \openout1 = `book.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 93.
@@ -1339,7 +1347,6 @@ LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 93.
 LaTeX Font Info:    ... okay on input line 93.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 93.
 LaTeX Font Info:    ... okay on input line 93.
-
 
 Package pgfplots Warning: running in backwards compatibility mode (unsuitable t
 ick labels; missing features). Consider writing \pgfplotsset{compat=1.18} into 
@@ -1650,19 +1657,7 @@ File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 ] [2
 
 
-] (./book.toc
-LaTeX Info: Redefining \rmfamily on input line 1.
-LaTeX Info: Redefining \sffamily on input line 1.
-LaTeX Info: Redefining \ttfamily on input line 1.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 7.00075pt on input line 4.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 5.00053pt on input line 4.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 6.99925pt on input line 4.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 4.99947pt on input line 4.
-)
+] (./book.toc)
 \tf@toc=\write7
 \openout7 = `book.toc'.
 
@@ -1670,7 +1665,21 @@ LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
 
 ] [2
 
-] [1] [2
+]
+
+LaTeX Warning: Hyper reference `References::doc' on page 1 undefined on input l
+ine 188.
+
+
+LaTeX Warning: Hyper reference `Participation_in_scientific_event,_list_of_publ
+ications_and_list_of_papers_prepared_or_submitted::doc' on page 1 undefined on 
+input line 192.
+
+
+LaTeX Warning: Hyper reference `appendix::doc' on page 1 undefined on input lin
+e 196.
+
+[1] [2
 
 ]
 Chapter 1.
@@ -1678,140 +1687,287 @@ Chapter 1.
 
 ]
 Chapter 2.
-[5] [6] [7] [8] [9] [10] [11]
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 8.00085pt on input line 829.
+(Font)              scaled to size 7.00075pt on input line 226.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 6.00064pt on input line 829.
+(Font)              scaled to size 5.00053pt on input line 226.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 7.99915pt on input line 829.
+(Font)              scaled to size 6.99925pt on input line 226.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 5.99936pt on input line 829.
+(Font)              scaled to size 4.99947pt on input line 226.
+[5] [6] [7] [8] [9] [10] [11] [12] [13] [14]
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 8.00085pt on input line 1152.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 6.00064pt on input line 1152.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 7.99915pt on input line 1152.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 5.99936pt on input line 1152.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 829.
+(hyperref)                removing `math shift' on input line 1152.
 
-[12] [13] [14] [15] [16
+[15] [16] [17] [18]
+File: cap4_14_0.png Graphic file (type bmp)
+<cap4_14_0.png>
+ [19] [20]
+File: cap4_17_0.png Graphic file (type bmp)
+<cap4_17_0.png>
 
-]
-Chapter 3.
-[17] [18
+Overfull \hbox (32298.24498pt too wide) in paragraph at lines 1983--1985
+[]\TU/FreeSerif(0)/m/n/10 ![spring.png](data:image/png;base64,iVBORw0KGgoAAAANS
+UhEUgAAAWgAAAFeCAIAAAAnpBIyAAAAhXpUWHRSYXcgcHJvZmlsZSB0eXBlIGV4aWYAAHjaVYvBDcMw
+DAP/mqIjyLJM2uMYiQNkg45fuu0n9yApgbT1vi97felp2dgxABc5csRU6P6juNciDXn+X9MfZGWgoRh
+TluEkhnJXkqKFN+LCAahYcIbnIV8gNQN3o86928QyPusLVffpbh/5eCey76LuBgAAAAlwSFlzAAALEw
+AACxMBAJqcGAAAADx0RVh0U29mdHdhcmUAQ3JlYXRlZCB3aXRoIHRoZSBXb2xmcmFtIExhbmd1YWdlI
+Dogd3d3LndvbGZyYW0uY29tXKKmhQAAACF0RVh0Q3JlYXRpb24gVGltZQAyMDE4OjAzOjAzIDA2OjMx
+OjE3CNi17gAAIABJREFUeJzt3XtcU1e6N/AfXjahhYCtDqJioIpIR0ScRvFSqkwHER3FG4pjj60darF
+T8drSzvE+RbRUsbao1eKlWu9omQGV83opraAyA1hHEKlEtEPA055EbJttFPb7x44xhoTsQO48349/yM
+7KzmKmeVx7rWetx43jOBBCiDk62LsDhBDnQ4GDEGI2ChyEELNR4CCEmI0CByHEbEIDB8uib1/87ndW7
+QwhxDkIDRwFBbhxAyUlWL7cqv0hhDgBoYFjyBCMHw8Aa9ZQ7CCkvXMzKwHs+HFMmgQAy5Zh9Wpr9YkQ
+4uDMmBz96CPcuIFjxwAadxDSvgkdcSiV6NIFXl5oaKBxByHtXWuWY+PiaNxBSLvWyjwOih2EtGetTwC
+j2EFIu9WmzFGKHYS0T52EN01Ohre3/kU+dkyahDVrANBcKSHtgnl5HMbQOgsh7Yp5eRwffWT4JXpmIa
+RdaU0ehzE07iCknbDktnoadxDSTlj4PA6KHYS0B5Y/yIdiByEuzyongFHsIMS1tTWPwxjK7yDEhVkmj
+8MYWmchxCVZJo/DGEd7ZnFzc+vbt6+9e0GI07NkHocxNhh39O3b98aNGyZ/l5iYGD8/v507d1qlE4S0
+G7YIHLB+7BAYOAghFmGjuiqO9sxCCGkL2xVkakvs+Oabb2JiYrp37y4Wi4cMGXLgwAHdwYWbm9uNGzf
+4v7i5uWkv9u3bt6mpacGCBWKxeOXKlXhyjoP/O8dxGRkZQUFBHh4e/fv3/+ijjx4+fKj70Tk5OYMHDx
+aJRAEBAevWrWtqaqKJEkLACaNQcADn5SWwuVHHjnEAB3DLlgl9y8mTJ/muhoeHDx06tGPHjgD27Nmjb
+TBmzBgPDw8AY8aMGTNmDH8RQJ8+fZYsWdKxY8dBgwbt2rVLe1G3QUpKSocOHQYNGtS/f3/+U9asWaO9
+85YtW/hIFBISwgeLefPm6d6EkPbJjMCRnMwtX26BjzQ3dkilUgCnT5/mfzx//jyAsLAw3TZ9+vTRC4I
+AOnbs2K9fv++//173om7g4McRV69e5Tiuqalp8+bNAAIDA/kGcrnc3d3d29u7oKCAv5KTk+Pu7k6Bgx
+ChgcOyzIodTz31VLdu3XSvLFmyJDk5WfeKwcABID8/X++ibuAAcPjwYe2rTU1NXl5e2vukpKQASE9P1
+73D22+/TYGDEDMCR3o69+SXqE2Ex45+/foBWLFixY8//misjbHA0dDQoHdRN3B06NDh/v37xu4zcuRI
+AHfu3NFtUFRURIGDEFvPcegSGDuys7MZhgHg7u4eHR2dmppaWVmp18Zg4PD19dVrphc4evXq1cJ9evb
+s6dXsF66rq6PAQYjtVlWaE7jOMmnSpO+++y45OdnX1zc/P//9998PDg6Oj4+/d+9ey/f39PRsuQE/YW
+HMTz/9xD+56BKLxS3fk5D2wJ6BA4JjR3BwcEZGxs2bN6uqqtLT03v16nX48GF+hdV6evfuXV9f39jYq
+HuxtrbWqh9KiFOwc+CAgNiRlpaWnZ2NR5kXixcv/vbbbwGcPXvWqh3r27dvY2PjxYsXdS/q/UhI+2T/
+wAFTsSMrKyslJUX3X37+IcXPz0+vZVNTkwV7NXPmTAAffPCB9qNZlt2wYYMFP4IQJ2VG4EhOxsKF1up
+HC7Fj7NixVVVVo0eP3rdv39mzZ7ds2TJ+/HgA8fHx2jZ8VtiBAwf+/e9/W6pLCQkJoaGheXl5f/zjHw
+8dOnTw4MHo6GiFQgGAzzcjpP2y9+zsEwyus9y9e3fUqFG6fWYYZtmyZU1NTdo2r7/+ut5vBENrH2iWO
+arXQG915ocffoiIiNDe2d/fv7i4GMDo0aMt90sT4nzMOMiHP4xj8eI2xSmTDO6j5TiusLDw6tWrCoUi
+ICBg5MiRPXv21H2XWq0+evTozZs3u3btmpiYaMH+PHjwoKioqLi4uGvXrpMnT1YoFBKJZNq0aYcOHbL
+gpxDiZAQGGGvkcRjTiv0s1pCVlTVx4sTS0lLdi3v27AGwZMkSe/WKEEfgEJOjehxkD75YLP7qq69SUl
+L+7//+j79y9erVFStWAJgyZYrdukWIA7DRQT6tYPfzShsbG2NjY/Pz859++umBAwcqFAo+Y3Xu3Llbt
+261Q4cIcRiOGzjgALFDpVJt3rz5yy+/vHHjRpcuXQYOHDh58uRXX321QwdHHKkRYjMOHTjgALGDENKc
+teqqWArVZyHEAVm3roql0LiDEIdi3boqluIg6yyEEJ6jz3HoonEHIQ7CmVYHaNxBiINwpsABih2EOAY
+nCxyg2EGIA3C+wAGKHYTYm6PncRhD+R2E2JFz5HEYQ+sshNiFc+RxGEPPLITYhTPlcRhD4w5CbMwpJ0
+f10LiDEBtzhcABih2E2JaLBA5Q7CDEhlwncIBiByG24qx5HMZQfgchNuDceRzG0DoLIVbl3HkcxtAzC
+yFW5Qp5HMbQuIMQK3HlwIFmsaOiAidPorISMhlYFiIR/PwQGorwcERF2buvhDgPFw8c0IkdzzyDR5WV
+DPD3R1wcFi5EYKDNukaIs3L9wAFg2jQcOQIAHTti3DhERiIkBCIRlErU1ODyZZw5g9u3AYBhMHs21q+
+Hj499u0yIQ2sXgUMmw+jRqKnBwIG4eBEikYE2FRVYuRJ8JemgIGzdSg8vhBhlRuBYuRLe3li1ytpdsp
+aTJxERYWIoUVGBN99EQQEYBllZ+NOfbNU5QpyKa+ZxtAXLYvlyfPghGAYbNuCtt+zdIUIcjxmBg0/iW
+LzYir1xHMuXY80aMAxOnKBnFkL0tYs5jtbhY4evL0pL4edn794Q4khcapObZb3/PqKjUV+P+fPt3RVC
+HAwFDqNEImzdCrEYOTkoLLR3bwhxJBQ4WhIYiORkqNVYu9beXSHEkdAchwkyGZ57DgyD+nrKCiNEw4w
+RR3IyFi60Xk8cVGAgJkyAWo19++zdFUIchtCDfHx8kJFh1Z44HJaFTAa5HGIxABQX27tDhDgMyuPQJ5
+PhwAHs348rV564zjCQSBAXh7g4DB9up84R4hhojuMxlsX8+di+XfMjw0AsxvPPQ6HQDyJBQVixghLSS
+ftFgUOjogKTJqGyEgDi4zFhAsaN08yG8r87n0V67hw++wz19QAwYgS++IK24ZP2iAIHAMhkGDQIDQ2Q
+SrF7N0JCnnhVLkePHvD0xL17AMCy2LkT69ZBLgeAY8cQG2uHPhNiR5THAQDTp6OhASNGID9fP2oAqKs
+D8HhkIRIhKQnXriE+Hmo1Jk2iBRfS7lDgwM6dKC6GWIx//MNwpkZJCQAMHvzERZEIX3yBZcugVmPOHG
+Rn26KrhDgIV6ur0gq7dgFAWprR/C7+dJ+hQw28xJ+BvGYNEhJQVmZgtEKIS6LzOODuDrUaKpXhk8Hkc
+gQEQK1Gba3RPbJvvIHt2xEaikuXDN+EEBfjmnVVhGNZqNVgGKNf+JkzoVZjwoSWdtZ//DGCg3HlCj79
+1ErdJMSx0KoKvL3R0ICSEoSH67+0cyfmzAHD4No1E8uueXkYNw7+/vjuO9rSQlwfTY4iJgYANmzQv75
+xI+bMAYCtW00na8TGQirF7ds4etQKXSTEwVDgwMqVEIuxdy+GDMGWLThzBhs3ol8/LFoEABs24LXXBN
+0nIQF4NJNKiGujRxUAyMvDvHmoqXniokSCzEwzkrv4PDHagE/aAzOWY11YbCyKirBrF8rKUFeH7t0xY
+QKmTDG9RKJXU5JhoFbjk08QFUUb4Ygra0d1VSxr506sXYuqKqMN/P0xYwaSkmgzC3FBlMdhNrkcr76K
+/HwAYBjExGDUKAQHQyTCtm04dAjBwfj11ydqSn78MeV3EJfS3vM4zFVaimHDkJ8PsRhZWbh7F199hYU
+LERuLqChNrkdiIm7dQkmJZjPL9u0YOBBnzti764RYjtDAoVRiyZL2/pyiVGLSJNTUQCpFTQ1ee01/HM
+Hvl+VnRsPDcfAgysshlaKqCmPH4vPP7dBnQqyBlmPN8M47mqiRn2943URvHy2AkBAUFODtt6FWY948i
+h3ERdByrFDaTSvV1YbnO7UNDG57oZqSxJXQiEOovDyo1YiONrpKwjeIjDQ8D7p6tWYPfmwsysqs2lNC
+rI4Ch1D8ymvz/SxaH34IADNmGG3w/vvo1g3377fUhhCnQHVVzNPUZPj62rWorIRE0lJ+Ol9TkmEgk1F
+NSeLcKI9DqOxsTJmC0FB8953+S/wmWgC5uaZT1N95Bx9+iOhonDpllX4SYgOUxyFUbCwkEly5gjfegF
+KpuVhaijfe0EQNgRtbkpIA4Ny5xzchxOnQqooZzpzB2LGag3/CwsCymnorDIOMDE1EEGLMGOTnY8cOv
+P669TpLiBXR5KgZoqJQVgapFGo1iotx5QoYBvHxuHZNUNRgWVRU4MwZ/OY3APDNN9buLyHWQiOO1uBr
+ygJ4/nnTO+ippiRxPRQ4rIivKbl7N9RqzZWuXammJHEFFDisRSbD2LEmakoeO4YLF7Bnj+YMIaopSZw
+FncdhFTIZhg1DfT3CwpCZqf8kYqymZE2NJppQTUni4CiPwyqGDEFxsdHtcKWlGDwYQUG4fv3xRZbFK6
+/gyBEwDDZswFtv2bK/hJiH8jgsj68p6etrdBMtX1NSbxiiW1Ny0SKqKUkcGp3HYXl8TckVK4wuuOTkA
+IZqSopEj/fCJSSgosKKnSSkLWhy1PL4mpIKheHAIbympFSKS5es2lNCWokSwCxMW1PS2HBjxQpBNSUl
+EhQX07MhcVAUOCxMJIJYDLUapaUGXt25E9u3a1LUW75JZiYAbNpEW1qII6LAYXmWqikZGUk1JYmD6rh
+y5Uoh7VgWLItRozB6tJV75PwGDMAXX6C4GP/v/4HjoFTiwAG8/jr27weAZcs0xSVNUipx6hSUSqE1KA
+mxGcrjsAqDNSV9fZGVRTUliSswI3DwE3WLF1uxN65EqcSWLbhwAUqleTUlz53D5cuampIXLkCtxl//i
+thY2ghHHAgtxzqKffuwahXVlCTOgQKH/TWvKRkZicBA+Phg0ybk5CA4GEol6us1DWbPxvr19PBC7IlW
+VeystBTh4cjPB8MgM1NTU3LxYkyejKgozeAiMRF1dU/UlBwyhGpKEnuiwGFPfE3J+npIpbh5E0lJ+pM
+gfBIHf7F5Tcl9++zQZ0JAgcO++JqSYWHIzzecSCqTAYZqSvL7WebModhB7IPO47Ab7aaV8nKEhBhuw2
+97MbirhWpKEjvqJLCdj4+JLGliLm1NSWNRY98+TU1Jg4OR1asBYM0azJyJ0tKWdr4QYnF0Hofd/PAD0
+OxUDl3r1gGmakpGR6O+HvPnW7pzhLTIWc/jePjw4bZt24YNG+bl5eXp6TlixIi8vDx7d8o8jY0A8Msv
+hl/duBFXrgiqKSkWIyeHakoS2+KEUSg4gPPyEtjcuhQKRUREBAAvL68XXnjh2WefBdChQ4ecnBx7d80
+MubkcwAUFGXgpK4sDOIDLzTV9n2XLOIAbP97iHSTEKOcLHA8ePPj9738PYNasWQ0NDRzH/frrry+99B
+KA0NBQe/fODCoVJ5FwADdrFqdQaC5WV3OJiZqosWGDoPtUV3MAxzCPb0KItTlf4Fi3bh2A8ePHNzU1a
+S+eP3+eH0DxocRZnD7NMYzmay+VcqGhmpDBMEKjBm/CBA7gPvnEah0l5ElOlsehUCjWrl3buXPnTz/9
+1M3NTXt94MCB/F9+4KccnYSxmpJlZVi40PTbWRYyGc6cQbduAPAoeBJidUKXYwEkJ8Pb23o9EWTnzp1
+KpXLmzJm9e/fWvd65c2f+L2pt0TQnERKCS5daU1Py5EkUFDxx/cAB/POfVFOS2IKTnccRFhb23Xff/f
+3vfx8/frzu9dra2p49ewK4deuWv7+/nXpndSyLd97Btm2Pa0r6+6N7dzx4gLKyJ1pSTUliVc50Hkd1d
+XWfPn3c3d0VCoWHh4fuS19//fWoUaM6d+78yy+/aEcfLsZkTUlPT3z1FU6exJ49mq20VFOSWIvAuRBH
+mBzdsWNHy7/L888/b8/+WVN1NefrywFcWBh3/rz+q+XlHMB5emp+VKm4zEzNkg3DcEeP2rizxPWZMcd
+hdxcvXgTQq1cviUSi99LVq1eVSuXQ5jWOXMX06ZpNtAarw7EsgMdZ5yIRkpLw2muampIJCcjMxOuv27
+TDxLU5U+C4cuUKgKVLl85vlmIdEBCgVCr5/A7X05aakiEhWLMG8+ahSxdMnmyL3pL2wJmWY2tqagAEN
+ntkLy8vr6mpYRhm7Nix9uiX1ZmsKblnDyCgpqTBUi+EtIIzBQ6FQgHAp9m35+DBgwDGjRv3zDPP2KFb
+1nfhAvCoXEtzcrmmQVyc4QarVyMxEWo15s7VPNQQ0kZmBI7kZEFZSdbTqVMnAOyT/+2zLLt161YAC+3
+bOavR1pQ0tjgisKZkcDCKi/Hpp1bqJmln7D07a4bg4GAA69at073Ix4tx48bZq1c2IBZzAFdSYuClbd
+s0SyfV1SZuwu+p69rVobe0AOjTp4+9e0FMc6bzOEaMGAFg8+bNfF55Y2PjqlWrMjIyevXqtW3bNnv2z
+MomTQIM1ZRMSMDcuQCQkSGopqRUih9/dOiakmPGjHnxxRft3QsigMAA4wh5HFVVVd7e3gCefvppqVT6
+m9/8BoCfn9/ly5ft2S3rKy/XDDoiI7kdO7jTp7kNG7gePTQ74uLjhd5nwwYO4KKjrdlX0j44WV2VK1e
+uvPfee99++y3LsgEBAZMnT168eDF/Hodry8vDnDmafFCtLl0wezY2bhR6E21Nybt3TdeUI6QlAgOMI4
+w42jmFgktN5SZM4CIjufh4bu9eTqUy/a7ycm7DBm7uXC46mouM1Ozi/+tfDaSfmqWgoGDMmDG+vr5eX
+l5SqXT//v26pxwA6NOnz/379//7v//b39/f3d194MCBO3bsaN6msbExOTnZy8trxYoV3JNzHPzfm5qa
+Nm7c2LdvX5FIFBwcnJ6e/uDBA92efPXVV+Hh4e7u7hKJJC0trbGxETRRYn0UOFxWVhYXGal5nDH4x9+
+fW7rU9KxqcydPnuT/1QkPDx86dGjHjh0B7NmzR9sAQGBg4IQJEwD079+/T58+fPuUlBTdNn369FmyZE
+nHjh0HDRq0a9cuzlDgSElJ6dChw6BBg/r378/fZM2aNdqbbNmyhT9dISQkpG/fvgDmzZtHgcMGKHC4o
+NpaLjr68ZlAEyZw6enc3r3c6dOaI3+Cgzl//8cNEhPNW2qRSqUATp8+zf/In6IUFhambcB/wz09Pc+c
+OcNf+fvf/y4SiTp27CiTybRtOnbs2K9fv++//173jbqBQyQSBQQEXL16leO4pqamzZs38yGJbyCXy93
+d3b29vQsKCvgrOTk57u7uFDhswIzAkZzMLV9u1c4QCygv12xvE4u5zEz9x5nkZA7g0tM5juNKSrj4eE
+34CAriHsUB05566qlu3brpXlmyZElycrL2Rz5wrF27VrfN8uXLASxYsEC3TX5+vm4bvcAB4PDhw9pXm
+5qavLy8tM/XKSkpANL5X+aRt99+mwKHDThTHgcxSaHQRA2p1PAzCP/wonvIYHk5J5Wat4+2X79+AFas
+WPHjjz8abMB/5+vq6nQv3rp1C8CIESN02+gd9agXODp06HD//n3dBvxTD//3kSNHArhz545ug6KiIgo
+cNmBG4EhP554M7sThLF2q2Xpv7NGDDxx6gwuVSnNUOsMIOrg0OzubYRgA7u7u0dHRqamplZWVug345x
+TdqVCO45qamjw8PHr27Klt4+vrq3dnvcDRq1cvvQa6gaNnz55ezR6e6+rqKHDYAM1xuI7aWs2iSXm54
+Qbl5ZoGBpdjtLFDyDPLtWvXkpOTdQ9wnDZtmnb4AMDPz6/5u/z8/EQikbZN869388lRvQa6gUMkEvXo
+0UOvwa+//kqBwwacaZMbaRlfUzIy0mhNycJCTQODSRzafbQzZ2oOQG1BcHBwRkbGzZs3q6qq0tPTe/X
+qdfjw4ZUrV2ob1NfXP3jwQPct9+/fr6ura36WSqv17t27vr6eX3/Vqq2ttdT9SQsocLgO/oD3YcOMNt
+i0CbBETcm0tLTs7GwAbm5uffv2Xbx48bfffgvg7Nmz2jZNTU2FT1aX++abb7hHQwaL6Nu3b2NjI3+8k
+5bej8RKKHC4Dv6f3qYmw6+uXYsrV+Dra4GakllZWSkpKbr/1N+7dw+A35P7c//2t79pBx33799fvXo1
+gJkzZwr8dUzib/XBBx9oe8Ky7IbmW3qINQh8pKE5Dsdns5qS/AlsL7744t69e8+cOZOZmck/gPBJXBz
+H4dEZCH/4wx8OHTq0b98+fgWkf//+Dx8+1LZp4xxHY2NjaGgogLFjxx48ePDAgQMvvvjic889B2DAgA
+Gmf0/SBpTH4Tp0a0rW1moulpRwU6dqosayZXrtDaes19aaqCl59+7dUaNG6f7zwzDMsmXLtMso/Hf+y
+y+/5BdfeFKp9D//+Y/2Jm0PHBzH/fDDD3wVYZ6/v39xcTGA0aNHt/A/FGk7J6urQlp25gzGjtUc/BMW
+BqUSVVUAwDBIS3viHKa//vWvhw8f/vrrr/0Mnf8zcSJycrBjh9EjjjmOKywsvHr1qkKhCAgIGDlyJF/
+Xhufm5tanT5/vv//+P//5z/nz5+VyuVQqfeGFF3TjiKU8ePCgqKiouLi4a9eukydPVigUEolk2rRphw
+4dsvhnkceExxjK43AK5eVPbFFhGC4+Xj8ZjD8OnmGYo0+mfKlUXHU1d/489+abmpFL68AmC6JZWVkTJ
+04sLS3Vvbhnzx4AS5Yssfant3M0x+Ga+O//6dP6jxulpaW+vr4AOnfunPtowqO6mtuw4XHJa+0fNzfN
+Rjhzt9LaJnAcOXIEwJgxY3766Sf+yr///W/+LOuioiJrf3o7R4GjvVAoFImJifwwk2GYkpISjuNUKm7
+pUk1WGP+na1dOKuUGDdIPIkFB3N69Qj/LNoHj4cOH0dHRAJ5++ulhw4b179+f3yk7d+5ca380ocDh+l
+QqVWZmpvejiuFubm5ff/01x3HV1VxY2ONjxPbufTw84f/v9vTkTp/m3n1XU0QO4EaMELQN3zaBg+O4X
+3/9dd26dWFhYZ6env7+/uPGjfv8888bGxtt8NHtHAUOF1dYWKiXrLl8+XKO42prNeEgONjAk4g2cPD0
+akoKWdMlro0Ch8uqrq6Oj4/XmwuXSCT8Kiw/gSqVGl5z5YvR6qWEKBTcrFlm7IUjLsyMEpDJyXg02iU
+OjWXZtWvXpqWlqdVqvZcyMzNFIlF2NgoKWqopyaeN6p2c7uODL75AYCDWrMGiRfDzo5qS7Zi9IxexMG
+0eZ3ORkZF8G364kZlp9Cb8AT8bNhh+VbuP1tg2XOLyzEgA44uqLF5sqZBFLKy0tHTBggUFBQXGGpSUl
+ISHhwPo0AEch+pqw9VY5HIEBECtRm2t0epwb7yB7dsRGopLl+jA9PZI6CY3pRJLlmDVKqt2hrSJj49P
+TEyMseFGYmIiHzUA8P9YtL2m5JUrVFOynXKyuirEJJZlR40apbe7XCwW19TU8PW6WRZdu+KXX1BSgke
+R5LGdOzFnDhgG166ZqA6Xl4dx4yAWo6bG8EQJcWG0rd6lsCz7yiuvXLx4sXPnzh4eHtrrKSkpPo++3C
+IRpk4FDNWU3LgRc+YAgmtKhoaiocGha0oSaxE4F0LLsY5PoVDwW0XFYnFhYaH2ZArtEqxWdbWmpqRUq
+qkpmZr6OOV86VKhn0g1JdstChyug8/a8PX1fZROrhKLxQByDSVs5eZqErp0//j6mpfcZXIDPnFVHXXP
+iWwBy4JlMWoURo+21tiHtJpMJuvSpcvIkSOvXLly/PjxkJAQAJ06dWJZluO41NTU5m8JCsL06Xj2WTz
+9NHx9ERaGZcvw2WdGzyvVqqjAkSP4/HNs3469eyGXQ61Gp04QieDvb41fjjgiOo/DubEs+84772zbtu
+3EiRNRUVF6r8pkMqVSGd58CrRV9u3Dpk0oLjbawN8fM2YgKcn0/AhxdpTH4cRkMtmkSZMuX77MMMzWr
+Vtfa+E00bZRKjF9OvLzAYBhEBODiAj07g0/P2zahJwcBAfj119x+7amwezZ+Phjyu9waQIfaWiOw9Hs
+37+f3/AqkUhOCy/faL7ycs7Xl2MYTizmsrKM1pRUqbjz51tZU5I4HQocTkmlUvHn8bz88ssKa85Mmqw
+pyVexbmNNSeJ0KI/DychksqKiIpFIlJWVtWHDhv/5n//xsWb21fLlqKlBWBjy8w3PXCiVAJ6YUg0JQU
+GBprZTQgKllroogQGGRhyOgH888fX1rdWeYm5NJmtKKhSaBgYHI2bVlCTOhUYczoFl2fnz5yckJNy9e
+/fFF1/UzQq1HpM1Jfft0zQwOBgxq6YkcS50HocT0F09SUtLW6hb5sCaTNaU3LYNMFVT8uJF5Odj/nwc
+Pmzp/hH7ERo4fHyQkWHVnhCjKioqLl++LJFIjh07ZqmkDCH4Kigsa/jVjRuF1pQcNAhHjuDMGTRLNCH
+OyoxHlY8+0qRyENvgk7vkcnlsbOzRo0fLyspsGTUAhIUBQF6egZe2bMGiRQCQlWUiXyMwEHPnAsDGjR
+bvILEfgXMhNDlqY9XV1WFhYQDGt1DE1cp0a0pq13xra7nERPO2w1VX05YWV0OBwxFlZmby+9MkEgm/Y
+81eTp/WrJswDCeVahI0+B+NHSxoUHS0froHcWq0quJYWJYdMmTIvHnzGhoapk6davvHEz1RUbhwAVIp
+1GoUF6O4GAyD+HiUlUHIFC3LQi5HYSG8vADg7Flr95fYiBmrKsSqlEqlQqEIDAyMiYm5c+dOZmZmbGy
+svTsFAOHhuHQJMhnkcrAsBg82fd6XUomdO7F/v/6OuOxs9O6NGTMQF4fhw63XZWJ1dHSgQ9iyZct777
+0XGhr6zTffsCwLQOScW8RYFqmpWLcO2sIMXbsiMBA3Bnx+AAAYEUlEQVS3b6Ou7omWQUFYsQJ/+pPt+
+0gsgPI47Ky0tHTu3LnFxcUAOnTowLKsk4YMADIZJk3C5csAEB+PCRMwbpxmeML/w+Ppia++wqFDOH4c
+VVWYNQu7duGzz2gbvhOy9yRLu7Z06VL+/wWJRLJXeE1nh6StKSmRUE1J10d5HPYhl8sB+Pn5MQyTmJh
+YVlb2Jycftc+Ygfp6SKUoKzMwf8GnnGvrLYhESEpCWRlmzYJajUmT8PnnNu0taSuBAYaWYy2lvLw8Oj
+o6NDSU4ziVSlUtpPq7wzt6VHNkqbFMjR07DB9rrFI93gvn5EOu9oWWY22HZdkVK1Y8//zz+fn5t27dq
+qioEIlEgS7xfL9pEwC8+67RBZdvvgGAmBj96yLR471wc+agosKavSQWJDDA0Iijjfbv36+tsZaYmGjV
+03dsj08SM5aqpt2e38JhAHw2amio/gljxDHRiMPq+OVVlUpVU1MzZMiQwsLCzz77zKqn79gev/hqLFW
+Nakq6IIEBhkYcrVBdXT179mx/f3+VSqVSqY667kF6fHkngyOO/fuFlrbPzTUxUUIchxmBIzmZW77cqp
+1xHQqFIjExkeH3pQNWPUzYEcyerdkLp4cv9QZwmZmC7hMZyQHcjh0W7yCxMMrjsLysrCxtyIiPj3eNd
+ZOWlZfr15TMymp9TcnISGv2lViCGYEjPZ1LT7deT5yeSqU6f/48x3GnT58GEB0dXW5ydO5CDNaUFIu5
+Y8fMuAnVlHQWtFfFAliW3bJly7p161iWvXnzpo+PT0VFRYjJYoouRy7Hrl24cAFKJXx8EB+PKVNMl2W
+qqMCFC7h8GXI56upw4QLUaixejD/9yehsK7E7ChxtIpPJdu7c+fHHH9+9exeAVCrdvXt3OwwZrZOXh3
+XrUFBgtAHVlHRYFDjaZOLEiTk5OQBCQ0PT0tIcZCO84xNSU1KpRH29psHs2Vi/3vR2fmI7Ah9paDlWK
+zc3d8KECUuXLuU47vTp07Nnz25XcxltV16umQ0Ri7nMTKop6ZQocAilUqkyMzODgoL4gOvp6amiJEfz
+KRRccDAHcGFhhss4zZ3bUk1JWql1EHQehyAsy/bv37+mpgaARCL5r//6r6SkJOc9OMOOUlNRWYmwMJw
+7Z/jRg9+uojupwdeUTE3FmjWYNw8AXn/dJn0lLbB35HJcKpVq37598fHx/HHBEyZMCAoK2rdvn7375c
+S0m1ZaOIBZSE1JOr/D7iiPw4Dy8vJ3332XLwcPgJ/OsE25VtfGb65vIb+L357fQgM+dvj6trRfjtgAz
+XHo27Fjh3Y4FhQUlJmZSSHDUlau5ADu3XeNNuDnMloovKBSaSotTJ1qjQ4SoWh3LFiWzcvLmz59+h//
++EcAUVFRDMPMnj27pKTk+vXrSUlJfi1s6iTmMFlTsrgYvr5ISjJ6B76mpFiMnBycOWOVThJBBAYYlxx
+x5ObmxsfHax9JGIbhBxe0XGIl/P7XoCADL2VmapZdhcxf8A8szc8TIzbTHgPH+fPnFQqFSqXShoygoK
+Bly5ZROoa1qVSatVjdmpIKBTd7tmZOlGpKOov2Ejj44zCSk5P5Y7j4xZHU1NTly5dTvLAlbU1Jfiutb
+k3J1FQz7jNhAtWUtCcXz+Pgy5Rs2bJlwYIF6kc1goKCgjp06ADgvffes2vv2qOoKJSVYfZsTUFJAAyD
+uDikpAjd0iaXQyaDWAwA+fl46y0r9pYYI3SvihPhJzsLCgry8vLi4uLWr1+fnZ09ZcqUoKCguLi4hIQ
+E+1ZjJTyzakqyLLZswfHj+jviGAbBwYiJoZqStmZG4OCLqixebMXetJFMJluwYMHJkyd1BxfXr19nWZ
+ZlWRc75rOdMFZTEtAvTEs1JW3JiXfHyuXyoqKiS5cuFRUVVVRU3LlzRy6X9+jRA0BQUFBCQsKYMWOG0
+z9Dzkwux9ixLdWUZBicOKGpKclvpR0xAl98QdvwrU/gXIiDTI7yx/CpVKrQ0FC9X4RfSc3NzaV8LdfQ
+lpqSrnsstKNw9BFHYWHhxYsXKysrS0tLKysr7969W11dHRgYOHDgwMrKyoiIiFGjRoWFhUVFRdGTiIt
+56SUUFEAqRX6+gUmQ0lIMHoygIFy//viiXI533sHevWAYpKY69GO10xMYYGww4lAoFOfPnz969Oi777
+4bHR3Nby3TG1l07dqVP9eThhWurdU1JTmdvXA07rAeM5ZjLUWpVMpkMrlcXllZWVNTEx8fP3z48OnTp
+x86dEi3WXx8fHh4eEJCQlRUlL+/f3h4+ODBg7XDCkoDd20ma0ryM6NxcQZeWr0aANasQUICyspABzla
+g4XzOLTrFzKZrLCwUKlU3r59W6lUKhSK6dOnT548+c0339y2bZvuW4KCgoYPH96lSxeGYSQSSUhISER
+ERHBw8LBhw0CpFu1VSQlgJC4AkMuxc2dLDVavRl0dtm/H9Om4dMn0gcnEXEIDx8mTB2Sy/SzLvvQSq1
+KpWJZNSkpKSkrauHFjamrq/fv3Ady/f1+tVqenpy9evHjTpk2b+H81Hhk0aBAAHx8fPkD4+fmFhIRIJ
+BJ+4SMjI2Pr1q2W/u2Is/r5ZwBGF0cE1pQsKNDUlKTJDosTGjgqKyv5U3m17ty5A6ChoeHHH3/UXmQY
+pqGhAUBERIRcLu/SpYufn5+np2f37t0HDx4MYOXKlWlpac3vT6dpEV1du+LHH1FaaiCd9MABbN8OhoG
+h/44eE4mwYQPGjUNaGl5/nQ46tjChqyqXLlUMHVrh4SH6xz9EIpHIw8Oje/fufn5+SqVSpVJ5eHgAEI
+lE9P0nFvHqq9i9G7Nm4Ysvnri+fDnWrAGAzMyWdt9r8UszO3bQaYMW5ujLsaR9kskwaBAaGhAZiRkzE
+ByMy5exf79mTnTpUqxfL+g+Gzdi0SJERuLrr63a33aHAgdxUHl5mDNHkw+qJRZj2zbMmCH0JjIZnnsO
+DIP6enpasSQKHMRx8TUlz50Dy7a+pmRZGRoakJKC+HiqKWkxFDiI68jLw6ZNmgJxBlFNSUsxI3CsXAl
+vb6xaZe0uEWK2FmpKrl+PU6fwwgu4fZtqSlqOPdNWCbGElmtKvv46B3ALFlBNSUsy45Tzjz7SHMlBiO
+NQKjFpEmpqIJWirAxJSfqTIEVFAHDrFkQiDB+OgwdRXg6pFFVVGDsW+/bZpddOT2jgUCqxZAk9pxCHo
+60pmZ9veObi4UMAeOGFx1f4mpJLl0Ktxpw5+PxzG3XVldDkKHFicjkCAqBWo6TE6IqJuzvUalRXGwgr
+fDoZfxpQVJS1O+tSqCATcWJ5eVCrERlpNGpkZ2saGByMrF6NZcugVmPmTMjlVu2pq6HAQZzYnTsAMGy
+Y0Qb8fhZjm2gBvP8+oqNRX4/58y3dOZdGgYM4PUvVlCwstFIHXZAZgSM5GQsXWq8nhJgtLAwA8vIMvH
+T8OBYtAoCsLBPJpoGBSE6GWo21a63QRRflgnVVSPvBsujfHzU1mDULq1drJjJYFu+8g82bAcHb4fhJV
+oC2tAjlUnVVSDt05gzGjtX8PSwMHh6aok0Mg5UrIfwAuYkTkZODTz6h0nCC0HIscXoVFZqakjy+pmRy
+snm13T79FH/5C2bPxq5dVuiiy7HDYcWEWFZICC5dgkwGmQyAoJqSzfFRhj/rlJhEIw5CgEf/hXt64t4
+9e3fFGdByLCEANCsv2gq1pGUUOAghZrNwXRVCnBQ/PyKR2LsfTkJo4PDxQUaGVXtCiD3xaaN0MphAdB
+4HIVAqsXs3AMTE2LsrToJWVQjBb3+L8nIAqK1tqToc0aLJUUIwebLmL1u22LUfzoMCByFYswZZWZq/L
+F9u7944AwochADAa6/h2DGAYocwFDgI0YiLo9ghFOVxEPIYHzsmTdKUtl692t4dclR0Hgch+o4fx6RJ
+ALBsGcUOwyiPgxB99MxiEuVxEGIYjTtaQJOjhBhG444WUOAgxCiKHcZQ4CCkJRQ7DKLAQYgJFDuaozw
+OQkyj/A49lMdBiFC0zqJFeRyECEXPLFpCA4dSiSVLsGqVVTtDiKMzN3a4ubn17dv3559//vOf/9ylSx
+dvb+8///nPKpXq3r17M2fO9Pb2fuaZZ6ZOnVpbW6v7LrVavXbt2hEjRvj4+Dz77LNSqXTbtm1NTU26b
+b755puYmJju3buLxeIhQ4YcOHBA7+nBZIM24YRRKDiA8/IS2JwQV3bsGAdwALdsmYmWAAIDA6Ojo7t1
+6zZkyJCOHTsCeO2114YPHy4WiyMiItzd3QFER0dr3/LgwYOhQ4cC6NKly4svvhjGF8gFVq1apW1z8uR
+J/mJ4ePjQoUP52+7Zs0d4gzaiwEFIawiMHfy3d/z48SqViuO47Oxs7ff5xx9/5DjuX//6V4cOHQD88s
+sv/Fv4NpGRkT///DN/5ezZswACAgK0t5VKpQBOnz7N/3j+/HkAYWFhwhu0EQUOQlpJSOzgw0RNTQ3/Y
+1NTk4+Pj+5XmuO43/3udwC+//57/scvv/zypZdeys/P172Pv7+/7vPBU0891a1bN90GS5YsSU5OFt6g
+jShwENJ6JmMHgO7du+teee655wDcu3dPeyU6OhpAVVWVsU+5fv26h4eHbuDo168fgBUrVvDDluZMNmg
+jMwJHcjK3fLk1+kCIE2s5dgDo06eP7pU+ffrozS2OGTNGL3A8fPjw3LlzH3zwwSuvvBIaGtp8RjI7O5
+thGADu7u7R0dGpqamVlZW69zTZoI2EBg5CiDEtxI5WBI7a2trBgwcD6Nix49ChQxcvXnz8+PFevXrpv
+evatWvJycm9e/fWhpVp06Y1NDQIb9AWZgSO9HQuPd0iH0qIqzEWO1oROKZMmQLgrbfeUiqVLbyL19TU
+VFVVlZ6ezkeWRYsWmdugdWiOgxDLMBg7WhE4xGKxt7d3Y2Ojbptu3brpvmvt2rVHjx7VbXDz5k1+sUZ
+ggzYyY68KIaQFltrP0qlTJ5Zl1Wq1SCTir2RlZf3v//4vAI7j3Nzc+CsAJk6cyCdoALh37x4Av0flpE
+w2aCPaHUuIxVgkJ33kyJG//vrr1KlTT5w4cfTo0dmzZyclJXXp0gVARkbGnTt3AIwdO7aqqmr06NH79
+u07e/bsli1bxo8fDyA+Pp6/ickGbSVwZEKPKoQIpPvMAvMfVW7cuBEQEKD9hvr5+RUVFS1cuJD/cf/+
+/RzH3b17d9SoUbpfZIZhli1b1tTUxN/EZIM2ojNHCbG8Nu6j/eWXX/Ly8mpqakJDQ0eMGOHp6alSqb7
+44guWZSdPnqxdYSksLLx69apCoQgICBg5cmTPnj11b2KyQVuYEThWroS3N+1zI0QQ196DT+dxEGItLh
+w76DwOQqzFhc/voDkOQqzLJccdtBxLiHW55LiDRhyE2EIL4w6WZQsLCy9evFhTUxMUFBQeHj548GB+9
+73DosBBiI00jx1FRUUpKSkFBQV6LRmGkUgkp06dCgwMtHk3BaHAQYjtaGPHe++x3bptWbRoEQCGYQYN
+GjRs2DB/f/+qqqqKiooLFy6o1WqGYdLS0rSpX45FYKIYncdBiEXweaVPPTWE/wImJiYqFAq9NiqVata
+sWXyDl19+2S79bBmdx0GIrc2cuRyAr69vbm5uC81yc3MlEgmA1NRUm/VNIDMSwPgkjsWLLT7oIaQdKS
+0tjYiIUKvVubm5sbGxLTfOzs6eMmUKwzBlZWUhISG26aEQNMdBiE0NGTKkuLj47bff/vjjj4W0f+ONN
+7Zv3x4ZGfn1119bu2/CUeAgxHaUSiW/QV6hUAhccGVZ1sPDg2GY+vp6x1mjpQQwQmynpKQEQGRkpPAQ
+IBKJQkND1Wq1TCazZtfMQ4GDENu5ePEiAHOzM4YPHw6gsLDQKn1qFQochNhOZWUlgODgYLPexa+tXLl
+yxSp9ahUzzhxNToa3t/V6Qojr40NGTU2NWe/i22uLyDoCoYHDxwcZGVbtCSGuj//ym/vQUVRUBPPHKV
+ZFeRyE2I5cLu/Ro4dZSyRKpdLX11etVqtUKu2553YndI5DqcSSJXRuICFt4ufnFxkZqVar58+fL/Ati
+YmJarU6OjracaIGKI+DEBvjM0cBHDt2zGTmaF5e3rhx4xiGuXbtmkPtlKVVFUJsKjw8PC0tTa1Wz5kz
+Jy8vr4WWBw4cSEhIAJCWluZQUQOguiqE2JxKpXr55Zf5L6DB3bEKhSIxMZFv4Ji7Y+lRhRA7YFl2586
+dCxYs4M/dkEgk4eHhgwYNqqysLCkp4VM2HPk8DqqrQojdVFRULFiwID8/X+86wzARERG7du1yuCeUR6
+iuCiF2xp85evny5crKyqCgoGHDhvE55o6M8jgIIWajOQ5CHMIf/vAHtVp96tQph8rXMMaMvSqEEOu5c
+OHCzz//zLKsUwQOyuMgxCG4ubnZuwtmoMBBCDEbBQ5CiNnoPA5CHIJzJUYIHXHw53FQ9hchxvzlL39x
+c3M7evSo7kWFQsEwTN++fU3GhVOnTp0+fdopZkZh1qPKRx9pUjkIIc3FxcUByMnJ0b2Yk5Pz4MGDGTN
+mmJz7HD58eFRUlLMEDsrjIMQyHjx40K1bt06dOtXV1XXqpJkEGD9+fG5u7nfffRcaGtry250rj4MmRw
+mxjM6dO48fP/6nn37iT/oDcPfu3fz8/JCQkAEDBph8+4ULFwoKCliWtXI3LYMCByEWo/e0wj+nJCQkC
+MnRoDwOQtqpMWPGuLu7awPHkSNHAEyfPt2unbIKChyEWIyXl9fLL798/fr1ysrKhoaGU6dOhYeH9+vX
+z979sjzK4yDEkuLi4nJzc3Nycnr27Hn//v0ZM2YIfKNz5XHQeRyEWFJ9fb2fn9+IESO6du16/PhxmUw
+WEBAg5I2FhYUsyw4fPtzVVlUoj4MQk3x9fYcPH15YWHjixImIiAiBUQMOk8dRVVUlEokkEskvv/yivX
+jkyBE3N7cnJmsEnk1KhxUTItCHH37If7k2btwo/F0vv/xyZGSkSqWyXscESk1NBfDOO+/wP969e7dHj
+x7PPPNMXV2dtg0FDkIs7Pr16wDc3Nx++OEH4e/y9PQE0PzEc9tTq9UDBgzo1KnTd999x3EcXztq9+7d
+um1oVYUQC/Pw8AAQGRnZs2dP4e9ynDyOzp07b9++vbGx8c033/znP//5ySefjBkz5pVXXtFtQ4GDEAv
+78ssv4eTpGxEREX/5y18KCwujo6M9PDy2bdumF9cocBBiSUql8uOPP+7cufPUqVPt3Zc2+dvf/tajRw
++FQrFy5UqJRKL3KuVxEGIxPXv2VCgUKpVq7ty53bp1M+u9nIMlRvz0009KpRLAhQsXmr9KeRyEWMyAA
+QNu3749bdq0zZs38zMdwjlUHgfHcdHR0efOnQsLC/vXv/71j3/8Y9y4cboNqK4KIUTfzp0758yZs3Tp
+0sTExAEDBvj5+V29evXpp5/WNqDzOAhxCI5zHkddXV1ISIiXl1d5ebmnp+eKFStWr169dOnS9evXa9t
+Q4CDEIXh5ef38888KhcLHx8e+PZk6derRo0ePHTvGnxKgUql++9vf3rp1q6SkZODAgXwbWlUhxCE4SB
+5Hdnb20aNHx48fP3HiRP6Kh4fH5s2bGxsb586d29TUxF+kEQchDkEsFt+7d88RRhxC0IiDEFcgk8mys
+rIqKips83FmBI7kZCxcaL2eENKutTExws/PLyMj4/nnn+/du/f06dOzsrLkcrml+tYc5XEQ4hDansex
+cePGRYsW6V7x9/efMWNGREREVFSUZZ+AKHAQ4iJYlu3evfvdu3ebv8QwTERExNChQ2NiYgYPHtz2IEK
+BgxCHYJE8jldffXX37t0tt+GDSExMzKhRo4YNG9a6D6LAQYhDsEgex5kzZ37/+98Lb9+tW7dhw4ZNmD
+Bh+PDhISEhwt9IgYMQh2CRwNHC04pJ/v7+w4YNi46Ojo2N9fPza7mx4cBRVFS0bdu2Vnw2IaR11Go1A
+IZh2nifoqIi/giyttDOqsbGxhp8dDK8rd7HxycyMrKNn02IBTnj0NguyaAFBQVtvAPDMOHh4f379w8P
+Dzc24UKPKoS4Drlc3qNHj1a8kWGYQYMGxcXFxcTEhIeHm2xvxkE+hBAHd+LECbPaBwUFxcbGDhkyJDY
+21qy5FQochLiOgwcPmmzDMExMTAw/CRoYGNi6D6JHFUJchFwuDwgI4CdZ9TAMExwcnJCQIPBJxCQacR
+DiIg4cOKAXNVr9JGISjTgIcRG9e/e+ffu29kkkKirKrJwus/x/tb8OX6oMV64AAAAASUVORK5CYII=)
+ 
+ []
 
-]
-Chapter 4.
-[19] [20
-
-]
-Chapter 5.
 [21]
-Underfull \vbox (badness 10000) detected at line 1914
- []
-
-
-Underfull \vbox (badness 10000) detected at line 1914
- []
-
-[22]
-Underfull \vbox (badness 10000) detected at line 1914
- []
-
-
-Overfull \vbox (6.78596pt too high) detected at line 1914
- []
-
-[23]
-Underfull \vbox (badness 10000) detected at line 1914
- []
-
-
-Underfull \vbox (badness 10000) detected at line 1914
- []
-
-[24]
-Underfull \vbox (badness 10000) detected at line 1914
- []
-
-
-Underfull \vbox (badness 10000) detected at line 1914
- []
-
-[25]
-Underfull \vbox (badness 10000) detected at line 1914
- []
-
-
-Overfull \vbox (6.78596pt too high) detected at line 1914
- []
-
-[26]
-Underfull \vbox (badness 10000) detected at line 1914
- []
-
-
-Underfull \vbox (badness 10000) detected at line 1914
- []
-
-[27] [28] [29] [30] [31]
-Overfull \hbox (35.59966pt too wide) detected at line 2309
-[]
- []
-
-[32]
-Overfull \hbox (2.31906pt too wide) detected at line 2390
-[]
- []
-
-[33] [34] [35] [36] [37] [38] [39] [40] (./book.ind)
-The property list \polyglossia@langsetup contains the pairs (without outer
-braces):
->  {latex/script}  =>  {latin}
->  {latex/lcscript}  =>  {latin}
->  {latex/scripttag}  =>  {}
->  {latex/language}  =>  {Latex}
->  {latex/langtag}  =>  {ENG}
->  {latex/bcp47}  =>  {}
->  {latex/hyphennames}  =>  {english}
->  {latex/direction}  =>  {LR}
->  {latex/hyphenmins}  =>  {2,3}
->  {latex/frenchspacing}  =>  {false}
->  {latex/indentfirst}  =>  {false}
->  {latex/fontsetup}  =>  {true}
->  {latex/envname}  =>  {latex}
->  {latex/babelname}  =>  {latex}
->  {latex/localnumeral}  =>  {polyglossia@C@localnumeral}
->  {latex/Localnumeral}  =>  {polyglossia@C@localnumeral}
->  {english/script}  =>  {latin}
->  {english/lcscript}  =>  {latin}
->  {english/scripttag}  =>  {}
->  {english/language}  =>  {English}
->  {english/langtag}  =>  {ENG}
->  {english/bcp47}  =>  {en-US}
->  {english/hyphennames}  =>  {english,american,usenglish,USenglish}
->  {english/direction}  =>  {LR}
->  {english/hyphenmins}  =>  {2,3}
->  {english/frenchspacing}  =>  {false}
->  {english/indentfirst}  =>  {false}
->  {english/fontsetup}  =>  {true}
->  {english/envname}  =>  {english}
->  {english/babelname}  =>  {american}
->  {english/localnumeral}  =>  {polyglossia@C@localnumeral}
->  {english/Localnumeral}  =>  {polyglossia@C@localnumeral}.
- [41] (./book.aux
-LaTeX Info: Redefining \rmfamily on input line 19.
-LaTeX Info: Redefining \sffamily on input line 19.
-LaTeX Info: Redefining \ttfamily on input line 19.
-)
-Package rerunfilecheck Info: File `book.out' has not changed.
-(rerunfilecheck)             Checksum: 86086FF082619F90B24A395AD8EC1194;4058.
- ) 
-Here is how much of TeX's memory you used:
- 42997 strings out of 478190
- 989686 string characters out of 5854827
- 1845173 words of memory out of 5000000
- 62793 multiletter control sequences out of 15000+600000
- 477017 words of font info for 124 fonts, out of 8000000 for 9000
- 15 hyphenation exceptions out of 8191
- 99i,23n,115p,742b,2273s stack positions out of 5000i,500n,10000p,200000b,80000s
-
-Output written on book.pdf (45 pages).
+U
