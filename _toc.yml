@@ -13,5 +13,5 @@ chapters:
   - file: cap4
   - file: cap5
 - file: References
-- file: Participation_in_scientific_event,_list_of_publications_and_list_of_papers_prepared_or_submitted
+#- file: Participation_in_scientific_event,_list_of_publications_and_list_of_papers_prepared_or_submitted
 - file: appendix
