@@ -1,0 +1,1669 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Exponential methods &#8212; Numerical exponential integrators for dynamical systems</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Swing spring application" href="cap5.html" />
+    <link rel="prev" title="Important concepts for the study of exponential methods" href="cap3.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Numerical exponential integrators for dynamical systems</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    General Information about the Project
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Summary_of_the_proposed_project.html">
+   Summary of the proposed project
+  </a>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="Project_execution.html">
+   Project execution
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="cap1.html">
+     Motivation - Stiffness
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="cap2.html">
+     Classical methods
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="cap3.html">
+     Important concepts for the study of exponential methods
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Exponential methods
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="cap5.html">
+     Swing spring application
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="References.html">
+   References
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="appendix.html">
+   Appendix
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/Isabela-Miki-Suzuki/Numerical-exponential-integrators-for-dynamical-systems/master?urlpath=tree/docs/cap4.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/Isabela-Miki-Suzuki/Numerical-exponential-integrators-for-dynamical-systems"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/Isabela-Miki-Suzuki/Numerical-exponential-integrators-for-dynamical-systems/issues/new?title=Issue%20on%20page%20%2Fcap4.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/cap4.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exponential-euler-method">
+   Exponential Euler method
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exponential-time-differencing-methods-etd">
+   Exponential time differencing methods (ETD)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exponential-time-differencing-methods-with-runge-kutta-time-stepping">
+   Exponential time differencing methods with Runge-Kutta time stepping
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exponential-trapezoidal-rule">
+     Exponential - Trapezoidal rule
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#naive-deduction-trapezoidal-rule">
+     Naive deduction - Trapezoidal rule
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exponential-third-order-etdrk-3">
+     Exponential - Third order (ETDRK-3)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#naive-deduction-third-order">
+     Naive deduction - Third order
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#graphics">
+   Graphics
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Exponential methods</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exponential-euler-method">
+   Exponential Euler method
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exponential-time-differencing-methods-etd">
+   Exponential time differencing methods (ETD)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exponential-time-differencing-methods-with-runge-kutta-time-stepping">
+   Exponential time differencing methods with Runge-Kutta time stepping
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exponential-trapezoidal-rule">
+     Exponential - Trapezoidal rule
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#naive-deduction-trapezoidal-rule">
+     Naive deduction - Trapezoidal rule
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exponential-third-order-etdrk-3">
+     Exponential - Third order (ETDRK-3)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#naive-deduction-third-order">
+     Naive deduction - Third order
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#graphics">
+   Graphics
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="exponential-methods">
+<h1>Exponential methods<a class="headerlink" href="#exponential-methods" title="Permalink to this headline">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from basecode import *
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this chapter, exponential methods are introduced, with further analysis of some of them, being tested and compared to more classical equivalents.</p>
+<p>The whole basecode is in the appendix.</p>
+<p>The stiff problem used in all the convergence tables is the following one taken from [1]:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    u'(t) + 100 u(t) = \sin(t)\\
+    u(0) = 1.
+\end{split}\]</div>
+<p>Solution:</p>
+<div class="math notranslate nohighlight">
+\[
+u(t) = \exp(-100t)+\frac{\exp(-100t)+100\sin(t)-\cos(t)}{1+100^2}.
+\]</div>
+<p>In this whole section informations from [1], [6], [7] are used.</p>
+<section id="exponential-euler-method">
+<h2>Exponential Euler method<a class="headerlink" href="#exponential-euler-method" title="Permalink to this headline">#</a></h2>
+<p>For</p>
+<p><span class="math notranslate nohighlight">\(\begin{cases}
+    y'(t) + \lambda y(t) = g(y(t), t), t \in (t_0, T) \\
+    y(0) = y_0
+\end{cases}\)</span></p>
+<p>the domain is evenly discretized:</p>
+<div class="math notranslate nohighlight">
+\[
+    N \in \mathbb{N}; h = \frac{T-t_0}{N}; \text{Domain: }\{t_k = t_0 + k h : k = 0, 1, ...\}.
+\]</div>
+<p>The discretization of the ODE takes the exact solution of the Cauchy problem, given by the variation of constants formula</p>
+<div class="math notranslate nohighlight">
+\[
+    y(t) = e^{-(t-t_0) \lambda}y_0 + \int_{t_0}^t [e^{-\lambda(t-\tau)} g(y(\tau), \tau)] d\tau
+\]</div>
+<p>and, by Taylor expansion on <span class="math notranslate nohighlight">\(g\)</span>:</p>
+<p><span class="math notranslate nohighlight">\(\tau \in (t_k, t_{k+1})\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+    g(y(\tau), \tau) = g(y(t_k), t_k) + (\tau - t_k) \frac{dg}{dt} (y(\theta_k), \theta_k)
+\]</div>
+<p>for a <span class="math notranslate nohighlight">\(\theta_k \in (t_k, t_{k+1}),\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+    y(t_{k+1}) = e^{-(t_{k+1}-t_k) \lambda}y(t_k) + \int_{t_k}^{t_{k+1}} [e^{-\lambda(t_{k+1}-\tau)} g(y(\tau), \tau)] d\tau
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+    = e^{-h \lambda}y(t_k) + \int_{t_k}^{t_{k+1}} \left[e^{-\lambda(t_{k+1}-\tau)} \left( g(y(t_k), t_k) + (\tau - t_k) \frac{dg}{dt} (y(\theta_k), \theta_k)\right)\right] d\tau
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+    = e^{-h \lambda}y(t_k) + g(y(t_k), t_k) \int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)} d\tau + \frac{dg}{dt} (y(\theta_k), \theta_k) \int_{t_k}^{t_{k+1}} (\tau - t_k) e^{-\lambda(t_{k+1}-\tau)} d\tau.
+\]</div>
+<p>Since</p>
+<div class="math notranslate nohighlight">
+\[
+    \int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)} d\tau = h\phi_1(-\lambda h)= \frac{1-e^{-h \lambda}}{\lambda}
+\]</div>
+<p>and, by the Taylor expansion of <span class="math notranslate nohighlight">\(e^{-\lambda h}\)</span> in the point zero</p>
+<div class="math notranslate nohighlight">
+\[
+    e^{-\lambda h} = 1 - \lambda h + \frac{1}{2}\lambda^2h^2 - \frac{1}{3!}\lambda^3h^3 + \dotsi + \frac{1}{n!} (-\lambda h)^n + \dotsi, n \in \mathbb{N}
+\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+     \int_{t_k}^{t_{k+1}} (\tau - t_k) e^{-\lambda(t_{k+1}-\tau)} d\tau =
+     h^2 \phi_2 (-\lambda h) =
+     h \frac{\phi_1(0) - \phi_1(-\lambda h)}{\lambda} =
+     \frac{h}{\lambda} - \frac{1-e^{-h \lambda}}{\lambda^2} = \\
+     \frac{h}{\lambda} - \frac{1-(1 - \lambda h + \frac{1}{2}\lambda^2h^2 - \frac{1}{3!}\lambda^3h^3 + \dotsi + \frac{1}{n!} (-\lambda h)^n + \dotsi)}{\lambda^2} = \\
+     \frac{h^2}{2} - \frac{h^3}{3!} \lambda + \dotsi + \frac{h^n}{n!} (-\lambda)^{n-2} + \dotsi  =  O(h^2),
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[
+    y(t_{k+1}) = e^{-h \lambda}y(t_k) + g(y(t_k), t_k) \frac{1-e^{-h \lambda}}{\lambda} + \frac{dg}{dt} (y(\theta_k), \theta_k) O(h^2),
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+  y(t_{k+1}) = e^{-h \lambda}y(t_k) + g(y(t_k), t_k) \frac{1-e^{-h \lambda}}{\lambda} + O(h^2).
+\]</div>
+<p>That inspires the <span class="math notranslate nohighlight">\(\textbf{Exponential Euler method}\)</span> :</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+y_0 = y(t_0)\\
+\textbf{for } k = 0, 1, 2, ..., N-1 :\\
+    y_{k+1} = e^{-h \lambda}y_k + g(y_k, t_k) \frac{1-e^{-h \lambda}}{\lambda}\\
+    t_{k+1} = t_k + h
+\end{split}\]</div>
+<p>with <span class="math notranslate nohighlight">\(y_k \thickapprox y(t_k)\)</span>.</p>
+<p>Expression:</p>
+<div class="math notranslate nohighlight">
+\[
+  y(t_{k+1}) = e^{-h \lambda}y(t_k) + g(y(t_k), t_k) \frac{1-e^{-h \lambda}}{\lambda} + O(h^2).
+\]</div>
+<p>Table of convergence:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>n0 = 128
+k = 4
+t0 = 0
+tf = 1
+x0 = np.array([1])
+A = np.array([[100]])
+errors_2x_vector, domain = errors_2x(n0, k, exponential_euler, t0, tf, x0, A, g, sol, vectorize_sol, error_sup)
+convergence_table(errors_2x_vector, n0, k, t0, tf)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>128 &amp; 0.0078125 &amp; 4.398075514689716e-05 &amp; - \\ 
+256 &amp; 0.00390625 &amp; 2.074422525626487e-05 &amp; 1.0841625981445133 \\ 
+512 &amp; 0.001953125 &amp; 1.0056221183126109e-05 &amp; 1.0446214904461004 \\ 
+1024 &amp; 0.0009765625 &amp; 4.948885884282876e-06 &amp; 1.0229126060177947 \\ 
+</pre></div>
+</div>
+</div>
+</div>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>n</p></th>
+<th class="head"><p>h = <span class="math notranslate nohighlight">\(\frac{1}{h}\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(\tau(0,h)\)</span></p></th>
+<th class="head"><p>q = <span class="math notranslate nohighlight">\(\frac{tau(0,h)}{tau(0, 2h)}\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>128</p></td>
+<td><p>0.0078125</p></td>
+<td><p>4.398075514689716e-05</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>256</p></td>
+<td><p>0.00390625</p></td>
+<td><p>2.074422525626487e-05</p></td>
+<td><p>1.0841625981445133</p></td>
+</tr>
+<tr class="row-even"><td><p>512</p></td>
+<td><p>0.001953125</p></td>
+<td><p>1.0056221183126109e-05</p></td>
+<td><p>1.0446214904461004</p></td>
+</tr>
+<tr class="row-odd"><td><p>1024</p></td>
+<td><p>0.0009765625</p></td>
+<td><p>4.948885884282876e-06</p></td>
+<td><p>1.0229126060177947</p></td>
+</tr>
+</tbody>
+</table>
+<p>The table proved the order of conergence given by the deduction, and, comparing to the one of the classic Euler method:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>n0 = 128
+k = 4
+t0 = 0
+tf = 1
+x0 = np.array([1])
+A = np.array([[100]])
+errors_2x_vector, domain = errors_2x(n0, k, classic_euler, t0, tf, x0, A, g, sol, vectorize_sol, error_sup)
+convergence_table(errors_2x_vector, n0, k, t0, tf)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>128 &amp; 0.0078125 &amp; 0.2391072699739873 &amp; - \\ 
+256 &amp; 0.00390625 &amp; 0.08650412059872986 &amp; 1.466817233501749 \\ 
+512 &amp; 0.001953125 &amp; 0.039214210532948934 &amp; 1.1413923006132296 \\ 
+1024 &amp; 0.0009765625 &amp; 0.018739566082401515 &amp; 1.0652890085799935 \\ 
+</pre></div>
+</div>
+</div>
+</div>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>n</p></th>
+<th class="head"><p>h = <span class="math notranslate nohighlight">\(\frac{1}{h}\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(\tau(0,h)\)</span></p></th>
+<th class="head"><p>q = <span class="math notranslate nohighlight">\(\frac{tau(0,h)}{tau(0, 2h)}\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>128</p></td>
+<td><p>0.0078125</p></td>
+<td><p>0.2391072699739873</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>256</p></td>
+<td><p>0.00390625</p></td>
+<td><p>0.08650412059872986</p></td>
+<td><p>1.466817233501749</p></td>
+</tr>
+<tr class="row-even"><td><p>512</p></td>
+<td><p>0.001953125</p></td>
+<td><p>0.039214210532948934</p></td>
+<td><p>1.1413923006132296</p></td>
+</tr>
+<tr class="row-odd"><td><p>1024</p></td>
+<td><p>0.0009765625</p></td>
+<td><p>0.018739566082401515</p></td>
+<td><p>1.0652890085799935</p></td>
+</tr>
+</tbody>
+</table>
+<p>the exponential one has much better approximations since the beginning, proving the efficiency of the exponential method.</p>
+</section>
+<section id="exponential-time-differencing-methods-etd">
+<h2>Exponential time differencing methods (ETD)<a class="headerlink" href="#exponential-time-differencing-methods-etd" title="Permalink to this headline">#</a></h2>
+<p>In the same conditions as above, it is taken a general Taylor expansion of <span class="math notranslate nohighlight">\(g\)</span>:</p>
+<p><span class="math notranslate nohighlight">\(\tau \in (t_k, t_{k+1}), n \in \mathbb{N}\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    g(y(\tau), \tau) = g(y(t_k), t_k) + (\tau - t_k) \frac{dg}{dt} (y(t_k), t_k) + \frac{(\tau - t_k)^2}{2!} \frac{d^2g}{dt^2} (y(t_k), t_k) + \\
+    \dotsi + \frac{(\tau - t_k)^{n-1}}{(n-1)!} \frac{d^{n-1}g}{dt^{n-1}} (y(t_k), t_k) + \frac{(\tau - t_k)^n}{n!} \frac{d^ng}{dt^n} (y(\theta_k), \theta_k)
+\end{split}\]</div>
+<p>for a <span class="math notranslate nohighlight">\(\theta_k \in (t_k, t_{k+1})\)</span></p>
+<p>In</p>
+<div class="math notranslate nohighlight">
+\[
+    y(t_{k+1}) = e^{-h \lambda}y(t_k) + \int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)} g(y(\tau), \tau) d\tau
+\]</div>
+<p>It will now become</p>
+<div class="math notranslate nohighlight">
+\[
+y(t_{k+1}) = e^{-h \lambda}y(t_k) + \int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)}  g(y(t_k), t_k) +
+(\tau - t_k) \frac{dg}{dt} (y(t_k), t_k) +
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+ \frac{(\tau - t_k)^2}{2!} \frac{d^2g}{dt^2} (y(t_k), t_k) + \dotsi + 
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+ + \frac{(\tau - t_k)^{n-1}}{(n-1)!} \frac{d^{n-1}g}{dt^{n-1}} (y(t_k), t_k) + \frac{(\tau - t_k)^n}{n!} \frac{d^ng}{dt^n} (y(\theta_k), \theta_k)  d\tau,
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+y(t_{k+1}) = e^{-h \lambda}y(t_k) +
+g(y(t_k), t_k)\int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)} d \tau +
+\]</div>
+<div class="math notranslate nohighlight">
+\[
++ \frac{dg}{dt}(y(t_k), t_k)\int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)} (\tau - t_k)d\tau + \frac{d^2g}{dt^2} (y(t_k), t_k)\int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)} \frac{(\tau - t_k)^2}{2!}d\tau +
+\]</div>
+<div class="math notranslate nohighlight">
+\[
++ \dotsi +
+\]</div>
+<div class="math notranslate nohighlight">
+\[
++ \frac{d^{n-1}g}{dt^{n-1}} (y(t_k), t_k)\int_{t_k}^{t_{k+1}}  e^{-\lambda(t_{k+1}-\tau)} \frac{(\tau - t_k)^{n-1}}{(n-1)!} d\tau + \frac{d^ng}{dt^n} (y(\theta_k), \theta_k) \int_{t_k}^{t_{k+1}}  e^{-\lambda(t_{k+1}-\tau)} \frac{(\tau - t_k)^n}{n!} d\tau,
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+y(t_{k+1}) = e^{-h \lambda}y(t_k) +
+h\phi_1(-\lambda h) g(y(t_k), t_k) +
+h^2\phi_2(-\lambda h) \frac{dg}{dt}(y(t_k), t_k) +
+h^3\phi_3(-\lambda h)\frac{d^2g}{dt^2} (y(t_k), t_k)
+\]</div>
+<div class="math notranslate nohighlight">
+\[
++ \dotsi +
+\]</div>
+<div class="math notranslate nohighlight">
+\[
++ h^n\phi_n(-\lambda h) \frac{d^{n-1}g}{dt^{n-1}} (y(t_k), t_k)+
+h^{n+1}\phi_{n+1}(-\lambda h) \frac{d^ng}{dt^n} (y(\theta_k), \theta_k).
+\]</div>
+<p>From the discussion about the exponential Euler, that is known that</p>
+<div class="math notranslate nohighlight">
+\[
+h^2\phi_2(-\lambda h) = \frac{h^2}{2} - \frac{h^3}{3!} \lambda + \dotsi + \frac{h^l}{l!} (-\lambda)^{l-2} + \dotsi = \frac{1}{(-\lambda)^2} \sum\limits_{i=2}^{\infty} \frac{(-\lambda h)^i}{i!}.
+\]</div>
+<p>Since</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+  \phi_{n+1}(-\lambda h) = \frac{\phi_n(-\lambda h) - \phi_n(0)}{-\lambda h} \text{ and}\\
+  \phi_n(0) = \frac{1}{n!},
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[
+  h^3 \phi_3(-\lambda h) = h^2 \frac{\phi_2(0) - \phi_2(-\lambda h)}{\lambda} = \frac{\frac{h^2}{2} - (\frac{h^2}{2} - \frac{h^3}{3!} \lambda + \dotsi + \frac{h^l}{l!} (-\lambda)^{l-2} + O(h^{l+1}))}{\lambda} = \frac{1}{(-\lambda)^3} \sum\limits_{i=3}^{\infty} \frac{(-\lambda h)^i}{i!}.
+\]</div>
+<p>And if</p>
+<div class="math notranslate nohighlight">
+\[
+h^l \phi_l(-\lambda h) = \frac{1}{(-\lambda)^l} \sum\limits_{i=l}^{\infty} \frac{(-\lambda h)^i}{i!}, \text{for a } l \in \mathbb{N},
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+  h^{l+1}\phi_{l+1}(-\lambda h) = h^{l+1} \frac{\phi_l(-\lambda h) - \phi_l(0)}{-\lambda h} = \frac{h^l \phi_l(0) - h^l \phi_l(-\lambda h)}{\lambda} = \frac{h^l}{l! \lambda} - \frac{1}{\lambda} \frac{1}{(-\lambda)^l} \sum\limits_{i=l}^{\infty} \frac{(-\lambda h)^i}{i!} = \frac{1}{(-\lambda)^{l+1}} \sum\limits_{i=l+1}^{\infty} \frac{(-\lambda h)^i}{i!}.
+\]</div>
+<p>So, by induction,</p>
+<div class="math notranslate nohighlight">
+\[
+h^n \phi_n(-\lambda h) = \frac{1}{(-\lambda)^n} \sum\limits_{i=n}^{\infty} \frac{(-\lambda h)^i}{i!} = O(h^n), \forall n \geq 2.
+\]</div>
+<p>Then,</p>
+<p>Expression:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+y(t_{k+1}) = e^{-h \lambda}y(t_k) +
+h\phi_1(-\lambda h) g(y(t_k), t_k) +
+h^2\phi_2(-\lambda h) \frac{dg}{dt}(y(t_k), t_k) +
+h^3\phi_3(-\lambda h)\frac{d^2g}{dt^2} (y(t_k), t_k) +
+\dotsi + \\
+h^n\phi_n(-\lambda h) \frac{d^{n-1}g}{dt^{n-1}} (y(t_k), t_k)+
+O(h^{n+1}).
+\end{split}\]</div>
+<p>It is possible to note that the exponential euler is essentially the exponential time differencing method of order 1.</p>
+<p>In the same way as Taylor methods, the problem here is that at the expense of a higher order of convergence, ends up requiring the evaluation and implementation of multiple derivatives that may not even be easy to calculate. It can be avoided using Runge-Kutta methods, the next to be analyzed.</p>
+</section>
+<section id="exponential-time-differencing-methods-with-runge-kutta-time-stepping">
+<h2>Exponential time differencing methods with Runge-Kutta time stepping<a class="headerlink" href="#exponential-time-differencing-methods-with-runge-kutta-time-stepping" title="Permalink to this headline">#</a></h2>
+<p>Here, the exponential Runge-Kutta were compared to methods from deductions following the classic runge-kutta approach in the constant variation formula.</p>
+<p>All convergence tables prove the deduced order.</p>
+<p>However, it is remarkable how much better the exponential methods are in relation to the new ones presented here, showing that we cannot be naive and apply the integral approximations expecting an exponential Runge-Kutta performance, the treatment must be exact for the linear part, as is done in all exponential methods.</p>
+<section id="exponential-trapezoidal-rule">
+<h3>Exponential - Trapezoidal rule<a class="headerlink" href="#exponential-trapezoidal-rule" title="Permalink to this headline">#</a></h3>
+<p>For the second order method, that is used the approximation</p>
+<div class="math notranslate nohighlight">
+\[
+    g(y(\tau), \tau) = g(y(t_k), t_k) + (\tau - t_k) \frac{dg}{dt} (y(t_k), t_k) + O(h^2),
+\]</div>
+<p><span class="math notranslate nohighlight">\(\forall \tau \in (t_k, t_{k+1}).\)</span></p>
+<p>The first derivative is discretized with the Taylor expansion</p>
+<div class="math notranslate nohighlight">
+\[
+g(y(t_{k+1}), t_{k+1}) = g(y(t_k), t_k) + h \frac{dg}{dt} (y(t_k), t_k) + O(h^2)
+\]</div>
+<p>and the exponential Euler expression</p>
+<div class="math notranslate nohighlight">
+\[
+  y(t_{k+1}) = e^{-h \lambda}y(t_k) + g(y(t_k), t_k) \frac{1-e^{-h \lambda}}{\lambda} + O(h^2),
+\]</div>
+<p>so that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\frac{dg}{dt} (y(t_k), t_k)  = \frac{g(a_k, t_{k+1}) - g(y(t_k), t_k)}{h} + O(h), \\
+\text{with } a_k = e^{-h \lambda}y(t_k) + g(y(t_k), t_k) \frac{1-e^{-h\lambda}}{\lambda},
+\end{split}\]</div>
+<p>which results in the expression</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+g(y(\tau), \tau) = g(y(t_k), t_k) + (\tau - t_k) \frac{g(a_k, t_{k+1}) - g(y(t_k), t_k)}{h} + (\tau - t_k)O(h) \\
+\text{with } a_k = e^{-h \lambda}y(t_k) + g(y(t_k), t_k) \frac{1-e^{-h\lambda}}{\lambda}.
+\end{split}\]</div>
+<p>Putting in the variation of constants formula</p>
+<div class="math notranslate nohighlight">
+\[
+y(t) = e^{-(t-t_0) \lambda}y_0 + \int_{t_0}^t e^{-\lambda(t-\tau)} g(y(\tau), \tau) d\tau,
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+  y(t_{k+1}) = e^{-h \lambda}y(t_k) + \int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)} \left[ g(y(t_k), t_k) + (\tau - t_k)  \frac{g(a_k, t_{k+1}) - g(y(t_k), t_k)}{h}  + (\tau - t_k)O(h) \right] d\tau
+  %mudei aqui
+\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+y(t_{k+1}) = e^{-h \lambda} y(t_k) + g(y(t_k), t_k)\int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)} d \tau + \frac{g(a_k, t_{k+1}) - g(y(t_k), t_k)}{h} \int_{t_k}^{t_{k+1}} (\tau - t_k) e^{-\lambda(t_{k+1}-\tau)} d \tau + \\
++ O(h)\int_{t_k}^{t_{k+1}} (\tau - t_k) e^{-\lambda(t_{k+1}-\tau)} d \tau \\
+\text{with } a_k = e^{-h \lambda}y(t_k) + g(y(t_k), t_k) \frac{1-e^{-h\lambda}}{\lambda}.
+\end{split}\]</div>
+<p>Then,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+y(t_{k+1}) = e^{-h \lambda} y(t_k) +
+  h \phi_1 (-\lambda h) g(y(t_k), t_k) +
+  \frac{g(a_k, t_{k+1}) - g(y(t_k), t_k)}{h} h^2 \phi_2 (-\lambda h) + \\
+  + O(h)h^2 \phi_2 (-\lambda h) \\
+  y(t_{k+1}) = e^{-h \lambda} y(t_k) +
+  h \phi_1 (-\lambda h) g(y(t_k), t_k) +
+  \left[g(a_k, t_{k+1}) - g(y(t_k), t_k) \right] h \phi_2 (-\lambda h) + \\
+  + O(h^3) \\
+  \text{with } a_k = e^{-h \lambda}y(t_k) + g(y(t_k), t_k) \frac{1-e^{-h\lambda}}{\lambda}.
+\end{split}\]</div>
+<p>Butcher tableau:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{array}
+{c|cc}
+0\\
+1 &amp; \phi_1(-\lambda h)\\
+\hline
+&amp; \phi_1 (-\lambda h) - \phi_2 (-\lambda h) &amp; \phi_2 (-\lambda h)
+\end{array}
+\end{split}\]</div>
+<p>Expression:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+  y(t_{k+1}) = e^{-h \lambda} y(t_k) +
+  h \phi_1 (-\lambda h) g(y(t_k), t_k) +
+  \left[g(a_k, t_{k+1}) - g(y(t_k), t_k) \right] h \phi_2 (-\lambda h) + \\
+  + O(h^3) \\
+  \text{with } a_k = e^{-h \lambda}y(t_k) + g(y(t_k), t_k) \frac{1-e^{-h\lambda}}{\lambda}.
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>n0 = 128
+k = 4
+t0 = 0
+tf = 1
+x0 = np.array([1])
+A = np.array([[100]])
+
+errors_2x_vector, domain = errors_2x(n0, k, etd2rk, t0, tf, x0, A, g, sol, vectorize_sol, error_sup)
+convergence_table(errors_2x_vector, n0, k, t0, tf)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>128 &amp; 0.0078125 &amp; 4.186569175362864e-08 &amp; - \\ 
+256 &amp; 0.00390625 &amp; 1.0575183428604418e-08 &amp; 1.985085775819591 \\ 
+512 &amp; 0.001953125 &amp; 2.652380943352073e-09 &amp; 1.9953227875115886 \\ 
+1024 &amp; 0.0009765625 &amp; 6.638462730912398e-10 &amp; 1.9983668943519293 \\ 
+</pre></div>
+</div>
+</div>
+</div>
+<p>Convergence table:</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>n</p></th>
+<th class="head"><p>h = <span class="math notranslate nohighlight">\(\frac{1}{h}\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(\tau(0,h)\)</span></p></th>
+<th class="head"><p>q = <span class="math notranslate nohighlight">\(\frac{tau(0,h)}{tau(0, 2h)}\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>128</p></td>
+<td><p>0.0078125</p></td>
+<td><p>4.186569175362864e-08</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>256</p></td>
+<td><p>0.00390625</p></td>
+<td><p>1.0575183428604418e-08</p></td>
+<td><p>1.985085775819591</p></td>
+</tr>
+<tr class="row-even"><td><p>512</p></td>
+<td><p>0.001953125</p></td>
+<td><p>2.652380943352073e-09</p></td>
+<td><p>1.9953227875115886</p></td>
+</tr>
+<tr class="row-odd"><td><p>1024</p></td>
+<td><p>0.0009765625</p></td>
+<td><p>6.638462730912398e-10</p></td>
+<td><p>1.9983668943519293</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="naive-deduction-trapezoidal-rule">
+<h3>Naive deduction - Trapezoidal rule<a class="headerlink" href="#naive-deduction-trapezoidal-rule" title="Permalink to this headline">#</a></h3>
+<p>It is also possible to think the exponential time differencing methods with Runge-Kutta time stepping using the numerical integration, for example, for the one with second order, it starts with the trapezoidal rule (which was taken from [2]) on the variation of constants formula:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+y(t_{k+1}) = e^{-h \lambda}y(t_k) + \frac{h}{2} \left[ e^{-\lambda(t_{k+1}-t_k)} g(y(t_k), t_k) + e^{-\lambda(t_{k+1}-t_{k+1})} g(y(t_{k+1}), t_{k+1}) \right] + O(h^3), \\
+    y(t_{k+1}) = e^{-h \lambda}y(t_k) + \frac{h}{2} \left[ e^{-\lambda h} g(y(t_k), t_k) + g(y(t_{k+1}), t_{k+1}) \right] +  O(h^3).
+\end{split}\]</div>
+<p>And then, from the expression seen before:</p>
+<div class="math notranslate nohighlight">
+\[
+y(t_{k+1}) = e^{-h \lambda}y(t_k) + g(y(t_k), t_k) \frac{1-e^{-h \lambda}}{\lambda} + O(h^2),
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+    g(y(t_{k+1}), t_{k+1}) = g(a_k, t_{k+1}) + O(h^2) \text{, with } a_k = e^{-h \lambda}y(t_k) + g(y(t_k), t_k) \frac{1-e^{-h\lambda}}{\lambda}.
+\]</div>
+<p>So,</p>
+<div class="math notranslate nohighlight">
+\[
+y(t_{k+1}) = e^{-h \lambda}y(t_k) + \frac{h}{2} \left[ e^{-\lambda h} g(y(t_k), t_k) + g(a_k, t_{k+1}) + O(h^2) \right] +  O(h^3),
+\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+y(t_{k+1}) = e^{-h \lambda}y(t_k) + \frac{h}{2} \left[ e^{-\lambda h} g(y(t_k), t_k) + g(a_k, t_{k+1}) \right] +  O(h^3) \\
+    \text{with } a_k = e^{-h \lambda}y(t_k) + g(y(t_k), t_k) h \phi_1 (-\lambda h).
+\end{split}\]</div>
+<p>Butcher tableau:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{array}
+{c|cc}
+0\\
+1 &amp; \phi_1(-\lambda h)\\
+\hline
+&amp; \frac{1}{2} e^{-h \lambda} &amp; \frac{1}{2}
+\end{array}
+\end{split}\]</div>
+<p>Expression:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+y(t_{k+1}) = e^{-h \lambda}y(t_k) + \frac{h}{2} \left[ e^{-\lambda h} g(y(t_k), t_k) + g(a_k, t_{k+1}) \right] +  O(h^3) \\
+    \text{with } a_k = e^{-h \lambda}y(t_k) + g(y(t_k), t_k) h \phi_1 (-\lambda h).
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>n0 = 128
+k = 4
+t0 = 0
+tf = 1
+x0 = np.array([1])
+A = np.array([[100]])
+
+errors_2x_vector, domain = errors_2x(n0, k, etd2rk_trapezoidal_naive, t0, tf, x0, A, g, sol, vectorize_sol, error_sup)
+convergence_table(errors_2x_vector, n0, k, t0, tf)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>128 &amp; 0.0078125 &amp; 0.0004242643044311458 &amp; - \\ 
+256 &amp; 0.00390625 &amp; 0.00010714498082271644 &amp; 1.9853990333325726 \\ 
+512 &amp; 0.001953125 &amp; 2.6871031228085582e-05 &amp; 1.9954406751889993 \\ 
+1024 &amp; 0.0009765625 &amp; 6.725136514989377e-06 &amp; 1.9984162299862431 \\ 
+</pre></div>
+</div>
+</div>
+</div>
+<p>Convergence table:</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>n</p></th>
+<th class="head"><p>h = <span class="math notranslate nohighlight">\(\frac{1}{h}\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(\tau(0,h)\)</span></p></th>
+<th class="head"><p>q = <span class="math notranslate nohighlight">\(\frac{tau(0,h)}{tau(0, 2h)}\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>128</p></td>
+<td><p>0.0078125</p></td>
+<td><p>0.0004242643044311458</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>256</p></td>
+<td><p>0.00390625</p></td>
+<td><p>0.00010714498082271644</p></td>
+<td><p>1.9853990333325726</p></td>
+</tr>
+<tr class="row-even"><td><p>512</p></td>
+<td><p>0.001953125</p></td>
+<td><p>2.6871031228085582e-05</p></td>
+<td><p>1.9954406751889993</p></td>
+</tr>
+<tr class="row-odd"><td><p>1024</p></td>
+<td><p>0.0009765625</p></td>
+<td><p>6.725136514989377e-06</p></td>
+<td><p>1.9984162299862431</p></td>
+</tr>
+</tbody>
+</table>
+<p>Notably worse than the real exponential one.</p>
+<p>To compare, this is the convergence table of the RK2, in which we can see that the errors are much bigger:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>n0 = 128
+k = 4
+t0 = 0
+tf = 1
+x0 = np.array([1])
+A = np.array([[100]])
+
+errors_2x_vector, domain = errors_2x(n0, k, rk2, t0, tf, x0, A, g, sol, vectorize_sol, error_sup)
+convergence_table(errors_2x_vector, n0, k, t0, tf)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>128 &amp; 0.0078125 &amp; 0.06606851127601271 &amp; - \\ 
+256 &amp; 0.00390625 &amp; 0.01256096444797522 &amp; 2.395015596211044 \\ 
+512 &amp; 0.001953125 &amp; 0.0027104154026279526 &amp; 2.212361357172686 \\ 
+1024 &amp; 0.0009765625 &amp; 0.0006264383048139033 &amp; 2.1132696413977325 \\ 
+</pre></div>
+</div>
+</div>
+</div>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>n</p></th>
+<th class="head"><p>h = <span class="math notranslate nohighlight">\(\frac{1}{h}\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(\tau(0,h)\)</span></p></th>
+<th class="head"><p>q = <span class="math notranslate nohighlight">\(\frac{tau(0,h)}{tau(0, 2h)}\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>128</p></td>
+<td><p>0.0078125</p></td>
+<td><p>0.06606851127601271</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>256</p></td>
+<td><p>0.00390625</p></td>
+<td><p>0.01256096444797522</p></td>
+<td><p>2.395015596211044</p></td>
+</tr>
+<tr class="row-even"><td><p>512</p></td>
+<td><p>0.001953125</p></td>
+<td><p>0.0027104154026279526</p></td>
+<td><p>2.212361357172686</p></td>
+</tr>
+<tr class="row-odd"><td><p>1024</p></td>
+<td><p>0.0009765625</p></td>
+<td><p>0.0006264383048139033</p></td>
+<td><p>2.1132696413977325</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="exponential-third-order-etdrk-3">
+<h3>Exponential - Third order (ETDRK-3)<a class="headerlink" href="#exponential-third-order-etdrk-3" title="Permalink to this headline">#</a></h3>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    g(y(\tau), \tau) = g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) +
+    \left(\tau - t_{k+\frac{1}{2}}\right) \frac{dg}{dt} \left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) + \\
+    + \frac{\left(\tau - t_{k+\frac{1}{2}}\right)^2}{2!} \frac{d^2g}{dt^2} \left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) + \\
+    + \frac{\left(\tau - t_{k+\frac{1}{2}}\right)^3}{3!} \frac{d^3g}{dt^3} \left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right)
+    + O((\tau - t_k)^4),
+\end{split}\]</div>
+<p><span class="math notranslate nohighlight">\(\forall \tau \in \mathbb{R}.\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    g(y(t_{k+1}), t_{k+1}) = g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) +
+    \left(t_{k+1} - t_{k+\frac{1}{2}}\right) \frac{dg}{dt} \left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) + \\
+    + \frac{\left(t_{k+1} - t_{k+\frac{1}{2}}\right)^2}{2!} \frac{d^2g}{dt^2} \left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) + \\
+    + \frac{\left(t_{k+1} - t_{k+\frac{1}{2}}\right)^3}{3!} \frac{d^3g}{dt^3} \left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right)
+    + O(h^4),
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    g(y(t_{k+1}), t_{k+1}) = g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) +
+    \frac{h}{2} \frac{dg}{dt} \left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) + \\
+    +\frac{h^2}{8} \frac{d^2g}{dt^2} \left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right)
+    + \frac{h^3}{48} \frac{d^3g}{dt^3} \left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right)
+    + O(h^4),
+\end{split}\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    g(y(t_k), t_k) = g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) +
+    \left(t_k - t_{k+\frac{1}{2}}\right) \frac{dg}{dt} \left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) + \\
+    + \frac{\left(t_k - t_{k+\frac{1}{2}}\right)^2}{2!} \frac{d^2g}{dt^2} \left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) + \\
+    + \frac{\left(t_k - t_{k+\frac{1}{2}}\right)^3}{3!} \frac{d^3g}{dt^3} \left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right)
+    + O(h^4),
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    g(y(t_k), t_k) = g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) -
+    \frac{h}{2} \frac{dg}{dt} \left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) + \\
+    + \frac{h^2}{8} \frac{d^2g}{dt^2} \left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right)
+    - \frac{h^3}{48} \frac{d^3g}{dt^3} \left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right)
+    + O(h^4).
+\end{split}\]</div>
+<p>Subtracting the two expressions,</p>
+<div class="math notranslate nohighlight">
+\[
+  g(y(t_{k+1}), t_{k+1}) - g(y(t_k), t_k) = h \frac{dg}{dt} \left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) + O(h^3).
+\]</div>
+<p>So,</p>
+<div class="math notranslate nohighlight">
+\[
+  \frac{dg}{dt} \left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) = \frac{g(y(t_{k+1}), t_{k+1}) - g(y(t_k), t_k)}{h} + O(h^2).
+\]</div>
+<p>And summing them</p>
+<div class="math notranslate nohighlight">
+\[
+  g(y(t_{k+1}), t_{k+1}) + g(y(t_k), t_k) =
+  2 g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right)
+  + \frac{h^2}{4} \frac{d^2g}{dt^2} \left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) + O(h^4).
+\]</div>
+<p>So,</p>
+<div class="math notranslate nohighlight">
+\[
+  \frac{d^2g}{dt^2} \left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) =
+  4\frac{ g(y(t_{k+1}), t_{k+1}) + g(y(t_k), t_k) -
+  2 g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right)}{h^2}
+  + O(h^2).
+\]</div>
+<p>This results in the expression</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    g(y(\tau), \tau) = g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) +
+    \left(\tau - t_{k+\frac{1}{2}}\right)  \frac{g(y(t_{k+1}), t_{k+1}) - g(y(t_k), t_k)}{h} + \\
+    + \frac{\left(\tau - t_{k+\frac{1}{2}}\right)^2}{2!} \frac{ 4 \left[g(y(t_{k+1}), t_{k+1}) + g(y(t_k), t_k) -
+  2 g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) \right]}{h^2} + \\
+    + O((\tau - t_k)^3),
+\end{split}\]</div>
+<p><span class="math notranslate nohighlight">\(\forall \tau \in \mathbb{R}.\)</span></p>
+<p>Putting in the variation of constants formula</p>
+<div class="math notranslate nohighlight">
+\[
+y(t) = e^{-(t-t_0) \lambda}y_0 + \int_{t_0}^t e^{-\lambda(t-\tau)} g(y(\tau), \tau) d\tau,
+\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+  y(t_{k+1}) = e^{-h \lambda}y(t_k) + \int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)} \left[ g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) +
+  \\
+  + \left(\tau - t_{k+\frac{1}{2}}\right)  \frac{g(y(t_{k+1}), t_{k+1}) - g(y(t_k), t_k)}{h} + 
+  \\
+  + \frac{\left(\tau - t_{k+\frac{1}{2}}\right)^2}{2!} \frac{ 4 \left[g(y(t_{k+1}), t_{k+1}) + g(y(t_k), t_k) - 2 g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) \right]}{h^2} + 
+  \\
+  + O((\tau - t_k)^3) \right] d\tau,
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+  y(t_{k+1}) = e^{-h \lambda} y(t_k) +  g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right)
+  \int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)} d \tau +
+  \\
+  \frac{g(y(t_{k+1}), t_{k+1}) - g(y(t_k), t_k)}{h}
+  \int_{t_k}^{t_{k+1}} \left(\tau - t_{k+\frac{1}{2}}\right) e^{-\lambda(t_{k+1}-\tau)} d \tau +
+  \\
+  + \frac{ 4 \left[g(y(t_{k+1}), t_{k+1}) + 
+  \\
+  g(y(t_k), t_k) - 2 g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) \right]}{h^2}
+  \int_{t_k}^{t_{k+1}} \frac{\left(\tau - t_{k+\frac{1}{2}}\right)^2}{2!} e^{-\lambda(t_{k+1}-\tau)} d \tau
+  \\
+  + \int_{t_k}^{t_{k+1}} O((\tau - t_k)^3) e^{-\lambda(t_{k+1}-\tau)} d \tau,
+\end{split}\]</div>
+<p>Since <span class="math notranslate nohighlight">\(\tau - t_{k+ \frac{1}{2}} = \tau - t_k - \frac{h}{2}\)</span> and <span class="math notranslate nohighlight">\(\left(\tau - t_{k+ \frac{1}{2}} \right)^2 = (\tau - t_k)^2 + \frac{h^2}{4} - h (\tau - t_k)\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+  y(t_{k+1}) = e^{-h \lambda} y(t_k) +
+  g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right)
+  \int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)} d \tau +
+  \\
+  \frac{g(y(t_{k+1}), t_{k+1}) - g(y(t_k), t_k)}{h}
+  \int_{t_k}^{t_{k+1}} \left(\tau - t_{k}\right) e^{-\lambda(t_{k+1}-\tau)} d \tau +
+  \\
+  + \frac{ 4 \left[g(y(t_{k+1}), t_{k+1}) + 
+  \\
+  g(y(t_k), t_k) - 2 g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) \right]}{h^2}
+  \int_{t_k}^{t_{k+1}} \frac{(\tau - t_k)^2}{2!} e^{-\lambda(t_{k+1}-\tau)} d \tau +
+  \\
+  - \frac{g(y(t_{k+1}), t_{k+1}) - g(y(t_k), t_k)}{h}
+  \int_{t_k}^{t_{k+1}} \frac{h}{2} e^{-\lambda(t_{k+1}-\tau)} d \tau +
+  \\
+  + \frac{ 4 \left[g(y(t_{k+1}), t_{k+1}) + g(y(t_k), t_k) - 2 g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) \right]}{h^2}
+  \int_{t_k}^{t_{k+1}} \frac{h^2}{4 \cdot 2!} e^{-\lambda(t_{k+1}-\tau)} d \tau +
+  \\
+  - \frac{ 4 \left[g(y(t_{k+1}), t_{k+1}) + g(y(t_k), t_k) - 2 g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) \right]}{h^2}
+  \int_{t_k}^{t_{k+1}} \frac{h (\tau - t_k)}{2!} e^{-\lambda(t_{k+1}-\tau)} d \tau +
+  \\
+  + \int_{t_k}^{t_{k+1}} O((\tau - t_k)^3) e^{-\lambda(t_{k+1}-\tau)} d \tau.
+\end{split}\]</div>
+<p>Then,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+  y(t_{k+1}) = e^{-h \lambda} y(t_k) +
+  g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right)
+  h \phi_1(-h \lambda) +
+  \frac{g(y(t_{k+1}), t_{k+1}) - g(y(t_k), t_k)}{h}
+  h^2 \phi_2 (-h \lambda) +
+  \\
+  + \frac{ 4 \left[g(y(t_{k+1}), t_{k+1}) + g(y(t_k), t_k) - 2 g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) \right]}{h^2}
+  h^3 \phi_3 (-h \lambda) +
+  \\
+  - \frac{g(y(t_{k+1}), t_{k+1}) - g(y(t_k), t_k)}{h}
+  \frac{h^2 \phi_1(-h \lambda)}{2} +
+  \\
+  + \frac{ 4 \left[g(y(t_{k+1}), t_{k+1}) + g(y(t_k), t_k) - 2 g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) \right]}{h^2}
+  \frac{h^3 \phi_1(-h \lambda)}{8} +
+  \\
+  - \frac{ 4 \left[g(y(t_{k+1}), t_{k+1}) + g(y(t_k), t_k) - 2 g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) \right]}{h^2}
+  \frac{h^3 \phi_2(-h \lambda)}{2} +
+  \\
+  + O(h^4 \phi_4(-h \lambda)).
+\end{split}\]</div>
+<p>i.e.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+  y(t_{k+1}) = e^{-h \lambda} y(t_k) +
+  g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right)
+  h \phi_1(-h \lambda) + %ok
+  \left[g(y(t_{k+1}), t_{k+1}) - g(y(t_k), t_k)\right]
+  \left( h \phi_2 (-h \lambda) - \frac{h \phi_1(-h \lambda)}{2} \right) +
+  \\
+  + 4 \left[g(y(t_{k+1}), t_{k+1}) + g(y(t_k), t_k) - 2 g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) \right]
+  \left( h \phi_3 (-h \lambda) + \frac{h \phi_1(-h \lambda)}{8} - \frac{h \phi_2(-h \lambda)}{2} \right) + O(h^4).
+\end{split}\]</div>
+<p>Using the Cox and Mathhews’s ETDRK-2 expressions to approximate <span class="math notranslate nohighlight">\(y\left(t_{k+\frac{1}{2}}\right)\)</span> and <span class="math notranslate nohighlight">\(y(t_{k+1})\)</span>, since those are of order 2, i.e., <span class="math notranslate nohighlight">\(O(h^3)\)</span>, the expression of the method is:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+  y(t_{k+1}) = e^{-h \lambda} y(t_k) +
+  g\left(c'_k, t_{k+\frac{1}{2}}\right)
+  h \phi_1(-h \lambda) + %ok
+  \left[g(c_k, t_{k+1}) - g(y(t_k), t_k)\right]
+  \left( h \phi_2 (-h \lambda) - \frac{h \phi_1(-h \lambda)}{2} \right) +
+  \\
+  + 4 \left[g(c_k, t_{k+1}) + g(y(t_k), t_k) - 2 g\left(c'_k, t_{k+\frac{1}{2}}\right) \right]
+  \left( h \phi_3 (-h \lambda) + \frac{h \phi_1(-h \lambda)}{8} - \frac{h \phi_2(-h \lambda)}{2} \right) + O(h^4),
+\end{split}\]</div>
+<p>with</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+  c_k = e^{-h \lambda} y(t_k) +
+  h \phi_1 (-\lambda h) g(y(t_k), t_k) +
+  \left[g(a_k, t_{k+1}) - g(y(t_k), t_k) \right] h \phi_2 (-\lambda h),
+  \\
+  a_k = e^{-h \lambda}y(t_k) + g(y(t_k), t_k) h \phi_1(-h\lambda),
+  \\
+  c'_k = e^{- \frac{h \lambda}{2}} y(t_k) +
+  \frac{h}{2} \phi_1 \left(- \frac{\lambda h}{2} \right) g(y(t_k), t_k) +
+  \left[g\left(a'_k, t_{k+\frac{1}{2}}\right) - g(y(t_k), t_k) \right] \frac{h}{2} \phi_2 \left(-\frac{\lambda h}{2}\right),
+  \\
+  a'_k = e^{-\frac{h \lambda}{2}}y(t_k) + g(y(t_k), t_k) \frac{h}{2} \phi_1\left(-\frac{h \lambda}{2}\right).
+\end{split}\]</div>
+<p>Here de deducing isn’t exactly in Runge Kutta form, differing on the approximations for steps in minor order, so it cannot be a Butcher tableau, but doing language abuse only on the part that would form the triangle, it would be:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{array}
+{c|cccc}
+0 \\
+\frac{1}{2} &amp; \frac{1}{2} \left( \phi_1\left(- \frac{\lambda h}{2} \right) - \phi_2\left(- \frac{\lambda h}{2} \right) \right) &amp; \frac{1}{2}\phi_2\left(- \frac{\lambda h}{2} \right) \\
+1 &amp; \phi_1\left(- \lambda h \right) - \phi_2\left(- \lambda h \right) &amp; 0 &amp; \phi_2\left(- \lambda h \right)  \\
+\hline
+&amp; 4 \phi_3(-h \lambda)-3\phi_2(-h\lambda)+\phi_1(-h\lambda) &amp; -8\phi_3(-h\lambda)+4\phi_2(-h\lambda) &amp; 4 \phi_3(-h\lambda)-\phi_2(-h\lambda) \text{   }.
+\end{array}
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>n0 = 128
+k = 4
+t0 = 0
+tf = 1
+x0 = np.array([1])
+A = np.array([[100]])
+
+errors_2x_vector, domain = errors_2x(n0, k, etd3rk_similar, t0, tf, x0, A, g, sol, vectorize_sol, error_sup)
+convergence_table(errors_2x_vector, n0, k, t0, tf)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>128 &amp; 0.0078125 &amp; 5.0853024048669315e-12 &amp; - \\ 
+256 &amp; 0.00390625 &amp; 3.212833644961055e-13 &amp; 3.9844153810116354 \\ 
+512 &amp; 0.001953125 &amp; 2.0132983821752326e-14 &amp; 3.996213373698299 \\ 
+1024 &amp; 0.0009765625 &amp; 1.2602766052971504e-15 &amp; 3.997748687591092 \\ 
+</pre></div>
+</div>
+</div>
+</div>
+<p>Convergence table:</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>n</p></th>
+<th class="head"><p>h = <span class="math notranslate nohighlight">\(\frac{1}{h}\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(\tau(0,h)\)</span></p></th>
+<th class="head"><p>q = <span class="math notranslate nohighlight">\(\frac{tau(0,h)}{tau(0, 2h)}\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>128</p></td>
+<td><p>0.0078125</p></td>
+<td><p>5.0853024048669315e-12</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>256</p></td>
+<td><p>0.00390625</p></td>
+<td><p>3.212833644961055e-13</p></td>
+<td><p>3.9844153810116354</p></td>
+</tr>
+<tr class="row-even"><td><p>512</p></td>
+<td><p>0.001953125</p></td>
+<td><p>2.0132983821752326e-14</p></td>
+<td><p>3.996213373698299</p></td>
+</tr>
+<tr class="row-odd"><td><p>1024</p></td>
+<td><p>0.0009765625</p></td>
+<td><p>1.2602766052971504e-15</p></td>
+<td><p>3.997748687591092</p></td>
+</tr>
+</tbody>
+</table>
+<p>Better than what expected, giving order 4.</p>
+</section>
+<section id="naive-deduction-third-order">
+<h3>Naive deduction - Third order<a class="headerlink" href="#naive-deduction-third-order" title="Permalink to this headline">#</a></h3>
+<p>Here, that is taken the variation of constants formula:</p>
+<div class="math notranslate nohighlight">
+\[
+    y(t_{k+1}) = e^{-h \lambda}y(t_k) + \int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)} g(y(\tau), \tau) d\tau,
+\]</div>
+<p>and applied the Simpson’s rule (here was used the order of convergence from Burden) so that it will be:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    y(t_{k+1}) = e^{-h \lambda}y(t_k) + 
+    \\
+    \frac{h}{6} \left[ e^{-\lambda(t_{k+1}-t_k)} g(y(t_k), t_k) + 4 e^{-\lambda \left(t_{k+1}-t_{k + \frac{1}{2}} \right)} g\left(y\left(t_{k+\frac{1}{2}}\right), t_k + \frac{h}{2} \right) \\ + e^{-\lambda(t_{k+1}-t_{k+1})} g(y(t_{k+1}), t_{k+1}) \right] 
+    \\
+    + O(h^5), \\
+    y(t_{k+1}) = e^{-h \lambda}y(t_k) + 
+    \\
+    \frac{h}{6} \left[ e^{-\lambda h} g(y(t_k), t_k) + 4 e^{-\frac{ \lambda h}{2}} g\left(y\left(t_k + \frac{h}{2} \right), t_k + \frac{h}{2} \right) + g(y(t_{k+1}), t_{k+1}) \right] 
+    \\
+    +  O(h^5).
+\end{split}\]</div>
+<p>To approximate <span class="math notranslate nohighlight">\(y\left(t_k + \frac{h}{2} \right)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    y\left(t_k + \frac{h}{2} \right) = e^{- \frac{h \lambda}{2}}y(t_k) + \frac{h}{4} \left[ e^{- \frac{h \lambda}{2}} g(y(t_k), t_k) + g \left(a'_{k}, t_k + \frac{h}{2} \right) \right] +  O(h^3), \\
+    \text{with } a'_{k} = e^{- \frac{h \lambda}{2}} y(t_k) + g(y(t_k), t_k) \frac{h}{2} \phi_1 \left(-\lambda \frac{h}{2} \right),
+\end{split}\]</div>
+<p>and, for <span class="math notranslate nohighlight">\(y\left(t_{k+1} \right)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    y(t_{k+1}) = e^{-h \lambda}y(t_k) + \frac{h}{2} \left[ e^{-\lambda h} g(y(t_k), t_k) + g(a_k, t_{k+1}) \right] +  O(h^3), \\
+    \text{with } a_k = e^{-h \lambda}y(t_k) + g(y(t_k), t_k) h \phi_1 (-\lambda h).
+\end{split}\]</div>
+<p>So, the expression is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+  y(t_{k+1}) = e^{-h \lambda}y(t_k) + \frac{h}{6} \left[ e^{-\lambda h} g(y(t_k), t_k) + 4 e^{-\frac{ \lambda h}{2}} g\left( b'_{k}, t_k + \frac{h}{2} \right) + g(b_k, t_{k+1}) \right] +  O(h^4), \\
+  \text{with } b'_{k} = e^{- \frac{h \lambda}{2}}y(t_k) + \frac{h}{4} \left[ e^{- \frac{h \lambda}{2}} g(y(t_k), t_k) + g \left(a'_{k}, t_k + \frac{h}{2} \right) \right], \\
+  b_k = e^{-h \lambda}y(t_k) + \frac{h}{2} \left[ e^{-\lambda h} g(y(t_k), t_k) + g(a_k, t_{k+1}) \right], \\
+  a'_{k} = e^{- \frac{h \lambda}{2}} y(t_k) + g(y(t_k), t_k) \frac{h}{2} \phi_1 \left(-\lambda \frac{h}{2} \right), \\
+  a_k = e^{-h \lambda}y(t_k) + g(y(t_k), t_k) h \phi_1 (-\lambda h).
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>n0 = 128
+k = 4
+t0 = 0
+tf = 1
+x0 = np.array([1])
+A = np.array([[100]])
+
+errors_2x_vector, domain = errors_2x(n0, k, etd3rk_naive, t0, tf, x0, A, g, sol, vectorize_sol, error_sup)
+convergence_table(errors_2x_vector, n0, k, t0, tf)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>128 &amp; 0.0078125 &amp; 1.083876968009309e-06 &amp; - \\ 
+256 &amp; 0.00390625 &amp; 6.883813637344194e-08 &amp; 3.9768491535433466 \\ 
+512 &amp; 0.001953125 &amp; 4.322307012305515e-09 &amp; 3.9933345852265947 \\ 
+1024 &amp; 0.0009765625 &amp; 2.705360744453822e-10 &amp; 3.9979086629155343 \\ 
+</pre></div>
+</div>
+</div>
+</div>
+<p>Convergence table:</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>n</p></th>
+<th class="head"><p>h = <span class="math notranslate nohighlight">\(\frac{1}{h}\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(\tau(0,h)\)</span></p></th>
+<th class="head"><p>q = <span class="math notranslate nohighlight">\(\frac{tau(0,h)}{tau(0, 2h)}\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>128</p></td>
+<td><p>0.0078125</p></td>
+<td><p>1.083876968009309e-06</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>256</p></td>
+<td><p>0.00390625</p></td>
+<td><p>6.883813637344194e-08</p></td>
+<td><p>3.9768491535433466</p></td>
+</tr>
+<tr class="row-even"><td><p>512</p></td>
+<td><p>0.001953125</p></td>
+<td><p>4.322307012305515e-09</p></td>
+<td><p>3.9933345852265947</p></td>
+</tr>
+<tr class="row-odd"><td><p>1024</p></td>
+<td><p>0.0009765625</p></td>
+<td><p>2.705360744453822e-10</p></td>
+<td><p>3.9979086629155343</p></td>
+</tr>
+</tbody>
+</table>
+<p>Also with order 4, better than what expected. But notably worse than the real exponential one.</p>
+<p>To compare, this is the convergence table of the RK4, in which we can see that the errors are much bigger:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>n0 = 128
+k = 4
+t0 = 0
+tf = 1
+x0 = np.array([1])
+A = np.array([[100]])
+
+errors_2x_vector, domain = errors_2x(n0, k, rk4, t0, tf, x0, A, g, sol, vectorize_sol, error_sup)
+convergence_table(errors_2x_vector, n0, k, t0, tf)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>128 &amp; 0.0078125 &amp; 0.002141816843239275 &amp; - \\ 
+256 &amp; 0.00390625 &amp; 9.770249694801558e-05 &amp; 4.4542958704375835 \\ 
+512 &amp; 0.001953125 &amp; 5.250705130854794e-06 &amp; 4.21781234893684 \\ 
+1024 &amp; 0.0009765625 &amp; 3.024340525237257e-07 &amp; 4.1178186851779905 \\ 
+</pre></div>
+</div>
+</div>
+</div>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>n</p></th>
+<th class="head"><p>h = <span class="math notranslate nohighlight">\(\frac{1}{h}\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(\tau(0,h)\)</span></p></th>
+<th class="head"><p>q = <span class="math notranslate nohighlight">\(\frac{tau(0,h)}{tau(0, 2h)}\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>128</p></td>
+<td><p>0.0078125</p></td>
+<td><p>0.002141816843239275</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>256</p></td>
+<td><p>0.00390625</p></td>
+<td><p>9.770249694801558e-05</p></td>
+<td><p>4.4542958704375835</p></td>
+</tr>
+<tr class="row-even"><td><p>512</p></td>
+<td><p>0.001953125</p></td>
+<td><p>5.250705130854794e-06</p></td>
+<td><p>4.21781234893684</p></td>
+</tr>
+<tr class="row-odd"><td><p>1024</p></td>
+<td><p>0.0009765625</p></td>
+<td><p>3.024340525237257e-07</p></td>
+<td><p>4.1178186851779905</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="graphics">
+<h2>Graphics<a class="headerlink" href="#graphics" title="Permalink to this headline">#</a></h2>
+<p>Next, it is shown graphics from the same problem, but first showing the error as the linear part, <span class="math notranslate nohighlight">\(100\)</span>, changes from <span class="math notranslate nohighlight">\(0\)</span> to <span class="math notranslate nohighlight">\(100\)</span> and next with <span class="math notranslate nohighlight">\(\lambda = 100\)</span> but changing the time step.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>n = 128
+lmba0 = 1
+lmbaf = 100
+t0 = 0.0
+tf = 1.0
+x0 = np.array([1])
+lmba_1D_classic, domain = errors_for_lambdas_array(n, classic_euler, t0, tf, x0, lmba0, lmbaf, A_1D, g, sol_given_lmba, vectorize_sol_given_lmba, error_2)
+lmba_1D_exponential, domain = errors_for_lambdas_array(n, exponential_euler, t0, tf, x0, lmba0, lmbaf, A_1D, g, sol_given_lmba, vectorize_sol_given_lmba, error_2)
+lmba_1D_etd2rk, domain = errors_for_lambdas_array(n, etd2rk, t0, tf, x0, lmba0, lmbaf, A_1D, g, sol_given_lmba, vectorize_sol_given_lmba, error_2)
+lmba_1D_etd2rk_trapezoidal_naive, domain = errors_for_lambdas_array(n, etd2rk_trapezoidal_naive, t0, tf, x0, lmba0, lmbaf, A_1D, g, sol_given_lmba, vectorize_sol_given_lmba, error_2)
+lmba_1D_etd3rk_similar, domain = errors_for_lambdas_array(n, etd3rk_similar, t0, tf, x0, lmba0, lmbaf, A_1D, g, sol_given_lmba, vectorize_sol_given_lmba, error_2)
+lmba_1D_etd3rk_naive, domain = errors_for_lambdas_array(n, etd3rk_naive, t0, tf, x0, lmba0, lmbaf, A_1D, g, sol_given_lmba, vectorize_sol_given_lmba, error_2)
+lmba_1D_rk2, domain = errors_for_lambdas_array(n, rk2, t0, tf, x0, lmba0, lmbaf, A_1D, g, sol_given_lmba, vectorize_sol_given_lmba, error_2)
+lmba_1D_rk4, domain = errors_for_lambdas_array(n, rk4, t0, tf, x0, lmba0, lmbaf, A_1D, g, sol_given_lmba, vectorize_sol_given_lmba, error_2)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/miki/IC/Relatorio_github/basecode.py:247: ComplexWarning: Casting complex values to real discards the imaginary part
+  return np.sqrt(float(np.sum(v)/x_approx.size)) #normalized
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>matrix_1D = [lmba_1D_classic, lmba_1D_exponential, lmba_1D_rk2, lmba_1D_etd2rk_trapezoidal_naive, lmba_1D_etd2rk, lmba_1D_rk4, lmba_1D_etd3rk_naive, lmba_1D_etd3rk_similar]
+names = [&#39;classic euler&#39;, &#39;exponential euler&#39;, &#39;rk2&#39;, &#39;etd2rk naive&#39;, &#39;etd2rk&#39;, &#39;rk4&#39;, &#39;etd3rk naive&#39;, &quot;etd3rk (similar)&quot;]
+fig, ax = graphic_2D(8*[domain], matrix_1D, names, &quot;lambda&quot;, &quot;error&quot;, &quot;1D problem from [1]&quot;, False, True)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/cap4_39_0.png" src="_images/cap4_39_0.png" />
+</div>
+</div>
+<p>Here it is notable that as the lambda increases, and so does the stiffness, the exponential methods deal really well, even dropping the error, since the exponential part is precisely solved, so, as it gains more relevance, the method perfoms better. Meanwhile, the other methods (classic and naive) start to decline, dealing badly with the stiffness. Just as predicted.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>n0 = 10
+k = 10
+lmba = 100
+A = lmba * np.array([[1]])
+t0 = 0.0
+tf = 1.0
+x0 = np.array([1])
+n_1D_classic, domain = errors_2x(n0, k, classic_euler, t0, tf, x0, A, g, sol, vectorize_sol, error_2)
+n_1D_exponential, domain = errors_2x(n0, k, exponential_euler, t0, tf, x0, A, g, sol, vectorize_sol, error_2)
+n_1D_etd2rk, domain = errors_2x(n0, k, etd2rk, t0, tf, x0, A, g, sol, vectorize_sol, error_2)
+n_1D_etd2rk_trapezoidal_naive, domain = errors_2x(n0, k, etd2rk_trapezoidal_naive, t0, tf, x0, A, g, sol, vectorize_sol, error_2)
+n_1D_etd3rk_similar, domain = errors_2x(n0, k, etd3rk_similar, t0, tf, x0, A, g, sol, vectorize_sol, error_2)
+n_1D_etd3rk_naive, domain = errors_2x(n0, k, etd3rk_naive, t0, tf, x0, A, g, sol, vectorize_sol, error_2)
+n_1D_rk2, domain = errors_2x(n0, k, rk2, t0, tf, x0, A, g, sol, vectorize_sol, error_2)
+n_1D_rk4, domain = errors_2x(n0, k, rk4, t0, tf, x0, A, g, sol, vectorize_sol, error_2)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>matrix_2D = [n_1D_classic, n_1D_exponential, n_1D_rk2, n_1D_etd2rk_trapezoidal_naive, n_1D_etd2rk, n_1D_rk4, n_1D_etd3rk_naive, n_1D_etd3rk_similar]
+names = [&#39;classic euler&#39;, &#39;exponential euler&#39;, &#39;rk2&#39;, &#39;etd2rk naive&#39;, &#39;etd2rk&#39;, &#39;rk4&#39;, &#39;etd3rk naive&#39;, &quot;etd3rk (similar)&quot;]
+fig_2D, ax_2D = graphic_2D(8*[1/domain], matrix_2D, names, &quot;h&quot;, &quot;error&quot;, &quot;1D problem with lmba = &quot;+str(lmba), False, True)
+plt.xscale(&#39;log&#39;)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/cap4_42_0.png" src="_images/cap4_42_0.png" />
+</div>
+</div>
+<p>Here is visually clear the orders already confirmed by the convergence tables.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="cap3.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Important concepts for the study of exponential methods</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="cap5.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Swing spring application</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Isabela Miki Suzuki<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
