@@ -333,8 +333,8 @@ convergence_table(errors_2x_vector, n0, k, t0, tf)
 # $$
 # 
 # $$
-#   y(t_{k+1}) = e^{-h \lambda}y(t_k) + \\
-#   + \int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)} \left[ g(y(t_k), t_k) + (\tau - t_k)  \frac{g(a_k, t_{k+1}) - g(y(t_k), t_k)}{h}  + (\tau - t_k)O(h) \right] d\tau
+#   y(t_{k+1}) = e^{-h \lambda}y(t_k) + \int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)} \left[ g(y(t_k), t_k) + (\tau - t_k)  \frac{g(a_k, t_{k+1}) - g(y(t_k), t_k)}{h}  + (\tau - t_k)O(h) \right] d\tau
+#   %mudei aqui
 # $$
 # 
 # $$
@@ -499,9 +499,7 @@ convergence_table(errors_2x_vector, n0, k, t0, tf)
 #  | 512 | 0.001953125 | 0.0027104154026279526 | 2.212361357172686 | 
 #  | 1024 | 0.0009765625 | 0.0006264383048139033 | 2.1132696413977325 | 
 
-#  ### Exponential - Third order
-# 
-#  ### Third order exponential time differencing methods with Runge-Kutta time stepping (ETDRK-3)
+#  ### Exponential - Third order (ETDRK-3)
 # 
 # $$
 #     g(y(\tau), \tau) = g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) +
@@ -595,17 +593,17 @@ convergence_table(errors_2x_vector, n0, k, t0, tf)
 # $$
 # 
 # $$
-#   y(t_{k+1}) = e^{-h \lambda}y(t_k) + \\
-#   + \int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)} \left[ g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) +
-#     \left(\tau - t_{k+\frac{1}{2}}\right)  \frac{g(y(t_{k+1}), t_{k+1}) - g(y(t_k), t_k)}{h} + \\
-#     + \frac{\left(\tau - t_{k+\frac{1}{2}}\right)^2}{2!} \frac{ 4 \left[g(y(t_{k+1}), t_{k+1}) + g(y(t_k), t_k) -
-#   2 g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) \right]}{h^2} + O((\tau - t_k)^3) \right] d\tau,
+#   y(t_{k+1}) = e^{-h \lambda}y(t_k) + \int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)} \left[ g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) +
+#   \\
+#   + \left(\tau - t_{k+\frac{1}{2}}\right)  \frac{g(y(t_{k+1}), t_{k+1}) - g(y(t_k), t_k)}{h} + 
+#   \\
+#   + \frac{\left(\tau - t_{k+\frac{1}{2}}\right)^2}{2!} \frac{ 4 \left[g(y(t_{k+1}), t_{k+1}) + g(y(t_k), t_k) - 2 g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) \right]}{h^2} + 
+#   \\
+#   + O((\tau - t_k)^3) \right] d\tau,
 # $$
 # 
 # $$
-#   y(t_{k+1}) = e^{-h \lambda} y(t_k) +
-#   \\
-#   g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right)
+#   y(t_{k+1}) = e^{-h \lambda} y(t_k) +  g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right)
 #   \int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)} d \tau +
 #   \\
 #   \frac{g(y(t_{k+1}), t_{k+1}) - g(y(t_k), t_k)}{h}
@@ -714,6 +712,7 @@ convergence_table(errors_2x_vector, n0, k, t0, tf)
 # 
 # Here de deducing isn't exactly in Runge Kutta form, differing on the approximations for steps in minor order, so it cannot be a Butcher tableau, but doing language abuse only on the part that would form the triangle, it would be:
 # 
+# $$
 # \begin{array}
 # {c|cccc}
 # 0 \\
@@ -722,6 +721,7 @@ convergence_table(errors_2x_vector, n0, k, t0, tf)
 # \hline
 # & 4 \phi_3(-h \lambda)-3\phi_2(-h\lambda)+\phi_1(-h\lambda) & -8\phi_3(-h\lambda)+4\phi_2(-h\lambda) & 4 \phi_3(-h\lambda)-\phi_2(-h\lambda) \text{   }.
 # \end{array}
+# $$
 
 # In[7]:
 

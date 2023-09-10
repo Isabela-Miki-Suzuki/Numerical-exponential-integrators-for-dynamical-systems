@@ -400,13 +400,8 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#exponential-third-order">
-     Exponential - Third order
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#third-order-exponential-time-differencing-methods-with-runge-kutta-time-stepping-etdrk-3">
-     Third order exponential time differencing methods with Runge-Kutta time stepping (ETDRK-3)
+    <a class="reference internal nav-link" href="#exponential-third-order-etdrk-3">
+     Exponential - Third order (ETDRK-3)
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -466,13 +461,8 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#exponential-third-order">
-     Exponential - Third order
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#third-order-exponential-time-differencing-methods-with-runge-kutta-time-stepping-etdrk-3">
-     Third order exponential time differencing methods with Runge-Kutta time stepping (ETDRK-3)
+    <a class="reference internal nav-link" href="#exponential-third-order-etdrk-3">
+     Exponential - Third order (ETDRK-3)
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -854,10 +844,10 @@ g(y(\tau), \tau) = g(y(t_k), t_k) + (\tau - t_k) \frac{g(a_k, t_{k+1}) - g(y(t_k
 y(t) = e^{-(t-t_0) \lambda}y_0 + \int_{t_0}^t e^{-\lambda(t-\tau)} g(y(\tau), \tau) d\tau,
 \]</div>
 <div class="math notranslate nohighlight">
-\[\begin{split}
-  y(t_{k+1}) = e^{-h \lambda}y(t_k) + \\
-  + \int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)} \left[ g(y(t_k), t_k) + (\tau - t_k)  \frac{g(a_k, t_{k+1}) - g(y(t_k), t_k)}{h}  + (\tau - t_k)O(h) \right] d\tau
-\end{split}\]</div>
+\[
+  y(t_{k+1}) = e^{-h \lambda}y(t_k) + \int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)} \left[ g(y(t_k), t_k) + (\tau - t_k)  \frac{g(a_k, t_{k+1}) - g(y(t_k), t_k)}{h}  + (\tau - t_k)O(h) \right] d\tau
+  %mudei aqui
+\]</div>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 y(t_{k+1}) = e^{-h \lambda} y(t_k) + g(y(t_k), t_k)\int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)} d \tau + \frac{g(a_k, t_{k+1}) - g(y(t_k), t_k)}{h} \int_{t_k}^{t_{k+1}} (\tau - t_k) e^{-\lambda(t_{k+1}-\tau)} d \tau + \\
@@ -1109,11 +1099,8 @@ convergence_table(errors_2x_vector, n0, k, t0, tf)
 </tbody>
 </table>
 </section>
-<section id="exponential-third-order">
-<h3>Exponential - Third order<a class="headerlink" href="#exponential-third-order" title="Permalink to this headline">#</a></h3>
-</section>
-<section id="third-order-exponential-time-differencing-methods-with-runge-kutta-time-stepping-etdrk-3">
-<h3>Third order exponential time differencing methods with Runge-Kutta time stepping (ETDRK-3)<a class="headerlink" href="#third-order-exponential-time-differencing-methods-with-runge-kutta-time-stepping-etdrk-3" title="Permalink to this headline">#</a></h3>
+<section id="exponential-third-order-etdrk-3">
+<h3>Exponential - Third order (ETDRK-3)<a class="headerlink" href="#exponential-third-order-etdrk-3" title="Permalink to this headline">#</a></h3>
 <div class="math notranslate nohighlight">
 \[\begin{split}
     g(y(\tau), \tau) = g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) +
@@ -1198,17 +1185,17 @@ y(t) = e^{-(t-t_0) \lambda}y_0 + \int_{t_0}^t e^{-\lambda(t-\tau)} g(y(\tau), \t
 \]</div>
 <div class="math notranslate nohighlight">
 \[\begin{split}
-  y(t_{k+1}) = e^{-h \lambda}y(t_k) + \\
-  + \int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)} \left[ g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) +
-    \left(\tau - t_{k+\frac{1}{2}}\right)  \frac{g(y(t_{k+1}), t_{k+1}) - g(y(t_k), t_k)}{h} + \\
-    + \frac{\left(\tau - t_{k+\frac{1}{2}}\right)^2}{2!} \frac{ 4 \left[g(y(t_{k+1}), t_{k+1}) + g(y(t_k), t_k) -
-  2 g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) \right]}{h^2} + O((\tau - t_k)^3) \right] d\tau,
+  y(t_{k+1}) = e^{-h \lambda}y(t_k) + \int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)} \left[ g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) +
+  \\
+  + \left(\tau - t_{k+\frac{1}{2}}\right)  \frac{g(y(t_{k+1}), t_{k+1}) - g(y(t_k), t_k)}{h} + 
+  \\
+  + \frac{\left(\tau - t_{k+\frac{1}{2}}\right)^2}{2!} \frac{ 4 \left[g(y(t_{k+1}), t_{k+1}) + g(y(t_k), t_k) - 2 g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right) \right]}{h^2} + 
+  \\
+  + O((\tau - t_k)^3) \right] d\tau,
 \end{split}\]</div>
 <div class="math notranslate nohighlight">
 \[\begin{split}
-  y(t_{k+1}) = e^{-h \lambda} y(t_k) +
-  \\
-  g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right)
+  y(t_{k+1}) = e^{-h \lambda} y(t_k) +  g\left(y\left(t_{k+\frac{1}{2}}\right), t_{k+\frac{1}{2}}\right)
   \int_{t_k}^{t_{k+1}} e^{-\lambda(t_{k+1}-\tau)} d \tau +
   \\
   \frac{g(y(t_{k+1}), t_{k+1}) - g(y(t_k), t_k)}{h}
@@ -1310,14 +1297,17 @@ y(t) = e^{-(t-t_0) \lambda}y_0 + \int_{t_0}^t e^{-\lambda(t-\tau)} g(y(\tau), \t
   a'_k = e^{-\frac{h \lambda}{2}}y(t_k) + g(y(t_k), t_k) \frac{h}{2} \phi_1\left(-\frac{h \lambda}{2}\right).
 \end{split}\]</div>
 <p>Here de deducing isn’t exactly in Runge Kutta form, differing on the approximations for steps in minor order, so it cannot be a Butcher tableau, but doing language abuse only on the part that would form the triangle, it would be:</p>
-<p>\begin{array}
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{array}
 {c|cccc}
-0 \
-\frac{1}{2} &amp; \frac{1}{2} \left( \phi_1\left(- \frac{\lambda h}{2} \right) - \phi_2\left(- \frac{\lambda h}{2} \right) \right) &amp; \frac{1}{2}\phi_2\left(- \frac{\lambda h}{2} \right) \
-1 &amp; \phi_1\left(- \lambda h \right) - \phi_2\left(- \lambda h \right) &amp; 0 &amp; \phi_2\left(- \lambda h \right)  \
+0 \\
+\frac{1}{2} &amp; \frac{1}{2} \left( \phi_1\left(- \frac{\lambda h}{2} \right) - \phi_2\left(- \frac{\lambda h}{2} \right) \right) &amp; \frac{1}{2}\phi_2\left(- \frac{\lambda h}{2} \right) \\
+1 &amp; \phi_1\left(- \lambda h \right) - \phi_2\left(- \lambda h \right) &amp; 0 &amp; \phi_2\left(- \lambda h \right)  \\
 \hline
 &amp; 4 \phi_3(-h \lambda)-3\phi_2(-h\lambda)+\phi_1(-h\lambda) &amp; -8\phi_3(-h\lambda)+4\phi_2(-h\lambda) &amp; 4 \phi_3(-h\lambda)-\phi_2(-h\lambda) \text{   }.
-\end{array}</p>
+\end{array}
+\end{split}\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>n0 = 128
